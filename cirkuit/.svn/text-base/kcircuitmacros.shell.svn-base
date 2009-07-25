@@ -1,0 +1,4 @@
+#!/bin/sh
+# created by cmake, don't edit, changes will be lost
+
+LD_LIBRARY_PATH=/home/kde-devel/src/kcircuitmacros/lib/./:/home/kde-devel/kde/lib:/home/kde-devel/kde/lib:/home/kde-devel/qt-copy/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH} "/home/kde-devel/src/kcircuitmacros/kcircuitmacros" "$@"

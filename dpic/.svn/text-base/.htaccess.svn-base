@@ -1,0 +1,10 @@
+Options ExecCGI Includes FollowSymlinks Indexes
+
+AddHandler server-parsed                .html
+AddHandler cgi-script                   .pl
+
+#AddType text/x-server-parsed-html       .html
+#AddType application/x-httpd-cgi         .cgi
+#AddType application/x-httpd-cgi         .pl
+#AddType application/x-httpd-cgi         .sh
+AddType application/postscript          .ps
