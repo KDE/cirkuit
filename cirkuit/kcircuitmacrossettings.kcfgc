@@ -1,4 +1,0 @@
-File=kcircuitmacros.kcfg 
-ClassName=KCircuitMacrosSettings 
-Singleton=true
-Mutators=true

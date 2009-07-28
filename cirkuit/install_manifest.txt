@@ -1,2 +1,0 @@
-/home/kde-devel/kde/bin/kcircuitmacros
-/home/kde-devel/kde/share/apps/kcircuitmacros/kcircuitmacrosui.rc
