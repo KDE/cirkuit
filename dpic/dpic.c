@@ -26,11 +26,9 @@
 /* dp0.x */
 /* Global definitions                                                 */
 
-#define Version         "dpic version 13.Jul.09"
+#define Version         "dpic version 08.Jun.08"
 
-/* UMBX distmax = 1E25; XBMU */
-
-#define distmax         3.40282347e+38   /* assumes at least IEEE single */
+#define distmax         1e25
 /*GH distmax = MaxReal; HG*/
 #define mdistmax        (-distmax)
 #define pi              3.1415926535897931
@@ -50,9 +48,9 @@
 
 /* include parscst.i */
 #define symbmax         241
-#define prodmax         180
-#define lrmax           4742
-#define lxmax           455
+#define prodmax         177
+#define lrmax           4594
+#define lxmax           457
 /*B%include parscstB*/
 
 /* include parscdc.i */
@@ -85,94 +83,94 @@
 #define element10       26
 #define element11       27
 #define element12       28
-#define lbrace1         29
-#define namedbox1       30
-#define namedbox2       31
-#define suffix1         32
-#define suffix2         33
-#define position1       34
-#define position2       35
-#define position3       36
-#define position4       37
-#define assignlist1     38
-#define assignlist2     39
-#define command1        40
-#define command2        41
-#define command3        42
-#define command4        43
-#define command5        44
-#define command6        45
-#define command7        46
-#define command8        47
-#define command9        48
-#define command10       49
-#define optnl1          50
-#define optnl2          51
-#define ifpart1         52
-#define elsehead1       53
-#define for1            54
-#define for2            55
-#define stringexpr1     56
-#define stringexpr2     57
-#define string1         58
-#define string2         59
-#define assignment1     60
-#define assignment2     61
-#define assignment3     62
-#define assignment4     63
-#define expression1     64
-#define expression2     65
-#define expression3     66
-#define expression4     67
-#define expression5     68
-#define ifhead1         69
-#define setlogic1       70
-#define logexpr1        71
-#define logexpr2        72
-#define forhead1        73
-#define forincr1        74
-#define do1             75
-#define do2             76
-#define by1             77
-#define by2             78
-#define redirect1       79
-#define redirect2       80
-#define redirect3       81
-#define resetlist1      82
-#define resetlist2      83
-#define defhead1        84
-#define defhead2        85
-#define sprintf1        86
-#define sprintf2        87
-#define exprlist1       88
-#define exprlist2       89
-#define object1         90
-#define object2         91
-#define object3         92
-#define object4         93
-#define object5         94
-#define object6         95
-#define object7         96
-#define object8         97
-#define object9         98
-#define object10        99
-#define object11        100
-#define object12        101
-#define object13        102
-#define object14        103
-#define object15        104
-#define object16        105
-#define object17        106
-#define object18        107
-#define object19        108
-#define object20        109
-#define object21        110
-#define object22        111
-#define object23        112
-#define object24        113
-#define object25        114
-#define object26        115
-#define object27        116
+#define element13       29
+#define lbrace1         30
+#define namedbox1       31
+#define namedbox2       32
+#define suffix1         33
+#define suffix2         34
+#define position1       35
+#define position2       36
+#define position3       37
+#define position4       38
+#define assignlist1     39
+#define assignlist2     40
+#define command1        41
+#define command2        42
+#define command3        43
+#define command4        44
+#define command5        45
+#define command6        46
+#define command7        47
+#define command8        48
+#define command9        49
+#define command10       50
+#define optnl1          51
+#define optnl2          52
+#define ifpart1         53
+#define elsehead1       54
+#define for1            55
+#define for2            56
+#define stringexpr1     57
+#define stringexpr2     58
+#define string1         59
+#define string2         60
+#define assignment1     61
+#define assignment2     62
+#define assignment3     63
+#define assignment4     64
+#define expression1     65
+#define expression2     66
+#define expression3     67
+#define expression4     68
+#define expression5     69
+#define ifhead1         70
+#define setlogic1       71
+#define logexpr1        72
+#define logexpr2        73
+#define forhead1        74
+#define forincr1        75
+#define do1             76
+#define do2             77
+#define by1             78
+#define by2             79
+#define resetlist1      80
+#define resetlist2      81
+#define defhead1        82
+#define defhead2        83
+#define sprintf1        84
+#define sprintf2        85
+#define exprlist1       86
+#define exprlist2       87
+#define object1         88
+#define object2         89
+#define object3         90
+#define object4         91
+#define object5         92
+#define object6         93
+#define object7         94
+#define object8         95
+#define object9         96
+#define object10        97
+#define object11        98
+#define object12        99
+#define object13        100
+#define object14        101
+#define object15        102
+#define object16        103
+#define object17        104
+#define object18        105
+#define object19        106
+#define object20        107
+#define object21        108
+#define object22        109
+#define object23        110
+#define object24        111
+#define object25        112
+#define object26        113
+#define object27        114
+#define object28        115
+#define object29        116
 #define openblock1      117
 #define block1          118
 #define block2          119
@@ -183,219 +181,201 @@
 #define closeblock1     124
 #define pair1           125
 #define pair2           126
-#define objectwith1     127
-#define objectwith2     128
-#define objectwith3     129
-#define nth1            130
-#define nth2            131
-#define nth3            132
-#define primobj1        133
-#define primobj2        134
-#define primobj3        135
-#define primobj4        136
-#define shift1          137
-#define shift2          138
-#define shift3          139
-#define location1       140
-#define location2       141
-#define location3       142
-#define location4       143
-#define location5       144
-#define place1          145
-#define place2          146
-#define place3          147
-#define place4          148
-#define place5          149
-#define factor1         150
-#define factor2         151
-#define factor3         152
-#define placename1      153
-#define placename2      154
-#define placename3      155
-#define placename4      156
-#define ncount1         157
-#define ncount2         158
-#define ncount3         159
-#define logprod1        160
-#define logprod2        161
-#define logval1         162
-#define logval2         163
-#define logval3         164
-#define lcompare1       165
-#define lcompare2       166
-#define lcompare3       167
-#define lcompare4       168
-#define primary1        169
-#define primary2        170
-#define primary3        171
-#define primary4        172
-#define primary5        173
-#define primary6        174
-#define primary7        175
-#define primary8        176
-#define primary9        177
-#define primary10       178
-#define primary11       179
-#define primary12       180
+#define withobj1        127
+#define withobj2        128
+#define shift1          129
+#define shift2          130
+#define shift3          131
+#define location1       132
+#define location2       133
+#define location3       134
+#define location4       135
+#define location5       136
+#define place1          137
+#define place2          138
+#define place3          139
+#define place4          140
+#define place5          141
+#define factor1         142
+#define factor2         143
+#define factor3         144
+#define placename1      145
+#define placename2      146
+#define placename3      147
+#define placename4      148
+#define nth1            149
+#define nth2            150
+#define nth3            151
+#define primobj1        152
+#define primobj2        153
+#define primobj3        154
+#define primobj4        155
+#define ncount1         156
+#define ncount2         157
+#define ncount3         158
+#define logprod1        159
+#define logprod2        160
+#define logval1         161
+#define logval2         162
+#define primary1        163
+#define primary2        164
+#define primary3        165
+#define primary4        166
+#define primary5        167
+#define primary6        168
+#define primary7        169
+#define primary8        170
+#define primary9        171
+#define primary10       172
+#define primary11       173
+#define primary12       174
+#define primary13       175
+#define primary14       176
+#define primary15       177
 
 /* include lxcst.h */
-/*D XAND = 36; D*/
-#define XBLOCK          26
-#define XLBRACKET       21
-#define XRBRACKET       22
-#define XCOMMENT        42
-#define XLcolrspec      137
-#define XLcolour        138
-#define XCARET          15
-#define XCOLON          20
-#define XD              25
-#define XDOUBLEHEAD     150
-#define XDc             98
-#define XDe             94
-#define XDend           97
-#define XDn             92
-#define XDne            88
-#define XDnw            90
-#define XDs             93
-#define XDse            89
-#define XDstart         96
-#define XDsw            91
-#define XDw             95
+/*D XAND = 37; D*/
+#define XBLOCK          27
+#define XCOMMENT        43
+#define XLcolrspec      139
+#define XLcolour        140
+#define XDOUBLEHEAD     152
+#define XDc             100
+#define XDe             96
+#define XDend           99
+#define XDn             94
+#define XDne            90
+#define XDnw            92
+#define XDs             95
+#define XDse            91
+#define XDstart         98
+#define XDsw            93
+#define XDw             97
 #define XEMPTY          2
-#define XEND            46
-#define XEQEQ           100
-#define XEQ             29
-#define XGE             102
-#define XLE             103
+#define XEND            47
 #define XERROR          3
-#define XFOR            84
-#define XGT             105
-#define XLBRACE         23
-#define XLEFTHEAD       148
-#define XLL             104
+#define XFOR            85
+#define XGG             107
+#define XGT             5
+#define XLBRACE         24
+#define XLBRACKET       22
+#define XLEFTHEAD       150
+#define XLKWDS          45
+#define XLL             106
 #define XLT             4
-#define XLabel          39
-#define XLabove         145
-#define XLabs           112
-#define XLacos          113
-#define XLarc           160
-#define XLarcrad        166
+#define XLabel          40
+#define XLabove         147
+#define XLabs           114
+#define XLacos          115
+#define XLarc           162
+#define XLarcrad        168
 #define XLarg           44
-#define XLarrow         162
-#define XLarrowhd       147
-#define XLarrowhead     183
-#define XLarrowht       167
-#define XLarrowwid      168
-#define XLasin          114
-#define XLat            55
-#define XLatan2         127
-#define XLbelow         146
-#define XLbox           157
-#define XLboxht         169
-#define XLboxrad        170
-#define XLboxwid        171
-#define XLccw           6
-#define XLcenter        142
-#define XLchop          60
-#define XLcircle        158
-#define XLcirclerad     172
-#define XLcoloneq       30
-#define XLcontinue      59
-#define XLcorner        87
-#define XLcos           115
-#define XLcw            5
-#define XLdashed        134
-#define XLdashwid       173
-#define XLdefine        79
-#define XLdiameter      110
-#define XLdirecton      151
-#define XLdiveq         34
-#define XLdo            85
-#define XLdotted        133
-#define XLdown          153
-#define XLellipse       159
-#define XLellipseht     174
-#define XLellipsewid    175
-#define XLelse          83
-#define XLenvvar        165
-#define XLexp           116
-#define XLexpe          117
-#define XLfillval       184
-#define XLfloat         37
-#define XLfloor         125
-#define XLfrom          53
-#define XLfunc1         111
-#define XLfunc2         126
-#define XLheight        107
-#define XLint           118
-#define XLinvis         135
-#define XLlastenv       188
-#define XLlastsc        182
-#define XLleft          155
-#define XLline          161
-#define XLlineht        176
-#define XLlinethick     185
-#define XLlinetype      131
-#define XLlinewid       177
-#define XLljust         143
-#define XLlog           119
-#define XLloge          120
-#define XLcompare       99
-#define XLmax           128
-#define XLmaxpsht       186
-#define XLmaxpswid      187
-#define XLmin           129
-#define XLminuseq       32
-#define XLmove          163
-#define XLmoveht        178
-#define XLmovewid       179
-#define XLmulteq        33
-#define XLname          38
-#define XLoutlined      139
-#define XLparam         106
-#define XLpath          136
-#define XLpluseq        31
-#define XLpmod          130
-#define XLprimitiv      156
-#define XLradius        109
-#define XLremeq         35
-#define XLright         154
-#define XLrjust         144
-#define XLscale         188
-#define XLshaded        140
-#define XLsign          121
-#define XLsin           122
-#define XLsolid         132
-#define XLspline        164
-#define XLsqrt          123
-#define XLstring        41
-#define XLtan           124
-#define XLtextht        180
-#define XLtextoffset    181
-#define XLtextpos       141
-#define XLtextwid       182
-#define XLthen          58
-#define XLto            54
-#define XLaTeX          40
-#define XLundefine      80
-#define XLup            152
-#define XLwidth         108
-#define XNEQ            101
-#define XNOT            16
-#define XNL             14
-#define XRBRACE         24
-#define XRIGHTHEAD      149
-#define XSEMICOLON      14
-#define XSTAR           9
-#define XSTART          45
-#define XANDAND         17
-#define XOROR           18
-#define Xlparen         7
-#define Xrparen         8
-#define Xplus           10
-#define Xcomma          19
-#define Xminus          11
-#define XSLASH          12
+#define XLarrow         164
+#define XLarrowhd       149
+#define XLarrowhead     185
+#define XLarrowht       169
+#define XLarrowwid      170
+#define XLasin          116
+#define XLat            56
+#define XLatan2         129
+#define XLbelow         148
+#define XLbox           159
+#define XLboxht         171
+#define XLboxrad        172
+#define XLboxwid        173
+#define XLccw           7
+#define XLcenter        144
+#define XLchop          61
+#define XLcircle        160
+#define XLcirclerad     174
+#define XLcoloneq       31
+#define XLcontinue      60
+#define XLcorner        89
+#define XLcos           117
+#define XLcw            6
+#define XLdashed        136
+#define XLdashwid       175
+#define XLdefine        80
+#define XLdiameter      112
+#define XLdirecton      153
+#define XLdiveq         35
+#define XLdo            86
+#define XLdotted        135
+#define XLdown          155
+#define XLellipse       161
+#define XLellipseht     176
+#define XLellipsewid    177
+#define XLelse          84
+#define XLenvvar        167
+#define XLeq            30
+#define XLexp           118
+#define XLexpe          119
+#define XLfillval       186
+#define XLfloat         38
+#define XLfloor         127
+#define XLfrom          54
+#define XLfunc1         113
+#define XLfunc2         128
+#define XLheight        109
+#define XLint           120
+#define XLinvis         137
+#define XLlastenv       190
+#define XLlastsc        184
+#define XLleft          157
+#define XLline          163
+#define XLlineht        178
+#define XLlinethick     187
+#define XLlinetype      133
+#define XLlinewid       179
+#define XLljust         145
+#define XLlog           121
+#define XLloge          122
+#define XLlogic         101
+#define XLmax           130
+#define XLmaxpsht       188
+#define XLmaxpswid      189
+#define XLmin           131
+#define XLminuseq       33
+#define XLmove          165
+#define XLmoveht        180
+#define XLmovewid       181
+#define XLmulteq        34
+#define XLname          39
+#define XLoutlined      141
+#define XLparam         108
+#define XLpath          138
+#define XLpluseq        32
+#define XLpmod          132
+#define XLprimitiv      158
+#define XLradius        111
+#define XLremeq         36
+#define XLright         156
+#define XLrjust         146
+#define XLscale         190
+#define XLshaded        142
+#define XLsign          123
+#define XLsin           124
+#define XLsolid         134
+#define XLspline        166
+#define XLsqrt          125
+#define XLstring        42
+#define XLtan           126
+#define XLtextht        182
+#define XLtextoffset    183
+#define XLtextpos       143
+#define XLtextwid       184
+#define XLthen          59
+#define XLto            55
+#define XLtroff         41
+#define XLundefine      81
+#define XLup            154
+#define XLwidth         110
+#define XNL             15
+#define XRBRACE         25
+#define XRIGHTHEAD      151
+#define XSEMICOLON      15
+#define XSTAR           10
+#define XSTART          46
 
 /* Machine constants                                                  */
 #define ordMINCH        0   /* first element of type character    */
@@ -527,7 +507,7 @@ typedef struct primitive {
       postype here;
       nametype *vars;
       double *env;
-    } UEMPTY6;
+    } UEMPTY7;
     struct {
       double cfill, radius;
     } Ucircle;
@@ -643,16 +623,14 @@ Char tabch, nlch, crch, etxch;
 /* File names                                                         */
 FILE *input, *output, *stderr_;   /*G asmname 'std_err'; G*/
 FILE *copyin;   /*G asmname 'copy_in'; G*/
-FILE *redirect;   /*G asmname 'redi_rect'; G*/
 /*D log: text; D*/
 /*DG asmname 'log_file'; GD*/
 
-mstring infname;   /* name of current input file       */
-mstring outfnam;   /* name of current output file     */
-/*X infname: string; X*/
+mstring infile;   /* name of current input file         */
+/*X infile: string; X*/
 
 boolean inputeof;   /* end of input flag                  */
-int argct;   /* argument counter for options     */
+int argct;   /* argument counter for options       */
 char drawmode;   /* output conversion                  */
 boolean safemode;   /* disable sh and copy                */
 /*D oflag: integer; D*/
@@ -666,7 +644,7 @@ Char ch;   /* current character                  */
 short newsymb;   /* current lexical symbol             */
 int inpic, lexsymb;
 _REC_errmsg errmsg[ERRMAX + 1];
-boolean inlogic;   /* set < to <^ in logical context     */
+boolean inlogic;   /* set < to << in logical context     */
 fbuffer *inbuf, *savebuf, *freebuf;
 
 /* Error handling                                                     */
@@ -687,14 +665,10 @@ double north, south, east, west;
     /* compass corners of a primitive     */
 double xfheight;   /* for calculating xfig coordinates   */
 Char *freeseg;   /* segment open to store strings      */
-short freex;   /* next free location                 */
+chbufinx freex;   /* next free location                 */
 Char *tmpbuf;   /* buffer for snprintf or sprintf     */
 double scale, fsc;   /* scale factor and final scale factor*/
 int splcount, spltot;   /* spline depth counter               */
-primitive *snode;   /* temporary node storage             */
-boolean sfill;   /* fill flag for linear objects       */
-double vfill;   /* fill value */
-nametype *sshade, *soutline;   /* temp values for linear objects     */
 double lastfillval;   /* last-used fill density             */
 double lastthick;   /* last-used line thickness           */
 int printstate;   /* for passing output state info      */
@@ -702,342 +676,331 @@ int printstate;   /* for passing output state info      */
 /* Global tables for easy C conversion.
    Alternative: use run-time space    */
 short lr[lrmax + 1]={
-0,   5,1,   0,  0,   0,  10,6,   0, -1,  15,3735,1,   1,  1,
-0,  20,1,  45,  7,  25, 540,2,  16,151,  30, 535,2, 165,169,
-35, 525,2,  38,170,  40, 515,2,  37,171,  45, 415,2,   7,172,
-50, 325,2,  81,176,  55, 315,2, 111,178,  60, 305,2, 126,179,
-65, 285,2,  39,153,  70, 210,2,  87,147,  75, 205,2,  67,149,
-80, 180,2,  69,132,  85, 175,2,  27,158,  90,  95,2,  23,159,
-0,4468,4,   0,  7, 100, 630,1,  10,  2, 105, 575,1,  11, 66,
-110, 540,1,  16,151, 115, 535,1, 165,169, 120, 525,1,  38,170,
-125, 515,1,  37,171, 130, 415,1,   7,172, 135, 325,1,  81,176,
-140, 315,1, 111,178, 145, 305,1, 126,179, 150, 285,1,  39,153,
-155, 210,1,  87,147, 160, 205,1,  67,149, 165, 180,1,  69,132,
-170, 175,1,  27,158,   0,  95,1,  23,159, 100, 630,1,  10,  2,
-0,4268,3,   0,132,   0, 190,1,  68,  3, 195, 200,2,  69,131,
-0,4473,4,   0,130,   0,4268,3,   2,131,   0, 300,3,   0,149,
-215,1685,1,  62,  4, 220, 285,1,  39,153, 225, 180,1,  69,132,
-165, 230,1,  37,157,   0, 185,3,   0,-157, 240, 275,1, 156,  5,
-245, 270,1,  26,134, 250, 265,1,  41,135,   0, 255,1,  21,136,
-0, 260,1,  22,  6,   0,4280,3,   1,136,   0,4280,3,   0,-135,
-0,4280,3,   0,-134,   0,4280,3,   0,-133,   0,4420,3,   1,154,
-290, 295,2,  21, 33,   0,3828,6,   0, 32, 100, 630,1,  10,  2,
-0,4300,3,   0,-142,   0, 310,1,   7,  7, 100, 630,1,  10,  2,
-0, 320,1,   7,  7, 100, 630,1,  10,  2,   0, 330,1,   7,  7,
-95,1635,1,   8,  8, 340, 385,2, 106,175, 345, 360,2,  25,155,
-350, 355,2,  87,146,   0,4478,4,   0,145,   0, 300,3,   1,146,
-220, 375,1,  39,  9, 240, 275,1, 156,  5,   0,4420,3,   3,156,
-290, 295,2,  21, 33,   0,4420,3,   3,155,   0,4460,3,   1,175,
-395, 915,1,  71, 10, 400, 910,1,  72,174, 405, 920,1,   9,143,
-0, 410,1,  12,144, 110, 540,1,  16, 11, 420,1285,1,  38, 12,
-425,1250,1, 165, 62, 430, 630,1,  10, 65, 435, 575,1,  11, 66,
-440, 415,1,   7,140, 445, 210,1,  87,147, 450, 205,1,  67,149,
-455, 540,1,  16,151, 460, 770,1,  41, 58, 465, 285,1,  39,153,
-470, 515,1,  37,171, 475, 325,1,  81,176, 480, 315,1, 111,178,
-485, 305,1, 126,179, 160, 490,1,  86, 86,   0, 495,1,   7,  7,
-0, 500,1,  41, 13, 505, 510,2,  19, 87,   0,4483,4,   0, 86,
-100, 630,1,  10,  2, 520, 230,4,  68,157,   0,4488,4,   0,171,
-290, 295,2,  21, 33,   0,4460,3,   1,170,   0,4460,3,   0,169,
-115, 535,1, 165, 14,   0,4392,3,   1,151, 555, 560,2,  15,152,
-0,4493,4,   0,150, 110, 540,1,  16, 11,   0,4392,3,   2,152,
-0,3788,3,   0,-13, 110, 540,1,  16, 11, 585, 620,2,   9, 14,
-590, 610,2,  12, 15, 595, 600,2,  13, 16,   0,4498,4,   0, 66,
-110, 540,1,  16, 11,   0,3788,3,   2, 16, 110, 540,1,  16, 11,
-0,3788,3,   2, 15, 110, 540,1,  16, 11,   0,3788,3,   2, 14,
-110, 540,1,  16, 11, 640, 620,2,   9, 14, 645, 610,2,  12, 15,
-650, 600,2,  13, 16,   0,4503,4,   0, 65, 660, 620,2,   9, 14,
-665, 610,2,  12, 15, 670, 600,2,  13, 16,   0,4508,4,   0, 64,
-680, 745,2,  19, 89, 685, 720,2,  10, 67, 690, 695,2,  11, 68,
-0,4513,4,   0, 88, 110, 540,1,  16, 11, 705, 620,2,   9, 14,
-710, 610,2,  12, 15, 715, 600,2,  13, 16,   0,4518,4,   0, 68,
-110, 540,1,  16, 11, 730, 620,2,   9, 14, 735, 610,2,  12, 15,
-740, 600,2,  13, 16,   0,4523,4,   0, 67, 100, 630,1,  10,  2,
-0,4220,3,   2, 89,   0, 760,3,   4, 87,   0, 765,1,   8, 15,
-0,4032,3,   1,-59,   0,4032,3,   0, 58,   0,3964,3,   0,-56,
-785, 810,2,   4,163, 790, 795,2,  10, 57,   0,4528,4,   0,166,
-800, 770,1,  41, 16,   0, 490,1,  86, 86,   0,3964,3,   2, 57,
-800, 770,1,  41, 16, 820, 795,2,  10, 57,   0,4533,4,   0,163,
-830, 835,2,  99,167,   0,4538,4,   0,162, 840, 630,1,  10, 12,
-845, 575,1,  11, 66, 850, 770,1,  41, 58, 855, 540,1,  16,151,
-110, 490,1,  86, 86, 865, 795,2,  10, 57,   0,4543,4,   0,168,
-875, 720,2,  10, 67, 880, 695,2,  11, 68,   0,4548,4,   0,167,
-890, 920,2,   9,143, 895, 410,2,  12,144, 900, 915,2,  71,173,
-905, 910,2,  72,174,   0,4292,6,   0,137,   0,4460,3,   1,174,
-0,4460,3,   1,-173, 110, 540,1,  16, 11,   0,4300,3,   2,143,
-935,1130,2,  10,138, 940, 945,2,  11,139,   0,4553,4,   0,126,
-950, 970,1,   7, 17, 955, 210,1,  87,147, 215, 205,1,  67,149,
-965, 355,2,  87,146, 350, 360,2,  25,155, 975, 630,1,  10,  2,
-980, 575,1,  11, 66, 985, 415,1,   7,140, 990, 210,1,  87,147,
-995, 205,1,  67,149,1000, 540,1,  16,151,1005, 285,1,  39,153,
-1010, 535,1, 165,169,1015, 525,1,  38,170,1020, 515,1,  37,171,
-1025, 325,1,  81,176,1030, 315,1, 111,178, 160, 305,1, 126,179,
-1040,1185,1,  65, 18,1045,1150,1,  62, 36,1050,1085,1,   4, 37,
-1055,1065,1,  19,125,1060, 720,1,  10, 67,   0, 695,1,  11, 68,
-100, 630,1,  10,  2,1075, 720,2,  10, 67,1080, 695,2,  11, 68,
-0,4558,4,   0,125, 975, 630,1,  10,  2,   0,3856,3,   0,-34,
-0,1100,1,  19, 19, 975, 630,1,  10,  2,   0,1110,1,  99, 20,
-0,4292,6,   0,137,1120,1130,2,  10,138,1125, 945,2,  11,139,
-0,4563,4,   0, 37, 950, 970,1,   7, 17,1140, 920,2,   9,143,
-1145, 410,2,  12,144,   0,4568,4,   0,138,   0,1155,1,  63, 21,
-0,1160,1,  64, 22,   0,1165,1,  65, 23, 975, 630,1,  10,  2,
-0,1175,1,  66, 24, 975, 630,1,  10,  2,   0,3856,3,   7, 36,
-975, 630,1,  10,  2,   0,1195,1,  66, 24, 975, 630,1,  10,  2,
-0,3856,3,   4, 35,1210,1230,1,   8, 25,   0,1215,1,  19,141,
-975, 630,1,  10,  2,   0,1225,1,   8, 15,   0,4300,3,   4,141,
-0,4300,3,   2,140,1240, 920,2,   9,143,1245, 410,2,  12,144,
-0,4573,4,   0,139,1255,1260,2,  29, 62,   0, 535,4,   0,169,
-1265, 630,1,  10,  2,1270, 575,1,  11, 66,1275,1285,1,  38, 60,
-1280,1250,1, 165, 62, 120, 540,1,  16,151, 290, 295,2,  21, 33,
-1295,1300,2,  29, 60,   0, 530,4,   0,170,1265, 630,1,  10,  2,
-0,4040,3,   3, 61,1315, 720,2,  10, 67,1320, 695,2,  11, 68,
-0,4578,4,   0, 60,   0,4040,3,   2, 63,1335, 720,2,  10, 67,
-1340, 695,2,  11, 68,   0,4583,4,   0, 62,   0,4444,3,   0,-160,
-1355,1185,2,  65, 35,1360,1150,2,  62, 36,1365,1385,2,   4, 37,
-1370,1065,2,  19,125,1375, 720,2,  10, 67,1380, 695,2,  11, 68,
-0,4588,4,   0,165,1390, 630,1,  10,  2,1395, 575,1,  11, 66,
-1400, 415,1,   7,140,1405, 540,1,  16,151,1410, 210,1,  87,147,
-1415, 205,1,  67,149,1420, 535,1, 165,169,1425, 525,1,  38,170,
-1430, 515,1,  37,171,1435, 325,1,  81,176,1440, 315,1, 111,178,
-1445, 305,1, 126,179, 160, 285,1,  39,153,1455,1185,2,  65, 35,
-1460,1150,2,  62, 36,1465,1085,2,   4, 37,1470, 720,2,  10, 67,
-1475, 695,2,  11, 68,1480,1065,2,  19,125,   0,4593,4,   0,164,
-0,3924,3,   0,-38,1495,1500,2,  17,161,   0,4598,4,   0, 71,
-1505, 630,1,  10, 12,1510, 575,1,  11, 66,1515, 770,1,  41, 58,
-105, 490,1,  86, 86,1370,1525,2,   4,164, 100, 630,1,  10,  2,
-1535, 720,2,  10, 67,1480, 695,2,  11, 68,   0,4444,3,   2,161,
-1550,1585,1,   8, 25,   0,1555,1,  19, 39,1560,1570,1,  38, 26,
-0,1565,1, 165, 62,   0,1260,1,  29, 27, 290, 295,2,  21, 33,
-0,1300,1,  29, 27,   0,3924,3,   2, 39,   0,4460,3,   2,180,
-1595,1615,1,   8, 28,   0,1600,1,  18, 72,1505, 630,1,  10, 12,
-1610,1500,2,  17,161,   0,4603,4,   0, 72,   0,4460,3,   2,172,
-0,4300,3,   2,144,1055,1630,1,   8, 29,   0,4460,3,   3,177,
-0,4460,3,   2,176,1055,1645,1,   8, 29,   0,4460,3,   3,178,
-1055,1655,1,  19, 30, 100, 630,1,  10,  2,1055,1665,1,   8, 29,
-0,4460,3,   5,179,1055,1675,1,  22, 31,   0,3828,3,   2, 33,
-0,4420,3,   1,153, 220, 285,1,  39,  9,1695, 360,2,  25,155,
-0,4608,4,   0,148,1705, 360,2,  25,155,   0,4613,4,   0,147,
-1055,1715,1,  28, 32,   0, 185,3,   2,158,1055,1725,1,  24, 33,
-0, 185,3,   2,159,1735, 620,2,   9, 14,1740, 610,2,  12, 15,
-1745, 600,2,  13, 16,1750, 540,2,  16,151,1755, 535,2, 165,169,
-1760, 525,2,  38,170,1765, 515,2,  37,171,1770, 415,2,   7,172,
-1775, 325,2,  81,176,1780, 315,2, 111,178,1785, 305,2, 126,179,
-1790, 285,2,  39,153,1795, 210,2,  87,147,1800, 205,2,  67,149,
-1805, 180,2,  69,132,1810, 175,2,  27,158,1815,  95,2,  23,159,
-0,4618,4,   0,  8,1825, 620,2,   9, 14,1830, 610,2,  12, 15,
-1835, 600,2,  13, 16,   0,4623,4,   0,  9,1845,1855,1,  14, 34,
-0,1850,1,   3,  6,   0,3740,3,   0, -6,   0,3740,3,   0, -5,
-1865,3145,2,  39, 18,1870,3130,2, 151, 20,1875,3125,2,  40, 21,
-1880,3050,2,  78, 27,1885,3035,2,  76, 28,1890,2480,2,  73, 40,
-1895,2445,2,  75, 43,1900,2430,2,  77, 45,1905,2415,2,  74, 46,
-1910,2360,2,  80, 48,1915,3110,6,  23, 29,1920,2225,2,  59,116,
-1925,1570,2,  38, 60,1930,1565,2, 165, 62,1935,2205,2,  79, 84,
-1940,2110,2,  84, 73,1945,2005,2, 156,118,1950,2185,6,  82, 70,
-1955,1975,6,  21,117,1960,1975,6,  26,117,1965, 770,2,  41, 58,
-1970, 490,2,  86, 86,   0,3760,6,   0, 10,1980,1990,1,  21, 35,
-0,1985,1,  26,121,   0,2330,3,   1,121,1865,3145,2,  39, 18,
-2000, 795,2,  10, 57,   0,4628,4,   0,119,2010, 630,2,  10, 65,
-2015, 575,2,  11, 66,2020, 540,2,  16,151,2025, 535,2, 165,169,
-2030, 525,2,  38,170,2035, 515,2,  37,171,2040, 415,2,   7,172,
-2045, 325,2,  81,176,2050, 315,2, 111,178,2055, 305,2, 126,179,
-2060, 285,2,  39,153,2065, 210,2,  87,147,2070, 205,2,  67,149,
-2075, 180,2,  69,132,2080, 175,2,  27,158,2085,  95,2,  23,159,
-0,4236,6,   0,122,2095, 720,2,  10, 67,2100, 695,2,  11, 68,
-0,4633,4,   0,123,   0,2330,3,   1,118,1560,1570,1,  38, 26,
-1550,2120,1,  54, 36, 100, 630,1,  10,  2,2130, 720,1,  10, 37,
-2135, 695,1,  11, 68,2140,2175,1,  85, 75,   0,2145,1,  57, 77,
-2150,2155,2,   9, 78,   0,4638,4,   0, 77,   0,2160,3,   1, 78,
-100, 630,1,  10,  2,1055,2170,1,  85, 38,   0,2180,3,   2, 76,
-0,2180,3,   0, 75,   0,2340,3,   4, 73,   0,2190,1,  82, 39,
-1505, 630,1,  10, 12,1595,2200,1,  58, 40,   0,2350,3,   3, 69,
-2210,2220,1,  38, 41,   0,2215,1,  39, 85,   0,2380,3,   1, 85,
-0,2380,3,   1, 84,   0,4228,3,   0,116,2235,2315,1,  87, 42,
-2240,2290,1,  55,115,2245,2265,1,  25,128,2250, 630,1,  10, 65,
-2255, 575,1,  11, 66, 990, 415,1,   7,140,1055,1065,1,  19, 30,
-220,2280,1,  39,  9, 240, 275,1, 156,  5,   0,2230,3,   3,129,
-290, 295,2,  21, 33,   0,2230,3,   3,128, 975, 630,1,  10,  2,
-0,4228,3,   2,115,   0,2305,1,  55, 43, 975, 630,1,  10,  2,
-0,4228,3,   3,114, 210,2320,1,  55, 44, 975, 630,1,  10,  2,
-0,4228,3,   3,113,   0,4228,3,   0,-90,1865,3145,2,  39, 18,
-0,2345,1,  23, 45,1865,3145,2,  39, 18,   0,2355,1,  23, 45,
-1865,3145,2,  39, 18,2365,2375,1,  38, 41,   0,2370,1,  39, 49,
-0,3120,3,   1, 49,   0,3120,3,   1, 48,2385,1855,2,  14,  5,
-2390,1850,2,   3,  6,   0,3936,6,   0,-50,   0,3936,3,   0,-51,
-0,2405,1,  23, 45,   0,2410,1,  24, 46,   0,3120,3,   3,-47,
-800, 770,1,  41, 16,2425, 795,2,  10, 57,   0,4643,4,   0, 46,
-800, 770,1,  41, 16,2440, 795,2,  10, 57,   0,4648,4,   0, 45,
-2450,2455,2, 165, 82,   0,4653,4,   0, 43,   0,2460,3,   0, 82,
-2465,2470,2,  19, 83,   0,4658,4,   0, 44,   0,2475,1, 165, 47,
-0,2460,3,   2, 83,2485, 630,1,  10, 12,2490, 575,1,  11, 66,
-2495, 770,1,  41, 58,2500, 540,1,  16,151,2505, 415,1,   7,140,
-2510, 490,1,  86, 86,2515, 535,1, 165,169,2520, 525,1,  38,170,
-2525, 515,1,  37,171,2530, 325,1,  81,176,2535, 315,1, 111,178,
-2540, 305,1, 126,179,2545, 210,1,  87,147,2550, 205,1,  67,149,
-160, 285,1,  39,153,2560, 795,2,  10, 57,2565,2570,2,  99, 80,
-0,4208,6,   0, 79, 795,2575,1,  99, 48, 800, 770,1,  41, 16,
-2585, 795,2,  10, 57,   0,4663,4,   0, 81,2595, 795,2,  10, 57,
-0,4668,4,   0, 80,   0,3120,3,   2, 42,2565,2570,2,  99, 80,
-0,3120,3,   2, 41,2620, 720,2,  10, 67,2625, 695,2,  11, 68,
-2630,1185,2,  65, 35,2635,1150,2,  62, 36,2640,1085,2,   4, 37,
-2560,1065,2,  19,125,   0,3120,3,   2, 40,2655,3015,2,  47, 91,
-2660,2995,2,  48, 92,2665,2975,2,  49, 93,2670,2955,2,  50, 94,
-2675,2935,2,  51, 95,2680,2915,2,  52, 96,2685,2905,2, 151, 97,
-2690,2895,2,  57, 98,2695,2890,2,  58, 99,2700,2880,2, 131,100,
-2705,2870,2,  60,101,2710,2860,2,  70,102,2715,2855,2, 147,103,
-2720,2850,2,   5,104,2725,2845,2,   6,105,2730,2840,2,  61,106,
-2735,2820,2,  53,108,2740,2810,2,  54,109,2745,2800,2,  55,110,
-2750,2795,2, 141,111,2755,2780,2, 137,112,2760,2775,2,  56,127,
-2765, 770,2,  41, 58,2770, 490,2,  86, 86,   0,4673,4,   0, 30,
-0,2230,3,   1,-127, 800, 770,1,  41, 16,2790, 795,2,  10, 57,
-0,4678,4,   0,112,   0,4228,3,   1,111, 975, 630,1,  10,  2,
-0,4228,3,   2,110, 975, 630,1,  10,  2,   0,4228,3,   2,109,
-975, 630,1,  10,  2,   0,4228,3,   2,108,2835, 795,2,  10, 57,
-0,4683,4,   0,107,   0,4228,3,   1,106,   0,4228,3,   1,105,
-0,4228,3,   1,104,   0,4228,3,   1,103,2010, 630,2,  10, 65,
-0,4228,3,   2,102,2010, 630,2,  10, 65,   0,4228,3,   2,101,
-2010, 630,2,  10, 65,   0,4228,3,   2,100,   0,4228,3,   1, 99,
-975, 630,1,  10,  2,   0,4228,3,   2, 98,2010, 630,2,  10, 65,
-0,4228,3,   2, 97, 100, 630,1,  10,  2,2925, 720,2,  10, 67,
-2930, 695,2,  11, 68,   0,4688,4,   0, 96, 100, 630,1,  10,  2,
-2945, 720,2,  10, 67,2950, 695,2,  11, 68,   0,4693,4,   0, 95,
-100, 630,1,  10,  2,2965, 720,2,  10, 67,2970, 695,2,  11, 68,
-0,4698,4,   0, 94, 100, 630,1,  10,  2,2985, 720,2,  10, 67,
-2990, 695,2,  11, 68,   0,4703,4,   0, 93, 100, 630,1,  10,  2,
-3005, 720,2,  10, 67,3010, 695,2,  11, 68,   0,4708,4,   0, 92,
-100, 630,1,  10,  2,3025, 720,2,  10, 67,3030, 695,2,  11, 68,
-0,4713,4,   0, 91, 800, 770,1,  41, 16,3045, 795,2,  10, 57,
-0,4718,4,   0, 28, 800, 770,1,  41, 16,3060, 795,2,  10, 57,
-0,4723,4,   0, 27,3070,3080,1,  24, 49,   0,3075,1,  43, 74,
-0,2335,3,   1, 74,   0,3816,3,   1,-26,   0,3090,1,  23, 45,
-1865,3145,2,  39, 18,3100,3105,2,  83, 53,   0,4728,4,   0, 24,
-0,3085,3,   1, 53,   0,3115,1,  23, 45,1865,3145,2,  39, 18,
-0,3816,3,   0, 22,   0,3816,3,   0, 21,   0,3816,3,   0, 20,
-3140,1555,2,  19, 39,   0,4733,4,   0, 19, 290, 295,2,  21, 33,
-0,3155,1,  20, 50,3160,2225,2,  59,116,3165, 630,2,  10, 65,
-3170, 575,2,  11, 66,3175,2005,2, 156,118,3180, 415,2,   7,140,
-3185, 210,2,  87,147,3190, 205,2,  67,149,3195, 540,2,  16,151,
-3200, 770,2,  41, 58,3205, 285,2,  39,153,3210, 535,2, 165,169,
-3215, 525,2,  38,170,3220, 515,2,  37,171,3225, 325,2,  81,176,
-3230, 315,2, 111,178,3235, 305,2, 126,179,3240, 490,2,  86, 86,
-3245, 180,2,  69,132,3250, 175,2,  27,158,3255,  95,2,  23,159,
-0,1975,6,   0,117,3265,3015,2,  47, 91,3270,2995,2,  48, 92,
-3275,2975,2,  49, 93,3280,2955,2,  50, 94,3285,2935,2,  51, 95,
-3290,2915,2,  52, 96,3295,2905,2, 151, 97,3300,2895,2,  57, 98,
-3305,2890,2,  58, 99,3310,2880,2, 131,100,3315,2870,2,  60,101,
-3320,2860,2,  70,102,3325,2855,2, 147,103,3330,2850,2,   5,104,
-3335,2845,2,   6,105,3340,2840,2,  61,106,3345,2820,2,  53,108,
-3350,2810,2,  54,109,3355,2800,2,  55,110,3360,2795,2, 141,111,
-3365,2780,2, 137,112,3370,2775,2,  56,127,3375, 770,2,  41, 58,
-3380, 490,2,  86, 86,   0,4738,4,   0, 31,   0,3816,3,   3, 18,
-0,3816,3,   0, 17,   0,3760,3,   0, 11,2385,1855,2,  14,  5,
-3410,3145,2,  39, 18,3415,3130,2, 151, 20,3420,3125,2,  40, 21,
-3425,3050,2,  78, 27,3430,3035,2,  76, 28,3435,2480,2,  73, 40,
-3440,2445,2,  75, 43,3445,2430,2,  77, 45,3450,2415,2,  74, 46,
-3455,2360,2,  80, 48,3460,3110,6,  23, 29,3465,2225,2,  59,116,
-3470,1570,2,  38, 60,3475,1565,2, 165, 62,3480,2205,2,  79, 84,
-3485,2110,2,  84, 73,3490,2005,2, 156,118,3495,2185,6,  82, 70,
-3500,1975,6,  21,117,3505,1975,6,  26,117,3510, 770,2,  41, 58,
-3515, 490,2,  86, 86,   0,2395,4,   0, 51,   0,3760,3,   2, 12,
-0,3530,1,  24, 46,   0,3816,3,   4, 23,2385,1855,2,  14,  5,
-0,3545,1,  24, 46,   0,3816,3,   4,-25,2385,1855,2,  14,  5,
-0,3560,1,  24, 46,   0,3095,3,   4,-52,2385,1855,2,  14,  5,
-0,3065,3,   3,-54,2385,1855,2,  14,  5,   0,3065,3,   2,-55,
-2385,1855,2,  14,  5,   0,3595,3,   1,124,   0,3600,1,  22,  6,
-0,2330,3,   3,120,1840,3720,1,  46, 51,3615,3715,2,  46,  4,
-3620,3145,2,  39, 18,3625,3130,2, 151, 20,3630,3125,2,  40, 21,
-3635,3050,2,  78, 27,3640,3035,2,  76, 28,3645,2480,2,  73, 40,
-3650,2445,2,  75, 43,3655,2430,2,  77, 45,3660,2415,2,  74, 46,
-3665,2360,2,  80, 48,3670,3110,6,  23, 29,3675,2225,2,  59,116,
-3680,1570,2,  38, 60,3685,1565,2, 165, 62,3690,2205,2,  79, 84,
-3695,2110,2,  84, 73,3700,2005,2, 156,118,3705,2185,6,  82, 70,
-3710, 770,2,  41, 58,3255, 490,2,  86, 86,   0,3725,3,   4,  4,
-0,3725,3,   3,  3,1845,1855,1,  14, 34,   0,  10,3,   2,  2,
-0,   0,0,   2,  0,3744,1860,5,1840    ,3748,2395,5,2380    ,
-3752,3610,5,3605    ,3756,3730,5,3725    ,   0,3405,5,   0    ,
-3764,3585,5,1990    ,3768,3575,5,2335    ,3772,3565,5,2345    ,
-3776,3550,5,2355    ,3780,3535,5,3090    ,3784,3400,5,3115    ,
-0,3605,5,   0    ,3792,1730,5,  20    ,3796, 580,5, 575    ,
-3800, 635,5, 630    ,3804, 700,5, 695    ,3808, 725,5, 720    ,
-3812,1820,5,1730    ,   0, 655,5,   0    ,3820,3520,5,3405    ,
-3824,3520,5,3610    ,   0,3395,5,   0    ,3832, 380,5, 375    ,
-3836, 530,5, 525    ,3840,1290,5,1285    ,3844,1575,5,1570    ,
-3848,2285,5,2280    ,3852,3150,5,3145    ,   0,1680,5,   0    ,
-3860,1095,5,1085    ,3864,1105,5,1100    ,3868,1170,5,1165    ,
-3872,1180,5,1175    ,3876,1190,5,1185    ,3880,1200,5,1195    ,
-3884,1220,5,1215    ,3888,1095,5,1385    ,3892,2295,5,2290    ,
-3896,2310,5,2305    ,3900,2325,5,2320    ,3904,2605,5,2480    ,
-3908,2805,5,2800    ,3912,2815,5,2810    ,3916,2825,5,2820    ,
-3920,3385,5,3155    ,   0,1205,5,   0    ,3928,1545,5, 415    ,
-3932,2115,5,2110    ,   0,3135,5,   0    ,3940,3525,5,3400    ,
-3944,3540,5,3535    ,3948,3555,5,3550    ,3952,3570,5,3565    ,
-3956,3580,5,3575    ,3960,3590,5,3585    ,   0,2400,5,   0    ,
-3968, 780,5, 415    ,3972, 815,5, 810    ,3976, 860,5, 835    ,
-3980, 780,5,1500    ,3984, 780,5,1600    ,3988, 780,5,2190    ,
-3992,2420,5,2415    ,3996,2435,5,2430    ,4000,2555,5,2480    ,
-4004,2590,5,2570    ,4008,2580,5,2575    ,4012,2830,5,2650    ,
-4016,2785,5,2780    ,4020,3040,5,3035    ,4024,3055,5,3050    ,
-4028,2830,5,3260    ,   0,1995,5,   0    ,4036, 805,5, 795    ,
-0, 775,5,   0    ,4044,1325,5,1260    ,4048,1305,5,1300    ,
-4052,1580,5,1555    ,   0,1485,5,   0    ,4060,1720,5,  95    ,
-4064,1710,5, 175    ,4068,1670,5, 295    ,4072,1650,5, 310    ,
-4076,1640,5, 320    ,4080,1625,5, 330    ,4084,1350,5, 415    ,
-4088, 675,5, 510    ,4092, 675,5, 745    ,4096, 870,5, 835    ,
-4100,1070,5,1065    ,4104,1330,5,1260    ,4108,1310,5,1300    ,
-4112,1450,5,1385    ,4116,1520,5,1500    ,4120,1530,5,1525    ,
-4124,1520,5,1600    ,4128,1660,5,1655    ,4132,2090,5,2005    ,
-4136,2125,5,2120    ,4140,2165,5,2160    ,4144,1520,5,2190    ,
-4148,2260,5,2230    ,4152,2615,5,2480    ,4156,2090,5,2860    ,
-4160,2090,5,2870    ,4164,2090,5,2880    ,4168,2260,5,2895    ,
-4172,2090,5,2905    ,4176,2920,5,2915    ,4180,2940,5,2935    ,
-4184,2960,5,2955    ,4188,2980,5,2975    ,4192,3000,5,2995    ,
-4196,3020,5,3015    ,   0,1035,5,   0    ,4204,2195,5,2190    ,
-0,1590,5,   0    ,4212,2610,5,2605    ,4216,2645,5,2615    ,
-0,2600,5,   0    ,4224, 750,5, 745    ,   0, 755,5,   0    ,
-4232,3260,5,3155    ,   0,2650,5,   0    ,4240,2865,5,2860    ,
-4244,2875,5,2870    ,4248,2885,5,2880    ,4252,2910,5,2905    ,
-0,2105,5,   0    ,4260,2300,5,2230    ,4264,2900,5,2895    ,
-0,1090,5,   0    ,4272, 365,5, 360    ,4276,2270,5,2265    ,
-0, 235,5,   0    ,4284, 370,5, 365    ,4288,2275,5,2270    ,
-0, 280,5,   0    ,4296,1115,5,1110    ,   0, 930,5,   0    ,
-4304, 885,5, 415    ,4308,1235,5, 945    ,4312, 885,5, 970    ,
-4316, 885,5,1085    ,4320, 885,5,1100    ,4324,1135,5,1130    ,
-4328, 885,5,1165    ,4332, 885,5,1175    ,4336, 885,5,1185    ,
-4340, 885,5,1195    ,4344, 885,5,1215    ,4348, 885,5,1385    ,
-4352, 885,5,2230    ,4356, 885,5,2290    ,4360, 885,5,2305    ,
-4364, 885,5,2320    ,4368, 885,5,2480    ,4372, 885,5,2800    ,
-4376, 885,5,2810    ,4380, 885,5,2820    ,4384, 885,5,2895    ,
-4388, 885,5,3155    ,   0, 390,5,   0    ,4396,1620,5, 410    ,
-4400, 565,5, 560    ,4404, 605,5, 600    ,4408, 615,5, 610    ,
-4412, 625,5, 620    ,4416, 925,5, 920    ,   0, 570,5,   0    ,
-4424,1700,5, 210    ,4428, 960,5, 945    ,4432, 960,5,1130    ,
-4436,1690,5,1685    ,4440,1700,5,2315    ,   0, 335,5,   0    ,
-4448,1605,5,1600    ,   0,1490,5,   0    ,4456,1540,5,1500    ,
-0,1345,5,   0    ,4464, 545,5, 540    ,   0, 550,5,   0    ,
-0,1840,3,   0,  7,   0,4268,3,   1,130,   0, 300,3,   0,145,
-0, 760,3,   2, 86,   0,4460,3,   0,-171,   0,4392,3,   0,-150,
-0,4056,3,   1, 66,   0,4056,3,   1, 65,   0,4056,3,   0,-64,
-0,4220,3,   0, 88,   0,4056,3,   2, 68,   0,4056,3,   2, 67,
-0, 825,3,   0,-166,   0,4452,3,   2,163,   0,4452,3,   0,162,
-0, 825,3,   2,168,   0, 825,3,   2,167,   0,4256,3,   1,126,
-0,4256,3,   2,125,   0,3856,3,   6, 37,   0,4292,3,   2,138,
-0,4292,3,   2,139,   0,4040,3,   3, 60,   0,4040,3,   2, 62,
-0, 825,3,   0,-165,   0,4452,3,   2,164,   0,4200,3,   0,-71,
-0,4200,3,   2, 72,   0, 300,3,   2,148,   0, 300,3,   1,147,
-0,1840,3,   1,  8,   0,1840,3,   2,  9,   0,2330,3,   0,119,
-0,4236,3,   0,-123,   0,2160,3,   0,-77,   0,3120,3,   1, 46,
-0,3120,3,   1, 45,   0,3120,3,   0, 43,   0,3120,3,   1,-44,
-0,4208,3,   2, 81,   0,4208,3,   1, 80,   0,3390,3,   0, 30,
-0,4228,3,   2,112,   0,4228,3,   1,107,   0,4228,3,   2, 96,
-0,4228,3,   2, 95,   0,4228,3,   2, 94,   0,4228,3,   2, 93,
-0,4228,3,   2, 92,   0,4228,3,   2, 91,   0,3816,3,   1, 28,
-0,3816,3,   1, 27,   0,3816,3,   0,-24,   0,3816,3,   0, 19,
-0,3390,3,   3, 31
+0,   5,1,   0,  0,   0,  10,6,   0, -1,  15,3620,1,   1,  1,
+0,  20,1,  46,  7,  25, 500,2,  17,143,  30, 515,2, 167,163,
+35, 505,2,  39,164,  40, 490,2,  38,165,  45, 415,2,   8,166,
+50, 325,2,  82,170,  55, 315,2, 113,172,  60, 305,2, 128,173,
+65, 285,2,  40,145,  70, 210,2,  89,139,  75, 205,2,  68,141,
+80, 180,2,  70,151,  85, 175,2,  28,157,  90,  95,2,  24,158,
+0,4325,4,   0,  7, 100, 630,1,  11,  2, 105, 575,1,  12, 67,
+110, 500,1,  17,143, 115, 515,1, 167,163, 120, 505,1,  39,164,
+125, 490,1,  38,165, 130, 415,1,   8,166, 135, 325,1,  82,170,
+140, 315,1, 113,172, 145, 305,1, 128,173, 150, 285,1,  40,145,
+155, 210,1,  89,139, 160, 205,1,  68,141, 165, 180,1,  70,151,
+170, 175,1,  28,157,   0,  95,1,  24,158, 100, 630,1,  11,  2,
+0,4285,3,   0,151,   0, 190,1,  69,  3, 195, 200,2,  70,150,
+0,4330,4,   0,149,   0,4285,3,   2,150,   0, 300,3,   0,141,
+215,1615,1,  63,  4, 220, 285,1,  40,145, 225, 180,1,  70,151,
+165, 230,1,  38,156,   0, 185,3,   0,-156, 240, 275,1, 158,  5,
+245, 270,1,  27,153, 250, 265,1,  42,154,   0, 255,1,  22,155,
+0, 260,1,  23,  6,   0,4293,3,   1,155,   0,4293,3,   0,-154,
+0,4293,3,   0,-153,   0,4293,3,   0,-152,   0,4261,3,   1,146,
+290, 295,2,  22, 34,   0,3713,6,   0, 33, 100, 630,1,  11,  2,
+0,4133,3,   0,-134,   0, 310,1,   8,  7, 100, 630,1,  11,  2,
+0, 320,1,   8,  7, 100, 630,1,  11,  2,   0, 330,1,   8,  7,
+95,1565,1,   9,  8, 340, 385,2, 108,169, 345, 360,2,  26,147,
+350, 355,2,  89,138,   0,4335,4,   0,137,   0, 300,3,   1,138,
+220, 375,1,  40,  9, 240, 275,1, 158,  5,   0,4261,3,   3,148,
+290, 295,2,  22, 34,   0,4261,3,   3,147,   0,4317,3,   1,169,
+395, 790,1,  72, 10, 400, 785,1,  73,168, 405, 795,1,  10,135,
+0, 410,1,  13,136, 110, 500,1,  17, 11, 420, 630,1,  11, 12,
+425, 575,1,  12, 67, 430,1230,1,  42, 59, 435,1160,1,  39, 61,
+440,1125,1, 167, 63, 445, 545,1,  87, 84, 450, 500,1,  17,143,
+455, 415,1,   8,132, 460, 490,1,  38,165, 465, 325,1,  82,170,
+470, 315,1, 113,172, 475, 305,1, 128,173, 480, 210,1,  89,139,
+485, 205,1,  68,141, 160, 285,1,  40,145, 495, 230,4,  69,156,
+0,4340,4,   0,165, 115, 515,1, 167, 13, 290, 295,2,  22, 34,
+0,4317,3,   1,164,   0,4317,3,   0,163,   0,4233,3,   1,143,
+530, 535,2,  16,144,   0,4345,4,   0,142, 110, 500,1,  17, 11,
+0,4233,3,   2,144,   0, 550,1,   8,  7,   0, 555,1,  42, 14,
+560, 565,2,  20, 85,   0,4350,4,   0, 84, 100, 630,1,  11,  2,
+0,3673,3,   0,-13, 110, 500,1,  17, 11, 585, 620,2,  10, 14,
+590, 610,2,  13, 15, 595, 600,2,  14, 16,   0,4355,4,   0, 67,
+110, 500,1,  17, 11,   0,3673,3,   2, 16, 110, 500,1,  17, 11,
+0,3673,3,   2, 15, 110, 500,1,  17, 11,   0,3673,3,   2, 14,
+110, 500,1,  17, 11, 640, 620,2,  10, 14, 645, 610,2,  13, 15,
+650, 600,2,  14, 16,   0,4360,4,   0, 66, 660, 620,2,  10, 14,
+665, 610,2,  13, 15, 670, 600,2,  14, 16,   0,4365,4,   0, 65,
+680, 745,2,  20, 87, 685, 720,2,  11, 68, 690, 695,2,  12, 69,
+0,4370,4,   0, 86, 110, 500,1,  17, 11, 705, 620,2,  10, 14,
+710, 610,2,  13, 15, 715, 600,2,  14, 16,   0,4375,4,   0, 69,
+110, 500,1,  17, 11, 730, 620,2,  10, 14, 735, 610,2,  13, 15,
+740, 600,2,  14, 16,   0,4380,4,   0, 68, 100, 630,1,  11,  2,
+0,4077,3,   2, 87,   0,1220,3,   4, 85, 765, 795,2,  10,135,
+770, 410,2,  13,136, 775, 790,2,  72,167, 780, 785,2,  73,168,
+0,4125,6,   0,129,   0,4317,3,   1,168,   0,4317,3,   1,-167,
+110, 500,1,  17, 11,   0,4133,3,   2,135, 810,1005,2,  11,130,
+815, 820,2,  12,131,   0,4385,4,   0,126, 825, 845,1,   8, 15,
+830, 210,1,  89,139, 215, 205,1,  68,141, 840, 355,2,  89,138,
+350, 360,2,  26,147, 850, 630,1,  11,  2, 855, 575,1,  12, 67,
+860, 415,1,   8,132, 865, 210,1,  89,139, 870, 205,1,  68,141,
+875, 500,1,  17,143, 880, 285,1,  40,145, 885, 515,1, 167,163,
+890, 505,1,  39,164, 895, 490,1,  38,165, 900, 325,1,  82,170,
+905, 315,1, 113,172, 160, 305,1, 128,173, 915,1060,1,  66, 16,
+920,1025,1,  63, 37, 925, 960,1,   4, 38, 930, 940,1,  20,125,
+935, 720,1,  11, 68,   0, 695,1,  12, 69, 100, 630,1,  11,  2,
+950, 720,2,  11, 68, 955, 695,2,  12, 69,   0,4390,4,   0,125,
+850, 630,1,  11,  2,   0,3741,3,   0,-35,   0, 975,1,  20, 17,
+850, 630,1,  11,  2,   0, 985,1,   5, 18,   0,4125,6,   0,129,
+995,1005,2,  11,130,1000, 820,2,  12,131,   0,4395,4,   0, 38,
+825, 845,1,   8, 15,1015, 795,2,  10,135,1020, 410,2,  13,136,
+0,4400,4,   0,130,   0,1030,1,  64, 19,   0,1035,1,  65, 20,
+0,1040,1,  66, 21, 850, 630,1,  11,  2,   0,1050,1,  67, 22,
+850, 630,1,  11,  2,   0,3741,3,   7, 37, 850, 630,1,  11,  2,
+0,1070,1,  67, 22, 850, 630,1,  11,  2,   0,3741,3,   4, 36,
+1085,1105,1,   9, 23,   0,1090,1,  20,133, 850, 630,1,  11,  2,
+0,1100,1,   9, 24,   0,4133,3,   4,133,   0,4133,3,   2,132,
+1115, 795,2,  10,135,1120, 410,2,  13,136,   0,4405,4,   0,131,
+1130,1135,2,  30, 63,   0, 515,4,   0,163,1140, 630,1,  11,  2,
+1145, 575,1,  12, 67,1150,1160,1,  39, 61,1155,1125,1, 167, 63,
+120, 500,1,  17,143, 290, 295,2,  22, 34,1170,1175,2,  30, 61,
+0, 510,4,   0,164,1140, 630,1,  11,  2,   0,3909,3,   3, 62,
+1190, 720,2,  11, 68,1195, 695,2,  12, 69,   0,4410,4,   0, 61,
+0,3909,3,   2, 64,1210, 720,2,  11, 68,1215, 695,2,  12, 69,
+0,4415,4,   0, 63,   0,1225,1,   9, 24,   0,3901,3,   1,-60,
+0,3901,3,   0, 59,1240,1245,2, 101,162,   0,4420,4,   0,159,
+100, 630,1,  11,  2,1255, 720,2,  11, 68,1260, 695,2,  12, 69,
+0,4425,4,   0,162,   0,3817,3,   0,-39,   0,3857,3,   0,-57,
+1280,1285,2,  18,160,   0,4430,4,   0, 72, 100, 630,1,  11,  2,
+1295, 720,2,  11, 68,1300, 695,2,  12, 69,   0,4435,4,   0,161,
+1310,1245,2, 101,162,   0,4440,4,   0,160,1320,1420,2,   5,176,
+1325,1350,2,   4,177,1330, 720,2,  11, 68,1335, 695,2,  12, 69,
+1340,1060,2,  66, 36,1345,1025,2,  63, 37,1300, 940,2,  20,125,
+1355, 630,1,  11,  2,1360, 575,1,  12, 67,1365, 500,1,  17,143,
+1370, 415,1,   8,132,1375, 515,1, 167,163, 455, 505,1,  39,164,
+1385,1415,1,   9, 25,1390, 720,1,  11, 68,1395, 695,1,  12, 69,
+1400,1060,1,  66, 36,1405,1025,1,  63, 37,1410, 960,1,   4, 38,
+0, 940,1,  20,125,   0,4317,3,   4,177, 100, 630,1,  11,  2,
+930,1430,1,   9, 26,   0,4317,3,   4,176,1440,1475,1,   9, 23,
+0,1445,1,  20, 40,1450,1460,1,  39, 27,   0,1455,1, 167, 63,
+0,1135,1,  30, 28, 290, 295,2,  22, 34,   0,1175,1,  30, 28,
+0,3817,3,   2, 40,   0,4317,3,   2,175,1485,1505,1, 101, 29,
+0,1490,1,  11, 58,1495,1230,1,  42, 30,   0, 545,1,  87, 84,
+0,3857,3,   2, 58,1495,1230,1,  42, 30,1485,1515,1,   9, 31,
+0,4317,3,   4,174,1525,1545,1,   9, 32,   0,1530,1,  19, 73,
+100, 630,1,  11,  2,1540,1285,2,  18,160,   0,4445,4,   0, 73,
+0,4317,3,   2,166,   0,4133,3,   2,136, 930,1560,1,   9, 26,
+0,4317,3,   3,171,   0,4317,3,   2,170, 930,1575,1,   9, 26,
+0,4317,3,   3,172, 930,1585,1,  20, 33, 100, 630,1,  11,  2,
+930,1595,1,   9, 26,   0,4317,3,   5,173, 930,1605,1,  23, 34,
+0,3713,3,   2, 34,   0,4261,3,   1,145, 220, 285,1,  40,  9,
+1625, 360,2,  26,147,   0,4450,4,   0,140,1635, 360,2,  26,147,
+0,4455,4,   0,139, 930,1645,1,  29, 35,   0, 185,3,   2,157,
+930,1655,1,  25, 36,   0, 185,3,   2,158,1665, 620,2,  10, 14,
+1670, 610,2,  13, 15,1675, 600,2,  14, 16,1680, 500,2,  17,143,
+1685, 515,2, 167,163,1690, 505,2,  39,164,1695, 490,2,  38,165,
+1700, 415,2,   8,166,1705, 325,2,  82,170,1710, 315,2, 113,172,
+1715, 305,2, 128,173,1720, 285,2,  40,145,1725, 210,2,  89,139,
+1730, 205,2,  68,141,1735, 180,2,  70,151,1740, 175,2,  28,157,
+1745,  95,2,  24,158,   0,4460,4,   0,  8,1755, 620,2,  10, 14,
+1760, 610,2,  13, 15,1765, 600,2,  14, 16,   0,4465,4,   0,  9,
+1775,1785,1,  15, 37,   0,1780,1,   3,  6,   0,3625,3,   0, -6,
+0,3625,3,   0, -5,1795,3015,2,  40, 18,1800,3000,2, 153, 21,
+1805,2995,2,  41, 22,1810,2920,2,  79, 28,1815,2905,2,  77, 29,
+1820,2440,2,  74, 41,1825,2405,2,  76, 44,1830,2390,2,  78, 46,
+1835,2375,2,  75, 47,1840,2320,2,  81, 49,1845,2980,6,  24, 30,
+1850,2155,2,  60,116,1855,1460,2,  39, 61,1860,1455,2, 167, 63,
+1865,2135,2,  80, 82,1870,2040,2,  85, 74,1875,1935,2, 158,118,
+1880,2115,6,  83, 71,1885,1905,6,  22,117,1890,1905,6,  27,117,
+1895,1230,2,  42, 59,1900, 545,2,  87, 84,   0,3645,6,   0, 10,
+1910,1920,1,  22, 38,   0,1915,1,  27,121,   0,2290,3,   1,121,
+1795,3015,2,  40, 18,1930,1490,2,  11, 58,   0,4470,4,   0,119,
+1940, 630,2,  11, 66,1945, 575,2,  12, 67,1950, 500,2,  17,143,
+1955, 515,2, 167,163,1960, 505,2,  39,164,1965, 490,2,  38,165,
+1970, 415,2,   8,166,1975, 325,2,  82,170,1980, 315,2, 113,172,
+1985, 305,2, 128,173,1990, 285,2,  40,145,1995, 210,2,  89,139,
+2000, 205,2,  68,141,2005, 180,2,  70,151,2010, 175,2,  28,157,
+2015,  95,2,  24,158,   0,4093,6,   0,122,2025, 720,2,  11, 68,
+2030, 695,2,  12, 69,   0,4475,4,   0,123,   0,2290,3,   1,118,
+1450,1460,1,  39, 27,1440,2050,1,  55, 39, 100, 630,1,  11,  2,
+2060, 720,1,  11, 40,2065, 695,1,  12, 69,2070,2105,1,  86, 76,
+0,2075,1,  58, 78,2080,2085,2,  10, 79,   0,4480,4,   0, 78,
+0,2090,3,   1, 79, 100, 630,1,  11,  2, 930,2100,1,  86, 41,
+0,2110,3,   2, 77,   0,2110,3,   0, 76,   0,2300,3,   4, 74,
+0,2120,1,  83, 42, 100, 630,1,  11,  2,1525,2130,1,  59, 43,
+0,2310,3,   3, 70,2140,2150,1,  39, 44,   0,2145,1,  40, 83,
+0,2340,3,   1, 83,   0,2340,3,   1, 82,   0,4085,3,   0,116,
+2165,2275,1,  89, 45,2170,2260,1,  98,112,2175,2245,1,  99,113,
+2180,2200,1,  26,115,2185, 630,1,  11, 66,2190, 575,1,  12, 67,
+865, 415,1,   8,132, 930, 940,1,  20, 33,   0,2205,1,  40, 46,
+290, 295,2,  22, 34,2215,2220,2,  56,115,   0,4485,4,   0,128,
+850, 630,1,  11,  2,   0,4085,3,   5,115,   0,2235,1,  56, 47,
+850, 630,1,  11,  2,   0,4085,3,   3,114,   0,2250,1,  56, 47,
+850, 630,1,  11,  2,   0,4085,3,   3,113,   0,2265,1,  56, 47,
+850, 630,1,  11,  2,   0,4085,3,   3,112, 210,2280,1,  56, 48,
+850, 630,1,  11,  2,   0,4085,3,   3,111,   0,4085,3,   0,-88,
+1795,3015,2,  40, 18,   0,2305,1,  24, 49,1795,3015,2,  40, 18,
+0,2315,1,  24, 49,1795,3015,2,  40, 18,2325,2335,1,  39, 44,
+0,2330,1,  40, 50,   0,2990,3,   1, 50,   0,2990,3,   1, 49,
+2345,1785,2,  15,  5,2350,1780,2,   3,  6,   0,3829,6,   0,-51,
+0,3829,3,   0,-52,   0,2365,1,  24, 49,   0,2370,1,  25, 50,
+0,2990,3,   3,-48,1495,1230,1,  42, 30,2385,1490,2,  11, 58,
+0,4490,4,   0, 47,1495,1230,1,  42, 30,2400,1490,2,  11, 58,
+0,4495,4,   0, 46,2410,2415,2, 167, 80,   0,4500,4,   0, 44,
+0,2420,3,   0, 80,2425,2430,2,  20, 81,   0,4505,4,   0, 45,
+0,2435,1, 167, 51,   0,2420,3,   2, 81,2445, 630,1,  11, 12,
+2450, 575,1,  12, 67,2455,1230,1,  42, 59,2460, 500,1,  17,143,
+2465, 415,1,   8,132,1370, 545,1,  87, 84,2475,1490,2,  11, 58,
+0,4510,4,   0, 43,   0,2990,3,   1, 42,2490, 720,2,  11, 68,
+2495, 695,2,  12, 69,2500,1060,2,  66, 36,2505,1025,2,  63, 37,
+2510, 960,2,   4, 38,2515, 940,2,  20,125,   0,4515,4,   0, 41,
+2525,2885,2,  48, 89,2530,2865,2,  49, 90,2535,2845,2,  50, 91,
+2540,2825,2,  51, 92,2545,2805,2,  52, 93,2550,2785,2,  53, 94,
+2555,2775,2, 153, 95,2560,2765,2,  58, 96,2565,2760,2,  59, 97,
+2570,2750,2, 133, 98,2575,2740,2,  61, 99,2580,2730,2,  71,100,
+2585,2725,2, 149,101,2590,2720,2,   6,102,2595,2715,2,   7,103,
+2600,2710,2,  62,104,2605,2690,2,  54,106,2610,2680,2,  55,107,
+2615,2670,2,  56,108,2620,2665,2, 143,109,2625,2650,2, 139,110,
+2630,2645,2,  57,127,2635,1230,2,  42, 59,2640, 545,2,  87, 84,
+0,4520,4,   0, 31,   0,2160,3,   1,-127,1495,1230,1,  42, 30,
+2660,1490,2,  11, 58,   0,4525,4,   0,110,   0,4085,3,   1,109,
+850, 630,1,  11,  2,   0,4085,3,   2,108, 850, 630,1,  11,  2,
+0,4085,3,   2,107, 850, 630,1,  11,  2,   0,4085,3,   2,106,
+2705,1490,2,  11, 58,   0,4530,4,   0,105,   0,4085,3,   1,104,
+0,4085,3,   1,103,   0,4085,3,   1,102,   0,4085,3,   1,101,
+1940, 630,2,  11, 66,   0,4085,3,   2,100,1940, 630,2,  11, 66,
+0,4085,3,   2, 99,1940, 630,2,  11, 66,   0,4085,3,   2, 98,
+0,4085,3,   1, 97, 850, 630,1,  11,  2,   0,4085,3,   2, 96,
+1940, 630,2,  11, 66,   0,4085,3,   2, 95, 100, 630,1,  11,  2,
+2795, 720,2,  11, 68,2800, 695,2,  12, 69,   0,4535,4,   0, 94,
+100, 630,1,  11,  2,2815, 720,2,  11, 68,2820, 695,2,  12, 69,
+0,4540,4,   0, 93, 100, 630,1,  11,  2,2835, 720,2,  11, 68,
+2840, 695,2,  12, 69,   0,4545,4,   0, 92, 100, 630,1,  11,  2,
+2855, 720,2,  11, 68,2860, 695,2,  12, 69,   0,4550,4,   0, 91,
+100, 630,1,  11,  2,2875, 720,2,  11, 68,2880, 695,2,  12, 69,
+0,4555,4,   0, 90, 100, 630,1,  11,  2,2895, 720,2,  11, 68,
+2900, 695,2,  12, 69,   0,4560,4,   0, 89,1495,1230,1,  42, 30,
+2915,1490,2,  11, 58,   0,4565,4,   0, 29,1495,1230,1,  42, 30,
+2930,1490,2,  11, 58,   0,4570,4,   0, 28,2940,2950,1,  25, 52,
+0,2945,1,  21, 75,   0,2295,3,   1, 75,   0,3701,3,   1,-27,
+0,2960,1,  24, 49,1795,3015,2,  40, 18,2970,2975,2,  84, 54,
+0,4575,4,   0, 25,   0,2955,3,   1, 54,   0,2985,1,  24, 49,
+1795,3015,2,  40, 18,   0,3701,3,   0, 23,   0,3701,3,   0, 22,
+0,3701,3,   0, 21,3010,1445,2,  20, 40,   0,4580,4,   0, 20,
+290, 295,2,  22, 34,   0,3025,1,  21, 53,3030,2155,2,  60,116,
+3035, 630,2,  11, 66,3040, 575,2,  12, 67,3045,1935,2, 158,118,
+3050, 415,2,   8,132,3055,1905,6,  22,117,3060,1905,6,  27,117,
+3065, 210,2,  89,139,3070, 205,2,  68,141,3075, 500,2,  17,143,
+3080,1230,2,  42, 59,3085, 285,2,  40,145,3090, 515,2, 167,163,
+3095, 505,2,  39,164,3100, 490,2,  38,165,3105, 325,2,  82,170,
+3110, 315,2, 113,172,3115, 305,2, 128,173,3120, 545,2,  87, 84,
+3125, 180,2,  70,151,3130, 175,2,  28,157,3135,  95,2,  24,158,
+0,4585,4,   0, 18,3145,2885,2,  48, 89,3150,2865,2,  49, 90,
+3155,2845,2,  50, 91,3160,2825,2,  51, 92,3165,2805,2,  52, 93,
+3170,2785,2,  53, 94,3175,2775,2, 153, 95,3180,2765,2,  58, 96,
+3185,2760,2,  59, 97,3190,2750,2, 133, 98,3195,2740,2,  61, 99,
+3200,2730,2,  71,100,3205,2725,2, 149,101,3210,2720,2,   6,102,
+3215,2715,2,   7,103,3220,2710,2,  62,104,3225,2690,2,  54,106,
+3230,2680,2,  55,107,3235,2670,2,  56,108,3240,2665,2, 143,109,
+3245,2650,2, 139,110,3250,2645,2,  57,127,3255,1230,2,  42, 59,
+3260, 545,2,  87, 84,   0,4590,4,   0, 32,   0,3701,3,   3, 19,
+0,3701,3,   0, 17,   0,3645,3,   0, 11,2345,1785,2,  15,  5,
+3290,3015,2,  40, 18,3295,3000,2, 153, 21,3300,2995,2,  41, 22,
+3305,2920,2,  79, 28,3310,2905,2,  77, 29,3315,2440,2,  74, 41,
+3320,2405,2,  76, 44,3325,2390,2,  78, 46,3330,2375,2,  75, 47,
+3335,2320,2,  81, 49,3340,2980,6,  24, 30,3345,2155,2,  60,116,
+3350,1460,2,  39, 61,3355,1455,2, 167, 63,3360,2135,2,  80, 82,
+3365,2040,2,  85, 74,3370,1935,2, 158,118,3375,2115,6,  83, 71,
+3380,1905,6,  22,117,3385,1905,6,  27,117,3390,1230,2,  42, 59,
+3395, 545,2,  87, 84,   0,2355,4,   0, 52,   0,3645,3,   2, 12,
+0,3410,1,  25, 50,   0,3701,3,   4, 24,2345,1785,2,  15,  5,
+0,3425,1,  25, 50,   0,3701,3,   4,-26,2345,1785,2,  15,  5,
+0,3440,1,  25, 50,   0,2965,3,   4,-53,2345,1785,2,  15,  5,
+0,2935,3,   3,-55,2345,1785,2,  15,  5,   0,2935,3,   2,-56,
+2345,1785,2,  15,  5,   0,3475,3,   1,124,   0,3480,1,  23,  6,
+0,2290,3,   3,120,1770,3605,1,  47, 54,3495,3600,2,  47,  4,
+3500,3015,2,  40, 18,3505,3000,2, 153, 21,3510,2995,2,  41, 22,
+3515,2920,2,  79, 28,3520,2905,2,  77, 29,3525,2440,2,  74, 41,
+3530,2405,2,  76, 44,3535,2390,2,  78, 46,3540,2375,2,  75, 47,
+3545,2320,2,  81, 49,3550,2980,6,  24, 30,3555,2155,2,  60,116,
+3560,1460,2,  39, 61,3565,1455,2, 167, 63,3570,2135,2,  80, 82,
+3575,2040,2,  85, 74,3580,1935,2, 158,118,3585,2115,6,  83, 71,
+3590,1230,2,  42, 59,3595, 545,2,  87, 84,   0,1905,6,   0,117,
+0,3610,3,   4,  4,   0,3610,3,   3,  3,1775,1785,1,  15, 37,
+0,  10,3,   2,  2,   0,   0,0,   2,  0,3629,1790,5,1770    ,
+3633,2355,5,2340    ,3637,3490,5,3485    ,3641,3615,5,3610    ,
+0,3285,5,   0    ,3649,3465,5,1920    ,3653,3455,5,2295    ,
+3657,3445,5,2305    ,3661,3430,5,2315    ,3665,3415,5,2960    ,
+3669,3280,5,2985    ,   0,3485,5,   0    ,3677,1660,5,  20    ,
+3681, 580,5, 575    ,3685, 635,5, 630    ,3689, 700,5, 695    ,
+3693, 725,5, 720    ,3697,1750,5,1660    ,   0, 655,5,   0    ,
+3705,3400,5,3285    ,3709,3400,5,3490    ,   0,3275,5,   0    ,
+3717, 380,5, 375    ,3721, 510,5, 505    ,3725,1165,5,1160    ,
+3729,1465,5,1460    ,3733,2210,5,2205    ,3737,3020,5,3015    ,
+0,1610,5,   0    ,3745, 970,5, 960    ,3749, 980,5, 975    ,
+3753,1045,5,1040    ,3757,1055,5,1050    ,3761,1065,5,1060    ,
+3765,1075,5,1070    ,3769,1095,5,1090    ,3773, 970,5,1350    ,
+3777,2225,5,2220    ,3781,2240,5,2235    ,3785,2255,5,2250    ,
+3789,2270,5,2265    ,3793,2285,5,2280    ,3797,2480,5,2440    ,
+3801,2675,5,2670    ,3805,2685,5,2680    ,3809,2695,5,2690    ,
+3813,3265,5,3025    ,   0,1080,5,   0    ,3821,1435,5, 415    ,
+3825,2045,5,2040    ,   0,3005,5,   0    ,3833,3405,5,3280    ,
+3837,3420,5,3415    ,3841,3435,5,3430    ,3845,3450,5,3445    ,
+3849,3460,5,3455    ,3853,3470,5,3465    ,   0,2360,5,   0    ,
+3861,1480,5, 415    ,3865,1510,5,1505    ,3869,2380,5,2375    ,
+3873,2395,5,2390    ,3877,2470,5,2440    ,3881,2700,5,2520    ,
+3885,2655,5,2650    ,3889,2910,5,2905    ,3893,2925,5,2920    ,
+3897,2700,5,3140    ,   0,1925,5,   0    ,3905,1500,5,1490    ,
+0,1270,5,   0    ,3913,1200,5,1135    ,3917,1180,5,1175    ,
+3921,1470,5,1445    ,   0,1265,5,   0    ,3929,1650,5,  95    ,
+3933,1640,5, 175    ,3937,1600,5, 295    ,3941,1580,5, 310    ,
+3945,1570,5, 320    ,3949,1555,5, 330    ,3953,1315,5, 415    ,
+3957, 675,5, 565    ,3961, 675,5, 745    ,3965, 945,5, 940    ,
+3969,1205,5,1135    ,3973,1185,5,1175    ,3977,1250,5,1245    ,
+3981,1290,5,1285    ,3985,1380,5,1350    ,3989,1425,5,1420    ,
+3993,1290,5,1530    ,3997,1590,5,1585    ,4001,2020,5,1935    ,
+4005,2055,5,2050    ,4009,2095,5,2090    ,4013,1290,5,2120    ,
+4017,2195,5,2160    ,4021,2485,5,2440    ,4025,2020,5,2730    ,
+4029,2020,5,2740    ,4033,2020,5,2750    ,4037,2195,5,2765    ,
+4041,2020,5,2775    ,4045,2790,5,2785    ,4049,2810,5,2805    ,
+4053,2830,5,2825    ,4057,2850,5,2845    ,4061,2870,5,2865    ,
+4065,2890,5,2885    ,   0, 910,5,   0    ,4073,2125,5,2120    ,
+0,1520,5,   0    ,4081, 750,5, 745    ,   0, 755,5,   0    ,
+4089,3140,5,3025    ,   0,2520,5,   0    ,4097,2735,5,2730    ,
+4101,2745,5,2740    ,4105,2755,5,2750    ,4109,2780,5,2775    ,
+0,2035,5,   0    ,4117,2230,5,2160    ,4121,2770,5,2765    ,
+0, 965,5,   0    ,4129, 990,5, 985    ,   0, 805,5,   0    ,
+4137, 760,5, 415    ,4141,1110,5, 820    ,4145, 760,5, 845    ,
+4149, 760,5, 960    ,4153, 760,5, 975    ,4157,1010,5,1005    ,
+4161, 760,5,1040    ,4165, 760,5,1050    ,4169, 760,5,1060    ,
+4173, 760,5,1070    ,4177, 760,5,1090    ,4181, 760,5,1350    ,
+4185, 760,5,2160    ,4189, 760,5,2220    ,4193, 760,5,2235    ,
+4197, 760,5,2250    ,4201, 760,5,2265    ,4205, 760,5,2280    ,
+4209, 760,5,2440    ,4213, 760,5,2670    ,4217, 760,5,2680    ,
+4221, 760,5,2690    ,4225, 760,5,2765    ,4229, 760,5,3025    ,
+0, 390,5,   0    ,4237,1550,5, 410    ,4241, 540,5, 535    ,
+4245, 605,5, 600    ,4249, 615,5, 610    ,4253, 625,5, 620    ,
+4257, 800,5, 795    ,   0, 570,5,   0    ,4265,1630,5, 210    ,
+4269, 835,5, 820    ,4273, 835,5,1005    ,4277,1620,5,1615    ,
+4281,1630,5,2275    ,   0, 335,5,   0    ,4289, 365,5, 360    ,
+0, 235,5,   0    ,4297, 370,5, 365    ,   0, 280,5,   0    ,
+4305,1535,5,1530    ,   0,1275,5,   0    ,4313,1305,5,1285    ,
+0,1235,5,   0    ,4321, 520,5, 500    ,   0, 525,5,   0    ,
+0,1770,3,   0,  7,   0,4285,3,   1,149,   0, 300,3,   0,137,
+0,4317,3,   0,-165,   0,4233,3,   0,-142,   0,1220,3,   2, 84,
+0,3925,3,   1, 67,   0,3925,3,   1, 66,   0,3925,3,   0,-65,
+0,4077,3,   0, 86,   0,3925,3,   2, 69,   0,3925,3,   2, 68,
+0,4113,3,   1,126,   0,4113,3,   2,125,   0,3741,3,   6, 38,
+0,4125,3,   2,130,   0,4125,3,   2,131,   0,3909,3,   3, 61,
+0,3909,3,   2, 63,   0,4301,3,   0,-159,   0,4309,3,   2,162,
+0,4069,3,   0,-72,   0,4309,3,   0,161,   0,4301,3,   2,160,
+0,4069,3,   2, 73,   0, 300,3,   2,140,   0, 300,3,   1,139,
+0,1770,3,   1,  8,   0,1770,3,   2,  9,   0,2290,3,   0,119,
+0,4093,3,   0,-123,   0,2090,3,   0,-78,   0,2160,3,   3,128,
+0,2990,3,   1, 47,   0,2990,3,   1, 46,   0,2990,3,   0, 44,
+0,2990,3,   1,-45,   0,2990,3,   1, 43,   0,2990,3,   1, 41,
+0,3270,3,   0, 31,   0,4085,3,   2,110,   0,4085,3,   1,105,
+0,4085,3,   2, 94,   0,4085,3,   2, 93,   0,4085,3,   2, 92,
+0,4085,3,   2, 91,   0,4085,3,   2, 90,   0,4085,3,   2, 89,
+0,3701,3,   1, 29,   0,3701,3,   1, 28,   0,3701,3,   0,-25,
+0,3701,3,   0, 20,   0,3701,3,   2, 18,   0,3270,3,   3, 32
 
 };
 lxinx entryhp[ordMAXCH + 1]={
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,2,
-3,0,0,0,4,5,0,6,8,88,0,0,0,0,0,0,0,0,0,0,89,0,90,101,102,0,0,0,0,0,0,0,0,0,103,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,106,0,0,0,0,0,107,140,164,209,236,256,0,
-273,279,0,0,289,315,334,335,343,0,353,373,411,439,0,447,0,0,0,0,455,0,0,0,0,
+3,0,0,0,4,5,0,6,8,88,0,0,0,0,0,0,0,0,0,0,89,0,90,102,103,0,0,0,0,0,0,0,0,0,105,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,108,0,0,0,0,0,109,142,166,211,238,258,0,
+275,281,0,0,291,317,336,337,345,0,355,375,413,441,0,449,0,0,0,0,457,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1046,61 +1009,61 @@ lxinx lxhp[lxmax + 1]={
 0,0,0,0,0,0,0,0,83,76,69,64,58,55,49,40,30,28,21,0,0,26,23,24,25,0,27,0,29,0,
 0,37,34,0,35,36,0,38,39,0,45,42,43,44,0,46,47,48,0,0,52,0,53,54,0,56,57,0,60,
 0,61,62,63,0,67,66,0,68,0,70,71,72,73,74,75,0,77,78,79,82,81,0,0,84,85,86,87,
-0,0,0,100,0,93,94,95,96,97,98,99,0,0,0,0,104,105,0,0,136,134,133,118,116,113,
-114,115,0,117,0,130,120,121,122,126,124,125,0,128,0,129,0,131,132,0,0,135,0,
-138,0,139,0,156,143,0,153,145,152,150,148,149,0,151,0,0,154,155,0,162,158,159,
-160,161,0,163,0,208,202,200,193,170,0,185,181,176,175,0,0,177,178,179,180,0,
-182,183,184,0,186,191,188,189,190,0,192,0,194,195,196,197,198,199,0,201,0,203,
-204,207,206,0,0,0,229,225,219,213,216,215,0,217,218,0,220,221,222,223,224,0,
-226,227,228,0,230,231,235,233,234,0,0,244,243,239,242,241,0,0,0,247,246,0,248,
-249,250,251,255,253,254,0,0,266,263,262,260,261,0,0,264,265,0,267,268,272,270,
-271,0,0,275,0,276,277,278,0,0,281,0,283,284,285,286,287,288,0,313,311,299,296,
-294,295,0,297,298,0,300,301,310,306,304,305,0,307,308,309,0,0,312,0,314,0,326,
-325,318,319,320,324,322,323,0,0,0,327,328,329,333,331,332,0,0,0,0,337,338,339,
-340,341,342,0,351,349,346,347,348,0,350,0,352,0,367,0,364,361,358,359,360,0,
-362,363,0,365,366,0,370,369,0,371,372,0,409,405,401,398,395,386,384,381,382,
-383,0,385,0,392,388,389,390,391,0,393,394,0,396,397,0,400,0,0,402,403,404,0,
-406,407,408,0,410,0,438,425,416,415,0,424,418,419,420,421,422,423,0,0,426,427,
-437,432,430,431,0,433,434,435,436,0,0,0,441,0,442,443,444,445,446,0,454,449,
-452,451,0,453,0,0,0};
+0,0,0,101,0,0,94,95,96,97,98,99,100,0,0,0,0,0,106,107,0,0,138,136,135,120,118,
+115,116,117,0,119,0,132,122,123,124,128,126,127,0,130,0,131,0,133,134,0,0,137,
+0,140,0,141,0,158,145,0,155,147,154,152,150,151,0,153,0,0,156,157,0,164,160,
+161,162,163,0,165,0,210,204,202,195,172,0,187,183,178,177,0,0,179,180,181,182,
+0,184,185,186,0,188,193,190,191,192,0,194,0,196,197,198,199,200,201,0,203,0,
+205,206,209,208,0,0,0,231,227,221,215,218,217,0,219,220,0,222,223,224,225,226,
+0,228,229,230,0,232,233,237,235,236,0,0,246,245,241,244,243,0,0,0,249,248,0,
+250,251,252,253,257,255,256,0,0,268,265,264,262,263,0,0,266,267,0,269,270,274,
+272,273,0,0,277,0,278,279,280,0,0,283,0,285,286,287,288,289,290,0,315,313,301,
+298,296,297,0,299,300,0,302,303,312,308,306,307,0,309,310,311,0,0,314,0,316,
+0,328,327,320,321,322,326,324,325,0,0,0,329,330,331,335,333,334,0,0,0,0,339,
+340,341,342,343,344,0,353,351,348,349,350,0,352,0,354,0,369,0,366,363,360,361,
+362,0,364,365,0,367,368,0,372,371,0,373,374,0,411,407,403,400,397,388,386,383,
+384,385,0,387,0,394,390,391,392,393,0,395,396,0,398,399,0,402,0,0,404,405,406,
+0,408,409,410,0,412,0,440,427,418,417,0,426,420,421,422,423,424,425,0,0,428,
+429,439,434,432,433,0,435,436,437,438,0,0,0,443,0,444,445,446,447,448,0,456,
+451,454,453,0,455,0,0,0};
 lxinx lxnp[lxmax + 1]={
 0,0,0,0,0,0,7,0,9,10,11,12,13,14,15,16,17,18,19,20,0,22,0,0,0,0,0,0,0,0,31,32,
 33,0,0,0,0,0,0,0,41,0,0,0,0,0,0,0,0,50,51,0,0,0,0,0,0,0,59,0,0,0,0,0,65,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,0,0,0,0,0,0,91,92,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,108,109,110,111,112,0,0,0,0,0,0,119,0,0,0,123,0,0,0,127,0,0,0,0,0,0,0,
-0,0,137,0,0,0,141,142,0,144,0,146,147,0,0,0,0,0,0,0,0,0,157,0,0,0,0,0,0,0,165,
-166,167,168,169,0,171,172,173,174,0,0,0,0,0,0,0,0,0,0,0,0,187,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,205,0,0,0,0,210,211,212,0,214,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,232,0,0,0,0,237,238,0,240,0,0,0,0,245,0,0,0,0,0,0,252,0,0,0,0,257,258,
-259,0,0,0,0,0,0,0,0,0,269,0,0,0,0,274,0,0,0,0,0,280,0,282,0,0,0,0,0,0,0,290,
-291,292,293,0,0,0,0,0,0,0,0,302,303,0,0,0,0,0,0,0,0,0,0,0,0,316,317,0,0,0,321,
-0,0,0,0,0,0,0,0,330,0,0,0,0,0,336,0,0,0,0,0,0,0,344,345,0,0,0,0,0,0,0,0,354,
-355,356,357,0,0,0,0,0,0,0,0,0,0,368,0,0,0,0,0,374,375,376,377,378,379,380,0,
-0,0,0,0,0,387,0,0,0,0,0,0,0,0,0,0,0,399,0,0,0,0,0,0,0,0,0,0,0,0,412,413,414,
-0,0,417,0,0,0,0,0,0,0,0,0,0,428,429,0,0,0,0,0,0,0,0,0,0,440,0,0,0,0,0,0,0,448,
-0,450,0,0,0,0,0,0};
+0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,0,0,0,0,0,0,0,0,91,92,93,0,0,0,0,0,0,0,0,0,0,
+104,0,0,0,0,0,110,111,112,113,114,0,0,0,0,0,0,121,0,0,0,125,0,0,0,129,0,0,0,
+0,0,0,0,0,0,139,0,0,0,143,144,0,146,0,148,149,0,0,0,0,0,0,0,0,0,159,0,0,0,0,
+0,0,0,167,168,169,170,171,0,173,174,175,176,0,0,0,0,0,0,0,0,0,0,0,0,189,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,207,0,0,0,0,212,213,214,0,216,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,234,0,0,0,0,239,240,0,242,0,0,0,0,247,0,0,0,0,0,0,254,0,0,
+0,0,259,260,261,0,0,0,0,0,0,0,0,0,271,0,0,0,0,276,0,0,0,0,0,282,0,284,0,0,0,
+0,0,0,0,292,293,294,295,0,0,0,0,0,0,0,0,304,305,0,0,0,0,0,0,0,0,0,0,0,0,318,
+319,0,0,0,323,0,0,0,0,0,0,0,0,332,0,0,0,0,0,338,0,0,0,0,0,0,0,346,347,0,0,0,
+0,0,0,0,0,356,357,358,359,0,0,0,0,0,0,0,0,0,0,370,0,0,0,0,0,376,377,378,379,
+380,381,382,0,0,0,0,0,0,389,0,0,0,0,0,0,0,0,0,0,0,401,0,0,0,0,0,0,0,0,0,0,0,
+0,414,415,416,0,0,419,0,0,0,0,0,0,0,0,0,0,430,431,0,0,0,0,0,0,0,0,0,0,442,0,
+0,0,0,0,0,0,450,0,452,0,0,0,0,0,0};
 symbol lxtv[lxmax + 1]={
-0,101,35,17,33,31,32,149,93,98,0,94,0,95,92,94,93,92,95,71,72,0,0,108,0,108,
-0,95,0,92,89,0,0,91,0,0,96,0,0,93,0,0,0,0,94,109,0,0,109,88,0,90,0,0,92,0,0,
-95,0,107,0,0,0,107,0,0,97,0,94,0,0,110,0,0,0,110,0,0,0,0,0,98,98,0,93,0,0,93,
-34,30,148,103,0,0,0,0,0,0,0,99,150,100,102,0,0,67,26,0,0,0,0,0,55,0,0,127,0,
-114,160,0,0,162,0,0,0,168,0,167,0,183,0,0,166,66,0,113,0,112,0,145,0,0,57,0,
-157,0,0,0,0,171,0,170,169,0,0,93,0,0,0,0,0,65,0,146,0,0,0,0,0,5,0,0,0,0,115,
-74,0,0,0,0,59,0,0,0,78,0,138,0,138,0,138,0,138,0,0,0,158,0,0,172,0,60,0,0,0,
-0,142,142,6,0,0,0,85,0,0,153,0,0,133,0,50,0,0,0,50,0,0,0,79,0,0,0,0,0,173,134,
-0,0,0,0,116,117,76,97,0,0,83,0,0,0,159,0,0,0,175,174,0,0,0,0,0,53,84,0,0,125,
-0,70,0,0,0,184,70,0,47,0,0,0,47,82,0,118,0,0,135,0,0,0,135,0,0,0,0,0,119,120,
-0,0,143,0,161,0,0,0,0,177,0,0,0,185,176,0,155,0,69,0,0,0,0,163,0,0,0,179,178,
-129,128,0,0,0,0,0,187,186,68,62,0,0,0,0,0,139,139,0,0,0,0,0,73,0,130,0,136,0,
-68,0,0,0,0,0,144,0,0,154,0,0,75,49,0,81,0,0,49,0,0,77,0,0,0,0,68,0,0,96,0,123,
-0,0,0,0,0,86,0,0,164,0,0,132,0,122,121,0,0,140,140,0,0,188,52,0,61,0,0,68,54,
-92,63,0,0,51,0,0,0,51,58,0,0,0,0,0,0,182,0,0,0,0,181,180,124,0,152,0,0,80,0,
-0,80,0,0,48,0,56,0,48,64,18};
+0,103,36,18,34,32,33,151,95,100,0,96,0,97,94,96,95,94,97,72,73,0,0,110,0,110,
+0,97,0,94,91,0,0,93,0,0,98,0,0,95,0,0,0,0,96,111,0,0,111,90,0,92,0,0,94,0,0,
+97,0,109,0,0,0,109,0,0,99,0,96,0,0,112,0,0,0,112,0,0,0,0,0,100,100,0,95,0,0,
+95,35,31,150,106,105,0,0,0,0,0,0,0,101,152,102,104,107,0,0,68,27,0,0,0,0,0,56,
+0,0,129,0,116,162,0,0,164,0,0,0,170,0,169,0,185,0,0,168,67,0,115,0,114,0,147,
+0,0,58,0,159,0,0,0,0,173,0,172,171,0,0,95,0,0,0,0,0,66,0,148,0,0,0,0,0,6,0,0,
+0,0,117,75,0,0,0,0,60,0,0,0,79,0,140,0,140,0,140,0,140,0,0,0,160,0,0,174,0,61,
+0,0,0,0,144,144,7,0,0,0,86,0,0,155,0,0,135,0,51,0,0,0,51,0,0,0,80,0,0,0,0,0,
+175,136,0,0,0,0,118,119,77,99,0,0,84,0,0,0,161,0,0,0,177,176,0,0,0,0,0,54,85,
+0,0,127,0,71,0,0,0,186,71,0,48,0,0,0,48,83,0,120,0,0,137,0,0,0,137,0,0,0,0,0,
+121,122,0,0,145,0,163,0,0,0,0,179,0,0,0,187,178,0,157,0,70,0,0,0,0,165,0,0,0,
+181,180,131,130,0,0,0,0,0,189,188,69,63,0,0,0,0,0,141,141,0,0,0,0,0,74,0,132,
+0,138,0,69,0,0,0,0,0,146,0,0,156,0,0,76,50,0,82,0,0,50,0,0,78,0,0,0,0,69,0,0,
+98,0,125,0,0,0,0,0,87,0,0,166,0,0,134,0,124,123,0,0,142,142,0,0,190,53,0,62,
+0,0,69,55,94,64,0,0,52,0,0,0,52,59,0,0,0,0,0,0,184,0,0,0,0,183,182,126,0,154,
+0,0,81,0,0,81,0,0,49,0,57,0,49,65,19};
 symbol entrytv[ordMAXCH + 1]={
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,41,42,44,
-13,36,28,7,8,9,10,19,11,25,12,0,0,0,0,0,0,0,0,0,0,20,14,4,29,105,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,0,22,15,0,27,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,0,24,43,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,42,43,44,
+14,37,29,8,9,10,11,20,12,26,13,0,0,0,0,0,0,0,0,0,0,21,15,4,30,5,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,0,23,16,0,28,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -1109,26 +1072,27 @@ Char lxch[lxmax + 1]={
 'x','y','e','i','d','t','h','s','t','o','p','e','o','t','w','a','r','t','u',
 't','h','a','i','g','h','t','d','i','u','s','e','o','w','r','t','h','e','f',
 't','e','t','i','g','h','t','a','n','d','s','t','i','a','m','e','t','e','r',
-'e','n','t','e','r','e','r','o','t','t','o','m','=','=','-','=','c','o','m',
-'p','a','r','e','>','>','=','=','e','r','e',']','b','c','n','r','s','t','a',
-'n','2','i','n','c','r','o','w','h','w','i','d','e','t','a','d','r','a','d',
-'d','o','s','o','s','v','e','e','o','y','t','x','h','r','w','i','d','a','d',
-'t','t','o','m','l','t','w','e','e','n','o','w','c','e','h','i','o','w','l',
-'m','n','p','s','y','t','i','n','u','e','m','a','n','d','o','r','u','r','e',
-'d','e','d','r','c','l','e','r','a','d','o','p','n','t','e','r','e','r','w',
-'a','e','i','o','t','w','n','t','e','d','a','m','e','t','e','r','f','i','n',
-'e','s','h','e','w','i','d','d','l','n','x','e','p','e','c','d','l','s','e',
-'i','p','s','e','h','w','i','d','t','i','l','o','r','o','m','r','o','o','r',
-'l','l','e','v','a','l','d','e','t','i','g','h','t','f','n','t','v','i','s',
-'i','b','l','e','a','e','i','j','o','g','e','u','s','t','n','e','h','t','w',
-'i','d','h','i','c','k','t','f','t','s','t','a','i','o','v','e','h','w','i',
-'d','t','n','x','p','s','h','w','i','d','t','d','f','u','t','l','i','n','e',
-'d','a','m','r','i','n','t','o','d','t','h','a','d','e','i','j','u','s','t',
-'g','h','t','s','e','t','d','n','d','i','u','s','a','c','h','i','o','p','q',
-'t','a','r','t','r','t','l','r','i','n','t','f','i','n','e','l','i','d','g',
-'n','n','a','d','e','d','a','l','e','d','m','e','a','e','h','o','p','e','i',
-'c','k','n','e','s','s','n','x','t','h','o','w','i','d','f','f','s','e','t',
-'t','n','n','p','d','e','f','i','n','e','a','i','d','t','h','t','h','y','|'};
+'e','n','t','e','r','e','r','o','t','t','o','m','=','=','-','<','=','c','o',
+'m','p','a','r','e','>','>','=','=','>','e','r','e',']','b','c','n','r','s',
+'t','a','n','2','i','n','c','r','o','w','h','w','i','d','e','t','a','d','r',
+'a','d','d','o','s','o','s','v','e','e','o','y','t','x','h','r','w','i','d',
+'a','d','t','t','o','m','l','t','w','e','e','n','o','w','c','e','h','i','o',
+'w','l','m','n','p','s','y','t','i','n','u','e','m','a','n','d','o','r','u',
+'r','e','d','e','d','r','c','l','e','r','a','d','o','p','n','t','e','r','e',
+'r','w','a','e','i','o','t','w','n','t','e','d','a','m','e','t','e','r','f',
+'i','n','e','s','h','e','w','i','d','d','l','n','x','e','p','e','c','d','l',
+'s','e','i','p','s','e','h','w','i','d','t','i','l','o','r','o','m','r','o',
+'o','r','l','l','e','v','a','l','d','e','t','i','g','h','t','f','n','t','v',
+'i','s','i','b','l','e','a','e','i','j','o','g','e','u','s','t','n','e','h',
+'t','w','i','d','h','i','c','k','t','f','t','s','t','a','i','o','v','e','h',
+'w','i','d','t','n','x','p','s','h','w','i','d','t','d','f','u','t','l','i',
+'n','e','d','a','m','r','i','n','t','o','d','t','h','a','d','e','i','j','u',
+'s','t','g','h','t','s','e','t','d','n','d','i','u','s','a','c','h','i','o',
+'p','q','t','a','r','t','r','t','l','r','i','n','t','f','i','n','e','l','i',
+'d','g','n','n','a','d','e','d','a','l','e','d','m','e','a','e','h','o','p',
+'e','i','c','k','n','e','s','s','n','x','t','h','o','w','i','d','f','f','s',
+'e','t','t','n','n','p','d','e','f','i','n','e','a','i','d','t','h','t','h',
+'y','|'};
 /* integer debugging constants        */
 /*D debuglevel, linesignal: integer; D*/
 /*D trace: boolean; D*/
@@ -1166,7 +1130,7 @@ double linlen(double x, double y);
 
 int lspec(int n);
 
-/*DGHM function ordp(p:pointer): integer; forward; MHGD*/
+/*DGH function ordp(p:pointer): integer; forward; HGD*/
 double principal(double x, double r);
 
 void checkjust(nametype *tp, boolean *A, boolean *B, boolean *L,
@@ -1195,12 +1159,8 @@ void newarg(arg **arg_);
 
 void newbuf(fbuffer **buf);
 
-#ifndef SAFE_MODE
 void pointinput(nametype *txt);
 
-void pointoutput(boolean nw, nametype *txt, int *ier);
-
-#endif
 void produce(stackinx newp, int p);
 
 void readfor(fbuffer *p0, int attx, fbuffer **p2);
@@ -1230,33 +1190,6 @@ void ddash(void);
 
 void mpocorner(postype ctr, double x, double y, double r, double ct,
 		      double st);
-
-void getlinshade(primitive *n, primitive **tn, nametype **ss,
-			nametype **so, double *f, boolean *sf);
-
-int ahlex(int atyp);
-
-int ahnum(int atyp);
-
-int pahlex(int atyp, int alex);
-
-int pahnum(int atyp, int anum);
-
-double ahoffset(primitive *node);
-
-void dahead(postype point, postype shaft, double ht, double wid,
-		   double ltp, postype *P, postype *L, postype *R, postype *Q,
-		   double *x, double *y);
-
-void startarc(primitive *n, postype X0, double *h, double *w,
-		     postype *X1);
-
-void endarc(primitive *n, postype X0, double *h, double *w,
-		   postype *X1);
-
-postype arcstart(primitive *n);
-
-postype arcend(primitive *n);
 
 
 /*--------------------------------------------------------------------*/
@@ -1354,8 +1287,8 @@ void currentline(int *startlin)
       inx = bf->savedlen;
     while (inx > j) {
       if (WITH->carray[inx] == etxch || WITH->carray[inx] == tabch ||
-	  WITH->carray[inx] == ' ' || WITH->carray[inx] == crch ||
-	  WITH->carray[inx] == nlch)
+	  WITH->carray[inx] == ' ' ||
+	  WITH->carray[inx] == crch || WITH->carray[inx] == nlch)
 	inx--;
       else
 	j = inx;
@@ -1503,7 +1436,7 @@ extern void srandom(int s);
 
 /*G asmname 'srandom'; G*/
 
-/*DUBX function  ordp(var p:primitivep ): integer; external; XBUD*/
+/*DUMBX function  ordp(var p:primitivep ): integer; external; XBMUD*/
 /*-----------------------------------------------------------------*/
 
 /* include dpic1.p */
@@ -1662,7 +1595,7 @@ begin
       XLspline: write(iou,'<spline>');
       XLarc: write(iou,'<arc>');
       XLstring: write(iou,'<<string>>');
-      XLaTeX: write(iou,'<<LaTeX>>');
+      XLtroff: write(iou,'<<troff>>');
       XLabel: write(iou,'<<Label>>');
       otherwise write(iou,'Unknown type ',p:3)
       end;
@@ -1680,7 +1613,7 @@ begin
          XLline,XLmove: i := 6;
          XLarrow: i := 7;
          XLcircle,XLspline: i := 8;
-         XLellipse,XLaTeX: i := 9;
+         XLellipse,XLtroff: i := 9;
          XLstring: i := 10;
          XLabel: i := 12;
          otherwise i := 3
@@ -1769,8 +1702,7 @@ D*/
             write(log,' endpos='); wpair(log,endpos.xpos,endpos.ypos);
             write(log,' height,width='); wpair(log,height,width);
             write(log,' lfill,aradius='); wpair(log,lfill,aradius);
-            write(log,' ahlex(atype)=',ahlex(atype):1);
-            write(log,' ahnum(atype)=',ahnum(atype):1)
+            write(log,' atype=',atype:1)
             end;
          XLarc: begin
             write(log,' lspec=',lspec(spec):1);
@@ -1784,10 +1716,9 @@ D*/
             xx := aat.xpos+aradius*cos(endpos.xpos+endpos.ypos);
             yy := aat.ypos+aradius*sin(endpos.xpos+endpos.ypos);
             wpair(log,xx,yy);
-            write(log,' ahlex(atype)=',ahlex(atype):1);
-            write(log,' ahnum(atype)=',ahnum(atype):1)
+            writeln(log,' atype=',atype:1)
             end;
-         XLaTeX,XLabel: ;
+         XLtroff,XLabel: ;
          otherwise writeln(log,' Bad case in printobject; this cannot happen')
          end;
       writeln(log); flush(log);
@@ -1806,6 +1737,7 @@ void deletetree(primitive **p)
   if (*p != NULL)
     (*p)->parent = NULL;
   while (*p != NULL) {
+    /*D if debuglevel > 0 then printobject(p); D*/
     while ((*p)->next_ != NULL || (*p)->son != NULL) {
       r = *p;
       if ((*p)->next_ != NULL) {
@@ -1816,8 +1748,11 @@ void deletetree(primitive **p)
 	r->son = NULL;
       }
       (*p)->parent = r;
+      /*D; if debuglevel > 0 then printobject(p) D*/
     }
     r = (*p)->parent;
+    /* D if debuglevel > 0 then begin write(log,'Deletetree:');
+       printobject(p) end; D */
     deletename(&(*p)->shadedp);
     deletename(&(*p)->outlinep);
     deletename(&(*p)->textp);
@@ -1831,9 +1766,9 @@ void deletetree(primitive **p)
       break;
 
     case XBLOCK:
-      deletename(&WITH->UU.UEMPTY6.vars);
-      if (WITH->UU.UEMPTY6.env != NULL)
-	Free(WITH->UU.UEMPTY6.env);
+      deletename(&WITH->UU.UEMPTY7.vars);
+      if (WITH->UU.UEMPTY7.env != NULL)
+	Free(WITH->UU.UEMPTY7.env);
       Free(*p);
       break;
 
@@ -1853,7 +1788,7 @@ void deletetree(primitive **p)
       Free(*p);
       break;
 
-    case XLaTeX:
+    case XLtroff:
     case XLabel:
       Free(*p);
       break;
@@ -1911,7 +1846,7 @@ void eqop(double *x, int op, double y)
 {
   switch (op) {
 
-  case XEQ:
+  case XLeq:
   case XLcoloneq:
     *x = y;
     break;
@@ -1940,7 +1875,7 @@ void eqop(double *x, int op, double y)
       markerror(852);
     else {
       *x = (long)floor(*x + 0.5) % (long)floor(y + 0.5);
-/* p2c: dpic.p, line 911:
+/* p2c: dpic.p, line 881:
  * Note: Using % for possibly-negative arguments [317] */
     }
     break;
@@ -2086,8 +2021,8 @@ int eqstring(Char *seg1, chbufinx inx1, chbufinx len1, Char *seg2,
   else if (len1 < len2)
     k = -seg2[inx2 + i];
   /*D if debuglevel = 2 then if (seg1 = nil) or (seg2 = nil) then
-     writeln(log,' nil segment(s)')
-     else writeln(log,' i=',i:1,' j=',j:1,' eqstring=',k:1); D*/
+     writeln(log,'eqstring: nil segment(s)')
+     else writeln(log,'eqstring: i=',i:1,' j=',j:1,' eqstring=',k:1); D*/
   return k;
 }
 
@@ -2194,7 +2129,7 @@ nametype *glfindname(primitive *eb, Char *chb, chbufinx chbufx,
   pp = NULL;
   np = NULL;
   while (eb != pp) {
-    np = findname(eb->UU.UEMPTY6.vars, chb, chbufx, length, last);
+    np = findname(eb->UU.UEMPTY7.vars, chb, chbufx, length, last);
     if (np != NULL)
       pp = eb;
     else
@@ -2228,7 +2163,6 @@ void newstr(nametype **sp)
 void addstring(Char **outbuf, nametype *sp, Char *srcbuf, chbufinx px,
 		      chbufinx ll)
 {
-  /* outbuf is freeseg */
   int i, j;
   boolean newseg;
   int FORLIM;
@@ -2243,7 +2177,6 @@ void addstring(Char **outbuf, nametype *sp, Char *srcbuf, chbufinx px,
     *outbuf = Malloc(sizeof(chbufarray));
     putbval(*outbuf, 0);
     freex = 3;
-    freeseg = *outbuf;
   }
   /* for i := 0 to ll-1 do outbuf^[freex+i] := srcbuf^[px+i]; */
   j = px - freex;
@@ -2253,24 +2186,18 @@ void addstring(Char **outbuf, nametype *sp, Char *srcbuf, chbufinx px,
   sp->segmnt = *outbuf;
   sp->seginx = freex;
   sp->len = ll;
-  j = bval(*outbuf);
-  putbval(*outbuf, j + 1);
+  putbval(*outbuf, bval(*outbuf) + 1);
   freex += ll;
-  /*D; if debuglevel > 0 then begin writeln(log,
-     'addstring to strptr ',ordp(sp):1,': segmnt=',ordp(freeseg):1,' seginx= ',
-      sp^.seginx:1, ' links= ', bval(outbuf):1,' freex=',freex:1 );
-     snapname(outbuf,sp^.seginx,sp^.len);
-     write(log,' from:'); snapname(srcbuf,px,ll);
+  /*D; if debuglevel > 0 then begin write(log,
+     'addstring: seginx= ', sp^.seginx:1, ' links= ', bval(outbuf):1 );
+     snapname(srcbuf,px,ll);
      writeln( log ) end D*/
 }
 
 
-/* outbuf is always freeseg: */
 void copystr(Char **outbuf, nametype **sp, nametype *ip)
 {
-  if (ip == NULL)
-    *sp = NULL;
-  else {
+  if (ip != NULL) {
     newstr(sp);
     addstring(outbuf, *sp, ip->segmnt, ip->seginx, ip->len);
   }
@@ -2278,65 +2205,37 @@ void copystr(Char **outbuf, nametype **sp, nametype *ip)
 
 
 void appendstring(nametype *sp, Char *buf, chbufinx px, chbufinx ll)
-{  /*D k := 0; D*/
-  int i;
-  /*D,kD*/
-  int j;
+{
+  int i, j;
   Char *tmpseg;
   int FORLIM;
 
-  if (sp == NULL || buf == NULL)
-    return;
-  if (sp->segmnt == freeseg && sp->seginx + sp->len == freex &&
-      freex + ll - 1 <= CHBUFSIZ) {
-    for (i = 0; i < ll; i++)   /*D k := 1; D*/
-      freeseg[freex + i] = buf[px + i];
-    sp->len += ll;
-    freex += ll;
-    return;
+  if (freex + ll - 1 > CHBUFSIZ) {
+    tmpseg = Malloc(sizeof(chbufarray));
+    FORLIM = sp->len + 2;
+    for (i = 3; i <= FORLIM; i++)
+      tmpseg[i] = freeseg[freex - sp->len + i - 3];
+    putbval(freeseg, bval(freeseg) - 1);
+    freeseg = tmpseg;
+    freex = sp->len + 3;
+    putbval(freeseg, 1);
+    sp->segmnt = freeseg;
+    sp->seginx = 3;
   }
-  if (sp->len + ll + 2 > CHBUFSIZ) {
+  if (freex + ll - 1 > CHBUFSIZ) {
     markerror(866);
     return;
   }
-  tmpseg = Malloc(sizeof(chbufarray));
-  FORLIM = sp->len;
-  for (i = 0; i < FORLIM; i++)
-    tmpseg[i + 3] = sp->segmnt[sp->seginx + i];
-  j = bval(sp->segmnt);
-  if (j > 1) {
-    putbval(sp->segmnt, j - 1);   /*D k := 2; D*/
-    if (sp->segmnt == freeseg && sp->seginx + sp->len == freex) {
-      freex = sp->seginx;
-      j = 3;
-      while (freex > j) {
-	if (sp->segmnt[freex - 1] == nlch)
-	  freex--;
-	else
-	  j = freex;
-      }
-    } else {
-      FORLIM = sp->seginx + sp->len;
-      for (i = sp->seginx; i < FORLIM; i++)
-	sp->segmnt[i] = nlch;
-    }
-  } else {
-    if (sp->segmnt == freeseg)   /*D k := 3; D*/
-      freeseg = NULL;
-    Free(sp->segmnt);
-  }
-  for (i = 0; i < ll; i++)
-    tmpseg[sp->len + i + 3] = buf[px + i];
-  freeseg = tmpseg;
-  freex = sp->len + ll + 3;
-  putbval(freeseg, 1);
-  sp->segmnt = freeseg;
-  sp->seginx = 3;
+  j = px - freex;
+  FORLIM = freex + ll;
+  /* for i := 0 to ll-1 do freeseg^[freex+i] := buf^[px+i]; */
+  for (i = freex; i < FORLIM; i++)
+    freeseg[i] = buf[j + i];
   sp->len += ll;
-  /*D; if debuglevel > 0 then if sp<>nil then with sp^ do begin
-     write(log,'appendstring: seginx:seginx+len-1= ',
-       seginx:1,':',seginx+len-1:1,' len= ',len:1, ' k=',k:1);
-     snapname(segmnt,seginx,len); writeln( log )
+  freex += ll;
+  /*D; if debuglevel > 0 then begin
+     write ( log,'appendstring: seginx= ',sp^.seginx:1,' len= ',sp^.len:1);
+     snapname(buf,px,ll); writeln( log )
      end D*/
 }
 
@@ -2368,7 +2267,7 @@ double pheight(primitive *pr)
     break;
 
   case XBLOCK:
-    ph = pr->UU.UEMPTY6.blockheight;
+    ph = pr->UU.UEMPTY7.blockheight;
     break;
 
   case XLellipse:
@@ -2409,7 +2308,7 @@ double pwidth(primitive *pr)
     break;
 
   case XBLOCK:
-    ph = pr->UU.UEMPTY6.blockwidth;
+    ph = pr->UU.UEMPTY7.blockwidth;
     break;
 
   case XLellipse:
@@ -2474,19 +2373,19 @@ void pexit(primitive *pr, postype *pe)
     switch (pr->direction) {
 
     case XLup:
-      pe->ypos = pr->aat.ypos + pr->UU.UEMPTY6.blockheight * 0.5;
+      pe->ypos = pr->aat.ypos + pr->UU.UEMPTY7.blockheight * 0.5;
       break;
 
     case XLdown:
-      pe->ypos = pr->aat.ypos - pr->UU.UEMPTY6.blockheight * 0.5;
+      pe->ypos = pr->aat.ypos - pr->UU.UEMPTY7.blockheight * 0.5;
       break;
 
     case XLleft:
-      pe->xpos = pr->aat.xpos - pr->UU.UEMPTY6.blockwidth * 0.5;
+      pe->xpos = pr->aat.xpos - pr->UU.UEMPTY7.blockwidth * 0.5;
       break;
 
     case XLright:
-      pe->xpos = pr->aat.xpos + pr->UU.UEMPTY6.blockwidth * 0.5;
+      pe->xpos = pr->aat.xpos + pr->UU.UEMPTY7.blockwidth * 0.5;
       break;
     }
     break;
@@ -2534,7 +2433,10 @@ void pexit(primitive *pr, postype *pe)
     break;
 
   case XLarc:
-    *pe = arcend(pr);
+    pe->xpos = pr->aat.xpos + pr->UU.Uline.aradius *
+		 cos(pr->UU.Uline.endpos.xpos + pr->UU.Uline.endpos.ypos);
+    pe->ypos = pr->aat.ypos + pr->UU.Uline.aradius *
+		 sin(pr->UU.Uline.endpos.xpos + pr->UU.Uline.endpos.ypos);
     break;
 
   case XLline:
@@ -2545,7 +2447,7 @@ void pexit(primitive *pr, postype *pe)
     break;
 
   case XLabel:
-  case XLaTeX:
+  case XLtroff:
     /* blank case */
     break;
   }
@@ -2584,7 +2486,7 @@ void newprim(primitive **pr, int primtype, primitive *envblk)
     break;
 
   case XLabel:
-  case XLaTeX:
+  case XLtroff:
     *pr = Malloc(sizeof(XLabelprimitive));
     break;
   }
@@ -2604,14 +2506,14 @@ void newprim(primitive **pr, int primtype, primitive *envblk)
     if (envblk->son == NULL)
       envblk->son = *pr;
     WITH->parent = envblk;
-    WITH->aat = envblk->UU.UEMPTY6.here;
+    WITH->aat = envblk->UU.UEMPTY7.here;
     WITH->direction = envblk->direction;
   }
   WITH->lparam = mdistmax;
   WITH->lthick = mdistmax;
   if (primtype == XLspline || primtype == XLarc || primtype == XLarrow ||
-      primtype == XLline || primtype == XLellipse || primtype == XLcircle ||
-      primtype == XLbox)
+      primtype == XLline || primtype == XLellipse ||
+      primtype == XLcircle || primtype == XLbox)
     resetspec(&WITH->spec, XLsolid);
   else
     resetspec(&WITH->spec, XLinvis);
@@ -2630,11 +2532,11 @@ void newprim(primitive **pr, int primtype, primitive *envblk)
     break;
 
   case XBLOCK:
-    WITH->UU.UEMPTY6.blockheight = 0.0;
-    WITH->UU.UEMPTY6.blockwidth = 0.0;
-    WITH->UU.UEMPTY6.here = WITH->aat;
-    WITH->UU.UEMPTY6.vars = NULL;
-    WITH->UU.UEMPTY6.env = NULL;
+    WITH->UU.UEMPTY7.blockheight = 0.0;
+    WITH->UU.UEMPTY7.blockwidth = 0.0;
+    WITH->UU.UEMPTY7.here = WITH->aat;
+    WITH->UU.UEMPTY7.vars = NULL;
+    WITH->UU.UEMPTY7.env = NULL;
     break;
 
   case XLcircle:
@@ -2659,11 +2561,11 @@ void newprim(primitive **pr, int primtype, primitive *envblk)
     WITH->UU.Uline.width = 0.0;
     WITH->UU.Uline.lfill = -1.0;
     WITH->UU.Uline.aradius = mdistmax;
-    WITH->UU.Uline.atype = pahlex(0, XEMPTY);
+    WITH->UU.Uline.atype = XEMPTY;
     break;
 
   case XLabel:
-  case XLaTeX:
+  case XLtroff:
     /* blank case */
     break;
   }
@@ -2781,8 +2683,8 @@ void scaleobj(primitive *pr, double s)
       WITH->UU.Ubox.boxwidth *= s;
       WITH->UU.Ubox.boxradius *= s;
     } else if (WITH->ptype == XBLOCK) {
-      WITH->UU.UEMPTY6.blockheight *= s;
-      WITH->UU.UEMPTY6.blockwidth *= s;
+      WITH->UU.UEMPTY7.blockheight *= s;
+      WITH->UU.UEMPTY7.blockwidth *= s;
     } else if (WITH->ptype == XLcircle)
       WITH->UU.Ucircle.radius *= s;
     else if (WITH->ptype == XLellipse) {
@@ -2826,7 +2728,7 @@ void corner(primitive *pr, int lexv, double *x, double *y)
     *y = 0.5 * (pr->aat.ypos + pe->UU.Uline.endpos.ypos);
     return;
   }
-  if (lexv == XEMPTY && pr->ptype != XLaTeX)
+  if (lexv == XEMPTY && pr->ptype != XLtroff)
     return;
   switch (pr->ptype) {
 
@@ -3053,7 +2955,7 @@ void corner(primitive *pr, int lexv, double *x, double *y)
     /* blank case */
     break;
 
-  case XLaTeX:
+  case XLtroff:
     markerror(858);
     break;
   }
@@ -3126,102 +3028,102 @@ void resetenv(int envval, primitive *envbl)
     last = XLlastenv;
   } else
     last = envval;
-  if (envbl->UU.UEMPTY6.env == NULL)
-    envbl->UU.UEMPTY6.env = Malloc(sizeof(envarray));
+  if (envbl->UU.UEMPTY7.env == NULL)
+    envbl->UU.UEMPTY7.env = Malloc(sizeof(envarray));
   for (i = envval - 1; i < last; i++) {
     switch (i + 1) {
 
     case XLarcrad:   /* scaled environmental vars */
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.25;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.25;
       break;
 
     case XLarrowht:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.1;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.1;
       break;
 
     case XLarrowwid:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.05;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.05;
       break;
 
     case XLboxht:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.5;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.5;
       break;
 
     case XLboxrad:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.0;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.0;
       break;
 
     case XLboxwid:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.75;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.75;
       break;
 
     case XLcirclerad:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.25;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.25;
       break;
 
     case XLdashwid:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.1;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.1;
       break;
 
     case XLellipseht:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.5;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.5;
       break;
 
     case XLellipsewid:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.75;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.75;
       break;
 
     case XLlineht:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.5;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.5;
       break;
 
     case XLlinewid:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.5;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.5;
       break;
 
     case XLmoveht:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.5;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.5;
       break;
 
     case XLmovewid:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.5;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.5;
       break;
 
     case XLtextht:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.0;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.0;
       break;
 
     case XLtextoffset:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 2.5 / 72;   /*.27*/
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 2.5 / 72;   /*.27*/
       break;
 
     case XLtextwid:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.0;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.0;
       break;
 
     /* The following are unscaled */
     case XLarrowhead:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 2.0;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 2.0;
       break;
 
     case XLfillval:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.3;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.3;
       break;
 
     case XLlinethick:   /* points */
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 0.8;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 0.8;
       break;
 
     case XLmaxpsht:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 11.0;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 11.0;
       break;
 
     case XLmaxpswid:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 8.5;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 8.5;
       break;
 
     case XLscale:
-      envbl->UU.UEMPTY6.env[i - XLenvvar] = 1.0;
+      envbl->UU.UEMPTY7.env[i - XLenvvar] = 1.0;
       break;
     }
   }
@@ -3238,9 +3140,9 @@ void inheritenv(primitive *envbl)
     resetenv(0, envbl);
     return;
   }
-  envbl->UU.UEMPTY6.env = Malloc(sizeof(envarray));
+  envbl->UU.UEMPTY7.env = Malloc(sizeof(envarray));
   for (i = XLenvvar; i < XLlastenv; i++)
-    envbl->UU.UEMPTY6.env[i - XLenvvar] = pr->UU.UEMPTY6.env[i - XLenvvar];
+    envbl->UU.UEMPTY7.env[i - XLenvvar] = pr->UU.UEMPTY7.env[i - XLenvvar];
 }
 
 
@@ -3250,15 +3152,15 @@ void resetscale(double x, int opr, primitive *envbl)
   int i;
 
   resetenv(0, envbl);
-  r = envbl->UU.UEMPTY6.env[XLscale - XLenvvar - 1];
-  eqop(&envbl->UU.UEMPTY6.env[XLscale - XLenvvar - 1], opr, x);
-  s = envbl->UU.UEMPTY6.env[XLscale - XLenvvar - 1];
+  r = envbl->UU.UEMPTY7.env[XLscale - XLenvvar - 1];
+  eqop(&envbl->UU.UEMPTY7.env[XLscale - XLenvvar - 1], opr, x);
+  s = envbl->UU.UEMPTY7.env[XLscale - XLenvvar - 1];
   if (r == 0.0)
     markerror(852);
   else
     s /= r;
   for (i = XLenvvar; i < XLlastsc; i++)
-    eqop(&envbl->UU.UEMPTY6.env[i - XLenvvar], XLmulteq, s);
+    eqop(&envbl->UU.UEMPTY7.env[i - XLenvvar], XLmulteq, s);
 }
 
 
@@ -3332,22 +3234,22 @@ void getscale(double xv, double yv, primitive *lp, double *sfact,
   if (lp != NULL) {
     if (lp->ptype == XBLOCK) {
       qp = findenv(lp);
-      if (qp->UU.UEMPTY6.env[XLscale - XLenvvar - 1] > 0.0)
-	*sfact = qp->UU.UEMPTY6.env[XLscale - XLenvvar - 1];
+      if (qp->UU.UEMPTY7.env[XLscale - XLenvvar - 1] > 0.0)
+	*sfact = qp->UU.UEMPTY7.env[XLscale - XLenvvar - 1];
       /*D if debuglevel > 0 then begin write(log,'getscale: sfact=');
          wfloat(log,sfact); writeln(log) end; D*/
       if (east > west &&
-	  (east - west) / *sfact > qp->UU.UEMPTY6.env[XLmaxpswid - XLenvvar - 1] &&
-	  qp->UU.UEMPTY6.env[XLmaxpswid - XLenvvar - 1] > 0.0) {
+	  (east - west) / *sfact > qp->UU.UEMPTY7.env[XLmaxpswid - XLenvvar - 1] &&
+	  qp->UU.UEMPTY7.env[XLmaxpswid - XLenvvar - 1] > 0.0) {
 	erno = 903;
-	gs = (east - west) / qp->UU.UEMPTY6.env[XLmaxpswid - XLenvvar - 1];
+	gs = (east - west) / qp->UU.UEMPTY7.env[XLmaxpswid - XLenvvar - 1];
       }
       if (north > south &&
-	  (north - south) / *sfact > qp->UU.UEMPTY6.env[XLmaxpsht - XLenvvar - 1] &&
-	  qp->UU.UEMPTY6.env[XLmaxpsht - XLenvvar - 1] > 0.0) {
+	  (north - south) / *sfact > qp->UU.UEMPTY7.env[XLmaxpsht - XLenvvar - 1] &&
+	  qp->UU.UEMPTY7.env[XLmaxpsht - XLenvvar - 1] > 0.0) {
 	erno = 904;
 	gs = Max(gs,
-		 (north - south) / qp->UU.UEMPTY6.env[XLmaxpsht - XLenvvar - 1]);
+		 (north - south) / qp->UU.UEMPTY7.env[XLmaxpsht - XLenvvar - 1]);
       }
     }
   }
@@ -3427,14 +3329,14 @@ void copyprim(primitive *prin, primitive **prout)
     break;
 
   case XBLOCK:
-    (*prout)->UU.UEMPTY6.blockheight = prin->UU.UEMPTY6.blockheight;
-    (*prout)->UU.UEMPTY6.blockwidth = prin->UU.UEMPTY6.blockwidth;
-    (*prout)->UU.UEMPTY6.here = prin->UU.UEMPTY6.here;
-    (*prout)->UU.UEMPTY6.vars = prin->UU.UEMPTY6.vars;
-    if (prin->UU.UEMPTY6.env != NULL) {
-      (*prout)->UU.UEMPTY6.env = Malloc(sizeof(envarray));
+    (*prout)->UU.UEMPTY7.blockheight = prin->UU.UEMPTY7.blockheight;
+    (*prout)->UU.UEMPTY7.blockwidth = prin->UU.UEMPTY7.blockwidth;
+    (*prout)->UU.UEMPTY7.here = prin->UU.UEMPTY7.here;
+    (*prout)->UU.UEMPTY7.vars = prin->UU.UEMPTY7.vars;
+    if (prin->UU.UEMPTY7.env != NULL) {
+      (*prout)->UU.UEMPTY7.env = Malloc(sizeof(envarray));
       for (i = XLenvvar; i < XLlastenv; i++)
-	(*prout)->UU.UEMPTY6.env[i - XLenvvar] = prin->UU.UEMPTY6.env[i - XLenvvar];
+	(*prout)->UU.UEMPTY7.env[i - XLenvvar] = prin->UU.UEMPTY7.env[i - XLenvvar];
     }
     break;
 
@@ -3463,7 +3365,7 @@ void copyprim(primitive *prin, primitive **prout)
     break;
 
   case XLabel:
-  case XLaTeX:
+  case XLtroff:
     /* blank case */
     break;
   }
@@ -3476,15 +3378,13 @@ void deletestringbox(primitive **pr)
 
   if (*pr != NULL) {
     if ((*pr)->parent != NULL) {
-      if ((*pr)->parent->son != NULL) {
-	if ((*pr)->parent->son == *pr)
-	  (*pr)->parent->son = NULL;
-	else {  /* is the following ever reached? */
-	  prx = (*pr)->parent->son;
-	  while (prx->next_ != NULL && prx->next_ != *pr)
-	    prx = prx->next_;
-	  prx->next_ = NULL;
-	}
+      if ((*pr)->parent->son == *pr)
+	(*pr)->parent->son = NULL;
+      else {  /* is the following ever reached? */
+	prx = (*pr)->parent->son;
+	while (prx->next_ != NULL && prx->next_ != *pr)
+	  prx = prx->next_;
+	prx->next_ = NULL;
       }
     }
   }
@@ -3542,7 +3442,7 @@ void addsuffix(Char *buf, chbufinx *inx, int *len, double suff)
     i = -i;
   do {
     buf[chbufi + j] = i % 10 + '0';
-/* p2c: dpic.p, line 1779:
+/* p2c: dpic.p, line 1726:
  * Note: Using % for possibly-negative arguments [317] */
     j--;
     i /= 10;
@@ -3568,8 +3468,11 @@ void appendthen(primitive **pr)
   prp->name = NULL;
   prp->textp = NULL;
   prp->shadedp = NULL;
-  if (prp->outlinep != NULL)  /* We have to duplicate the stored string */
-    copystr(&freeseg, &prp->outlinep, (*pr)->outlinep);
+  if (prp->outlinep != NULL) {  /* We have to duplicate the stored string */
+    newstr(&prp->outlinep);
+    addstring(&freeseg, prp->outlinep, (*pr)->outlinep->segmnt,
+	      (*pr)->outlinep->seginx, (*pr)->outlinep->len);
+  }
   pexit(*pr, &prp->aat);
   (*pr)->son = prp;
   setthen(&prp->spec);
@@ -3619,13 +3522,7 @@ boolean hasshade(int lx, boolean warn)
 {
   boolean hs;
 
-  hs = (lx == XLellipse || lx == XLcircle || lx == XLbox ||
-	(((1L << ((long)drawmode)) & ((1L << ((long)PSTricks)) |
-	    (1L << ((long)PGF)) | (1L << ((long)MPost)) | (1L << ((long)PS)) |
-	    (1L << ((long)PSfrag)))) != 0 &&
-	 (lx == XLspline || lx == XLarrow || lx == XLline || lx == XLarc)));
-/* p2c: dpic.p, line 1838: 
- * Note: Line breaker spent 0.0 seconds, 5000 tries on line 3195 [251] */
+  hs = (lx == XLellipse || lx == XLcircle || lx == XLbox);
   if (!hs && warn)
     markerror(858);
   return hs;
@@ -3643,7 +3540,7 @@ void produce(stackinx newp, int p)
   primitive *primp, *prp, *eb;
   int i, j, k, kk, lj, ll, mm;
   double r, s, t, x1, y1, dx, dy, ts;
-  boolean bswitch;
+  boolean truth;
   attribute *WITH, *WITH1;
   primitive *WITH2;
   attribute *WITH3;
@@ -3652,8 +3549,33 @@ void produce(stackinx newp, int p)
   fbuffer *WITH5;
   postype *WITH6;
 
+  WITH = &attstack[newp];
+
+  /*D with attstack^[newp] do if (debuglevel = 2) and (
+     ((p >= block1) and (p <= block3)) or
+     ((p > object1) and (p <= object23))
+     or (p in [sprintf2,string2,element6,element12])) then printobject(prim);
+  if debuglevel > 0 then with attstack^[newp] do
+     if p in [ assignment1..assignment4,
+               expression1,expression2,
+               logprod2,
+               logval2,
+               expression2..expression5,
+               term2..term4,
+               factor2,factor3,
+               primary1..primary12,primary14,primary15
+               ] then begin
+           write(log,'value='); wfloat(log,xval);
+           writeln(log) end
+     else if p in [position1..position3,
+        location1,location2,shift2,shift3,place1..place3] then begin
+        write(log,'location:');
+        with attstack^[newp] do wpair(log,xval,yval);
+        writeln(log); flush(log); end D*/
+  /*D;if (linesignal > 0) and (p=input2) then begin
+      writeln(stderr,'bottom:'); flush(stderr); end D*/
   /* D if (debuglevel > 0) then begin
-        writeln(     'Production(newp=',newp:1,
+        writeln('Production(newp=',newp:1,
                      ',lexval=',attstack^[newp].lexval:1,
                      ',prod=',p:1,')' )
         end; D */
@@ -3665,33 +3587,6 @@ void produce(stackinx newp, int p)
      end; D*/
   /* Dwriteln('Produce Step 1, debuglevel=',debuglevel);
      writeln(log,'Produce Step 1'); D */
-
-  WITH = &attstack[newp];
-
-  /*D with attstack^[newp] do if (debuglevel = 2) and (
-     ((p >= block1) and (p <= block3)) or
-     ((p > object1) and (p <= object23))
-     or (p in [sprintf2,string2,element5,element11])) then printobject(prim);
-  if debuglevel > 0 then with attstack^[newp] do
-     if p in [ assignment1..assignment4,
-               expression1..expression5,
-               logexpr2,
-               term2..term4,
-               factor2,factor3,
-               logprod2,
-               logval2,logval3,
-               lcompare3,lcompare4,
-               primary1..primary11
-               ] then begin
-           write(log,'value='); wfloat(log,xval);
-           writeln(log) end
-     else if p in [position1..position3,
-        location1,location2,shift2,shift3,place1..place3] then begin
-        write(log,'location:');
-        with attstack^[newp] do wpair(log,xval,yval);
-        writeln(log); flush(log); end D*/
-  /*D;if (linesignal > 0) and (p=input2) then begin
-      writeln(stderr,'bottom:'); flush(stderr); end D*/
   switch (p) {
 
   case -2:
@@ -3705,13 +3600,13 @@ void produce(stackinx newp, int p)
     inbuf = NULL;
     break;
 
-  /*      METAGOAL = input "<EOF>"   */
+  /*  0   METAGOAL = input "<EOF>"   */
 
   case METAGOAL1:
     break;
 
-  /*      input = "<EMPTY>"   */
-  /*            | input picture NL   */
+  /*  1   input = "<EMPTY>"   */
+  /*  2         | input picture NL   */
   case input1:
     break;
 
@@ -3732,8 +3627,8 @@ void produce(stackinx newp, int p)
       envblock->direction = XLright;
     break;
 
-  /*      picture = start NL elementlist "<END>"   */
-  /*              | start NL elementlist NL "<END>"   */
+  /*  3   picture = start NL elementlist "<END>"   */
+  /*  4           | start NL elementlist NL "<END>"   */
   case picture1:
   case picture2:
     if (WITH->prim != NULL)
@@ -3750,8 +3645,8 @@ void produce(stackinx newp, int p)
       WITH2 = envblock;
       WITH2->aat.xpos = (east + west) * 0.5;
       WITH2->aat.ypos = (north + south) * 0.5;
-      WITH2->UU.UEMPTY6.blockheight = north - south;
-      WITH2->UU.UEMPTY6.blockwidth = east - west;
+      WITH2->UU.UEMPTY7.blockheight = north - south;
+      WITH2->UU.UEMPTY7.blockwidth = east - west;
     }
     if (drawmode == xfig) {
       shift(envblock, -west, -south);
@@ -3774,15 +3669,15 @@ void produce(stackinx newp, int p)
     drawtree(north, south, east, west, envblock);
     break;
 
-  /*      NL = ["^M"]"<NL>"   */
-  /*         | "<ERROR>"   */
+  /*  5   NL = ["^M"]"<NL>"   */
+  /*  6      | "<ERROR>"   */
   case NL1:
   case NL2:
     break;
 
-  /*      start = "<START>"   */
-  /*            | "<START>" term   */
-  /*            | "<START>" term term   */
+  /*  7   start = "<START>"   */
+  /*  8         | "<START>" term   */
+  /*  9         | "<START>" term term   */
   case start1:
     break;
 
@@ -3797,12 +3692,13 @@ void produce(stackinx newp, int p)
     WITH->yval = attstack[newp + 2].xval;
     break;
 
-  /*      elementlist = "<EMPTY>"   */
+  /* 10   elementlist = "<EMPTY>"   */
+  /* 11               | element   */
+  /* 12               | elementlist NL element   */
   case elementlist1:
     WITH->state = 0;
     break;
 
-  /*                  | element   */
   case elementlist2:
     WITH->state = 0;
     if (WITH->prim != NULL && WITH->lexval != XLcontinue) {
@@ -3845,24 +3741,23 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*                  | elementlist NL element */
+  /* 12               | elementlist NL element */
   case elementlist3:
-    if (attstack[newp + 2].prim != NULL) {
-      if (attstack[newp + 2].lexval != XLcontinue) {
-	if (WITH->prim == NULL) {
-	  attstack[newp] = attstack[newp + 2];
-	  redubuf[reduinx + REDUMAX].prod_ = elementlist2;
-	  reduinx--;
-	} else
-	  addelem(attstack[newp + WITH->state].prim, attstack[newp + 2].prim);
-      }
+    if (attstack[newp + 2].prim != NULL &&
+	attstack[newp + 2].lexval != XLcontinue) {
+      if (WITH->prim == NULL) {
+	attstack[newp] = attstack[newp + 2];
+	redubuf[reduinx + REDUMAX].prod_ = elementlist2;
+	reduinx--;
+      } else
+	addelem(attstack[newp + WITH->state].prim, attstack[newp + 2].prim);
     }
     break;
 
-  /*      term = factor   */
-  /*           | term "*" factor   */
-  /*           | term "/" factor   */
-  /*           | term "%" factor   */
+  /* 13   term = factor   */
+  /* 14        | term "*" factor   */
+  /* 15        | term "/" factor   */
+  /* 16        | term "%" factor   */
   case term1:
     break;
 
@@ -3885,23 +3780,24 @@ void produce(stackinx newp, int p)
     } else {
       WITH->xval = (long)floor(WITH->xval + 0.5) %
 		   (long)floor(attstack[newp + 2].xval + 0.5);
-/* p2c: dpic.p, line 2017:
+/* p2c: dpic.p, line 1964:
  * Note: Using % for possibly-negative arguments [317] */
     }
     break;
 
-  /*      element = namedbox   */
-  /*              | "<Label>" suffix ":" position   */
-  /*              | assignlist   */
-  /*              | "<directon>"   */
-  /*              | "<LaTeX>"   */
-  /*              | command   */
-  /*              | lbrace "lbrace" elementlist optnl "rbrace"   */
-  /*              | ifpart   */
-  /*              | elsehead "lbrace" elementlist optnl "rbrace"   */
-  /*              | for "rbrace"   */
-  /*              | "command" stringexpr   */
-  /*              | "exec" stringexpr   */
+  /* 17   element = namedbox   */
+  /* 18           | "<Label>" suffix ":"   */
+  /* 19           | "<Label>" suffix ":" position   */
+  /* 20           | assignlist   */
+  /* 21           | "<directon>"   */
+  /* 22           | "<troff>"   */
+  /* 23           | command   */
+  /* 24           | lbrace "lbrace" elementlist optnl "rbrace"   */
+  /* 25           | ifpart   */
+  /* 26           | elsehead "lbrace" elementlist optnl "rbrace"   */
+  /* 27           | for "rbrace"   */
+  /* 28           | "command" stringexpr   */
+  /* 29           | "exec" stringexpr   */
   case element1:
     if (WITH->prim != NULL) {
       prp = WITH->prim;
@@ -3944,11 +3840,12 @@ void produce(stackinx newp, int p)
          with envblock^ do wpair(log,here.xpos,here.ypos); writeln(log);
          printobject(prim)
          end D*/
-      pexit(prp, &envblock->UU.UEMPTY6.here);
+      pexit(prp, &envblock->UU.UEMPTY7.here);
     }
     break;
 
   case element2:
+  case element3:
     if (attstack[newp + 1].lexval != XEMPTY)
       addsuffix(chbuf, &WITH->chbufx, &WITH->length, attstack[newp + 1].xval);
     prp = findplace(envblock->son, chbuf, WITH->chbufx, WITH->length);
@@ -3963,42 +3860,42 @@ void produce(stackinx newp, int p)
       prp->name = NULL;
       prp = WITH->prim;
     }
-    prp->aat.xpos = attstack[newp + 3].xval;
-    prp->aat.ypos = attstack[newp + 3].yval;
-    /*D; if (debuglevel > 0) and (prim<>nil) then printobject(prim)D*/
-    break;
-
-  case element3:
-    WITH->lexval = XLBRACE;
+    if (p == element2)
+      prp->aat = envblock->UU.UEMPTY7.here;
+    else {
+      prp->aat.xpos = attstack[newp + 3].xval;
+      prp->aat.ypos = attstack[newp + 3].yval;
+      /*D; if (debuglevel > 0) and (prim<>nil) then printobject(prim)D*/
+    }
     break;
 
   case element4:
-    envblock->direction = WITH->lexval;
     WITH->lexval = XLBRACE;
     break;
 
   case element5:
-    newprim(&WITH->prim, XLaTeX, envblock);
+    envblock->direction = WITH->lexval;
+    WITH->lexval = XLBRACE;
+    break;
+
+  case element6:
+    newprim(&WITH->prim, XLtroff, envblock);
     newstr(&WITH->prim->textp);
     addstring(&freeseg, WITH->prim->textp, chbuf, WITH->chbufx, WITH->length);
     break;
 
-  case element6:
+  case element7:
     WITH->lexval = XLBRACE;
     break;
 
-  case element7:
-    envblock->UU.UEMPTY6.here.xpos = WITH->xval;
-    envblock->UU.UEMPTY6.here.ypos = WITH->yval;
+  case element8:
+    envblock->UU.UEMPTY7.here.xpos = WITH->xval;
+    envblock->UU.UEMPTY7.here.ypos = WITH->yval;
     if (WITH->state == XLright || WITH->state == XLleft ||
 	WITH->state == XLdown || WITH->state == XLup)
       envblock->direction = WITH->state;
     if (attstack[newp + 2].state == 0)
       attstack[newp] = attstack[newp + 2];
-    break;
-
-  case element8:
-    /* blank case */
     break;
 
   case element9:
@@ -4010,8 +3907,12 @@ void produce(stackinx newp, int p)
     break;
 
   case element11:
+    /* blank case */
+    break;
+
+  case element12:
     if (attstack[newp + 1].prim != NULL) {
-      newprim(&WITH->prim, XLaTeX, envblock);
+      newprim(&WITH->prim, XLtroff, envblock);
       WITH->prim->textp = attstack[newp + 1].prim->textp;
       attstack[newp + 1].prim->textp = NULL;
       if (envblock->son == attstack[newp + 1].prim)
@@ -4020,7 +3921,7 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  case element12:
+  case element13:
     if (attstack[newp + 1].prim != NULL) {
       if (attstack[newp + 1].prim->textp != NULL) {
 	if (attstack[newp + 1].prim->textp->segmnt != NULL) {
@@ -4045,17 +3946,17 @@ void produce(stackinx newp, int p)
     break;
     /*              | loop "}" */
     /*              | break */
-    /*repeat element13,element14: ; */
+    /*repeat element14,element15: ; */
 
-  /*      lbrace = "<EMPTY>"   */
+  /* 30   lbrace = "<EMPTY>"   */
   case lbrace1:
-    WITH->xval = envblock->UU.UEMPTY6.here.xpos;
-    WITH->yval = envblock->UU.UEMPTY6.here.ypos;
+    WITH->xval = envblock->UU.UEMPTY7.here.xpos;
+    WITH->yval = envblock->UU.UEMPTY7.here.ypos;
     WITH->state = envblock->direction;
     break;
 
-  /*      namedbox = object   */
-  /*               | "<Label>" suffix ":" object   */
+  /* 31   namedbox = object   */
+  /* 32            | "<Label>" suffix ":" object   */
   case namedbox1:
     if (WITH->prim != NULL) {  /* then, arc, deferred shift */
       prp = WITH->prim;
@@ -4145,8 +4046,8 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*      suffix = "<EMPTY>"   */
-  /*             | "[" expression "]"   */
+  /* 33   suffix = "<EMPTY>"   */
+  /* 34          | "[" expression "]"   */
   case suffix1:
     WITH->lexval = XEMPTY;
     break;
@@ -4155,12 +4056,12 @@ void produce(stackinx newp, int p)
     WITH->xval = attstack[newp + 1].xval;
     break;
 
-  /*      position = pair   */
+  /* 35   position = pair   */
+  /* 36            | expression "between" position "and" position   */
+  /* 38            | expression "<" position "," position ">" shift   */
   case position1:
     break;
 
-  /*               | expression "between" position "and" position   */
-  /*               | expression "<" position "," position "<compare>" shift   */
   case position2:
   case position4:
     r = WITH->xval;
@@ -4168,17 +4069,13 @@ void produce(stackinx newp, int p)
 		 r * (attstack[newp + 4].xval - attstack[newp + 2].xval);
     WITH->yval = attstack[newp + 2].yval +
 		 r * (attstack[newp + 4].yval - attstack[newp + 2].yval);
-    if (p == position4) {
-      if (attstack[newp + 5].lexval != XGT)
-	markerror(869);
-      else if (attstack[newp + 6].lexval != XEMPTY) {
-	WITH->xval += attstack[newp + 6].xval;
-	WITH->yval += attstack[newp + 6].yval;
-      }
+    if (p == position4 && attstack[newp + 6].lexval != XEMPTY) {
+      WITH->xval += attstack[newp + 6].xval;
+      WITH->yval += attstack[newp + 6].yval;
     }
     break;
 
-  /*             | expression "of" "the" "way" "between" position "and" position*/
+  /* 37          | expression "of" "the" "way" "between" position "and" position*/
   case position3:
     r = WITH->xval;
     WITH->xval = attstack[newp + 5].xval +
@@ -4187,8 +4084,8 @@ void produce(stackinx newp, int p)
 		 r * (attstack[newp + 7].yval - attstack[newp + 5].yval);
     break;
 
-  /*      assignlist = assignment   */
-  /*                 | assignlist "," assignment   */
+  /* 39   assignlist = assignment   */
+  /* 40              | assignlist "," assignment   */
   case assignlist1:
     break;
 
@@ -4196,68 +4093,48 @@ void produce(stackinx newp, int p)
     WITH->xval = attstack[newp + 2].xval;
     break;
 
-  /*      command = "print" expression redirect   */
-  /*              | "print" position redirect   */
-  /*              | "print" stringexpr redirect   */
+  /* 41   command = "print" expression   */
+  /* 42           | "print" position   */
+  /* 43           | "print" stringexpr   */
+  /* 44           | "reset"   */
+  /* 45           | "reset" resetlist   */
+  /* 46           | "sh" stringexpr   */
+  /* 47           | "copy" stringexpr   */
+  /* 48           | defhead optnl "lbrace" "rbrace"   */
+  /* 49           | "undefine" "<name>"   */
+  /* 50           | "undefine" "<Label>"   */
   case command1:
-  case command2:
-  case command3:
     WITH1 = &attstack[newp + 1];
-    if (attstack[newp + 2].lexval == XEMPTY) {
-      switch (p) {
-
-      case command1:
-	wfloat(&stderr_, WITH1->xval);
-	break;
-
-      case command2:
-	wpair(&stderr_, WITH1->xval, WITH1->yval);
-	break;
-
-      case command3:
-	if (WITH1->prim != NULL)
-	  wstring(&stderr_, WITH1->prim->textp);
-	break;
-      }
-      putc('\n', stderr_);
-      consoleflush();
-    } else if (attstack[newp + 2].state == 0) {
-#ifndef SAFE_MODE
-      switch (p) {
-
-      case command1:
-	wfloat(&redirect, WITH1->xval);
-	break;
-
-      case command2:
-	wpair(&redirect, WITH1->xval, WITH1->yval);
-	break;
-
-      case command3:
-	if (WITH1->prim != NULL)
-	  wstring(&redirect, WITH1->prim->textp);
-	break;
-      }
-      putc('\n', redirect);
-      if (redirect != NULL)
-	fclose(redirect);
-      redirect = NULL;
-#endif
-    }
-    if (p == command3)
-      deletestringbox(&WITH1->prim);
+    wfloat(&stderr_, WITH1->xval);
+    putc('\n', stderr_);
+    consoleflush();
     break;
 
-  /*              | "reset"   */
+  case command2:
+    WITH1 = &attstack[newp + 1];
+    wpair(&stderr_, WITH1->xval, WITH1->yval);
+    putc('\n', stderr_);
+    consoleflush();
+    break;
+
+  case command3:
+    WITH1 = &attstack[newp + 1];
+    if (WITH1->prim != NULL) {
+      wstring(&stderr_, WITH1->prim->textp);
+      putc('\n', stderr_);
+      consoleflush();
+    }
+    deletestringbox(&WITH1->prim);
+    break;
+
   case command4:
     resetenv(0, envblock);
     break;
 
-  /*              | "reset" resetlist   */
   case command5:
+    /* blank case */
     break;
 
-  /*              | "sh" stringexpr   */
   case command6:
     WITH1 = &attstack[newp + 1];
     if (WITH1->prim != NULL) {
@@ -4283,7 +4160,6 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*              | "copy" stringexpr   */
   case command7:
     WITH1 = &attstack[newp + 1];
     if (WITH1->prim != NULL) {
@@ -4296,12 +4172,10 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*              | defhead optnl "lbrace" "rbrace"   */
   case command8:
+    /* blank case */
     break;
 
-  /*              | "undefine" "<name>"   */
-  /*              | "undefine" "<Label>"   */
   case command9:
   case command10:
     attstack[newp] = attstack[newp + 1];
@@ -4316,17 +4190,17 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*      optnl = "<EMPTY>"   */
-  /*            | NL   */
+  /* 51   optnl = "<EMPTY>"   */
+  /* 52         | NL   */
   case optnl1:
   case optnl2:
     break;
 
-  /*      ifpart = ifhead "lbrace" elementlist optnl "rbrace"   */
+  /* 53   ifpart = ifhead "lbrace" elementlist optnl "rbrace"   */
   case ifpart1:
     break;
 
-  /*      elsehead = ifpart "else"   */
+  /* 54   elsehead = ifpart "else"   */
   case elsehead1:
     if (WITH->xval == 0.0) {
       attstack[newp + 1].lexval = XLBRACE;
@@ -4335,14 +4209,14 @@ void produce(stackinx newp, int p)
       skiptobrace();
     break;
 
-  /*      for = forhead "lbrace" elementlist optnl   */
-  /*          | forincr elementlist optnl   */
+  /* 55   for = forhead "lbrace" elementlist optnl   */
+  /* 56       | forincr elementlist optnl   */
   case for1:
   case for2:
     break;
 
-  /*      stringexpr = string   */
-  /*                 | stringexpr "+" string   */
+  /* 57   stringexpr = string   */
+  /* 58              | stringexpr "+" string   */
   case stringexpr1:
     break;
 
@@ -4377,20 +4251,20 @@ void produce(stackinx newp, int p)
         inbuf^.readx := inbuf^.savedlen+1
         end; */
 
-  /*      string = "<string>"   */
-  /*             | sprintf ")"   */
+  /* 59   string = "<string>"   */
+  /* 60          | sprintf ")"   */
   case string1:
     newprim(&WITH->prim, XLstring, envblock);
     eb = findenv(envblock);
     WITH2 = WITH->prim;
-    WITH2->UU.Ubox.boxheight = eb->UU.UEMPTY6.env[XLtextht - XLenvvar - 1];
-    WITH2->UU.Ubox.boxwidth = eb->UU.UEMPTY6.env[XLtextwid - XLenvvar - 1];
+    WITH2->UU.Ubox.boxheight = eb->UU.UEMPTY7.env[XLtextht - XLenvvar - 1];
+    WITH2->UU.Ubox.boxwidth = eb->UU.UEMPTY7.env[XLtextwid - XLenvvar - 1];
     if (drawmode == xfig && WITH2->UU.Ubox.boxwidth == 0.0) {
       /* To keep xfig from crashing, assume text height is .1
          and a character is .1*0.75 wide */
       eb = findenv(envblock);
       if (WITH2->UU.Ubox.boxheight == 0.0)
-	WITH2->UU.Ubox.boxheight = 0.1 * eb->UU.UEMPTY6.env[XLscale - XLenvvar - 1];
+	WITH2->UU.Ubox.boxheight = 0.1 * eb->UU.UEMPTY7.env[XLscale - XLenvvar - 1];
       WITH2->UU.Ubox.boxwidth = WITH2->UU.Ubox.boxheight * WITH->length * 0.75;
     }
     WITH2->UU.Ubox.boxradius = 0.0;
@@ -4401,22 +4275,22 @@ void produce(stackinx newp, int p)
   case string2:
     break;
 
-  /*      assignment = "<name>" suffix "=" expression   */
-  /*                 | "<name>" suffix "=" assignment   */
-  /*                 | "<envvar>" "=" expression   */
-  /*                 | "<envvar>" "=" assignment   */
+  /* 61   assignment = "<name>" suffix "=" expression   */
+  /* 62              | "<name>" suffix "=" assignment   */
+  /* 63              | "<envvar>" "=" expression   */
+  /* 64              | "<envvar>" "=" assignment   */
   case assignment1:
   case assignment2:
     if (attstack[newp + 1].lexval != XEMPTY)
       addsuffix(chbuf, &WITH->chbufx, &WITH->length, attstack[newp + 1].xval);
-    if (attstack[newp + 2].lexval == XEQ) {
-      WITH->varname = findname(envblock->UU.UEMPTY6.vars, chbuf, WITH->chbufx,
+    if (attstack[newp + 2].lexval == XLeq) {
+      WITH->varname = findname(envblock->UU.UEMPTY7.vars, chbuf, WITH->chbufx,
 			       WITH->length, &lastn);
       if (WITH->varname == NULL) {
 	newstr(&WITH->varname);
 	addstring(&freeseg, WITH->varname, chbuf, WITH->chbufx, WITH->length);
 	if (lastn == NULL)
-	  envblock->UU.UEMPTY6.vars = WITH->varname;
+	  envblock->UU.UEMPTY7.vars = WITH->varname;
 	else
 	  lastn->next_ = WITH->varname;
       }
@@ -4441,21 +4315,18 @@ void produce(stackinx newp, int p)
       if (WITH->lexval == XLscale)
 	resetscale(attstack[newp + 2].xval, attstack[newp + 1].lexval,
 		   envblock);
-      else if (WITH->lexval == XLarrowhead && drawmode == TeX &&
-	       attstack[newp + 2].xval == 0.0)
-	markerror(858);
       else {
-	if (envblock->UU.UEMPTY6.env == NULL)
+	if (envblock->UU.UEMPTY7.env == NULL)
 	  inheritenv(envblock);
-	eqop(&envblock->UU.UEMPTY6.env[WITH->lexval - XLenvvar - 1],
+	eqop(&envblock->UU.UEMPTY7.env[WITH->lexval - XLenvvar - 1],
 	     attstack[newp + 1].lexval, attstack[newp + 2].xval);
       }
-      WITH->xval = envblock->UU.UEMPTY6.env[WITH->lexval - XLenvvar - 1];
+      WITH->xval = envblock->UU.UEMPTY7.env[WITH->lexval - XLenvvar - 1];
       /*D if debuglevel > 0 then writeln(log,' Assignment4: lexval=',lexval:1,
          ' value=',envblock^.env^[lexval]); D*/
       WITH->startchop = WITH->lexval;
       if (WITH->lexval == XLdashwid || WITH->lexval == XLlinethick) {
-	newprim(&WITH->prim, XLaTeX, envblock);
+	newprim(&WITH->prim, XLtroff, envblock);
 	if (WITH->lexval == XLlinethick)
 	  WITH->prim->lthick = WITH->xval;
 	else
@@ -4465,11 +4336,11 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*      expression = term   */
-  /*                 | "+" term   */
-  /*                 | "-" term   */
-  /*                 | expression "+" term   */
-  /*                 | expression "-" term   */
+  /* 65   expression = term   */
+  /* 66              | "+" term   */
+  /* 67              | "-" term   */
+  /* 68              | expression "+" term   */
+  /* 69              | expression "-" term   */
   case expression1:
     break;
 
@@ -4489,7 +4360,7 @@ void produce(stackinx newp, int p)
     WITH->xval -= attstack[newp + 2].xval;
     break;
 
-  /*      ifhead = setlogic "if" logexpr "then"   */
+  /* 70   ifhead = setlogic "if" logexpr "then"   */
   case ifhead1:
     inlogic = false;
     WITH->xval = attstack[newp + 2].xval;
@@ -4503,13 +4374,13 @@ void produce(stackinx newp, int p)
       skiptobrace();
     break;
 
-  /*      setlogic = "<EMPTY>"   */
+  /* 71   setlogic = "<EMPTY>"   */
   case setlogic1:
     inlogic = true;
     break;
 
-  /*      logexpr = logprod   */
-  /*              | logexpr "||" logprod   */
+  /* 72   logexpr = logprod   */
+  /* 73           | logexpr "||" logprod   */
   case logexpr1:
     break;
 
@@ -4520,7 +4391,7 @@ void produce(stackinx newp, int p)
       WITH->xval = 0.0;
     break;
 
-  /*      forhead = "for" assignlist "to" expression do   */
+  /* 74   forhead = "for" assignlist "to" expression do   */
   case forhead1:
     if (attstack[newp + 1].startchop == 0.0)
       WITH->varname = attstack[newp + 1].varname;
@@ -4571,7 +4442,7 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*      forincr = for ":"   */
+  /* 75   forincr = for ":"   */
   case forincr1:
     /* compute loop variable */
     if (WITH->length < 0)
@@ -4585,12 +4456,12 @@ void produce(stackinx newp, int p)
       WITH->varname->val = WITH->xval;
       /* loop variable is an env variable */
     } else if ((long)floor(WITH->startchop + 0.5) != XLscale) {
-      if (envblock->UU.UEMPTY6.env == NULL)
+      if (envblock->UU.UEMPTY7.env == NULL)
 	inheritenv(envblock);
-      envblock->UU.UEMPTY6.env[(int)((long)floor(WITH->startchop + 0.5)) -
+      envblock->UU.UEMPTY7.env[(int)((long)floor(WITH->startchop + 0.5)) -
 			   XLenvvar - 1] = WITH->xval;
     } else
-      resetscale(WITH->xval, XEQ, envblock);
+      resetscale(WITH->xval, XLeq, envblock);
 
     /*D if debuglevel > 0 then begin writeln(log,' varname <> nil=',
        varname <> nil:1) end; D*/
@@ -4604,8 +4475,8 @@ void produce(stackinx newp, int p)
   /*           | loopincr elementlist optnl */
   /*repeat loop1,loop2: ; */
 
-  /*      do = "do"   */
-  /*         | by expression "do"   */
+  /* 76   do = "do"   */
+  /* 77      | by expression "do"   */
   case do1:
     WITH->xval = 1.0;
     break;
@@ -4620,8 +4491,8 @@ void produce(stackinx newp, int p)
   /*      loopincr = loop ":" */
   /*repeat loopincr1: attstack^[newp+1].lexval := XLBRACE ; */
 
-  /*      by = "by"   */
-  /*         | "by" "*"   */
+  /* 78   by = "by"   */
+  /* 79      | "by" "*"   */
   case by1:
     break;
 
@@ -4629,64 +4500,8 @@ void produce(stackinx newp, int p)
     WITH->lexval = attstack[newp + 1].lexval;
     break;
 
-  /*      redirect = "<EMPTY>" */
-  case redirect1:
-    WITH->lexval = XEMPTY;
-    break;
-
-  /*               | "<compare>" stringexpr  */
-  case redirect2:
-    WITH1 = &attstack[newp + 1];
-    attstack[newp].state = 1;
-    bswitch = false;
-    if (WITH1->prim != NULL) {
-      if (WITH1->prim->textp == NULL)
-	markerror(861);
-      else if (p == redirect2 && attstack[newp].lexval != XGT)
-	markerror(869);
-      else if (safemode)
-	markerror(906);
-      else
-	bswitch = true;
-    }
-#ifdef SAFE_MODE
-    if (bswitch)
-      markerror(906);
-#else
-    if (bswitch)
-      pointoutput(true, WITH1->prim->textp, &attstack[newp].state);
-#endif
-    deletestringbox(&WITH1->prim);
-    break;
-
-  /*               | "<compare>" "<compare>" stringexpr   */
-  case redirect3:
-    WITH1 = &attstack[newp + 2];
-    attstack[newp].state = 1;
-    bswitch = false;
-    if (WITH1->prim != NULL) {
-      if (WITH1->prim->textp == NULL)
-	markerror(861);
-      else if (attstack[newp].lexval != XGT ||
-	       attstack[newp + 1].lexval != XGT)
-	markerror(869);
-      else if (safemode)
-	markerror(906);
-      else
-	bswitch = true;
-    }
-#ifdef SAFE_MODE
-    if (bswitch)
-      markerror(906);
-#else
-    if (bswitch)
-      pointoutput(false, WITH1->prim->textp, &attstack[newp].state);
-#endif
-    deletestringbox(&WITH1->prim);
-    break;
-
-  /*      resetlist = "<envvar>"   */
-  /*                | resetlist "," "<envvar>"   */
+  /* 80   resetlist = "<envvar>"   */
+  /* 81             | resetlist "," "<envvar>"   */
   case resetlist1:
     resetenv(WITH->lexval, envblock);
     break;
@@ -4695,8 +4510,8 @@ void produce(stackinx newp, int p)
     resetenv(attstack[newp + 2].lexval, envblock);
     break;
 
-  /*      defhead = "define" "<name>"   */
-  /*              | "define" "<Label>"   */
+  /* 82   defhead = "define" "<name>"   */
+  /* 83           | "define" "<Label>"   */
   case defhead1:
   case defhead2:
     attstack[newp] = attstack[newp + 1];
@@ -4729,15 +4544,15 @@ void produce(stackinx newp, int p)
        end D*/
     break;
 
-  /*      sprintf = "sprintf" "(" "<string>"   */
-  /*              | "sprintf" "(" "<string>" "," exprlist   */
+  /* 84   sprintf = "sprintf" "(" "<string>"   */
+  /* 85           | "sprintf" "(" "<string>" "," exprlist   */
   case sprintf1:
   case sprintf2:
     newprim(&WITH->prim, XLstring, envblock);
     WITH2 = WITH->prim;
     eb = findenv(envblock);
-    WITH2->UU.Ubox.boxheight = eb->UU.UEMPTY6.env[XLtextht - XLenvvar - 1];
-    WITH2->UU.Ubox.boxwidth = eb->UU.UEMPTY6.env[XLtextwid - XLenvvar - 1];
+    WITH2->UU.Ubox.boxheight = eb->UU.UEMPTY7.env[XLtextht - XLenvvar - 1];
+    WITH2->UU.Ubox.boxwidth = eb->UU.UEMPTY7.env[XLtextwid - XLenvvar - 1];
     WITH2->UU.Ubox.boxradius = 0.0;
     newstr(&WITH2->textp);
     if (p == sprintf1)
@@ -4751,7 +4566,11 @@ void produce(stackinx newp, int p)
     lj = j;   /* start of current substring */
     kk = 0;   /* substring count */
     WITH1 = &attstack[newp + 2];
-    while (j < WITH1->length) {   /* end; below */
+    while (j < WITH1->length) {
+      /*D begin
+         if debuglevel > 0 then begin writeln(log,
+            ' looping, i,j,lj,length=',i:4,j:4,lj:4,length:4,
+            ' c="', chbuf^[chbufx+j],'"'); flush(log) end; D*/
       if (chbuf[WITH1->chbufx + j] != '%') {
 	j++;
 	if (j == WITH1->length)
@@ -4864,28 +4683,22 @@ void produce(stackinx newp, int p)
       i++;
       lj = j;
     }
-    /*D begin
-       if debuglevel > 0 then begin writeln(log,
-          ' sprintf looping, i,j,lj,length=',i:4,j:4,lj:4,length:4,
-          ' c="', chbuf^[chbufx+j],'"'); flush(log) end; D*/
     /*D end; D*/
-    /* begin above */
     if (i < mm)   /* Too many args */
       markerror(864);
     if (drawmode == xfig) {
       WITH2 = WITH->prim;
       if (WITH2->UU.Ubox.boxwidth == 0.0) {
 	if (WITH2->UU.Ubox.boxheight == 0.0)
-	  WITH2->UU.Ubox.boxheight = 0.1 * eb->UU.UEMPTY6.env[XLscale - XLenvvar - 1];
+	  WITH2->UU.Ubox.boxheight = 0.1 * eb->UU.UEMPTY7.env[XLscale - XLenvvar - 1];
 	WITH2->UU.Ubox.boxwidth = WITH2->UU.Ubox.boxheight *
 				  WITH2->textp->len * 0.75;
       }
     }
-    deletestringbox(&attstack[newp + 2].prim);
     break;
 
-  /*      exprlist = expression   */
-  /*               | expression "," exprlist   */
+  /* 86   exprlist = expression   */
+  /* 87            | expression "," exprlist   */
   case exprlist1:
     WITH->state = 1;
     break;
@@ -4894,34 +4707,35 @@ void produce(stackinx newp, int p)
     WITH->state = attstack[newp + 2].state + 1;
     break;
 
-  /*      object = block  */
-  /*             | object "height" expression  */
-  /*             | object "width" expression  */
-  /*             | object "radius" expression  */
-  /*             | object "diameter" expression  */
-  /*             | object "thickness" expression  */
-  /*             | object "scaled" expression  */
-  /*             | object "<directon>" optexp  */
-  /*             | object "by" pair  */
-  /*             | object "then"  */
-  /*             | object "<linetype>" optexp  */
-  /*             | object "chop" optexp  */
-  /*             | object "filled" optexp  */
-  /*             | object "<arrowhd>"  */
-  /*             | object "cw"  */
-  /*             | object "ccw"  */
-  /*             | object "same"  */
-  /*             | object stringexpr  */
-  /*             | object "from" position  */
-  /*             | object "to" position  */
-  /*             | object "at" position  */
-  /*             | object "<textpos>"  */
-  /*             | object "<colrspec>" stringexpr  */
-  /*             | objectwith "<corner>" "at" position  */
-  /*             | objectwith pair "at" position  */
-  /*             | objectwith "at" position  */
-  /*             | "continue"  */
-
+  /* 88   object = block   */
+  /* 89          | object "height" expression   */
+  /* 90          | object "width" expression   */
+  /* 91          | object "radius" expression   */
+  /* 92          | object "diameter" expression   */
+  /* 93          | object "thickness" expression   */
+  /* 94          | object "scaled" expression   */
+  /* 95          | object "<directon>" optexp   */
+  /* 96          | object "by" pair   */
+  /* 97          | object "then"   */
+  /* 98          | object "<linetype>" optexp   */
+  /* 99          | object "chop" optexp   */
+  /*100          | object "filled" optexp   */
+  /*101          | object "<arrowhd>"   */
+  /*102          | object "cw"   */
+  /*103          | object "ccw"   */
+  /*104          | object "same"   */
+  /*105          | object stringexpr   */
+  /*106          | object "from" position   */
+  /*107          | object "to" position   */
+  /*108          | object "at" position   */
+  /*109          | object "<textpos>"   */
+  /*110          | object "<colrspec>" stringexpr   */
+  /*111          | withobj "<corner>" "at" position   */
+  /*112          | withobj "start" "at" position   */
+  /*113          | withobj "end" "at" position   */
+  /*114          | withobj pair "at" position   */
+  /*115          | withobj "." "<Label>" suffix "at" position   */
+  /*116          | "continue"   */
   case object1:
     break;
 
@@ -4934,8 +4748,8 @@ void produce(stackinx newp, int p)
       case XLbox:
       case XBLOCK:
 	if (WITH2->ptype == XBLOCK) {
-	  r = 0.5 * (attstack[newp + 2].xval - WITH2->UU.UEMPTY6.blockheight);
-	  WITH2->UU.UEMPTY6.blockheight = attstack[newp + 2].xval;
+	  r = 0.5 * (attstack[newp + 2].xval - WITH2->UU.UEMPTY7.blockheight);
+	  WITH2->UU.UEMPTY7.blockheight = attstack[newp + 2].xval;
 	} else {
 	  r = 0.5 * (attstack[newp + 2].xval - WITH2->UU.Ubox.boxheight);
 	  WITH2->UU.Ubox.boxheight = attstack[newp + 2].xval;
@@ -5023,7 +4837,7 @@ void produce(stackinx newp, int p)
 	break;
 
       case XLabel:
-      case XLaTeX:
+      case XLtroff:
 	markerror(858);
 	break;
       }
@@ -5039,8 +4853,8 @@ void produce(stackinx newp, int p)
       case XLbox:
       case XBLOCK:
 	if (WITH2->ptype == XBLOCK) {
-	  r = 0.5 * (attstack[newp + 2].xval - WITH2->UU.UEMPTY6.blockwidth);
-	  WITH2->UU.UEMPTY6.blockwidth = attstack[newp + 2].xval;
+	  r = 0.5 * (attstack[newp + 2].xval - WITH2->UU.UEMPTY7.blockwidth);
+	  WITH2->UU.UEMPTY7.blockwidth = attstack[newp + 2].xval;
 	} else {
 	  r = 0.5 * (attstack[newp + 2].xval - WITH2->UU.Ubox.boxwidth);
 	  WITH2->UU.Ubox.boxwidth = attstack[newp + 2].xval;
@@ -5128,7 +4942,7 @@ void produce(stackinx newp, int p)
 	break;
 
       case XLabel:
-      case XLaTeX:
+      case XLtroff:
 	markerror(858);
 	break;
       }
@@ -5257,8 +5071,8 @@ void produce(stackinx newp, int p)
 	  dx = 0.0;
 	  dy = 0.0;
 	} else if (WITH2->ptype == XBLOCK) {
-	  dx = WITH2->UU.UEMPTY6.blockwidth * r / 2;
-	  dy = WITH2->UU.UEMPTY6.blockheight * r / 2;
+	  dx = WITH2->UU.UEMPTY7.blockwidth * r / 2;
+	  dy = WITH2->UU.UEMPTY7.blockheight * r / 2;
 	} else {
 	  dx = WITH2->UU.Ubox.boxwidth * r / 2;
 	  dy = WITH2->UU.Ubox.boxheight * r / 2;
@@ -5352,7 +5166,7 @@ void produce(stackinx newp, int p)
 	break;
 
       case XLabel:
-      case XLaTeX:
+      case XLtroff:
 	markerror(858);
 	break;
       }
@@ -5364,8 +5178,8 @@ void produce(stackinx newp, int p)
     if (WITH->prim != NULL) {
       WITH2 = WITH->prim;
       if (WITH2->ptype == XLspline || WITH2->ptype == XLarrow ||
-	  WITH2->ptype == XLmove ||
-	  WITH2->ptype == XLline || WITH2->ptype == XLarc) {
+	  WITH2->ptype == XLmove || WITH2->ptype == XLline ||
+	  WITH2->ptype == XLarc) {
 	i = attstack[newp + 1].lexval;
 	envblock->direction = i;
 	eb = findenv(envblock);
@@ -5407,13 +5221,13 @@ void produce(stackinx newp, int p)
 	    case XLline:
 	    case XLarrow:
 	    case XLspline:
-	      r = eb->UU.UEMPTY6.env[XLlineht - XLenvvar - 1];
-	      s = eb->UU.UEMPTY6.env[XLlinewid - XLenvvar - 1];
+	      r = eb->UU.UEMPTY7.env[XLlineht - XLenvvar - 1];
+	      s = eb->UU.UEMPTY7.env[XLlinewid - XLenvvar - 1];
 	      break;
 
 	    case XLmove:
-	      r = eb->UU.UEMPTY6.env[XLmoveht - XLenvvar - 1];
-	      s = eb->UU.UEMPTY6.env[XLmovewid - XLenvvar - 1];
+	      r = eb->UU.UEMPTY7.env[XLmoveht - XLenvvar - 1];
+	      s = eb->UU.UEMPTY7.env[XLmovewid - XLenvvar - 1];
 	      break;
 	    }
 	  }
@@ -5450,7 +5264,7 @@ void produce(stackinx newp, int p)
   /*                          | object "then"    */
   case object10:
     if (WITH->prim != NULL) {
-      /*D if debuglevel > 0 then begin write(log,'lexical "then" found, ');
+      /*D if debuglevel > 0 then begin writeln(log,'lexical "then" found, ');
           prtstval(state); writeln(log) end; D*/
       appendthen(&WITH->prim);
       if (WITH->prim->ptype != XLarc)
@@ -5498,7 +5312,7 @@ void produce(stackinx newp, int p)
 	  r = attstack[newp + 2].xval;
 	else {
 	  eb = findenv(envblock);
-	  r = eb->UU.UEMPTY6.env[XLcirclerad - XLenvvar - 1];
+	  r = eb->UU.UEMPTY7.env[XLcirclerad - XLenvvar - 1];
 	}
 	if (teststflag(WITH->state, XLchop))
 	  WITH->endchop = r;
@@ -5519,7 +5333,7 @@ void produce(stackinx newp, int p)
 	s = attstack[newp + 2].xval;
       else {
 	eb = findenv(envblock);
-	s = eb->UU.UEMPTY6.env[XLfillval - XLenvvar - 1];
+	s = eb->UU.UEMPTY7.env[XLfillval - XLenvvar - 1];
       }
       prp = WITH->prim;
       while (prp != NULL) {
@@ -5538,10 +5352,9 @@ void produce(stackinx newp, int p)
 	  break;
 
 	default:   /*,PSmps*/
-	  if (((1L << ((long)drawmode)) &
-	       ((1L << ((long)xfig)) | (1L << ((long)PGF)) |
-		(1L << ((long)PSfrag)) | (1L << ((long)PSTricks)) |
-		(1L << ((long)MPost)) | (1L << ((long)PS)))) == 0)
+	  if (((1L << ((long)drawmode)) & ((1L << ((long)xfig)) |
+		 (1L << ((long)PGF)) | (1L << ((long)PSfrag)) |
+		 (1L << ((long)PSTricks)) | (1L << ((long)PS)))) == 0)
 	    markerror(858);
 	  else {
 	    switch (WITH2->ptype) {
@@ -5576,13 +5389,8 @@ void produce(stackinx newp, int p)
       if (WITH2->ptype != XLspline && WITH2->ptype != XLarc &&
 	  WITH2->ptype != XLarrow && WITH2->ptype != XLline)
 	markerror(858);
-      else {
-	WITH2->UU.Uline.atype = pahlex(WITH2->UU.Uline.atype,
-				      attstack[newp + 1].lexval);
-	eb = findenv(envblock);
-	mm = (long)floor(eb->UU.UEMPTY6.env[XLarrowhead - XLenvvar - 1] + 0.5);
-	WITH2->UU.Uline.atype = pahnum(WITH2->UU.Uline.atype, mm);
-      }
+      else
+	WITH2->UU.Uline.atype = attstack[newp + 1].lexval;
     }
     break;
 
@@ -5609,7 +5417,10 @@ void produce(stackinx newp, int p)
 	  WITH2->UU.Uline.endpos.ypos = -fabs(
 	      principal(2.0 * pi - WITH2->UU.Uline.endpos.ypos, 2.0 * pi));
 	else if (WITH2->direction != 0) {
-	  WITH2->aat = arcstart(WITH->prim);
+	  WITH2->aat.xpos += WITH2->UU.Uline.aradius *
+			     cos(WITH2->UU.Uline.endpos.xpos);
+	  WITH2->aat.ypos += WITH2->UU.Uline.aradius *
+			     sin(WITH2->UU.Uline.endpos.xpos);
 	  switch (WITH2->direction) {
 
 	  case XLup:
@@ -5653,7 +5464,10 @@ void produce(stackinx newp, int p)
 	  WITH2->UU.Uline.endpos.ypos = fabs(
 	      principal(WITH2->UU.Uline.endpos.ypos - 2.0 * pi, 2.0 * pi));
 	else if (WITH2->direction != 0) {
-	  WITH2->aat = arcstart(WITH->prim);
+	  WITH2->aat.xpos += WITH2->UU.Uline.aradius *
+			     cos(WITH2->UU.Uline.endpos.xpos);
+	  WITH2->aat.ypos += WITH2->UU.Uline.aradius *
+			     sin(WITH2->UU.Uline.endpos.xpos);
 	  switch (WITH2->direction) {
 
 	  case XLup:
@@ -5816,7 +5630,7 @@ void produce(stackinx newp, int p)
 	  break;
 
 	case XLabel:
-	case XLaTeX:
+	case XLtroff:
 	  markerror(858);
 	  break;
 	}
@@ -5896,8 +5710,8 @@ void produce(stackinx newp, int p)
   case object20:
     if (WITH->prim != NULL) {
       if (WITH->prim->ptype == XLmove || WITH->prim->ptype == XLspline ||
-	  WITH->prim->ptype == XLarrow ||
-	  WITH->prim->ptype == XLline || WITH->prim->ptype == XLarc) {
+	  WITH->prim->ptype == XLarrow || WITH->prim->ptype == XLline ||
+	  WITH->prim->ptype == XLarc) {
 	if ((WITH->prim->ptype != XLarc) & teststflag(WITH->state, XLto)) {
 	  /*D if debuglevel > 0 then begin writeln(log,'"then" inserted, ');
 	      prtstval(state); writeln(log) end; D*/
@@ -6056,24 +5870,16 @@ void produce(stackinx newp, int p)
 	break;
 
       case XLoutlined:
-	if (hasoutline(WITH->lexval, true)) {
-	  deletename(&WITH2->outlinep);
-	  WITH2->outlinep = attstack[newp + 2].prim->textp;
-	  attstack[newp + 2].prim->textp = NULL;
-	}
-	break;
-
       case XLcolour:
 	if (hasoutline(WITH->lexval, true)) {
 	  deletename(&WITH2->outlinep);
 	  WITH2->outlinep = attstack[newp + 2].prim->textp;
 	  attstack[newp + 2].prim->textp = NULL;
-	  if ((attstack[newp + 1].lexval == XLcolour &&
-	       WITH2->ptype != XLspline && WITH2->ptype != XLarrow &&
-	       WITH2->ptype != XLline &&
-	       WITH2->ptype != XLarc) & hasshade(WITH->lexval, false)) {
-	    deletename(&WITH2->shadedp);
-	    copystr(&freeseg, &WITH2->shadedp, WITH2->outlinep);
+	  if (attstack[newp + 1].lexval == XLcolour) {
+	    if (hasshade(WITH->lexval, false)) {
+	      deletename(&WITH2->shadedp);
+	      copystr(&freeseg, &WITH2->shadedp, WITH2->outlinep);
+	    }
 	  }
 	}
 	break;
@@ -6082,10 +5888,14 @@ void produce(stackinx newp, int p)
     deletestringbox(&attstack[newp + 2].prim);
     break;
 
-  /*                          | objectwith "<corner>" "at" position    */
-  /*                          | objectwith pair "at" position    */
+  /*                          | withobj "<corner>" "at" position    */
+  /*                          | withobj "start" "at" position    */
+  /*                          | withobj "end" "at" position    */
+  /*                          | withobj pair "at" position    */
   case object24:
   case object25:
+  case object26:
+  case object27:
     if (WITH->prim != NULL) {
       if (WITH->root != NULL) {
 	prp = WITH->prim;
@@ -6094,7 +5904,7 @@ void produce(stackinx newp, int p)
       }
       WITH->xval = attstack[newp + 3].xval;
       WITH->yval = attstack[newp + 3].yval;
-      if (p == object24)
+      if (p != object27)
 	setstval(&WITH->state, attstack[newp + 1].lexval);
       else if (WITH->prim->ptype != XLarc && WITH->prim->ptype != XLellipse &&
 	       WITH->prim->ptype != XLcircle && WITH->prim->ptype != XBLOCK &&
@@ -6109,29 +5919,39 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*             | objectwith "at" position  */
-  case object26:
-    if (WITH->prim == NULL)
-      WITH->root = NULL;
-    else {
-      if (WITH->root != NULL) {
-	prp = WITH->prim;
-	WITH->prim = WITH->root;
-	WITH->root = prp;
+  /*                         | withobj "." "<Label>" suffix "at" position*/
+  case object28:
+    if (WITH->prim != NULL) {
+      if (attstack[newp + 3].lexval != XEMPTY) {
+	WITH1 = &attstack[newp + 2];
+	addsuffix(chbuf, &WITH1->chbufx, &WITH1->length,
+		  attstack[newp + 3].xval);
       }
-      WITH->xval = attstack[newp + 2].xval;
-      WITH->yval = attstack[newp + 2].yval;
-      setstval(&WITH->state, XEMPTY);
-      setstflag(&WITH->state, XLat);
+      primp = findplace(WITH->prim->son, chbuf, attstack[newp + 2].chbufx,
+			attstack[newp + 2].length);
+      if (WITH->root != NULL) {
+	WITH->prim = WITH->root;
+	WITH->root = NULL;
+      }
+      if (primp == NULL)
+	marknotfound(chbuf, attstack[newp + 2].chbufx,
+		     attstack[newp + 2].length);
+      else {
+	WITH->root = primp;
+	WITH->xval = attstack[newp + 5].xval;
+	WITH->yval = attstack[newp + 5].yval;
+	setstval(&WITH->state, XEMPTY);
+	setstflag(&WITH->state, XLat);
+      }
     }
     break;
 
   /*                         | "continue" */
-  case object27:
+  case object29:
     primp = NULL;
     prp = envblock->son;
     while (prp != NULL) {
-      if (prp->ptype != XLaTeX && prp->ptype != XLstring &&
+      if (prp->ptype != XLtroff && prp->ptype != XLstring &&
 	  prp->ptype != XBLOCK && prp->ptype != XLabel)
 	primp = prp;
       prp = prp->next_;
@@ -6147,12 +5967,12 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*     openblock = "<EMPTY>"   */
+  /*117   openblock = "<EMPTY>"   */
   case openblock1:
     /*D if debuglevel > 0 then writeln(log,
        'Calling newprim(prim,',XBLOCK:1,'):'); D*/
     newprim(&WITH->prim, XBLOCK, envblock);
-    WITH6 = &WITH->prim->UU.UEMPTY6.here;
+    WITH6 = &WITH->prim->UU.UEMPTY7.here;
     /* prim^.here := envblock^.here; */
     /* Bah! gpic compatibility: */
     WITH6->xpos = 0.0;
@@ -6163,10 +5983,10 @@ void produce(stackinx newp, int p)
     /*D; if (debuglevel > 0) and (prim <> nil) then printobject(prim)D*/
     break;
 
-  /*     block = "<primitiv>" optexp   */
-  /*           | stringexpr   */
-  /*           | openblock "[" closeblock "]"   */
-  /*           | openblock "[]"   */
+  /*118   block = "<primitiv>" optexp   */
+  /*119         | stringexpr   */
+  /*120         | openblock "[" closeblock "]"   */
+  /*121         | openblock "[]"   */
   case block1:
     if (WITH->lexval > XLprimitiv && WITH->lexval < XLenvvar) {
       newprim(&WITH->prim, WITH->lexval, envblock);
@@ -6176,18 +5996,18 @@ void produce(stackinx newp, int p)
 	    (1L << ((long)PS)) | (1L << ((long)PSfrag)))) != 0 &&
 	  WITH->lexval != XLmove)
 	    /*,PSmps*/
-	      WITH->prim->lthick = eb->UU.UEMPTY6.env[XLlinethick - XLenvvar - 1];
+	      WITH->prim->lthick = eb->UU.UEMPTY7.env[XLlinethick - XLenvvar - 1];
       if (attstack[newp + 1].lexval != XEMPTY && WITH->lexval != XLmove &&
-	  WITH->lexval != XLspline && WITH->lexval != XLarrow &&
-	  WITH->lexval != XLline)
+	  WITH->lexval != XLspline &&
+	  WITH->lexval != XLarrow && WITH->lexval != XLline)
 	markerror(858);
       WITH2 = WITH->prim;
       switch (WITH->lexval) {
 
       case XLbox:
-	WITH2->UU.Ubox.boxheight = eb->UU.UEMPTY6.env[XLboxht - XLenvvar - 1];
-	WITH2->UU.Ubox.boxwidth = eb->UU.UEMPTY6.env[XLboxwid - XLenvvar - 1];
-	WITH2->UU.Ubox.boxradius = eb->UU.UEMPTY6.env[XLboxrad - XLenvvar - 1];
+	WITH2->UU.Ubox.boxheight = eb->UU.UEMPTY7.env[XLboxht - XLenvvar - 1];
+	WITH2->UU.Ubox.boxwidth = eb->UU.UEMPTY7.env[XLboxwid - XLenvvar - 1];
+	WITH2->UU.Ubox.boxradius = eb->UU.UEMPTY7.env[XLboxrad - XLenvvar - 1];
 	switch (WITH2->direction) {
 
 	case XLup:
@@ -6209,7 +6029,7 @@ void produce(stackinx newp, int p)
 	break;
 
       case XLcircle:
-	WITH2->UU.Ucircle.radius = eb->UU.UEMPTY6.env[XLcirclerad - XLenvvar - 1];
+	WITH2->UU.Ucircle.radius = eb->UU.UEMPTY7.env[XLcirclerad - XLenvvar - 1];
 	switch (WITH2->direction) {
 
 	case XLup:
@@ -6231,8 +6051,8 @@ void produce(stackinx newp, int p)
 	break;
 
       case XLellipse:
-	WITH2->UU.Uellipse.elheight = eb->UU.UEMPTY6.env[XLellipseht - XLenvvar - 1];
-	WITH2->UU.Uellipse.elwidth = eb->UU.UEMPTY6.env[XLellipsewid - XLenvvar - 1];
+	WITH2->UU.Uellipse.elheight = eb->UU.UEMPTY7.env[XLellipseht - XLenvvar - 1];
+	WITH2->UU.Uellipse.elwidth = eb->UU.UEMPTY7.env[XLellipsewid - XLenvvar - 1];
 	switch (WITH2->direction) {
 
 	case XLup:
@@ -6254,7 +6074,7 @@ void produce(stackinx newp, int p)
 	break;
 
       case XLarc:
-	WITH2->UU.Uline.aradius = eb->UU.UEMPTY6.env[XLarcrad - XLenvvar - 1];
+	WITH2->UU.Uline.aradius = eb->UU.UEMPTY7.env[XLarcrad - XLenvvar - 1];
 	switch (WITH2->direction) {
 
 	case XLup:
@@ -6277,11 +6097,9 @@ void produce(stackinx newp, int p)
 	  WITH2->aat.ypos += WITH2->UU.Uline.aradius;
 	  break;
 	}
-	WITH2->UU.Uline.height = eb->UU.UEMPTY6.env[XLarrowht - XLenvvar - 1];
-	WITH2->UU.Uline.width = eb->UU.UEMPTY6.env[XLarrowwid - XLenvvar - 1];
-	    /* atype := XEMPTY; */
-	WITH2->UU.Uline.atype = pahnum(pahlex(0, XEMPTY),
-	    (long)floor(eb->UU.UEMPTY6.env[XLarrowhead - XLenvvar - 1] + 0.5));
+	WITH2->UU.Uline.height = eb->UU.UEMPTY7.env[XLarrowht - XLenvvar - 1];
+	WITH2->UU.Uline.width = eb->UU.UEMPTY7.env[XLarrowwid - XLenvvar - 1];
+	WITH2->UU.Uline.atype = XEMPTY;
 	WITH2->UU.Uline.endpos.ypos = pi * 0.5;
 	break;
 
@@ -6302,12 +6120,12 @@ void produce(stackinx newp, int p)
 
 	  case XLup:
 	  case XLdown:
-	    r = eb->UU.UEMPTY6.env[XLmoveht - XLenvvar - 1];
+	    r = eb->UU.UEMPTY7.env[XLmoveht - XLenvvar - 1];
 	    break;
 
 	  case XLleft:
 	  case XLright:
-	    r = eb->UU.UEMPTY6.env[XLmovewid - XLenvvar - 1];
+	    r = eb->UU.UEMPTY7.env[XLmovewid - XLenvvar - 1];
 	    break;
 	  }
 	} else {
@@ -6315,12 +6133,12 @@ void produce(stackinx newp, int p)
 
 	  case XLup:
 	  case XLdown:
-	    r = eb->UU.UEMPTY6.env[XLlineht - XLenvvar - 1];
+	    r = eb->UU.UEMPTY7.env[XLlineht - XLenvvar - 1];
 	    break;
 
 	  case XLleft:
 	  case XLright:
-	    r = eb->UU.UEMPTY6.env[XLlinewid - XLenvvar - 1];
+	    r = eb->UU.UEMPTY7.env[XLlinewid - XLenvvar - 1];
 	    break;
 	  }
 	}
@@ -6342,14 +6160,12 @@ void produce(stackinx newp, int p)
 	  WITH2->UU.Uline.endpos.xpos = WITH2->aat.xpos + r;
 	  break;
 	}
-	WITH2->UU.Uline.height = eb->UU.UEMPTY6.env[XLarrowht - XLenvvar - 1];
-	WITH2->UU.Uline.width = eb->UU.UEMPTY6.env[XLarrowwid - XLenvvar - 1];
+	WITH2->UU.Uline.height = eb->UU.UEMPTY7.env[XLarrowht - XLenvvar - 1];
+	WITH2->UU.Uline.width = eb->UU.UEMPTY7.env[XLarrowwid - XLenvvar - 1];
 	if (WITH2->ptype == XLarrow)
-	  WITH2->UU.Uline.atype = pahlex(0, XRIGHTHEAD);
+	  WITH2->UU.Uline.atype = XRIGHTHEAD;
 	else
-	  WITH2->UU.Uline.atype = pahlex(0, XEMPTY);
-	WITH2->UU.Uline.atype = pahnum(WITH2->UU.Uline.atype,
-	    (long)floor(eb->UU.UEMPTY6.env[XLarrowhead - XLenvvar - 1] + 0.5));
+	  WITH2->UU.Uline.atype = XEMPTY;
 	break;
       }
     }
@@ -6370,28 +6186,28 @@ void produce(stackinx newp, int p)
       envblock = WITH->prim->parent;
       getnesw(WITH->prim->son);
       WITH2 = WITH->prim;
-      WITH2->UU.UEMPTY6.blockwidth = east - west;
-      WITH2->UU.UEMPTY6.blockheight = north - south;
+      WITH2->UU.UEMPTY7.blockwidth = east - west;
+      WITH2->UU.UEMPTY7.blockheight = north - south;
       WITH2->aat.xpos = (east + west) * 0.5;
       WITH2->aat.ypos = (north + south) * 0.5;
-      dx = envblock->UU.UEMPTY6.here.xpos - WITH2->aat.xpos;
-      dy = envblock->UU.UEMPTY6.here.ypos - WITH2->aat.ypos;
+      dx = envblock->UU.UEMPTY7.here.xpos - WITH2->aat.xpos;
+      dy = envblock->UU.UEMPTY7.here.ypos - WITH2->aat.ypos;
       switch (envblock->direction) {
 
       case XLright:
-	dx += WITH2->UU.UEMPTY6.blockwidth * 0.5;
+	dx += WITH2->UU.UEMPTY7.blockwidth * 0.5;
 	break;
 
       case XLleft:
-	dx -= WITH2->UU.UEMPTY6.blockwidth * 0.5;
+	dx -= WITH2->UU.UEMPTY7.blockwidth * 0.5;
 	break;
 
       case XLup:
-	dy += WITH2->UU.UEMPTY6.blockheight * 0.5;
+	dy += WITH2->UU.UEMPTY7.blockheight * 0.5;
 	break;
 
       case XLdown:
-	dy -= WITH2->UU.UEMPTY6.blockheight * 0.5;
+	dy -= WITH2->UU.UEMPTY7.blockheight * 0.5;
 	break;
       }
       WITH2->direction = envblock->direction;   /* gpic compatibility */
@@ -6421,8 +6237,8 @@ void produce(stackinx newp, int p)
       envblock = WITH->prim->parent;
     break;
 
-  /*     optexp = "<EMPTY>"   */
-  /*            | expression   */
+  /*122   optexp = "<EMPTY>"   */
+  /*123          | expression   */
   case optexp1:
     WITH->lexval = XEMPTY;
     break;
@@ -6430,31 +6246,31 @@ void produce(stackinx newp, int p)
   case optexp2:
     break;
 
-  /*     closeblock = elementlist optnl   */
-  /*    Add latex to reset env variables changed within a block */
+  /*124   closeblock = elementlist optnl   */
+  /*    Add troff to reset env variables changed within a block */
   case closeblock1:
-    if (WITH->prim != NULL && envblock->UU.UEMPTY6.env != NULL) {
+    if (WITH->prim != NULL && envblock->UU.UEMPTY7.env != NULL) {
       eb = findenv(envblock->parent);
       if (eb != NULL) {  /* check and reset variables: */
-	if (envblock->UU.UEMPTY6.env[XLlinethick - XLenvvar - 1] !=
-	    eb->UU.UEMPTY6.env[XLlinethick - XLenvvar - 1]) {
-	  newprim(&attstack[newp + 2].prim, XLaTeX, envblock);
+	if (envblock->UU.UEMPTY7.env[XLlinethick - XLenvvar - 1] !=
+	    eb->UU.UEMPTY7.env[XLlinethick - XLenvvar - 1]) {
+	  newprim(&attstack[newp + 2].prim, XLtroff, envblock);
 	  attstack[newp + 2].prim->lthick =
-	    eb->UU.UEMPTY6.env[XLlinethick - XLenvvar - 1];
+	    eb->UU.UEMPTY7.env[XLlinethick - XLenvvar - 1];
 	  addelem(attstack[newp + WITH->state].prim, attstack[newp + 2].prim);
 	}
-	if (envblock->UU.UEMPTY6.env[XLdashwid - XLenvvar - 1] !=
-	    eb->UU.UEMPTY6.env[XLdashwid - XLenvvar - 1]) {
-	  newprim(&attstack[newp + 2].prim, XLaTeX, envblock);
-	  attstack[newp + 2].prim->lparam = eb->UU.UEMPTY6.env[XLdashwid - XLenvvar - 1];
+	if (envblock->UU.UEMPTY7.env[XLdashwid - XLenvvar - 1] !=
+	    eb->UU.UEMPTY7.env[XLdashwid - XLenvvar - 1]) {
+	  newprim(&attstack[newp + 2].prim, XLtroff, envblock);
+	  attstack[newp + 2].prim->lparam = eb->UU.UEMPTY7.env[XLdashwid - XLenvvar - 1];
 	  addelem(attstack[newp + WITH->state].prim, attstack[newp + 2].prim);
 	}
       }
     }
     break;
 
-  /*     pair = expression "," expression   */
-  /*          | location shift   */
+  /*125   pair = expression "," expression   */
+  /*126        | location shift   */
   case pair1:
     WITH->yval = attstack[newp + 2].xval;
     break;
@@ -6466,12 +6282,12 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*     objectwith = object "with"  */
-  /*                | objectwith "." "<Label>" suffix  */
-  case objectwith1:
+  /*127   withobj = object "with"   */
+  /*128           | withobj "." "<Label>" suffix   */
+  case withobj1:
     break;
 
-  case objectwith2:
+  case withobj2:
     if (WITH->prim != NULL) {
       if (attstack[newp + 3].lexval != XEMPTY) {
 	WITH1 = &attstack[newp + 2];
@@ -6483,7 +6299,7 @@ void produce(stackinx newp, int p)
       if (primp == NULL) {
 	marknotfound(chbuf, attstack[newp + 2].chbufx,
 		     attstack[newp + 2].length);
-	deletetree(&WITH->prim);
+	WITH->prim = NULL;
       } else {
 	if (WITH->root == NULL)
 	  WITH->root = WITH->prim;
@@ -6492,26 +6308,9 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*                | objectwith "." nth primobj  */
-  case objectwith3:
-    if (WITH->prim != NULL) {
-      WITH->lexval = attstack[newp + 1].lexval;
-      primp = nthprimobj(WITH->prim->son, attstack[newp + 2].length,
-			 attstack[newp + 3].lexval);
-      if (primp == NULL) {
-	markerror(857);
-	deletetree(&WITH->prim);
-      } else {
-	if (WITH->root == NULL)
-	  WITH->root = WITH->prim;
-	WITH->prim = primp;
-      }
-    }
-    break;
-
-  /*     shift = "<EMPTY>"   */
-  /*           | shift "+" location   */
-  /*           | shift "-" location   */
+  /*129   shift = "<EMPTY>"   */
+  /*130         | shift "+" location   */
+  /*131         | shift "-" location   */
   case shift1:
     WITH->xval = 0.0;
     WITH->yval = 0.0;
@@ -6530,11 +6329,11 @@ void produce(stackinx newp, int p)
     WITH->lexval = XLfloat;
     break;
 
-  /*     location = "(" position ")"   */
-  /*              | "(" position "," position ")"   */
-  /*              | place   */
-  /*              | location "*" factor   */
-  /*              | location "/" factor   */
+  /*132   location = "(" position ")"   */
+  /*133            | "(" position "," position ")"   */
+  /*134            | place   */
+  /*135            | location "*" factor   */
+  /*136            | location "/" factor   */
   case location1:
     attstack[newp] = attstack[newp + 1];
     break;
@@ -6562,11 +6361,11 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*     place = placename   */
-  /*           | placename "<corner>"   */
-  /*           | "<corner>" placename   */
-  /*           | "<corner>" "of" placename   */
-  /*           | "Here"   */
+  /*137   place = placename   */
+  /*138         | placename "<corner>"   */
+  /*139         | "<corner>" placename   */
+  /*140         | "<corner>" "of" placename   */
+  /*141         | "Here"   */
   case place1:
     corner(WITH->prim, XEMPTY, &WITH->xval, &WITH->yval);
     break;
@@ -6584,13 +6383,13 @@ void produce(stackinx newp, int p)
     break;
 
   case place5:
-    WITH->xval = envblock->UU.UEMPTY6.here.xpos;
-    WITH->yval = envblock->UU.UEMPTY6.here.ypos;
+    WITH->xval = envblock->UU.UEMPTY7.here.xpos;
+    WITH->yval = envblock->UU.UEMPTY7.here.ypos;
     break;
 
-  /*     factor = primary   */
-  /*            | "!" primary   */
-  /*            | primary "^" factor   */
+  /*142   factor = primary   */
+  /*143          | "!" primary   */
+  /*144          | primary "^" factor   */
   case factor1:
     break;
 
@@ -6617,10 +6416,10 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*     placename = "<Label>" suffix   */
-  /*               | nth primobj   */
-  /*               | placename "." "<Label>" suffix   */
-  /*               | placename "." nth primobj   */
+  /*145   placename = "<Label>" suffix   */
+  /*146             | nth primobj   */
+  /*147             | placename "." "<Label>" suffix   */
+  /*148             | placename "." nth primobj   */
   case placename1:
     if (attstack[newp + 1].lexval != XEMPTY)
       addsuffix(chbuf, &WITH->chbufx, &WITH->length, attstack[newp + 1].xval);
@@ -6643,11 +6442,7 @@ void produce(stackinx newp, int p)
     }
     /*D if (debuglevel > 0) and (prp<>nil) then with prp^ do
        writeln(log,
-       'placename: type ', ptype:7,', ',aat.xpos:7:4,aat.ypos:7:4)
-        else if debuglevel > 0 then begin
-           write(log,'Search failure for "');
-           for i := 0 to length-1 do write(log,chbuf^[chbufx+i]);
-           writeln(log,'"') end ; D*/
+       'placename: type ', ptype:7,', ',aat.xpos:7:4,aat.ypos:7:4); D*/
     WITH->prim = prp;
     break;
 
@@ -6693,9 +6488,9 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*     nth = ncount "th"   */
-  /*         | ncount "th" "last"   */
-  /*         | "last"   */
+  /*149   nth = ncount "th"   */
+  /*150       | ncount "th" "last"   */
+  /*151       | "last"   */
   case nth1:
     if (WITH->xval <= 0.0)
       markerror(856);
@@ -6714,10 +6509,10 @@ void produce(stackinx newp, int p)
     WITH->length = 0;
     break;
 
-  /*     primobj = "<primitiv>"   */
-  /*             | "[]"   */
-  /*             | "<string>"   */
-  /*             | "[" "]"   */
+  /*152   primobj = "<primitiv>"   */
+  /*153           | "[]"   */
+  /*154           | "<string>"   */
+  /*155           | "[" "]"   */
   case primobj1:
   case primobj2:
   case primobj3:
@@ -6727,22 +6522,22 @@ void produce(stackinx newp, int p)
     WITH->lexval = XBLOCK;
     break;
 
-  /*     ncount = "<float>"   */
+  /*156   ncount = "<float>"   */
+  /*157          | "`" expression "'"   */
+  /*158          | "lbrace" expression "rbrace"   */
   case ncount1:
     break;
 
-  /*            | "`" expression "'"   */
-  /*            | "lbrace" expression "rbrace"   */
   case ncount2:
   case ncount3:
     WITH->xval = attstack[newp + 1].xval;
     break;
 
-  /*     logprod = logval   */
+  /*159   logprod = logval   */
+  /*160           | logprod "&&" logval   */
   case logprod1:
     break;
 
-  /*             | logprod "&&" logval   */
   case logprod2:
     if (WITH->xval == 0.0 || attstack[newp + 2].xval == 0.0)
       WITH->xval = 0.0;
@@ -6750,146 +6545,67 @@ void produce(stackinx newp, int p)
       WITH->xval = 1.0;
     break;
 
-  /*   logval = lcompare */
+  /*161   logval = expression   */
+  /*162          | logval "<compare>" expression   */
+  /*             "==" "!=" ">=" "<=" "<<" ">>"     */
   case logval1:
-    if (WITH->lexval == XLstring) {
-      markerror(869);
-      WITH->lexval = XLfloat;
-      deletestringbox(&WITH->prim);
-    }
     break;
 
-  /*          | stringexpr "<" stringexpr */
+  /* D if debuglevel > 0 then writeln(log,'logval=',xval) D */
   case logval2:
-    i = cmpstring(WITH->prim, attstack[newp + 2].prim);
-    if (i < 0)
-      WITH->xval = 1.0;
-    else
-      WITH->xval = 0.0;
-    WITH->lexval = XLfloat;
-    deletestringbox(&attstack[newp + 2].prim);
-    deletestringbox(&WITH->prim);
-    break;
+    switch (attstack[newp + 1].lexval - XLlogic) {
 
-  /*          | expression "<" expression */
-  case logval3:
-    if (WITH->xval < attstack[newp + 2].xval)
-      WITH->xval = 1.0;
-    else
-      WITH->xval = 0.0;
-    break;
+    case 1:
+      truth = (WITH->xval == attstack[newp + 2].xval);
+      break;
 
-  /*   lcompare = expression */
-  /*            | stringexpr */
-  case lcompare1:
-  case lcompare2:
-    break;
+    case 2:
+      truth = (WITH->xval != attstack[newp + 2].xval);
+      break;
 
-  /*            | lcompare "<compare>" expression */
-  /*             "==" "!=" ">=" "<=" "<^>" ">"     */
-  case lcompare3:
-    if (WITH->lexval == XLstring) {
-      markerror(869);
-      bswitch = false;
-      deletestringbox(&WITH->prim);
-    } else {
-      switch (attstack[newp + 1].lexval - XLcompare) {
+    case 3:
+      truth = (WITH->xval >= attstack[newp + 2].xval);
+      break;
 
-      case 1:
-	bswitch = (WITH->xval == attstack[newp + 2].xval);
-	break;
+    case 4:
+      truth = (WITH->xval <= attstack[newp + 2].xval);
+      break;
 
-      case 2:
-	bswitch = (WITH->xval != attstack[newp + 2].xval);
-	break;
+    case 5:
+      truth = (WITH->xval < attstack[newp + 2].xval);
+      break;
 
-      case 3:
-	bswitch = (WITH->xval >= attstack[newp + 2].xval);
-	break;
-
-      case 4:
-	bswitch = (WITH->xval <= attstack[newp + 2].xval);
-	break;
-
-      case 5:
-	bswitch = (WITH->xval < attstack[newp + 2].xval);
-	break;
-
-      case 6:
-	bswitch = (WITH->xval > attstack[newp + 2].xval);
-	break;
-      }
+    case 6:
+      truth = (WITH->xval > attstack[newp + 2].xval);
+      break;
     }
-    if (bswitch)
+    if (truth)
       WITH->xval = 1.0;
-    else
+    else {
       WITH->xval = 0.0;
-    break;
-
-  /*            | lcompare "<compare>" stringexpr */
-  case lcompare4:
-    if (WITH->lexval != XLstring) {
-      markerror(869);
-      bswitch = false;
-    } else {
-      i = cmpstring(WITH->prim, attstack[newp + 2].prim);
-      /*D if debuglevel > 0 then writeln(log,' cmpstring=',i:1); D*/
-      switch (attstack[newp + 1].lexval - XLcompare) {
-
-      case 1:
-	bswitch = (i == 0);
-	break;
-
-      case 2:
-	bswitch = (i != 0);
-	break;
-
-      case 3:
-	bswitch = (i >= 0);
-	break;
-
-      case 4:
-	bswitch = (i <= 0);
-	break;
-
-      case 5:
-	bswitch = (i < 0);
-	break;
-
-      case 6:
-	bswitch = (i > 0);
-	break;
-
-      default:
-	bswitch = false;
-	break;
-      }
-      deletestringbox(&WITH->prim);
+      /* D; if debuglevel > 0 then writeln(log,'logval truth=',xval) D */
     }
-    if (bswitch)
-      WITH->xval = 1.0;
-    else
-      WITH->xval = 0.0;
-    WITH->lexval = XLfloat;
-    deletestringbox(&attstack[newp + 2].prim);
     break;
 
-  /*     primary = "<envvar>"   */
-  /*             | "<name>" suffix   */
-  /*             | "<float>"   */
-  /*             | "(" logexpr ")"   */
-  /*             | location ".x"   */
-  /*             | location ".y"   */
-  /*             | placename "<param>"   */
-  /*             | "rand" "(" ")"   */
-  /*             | "rand" "(" expression ")"   */
-  /*             | "<func1>" "(" expression ")"   */
-  /*             | "<func2>" "(" expression "," expression ")"   */
-  /*             | "(" assignlist ")"   */
+  /*163   primary = "<envvar>"   */
+  /*164           | "<name>" suffix   */
+  /*165           | "<float>"   */
+  /*166           | "(" logexpr ")"   */
+  /*167           | location ".x"   */
+  /*168           | location ".y"   */
+  /*169           | placename "<param>"   */
+  /*170           | "rand" "(" ")"   */
+  /*171           | "rand" "(" expression ")"   */
+  /*172           | "<func1>" "(" expression ")"   */
+  /*173           | "<func2>" "(" expression "," expression ")"   */
+  /*174           | "(" stringexpr "<compare>" stringexpr ")"   */
+  /*175           | "(" assignlist ")"   */
+  /*176           | "(" expression ">" expression ")"   */
+  /*177           | "(" expression "<" expression ")"   */
   case primary1:
     if (envblock != NULL) {
       eb = findenv(envblock);
-      WITH->xval = eb->UU.UEMPTY6.env[WITH->lexval - XLenvvar - 1];
+      WITH->xval = eb->UU.UEMPTY7.env[WITH->lexval - XLenvvar - 1];
     }
     break;
 
@@ -7067,7 +6783,7 @@ void produce(stackinx newp, int p)
     case XLpmod:
       j = labs((long)floor(attstack[newp + 4].xval + 0.5));
       i = (long)floor(attstack[newp + 2].xval + 0.5) % j;
-/* p2c: dpic.p, line 3881:
+/* p2c: dpic.p, line 3730:
  * Note: Using % for possibly-negative arguments [317] */
       if (i >= 0)
 	WITH->xval = i;
@@ -7077,10 +6793,69 @@ void produce(stackinx newp, int p)
     }
     break;
 
-  /*                 | "(" assignlist ")"    */
+  /*                  | "(" stringexpr "<compare>" stringexpr ")"  */
+  /*                    "==" "!=" ">=" "<=" "<<" ">>"       */
   case primary12:
-    WITH->xval = attstack[newp + 1].xval;
+    i = cmpstring(attstack[newp + 1].prim, attstack[newp + 3].prim);
+    switch (attstack[newp + 2].lexval - XLlogic) {
 
+    case 1:
+      truth = (i == 0);
+      break;
+
+    case 2:
+      truth = (i != 0);
+      break;
+
+    case 3:
+      truth = (i >= 0);
+      break;
+
+    case 4:
+      truth = (i <= 0);
+      break;
+
+    case 5:
+      truth = (i < 0);
+      break;
+
+    case 6:
+      truth = (i > 0);
+      break;
+
+    default:
+      truth = false;
+      break;
+    }
+    if (truth)
+      WITH->xval = 1.0;
+    else
+      WITH->xval = 0.0;
+    deletestringbox(&attstack[newp + 3].prim);
+    deletestringbox(&attstack[newp + 1].prim);
+    break;
+
+  /*                 | "(" assignlist ")"    */
+  case primary13:
+    WITH->xval = attstack[newp + 1].xval;
+    break;
+
+  /*              | "(" expression ">" expression ")"   */
+  case primary14:
+    if (attstack[newp + 1].xval > attstack[newp + 3].xval)
+      WITH->xval = 1.0;
+    else
+      WITH->xval = 0.0;
+    break;
+
+  /*              | "(" expression "<" expression ")"   */
+  case primary15:
+    if (attstack[newp + 1].xval < attstack[newp + 3].xval)
+      WITH->xval = 1.0;
+    else {
+      WITH->xval = 0.0;
+
+    }
     break;
   }/* case */
 
@@ -7105,8 +6880,8 @@ begin
    end;
 procedure openfiles;
 begin
-   infname := substr(parms,1,length(parms)-1);
-   reset(input,'NAME='||infname);
+   infile := substr(parms,1,length(parms)-1);
+   reset(input,'NAME='||infile);
    reset(dpictabl,'NAME=DPICTABL')
    end;
 X */
@@ -7164,16 +6939,16 @@ void openfiles(void)
   if (argct >= P_argc)
     return;
 
-  P_sun_argv(infname, sizeof(mstring), argct);
+  P_sun_argv(infile, sizeof(mstring), argct);
   /*GH if argct <= ParamCount then begin
-     infname := ParamStr(argct); HG*/
+     infile := ParamStr(argct); HG*/
 
-  if (checkfile(infname, true) != 0)
+  if (checkfile(infile, true) != 0)
     fatal(1);
   if (input != NULL)
-    input = freopen(P_trimname(infname, sizeof(mstring)), "r", input);
+    input = freopen(P_trimname(infile, sizeof(mstring)), "r", input);
   else
-    input = fopen(P_trimname(infname, sizeof(mstring)), "r");
+    input = fopen(P_trimname(infile, sizeof(mstring)), "r");
   if (input == NULL)
     _EscIO(FileNotFound);
 }
@@ -7213,14 +6988,7 @@ begin
      if job > 0 then write(log,'(',j:1,',',savedlen:1,')');
      write(log,'|');
      if carray = nil then write(log,'nil')
-     else for i:=j to savedlen do case ord(carray^[i]) of
-        ordETX: write(log,'^C');
-        ordNL: writeln(log);
-        ordCR: write(log,'\r');
-        ordTAB: write(log,'\t');
-        otherwise write(log,carray^[i])
-        end;
-
+     else for i:=j to savedlen do write(log,carray^[i]);
      writeln(log,'|')
      end
   end; D*/
@@ -7267,689 +7035,37 @@ void writeerror(void)
 	fprintf(stderr_, "Label");
       else if (symb_ == XLstring)
 	fprintf(stderr_, "String");
-      else if (symb_ == XLaTeX)
-	fprintf(stderr_, "LaTeX");
+      else if (symb_ == XLtroff)
+	fprintf(stderr_, "Troff");
       else if (symb_ == XLfloat)
 	fprintf(stderr_, "Float");
       else if (symb_ == XERROR)
 	fprintf(stderr_, "Error");
-      else {
-	switch (symb_) {
-
-	/* include controlerr.i */
-
-	case 4:
-	  putc('<', stderr_);
-	  break;
-
-	case 5:
-	  fprintf(stderr_, "cw");
-	  break;
-
-	case 6:
-	  fprintf(stderr_, "ccw");
-	  break;
-
-	case 7:
-	  putc('(', stderr_);
-	  break;
-
-	case 8:
-	  fprintf(stderr_, "Possibly unbalanced parentheses: )");
-	  break;
-
-	case 9:
-	  putc('*', stderr_);
-	  break;
-
-	case 10:
-	  putc('+', stderr_);
-	  break;
-
-	case 11:
-	  putc('-', stderr_);
-	  break;
-
-	case 12:
-	  putc('/', stderr_);
-	  break;
-
-	case 13:
-	  putc('%', stderr_);
-	  break;
-
-	case 14:
-	  fprintf(stderr_, "; or end of line");
-	  break;
-
-	case 16:
-	  putc('!', stderr_);
-	  break;
-
-	case 17:
-	  fprintf(stderr_, "&&");
-	  break;
-
-	case 18:
-	  fprintf(stderr_, "||");
-	  break;
-
-	case 19:
-	  putc(',', stderr_);
-	  break;
-
-	case 20:
-	  putc(':', stderr_);
-	  break;
-
-	case 21:
-	  putc('[', stderr_);
-	  break;
-
-	case 22:
-	  fprintf(stderr_, "Possibly unbalanced brackets: ]");
-	  break;
-
-	case 23:
-	  putc('{', stderr_);
-	  break;
-
-	case 24:
-	  fprintf(stderr_, "Possibly unbalanced braces: }");
-	  break;
-
-	case 25:
-	  putc('.', stderr_);
-	  break;
-
-	case 26:
-	  fprintf(stderr_, "[]");
-	  break;
-
-	case 27:
-	  putc('`', stderr_);
-	  break;
-
-	case 28:
-	  putc('\'', stderr_);
-	  break;
-
-	case 29:
-	  putc('=', stderr_);
-	  break;
-
-	case 30:
-	  fprintf(stderr_, ":=");
-	  break;
-
-	case 31:
-	  fprintf(stderr_, "+=");
-	  break;
-
-	case 32:
-	  fprintf(stderr_, "-=");
-	  break;
-
-	case 33:
-	  fprintf(stderr_, "*=");
-	  break;
-
-	case 34:
-	  fprintf(stderr_, "/=");
-	  break;
-
-	case 35:
-	  fprintf(stderr_, "%%=");
-	  break;
-
-	case 36:
-	  putc('&', stderr_);
-	  break;
-
-	case 41:
-	  fprintf(stderr_, "\" or string");
-	  break;
-
-	case 42:
-	  putc('#', stderr_);
-	  break;
-
-	case 43:
-	  fprintf(stderr_, "End of \"for\" body");
-	  break;
-
-	case 44:
-	  fprintf(stderr_, "$ or argument reference");
-	  break;
-
-	case 47:
-	  fprintf(stderr_, "height or ht");
-	  break;
-
-	case 48:
-	  fprintf(stderr_, "wid or width");
-	  break;
-
-	case 49:
-	  fprintf(stderr_, "rad or radius");
-	  break;
-
-	case 50:
-	  fprintf(stderr_, "diam or diameter");
-	  break;
-
-	case 51:
-	  fprintf(stderr_, "thick or thickness");
-	  break;
-
-	case 52:
-	  fprintf(stderr_, "scaled");
-	  break;
-
-	case 53:
-	  fprintf(stderr_, "from");
-	  break;
-
-	case 54:
-	  fprintf(stderr_, "to");
-	  break;
-
-	case 55:
-	  fprintf(stderr_, "at");
-	  break;
-
-	case 56:
-	  fprintf(stderr_, "with");
-	  break;
-
-	case 57:
-	  fprintf(stderr_, "by");
-	  break;
-
-	case 58:
-	  fprintf(stderr_, "then");
-	  break;
-
-	case 59:
-	  fprintf(stderr_, "continue");
-	  break;
-
-	case 60:
-	  fprintf(stderr_, "chop");
-	  break;
-
-	case 61:
-	  fprintf(stderr_, "same");
-	  break;
-
-	case 62:
-	  fprintf(stderr_, "of");
-	  break;
-
-	case 63:
-	  fprintf(stderr_, "the");
-	  break;
-
-	case 64:
-	  fprintf(stderr_, "way");
-	  break;
-
-	case 65:
-	  fprintf(stderr_, "between");
-	  break;
-
-	case 66:
-	  fprintf(stderr_, "and");
-	  break;
-
-	case 67:
-	  fprintf(stderr_, "Here");
-	  break;
-
-	case 68:
-	  fprintf(stderr_, "nd or rd or st or th");
-	  break;
-
-	case 69:
-	  fprintf(stderr_, "last");
-	  break;
-
-	case 70:
-	  fprintf(stderr_, "fill or filled");
-	  break;
-
-	case 71:
-	  fprintf(stderr_, ".x");
-	  break;
-
-	case 72:
-	  fprintf(stderr_, ".y");
-	  break;
-
-	case 73:
-	  fprintf(stderr_, "print");
-	  break;
-
-	case 74:
-	  fprintf(stderr_, "copy");
-	  break;
-
-	case 75:
-	  fprintf(stderr_, "reset");
-	  break;
-
-	case 76:
-	  fprintf(stderr_, "exec");
-	  break;
-
-	case 77:
-	  fprintf(stderr_, "sh");
-	  break;
-
-	case 78:
-	  fprintf(stderr_, "command");
-	  break;
-
-	case 79:
-	  fprintf(stderr_, "define");
-	  break;
-
-	case 80:
-	  fprintf(stderr_, "undef or undefine");
-	  break;
-
-	case 81:
-	  fprintf(stderr_, "rand");
-	  break;
-
-	case 82:
-	  fprintf(stderr_, "if");
-	  break;
-
-	case 83:
-	  fprintf(stderr_, "else");
-	  break;
-
-	case 84:
-	  fprintf(stderr_, "for");
-	  break;
-
-	case 85:
-	  fprintf(stderr_, "do");
-	  break;
-
-	case 86:
-	  fprintf(stderr_, "sprintf");
-	  break;
-
-	case 88:
-	  fprintf(stderr_, ".ne");
-	  break;
-
-	case 89:
-	  fprintf(stderr_, ".se");
-	  break;
-
-	case 90:
-	  fprintf(stderr_, ".nw");
-	  break;
-
-	case 91:
-	  fprintf(stderr_, ".sw");
-	  break;
-
-	case 92:
-	  fprintf(stderr_, ".n or .north or .t or .top or top");
-	  break;
-
-	case 93:
-	  fprintf(stderr_, ".b or .bot or .bottom or .s or .south or bottom");
-	  break;
-
-	case 94:
-	  fprintf(stderr_, ".e or .east or .r or .right");
-	  break;
-
-	case 95:
-	  fprintf(stderr_, ".l or .left or .w or .west");
-	  break;
-
-	case 96:
-	  fprintf(stderr_, ".start or start");
-	  break;
-
-	case 97:
-	  fprintf(stderr_, ".end or end");
-	  break;
-
-	case 98:
-	  fprintf(stderr_, ".c or .center or .centre");
-	  break;
-
-	case 99:
-	  fprintf(stderr_, "<compare>");
-	  break;
-
-	case 100:
-	  fprintf(stderr_, "==");
-	  break;
-
-	case 101:
-	  fprintf(stderr_, "!=");
-	  break;
-
-	case 102:
-	  fprintf(stderr_, ">=");
-	  break;
-
-	case 103:
-	  fprintf(stderr_, "<=");
-	  break;
-
-	case 105:
-	  putc('>', stderr_);
-	  break;
-
-	case 107:
-	  fprintf(stderr_, ".height or .ht");
-	  break;
-
-	case 108:
-	  fprintf(stderr_, ".wid or .width");
-	  break;
-
-	case 109:
-	  fprintf(stderr_, ".rad or .radius");
-	  break;
-
-	case 110:
-	  fprintf(stderr_, ".diam or .diameter");
-	  break;
-
-	case 112:
-	  fprintf(stderr_, "abs");
-	  break;
-
-	case 113:
-	  fprintf(stderr_, "acos");
-	  break;
-
-	case 114:
-	  fprintf(stderr_, "asin");
-	  break;
-
-	case 115:
-	  fprintf(stderr_, "cos");
-	  break;
-
-	case 116:
-	  fprintf(stderr_, "exp");
-	  break;
-
-	case 117:
-	  fprintf(stderr_, "expe");
-	  break;
-
-	case 118:
-	  fprintf(stderr_, "int");
-	  break;
-
-	case 119:
-	  fprintf(stderr_, "log");
-	  break;
-
-	case 120:
-	  fprintf(stderr_, "loge");
-	  break;
-
-	case 121:
-	  fprintf(stderr_, "sign");
-	  break;
-
-	case 122:
-	  fprintf(stderr_, "sin");
-	  break;
-
-	case 123:
-	  fprintf(stderr_, "sqrt");
-	  break;
-
-	case 124:
-	  fprintf(stderr_, "tan");
-	  break;
-
-	case 125:
-	  fprintf(stderr_, "floor");
-	  break;
-
-	case 127:
-	  fprintf(stderr_, "atan2");
-	  break;
-
-	case 128:
-	  fprintf(stderr_, "max");
-	  break;
-
-	case 129:
-	  fprintf(stderr_, "min");
-	  break;
-
-	case 130:
-	  fprintf(stderr_, "pmod");
-	  break;
-
-	case 132:
-	  fprintf(stderr_, "solid");
-	  break;
-
-	case 133:
-	  fprintf(stderr_, "dotted");
-	  break;
-
-	case 134:
-	  fprintf(stderr_, "dashed");
-	  break;
-
-	case 135:
-	  fprintf(stderr_, "invis or invisible");
-	  break;
-
-	case 136:
-	  fprintf(stderr_, "path");
-	  break;
-
-	case 138:
-	  fprintf(stderr_, "color or colored or colour or coloured");
-	  break;
-
-	case 139:
-	  fprintf(stderr_, "outline or outlined");
-	  break;
-
-	case 140:
-	  fprintf(stderr_, "shade or shaded");
-	  break;
-
-	case 142:
-	  fprintf(stderr_, "center or centre");
-	  break;
-
-	case 143:
-	  fprintf(stderr_, "ljust");
-	  break;
-
-	case 144:
-	  fprintf(stderr_, "rjust");
-	  break;
-
-	case 145:
-	  fprintf(stderr_, "above");
-	  break;
-
-	case 146:
-	  fprintf(stderr_, "below");
-	  break;
-
-	case 148:
-	  fprintf(stderr_, "<-");
-	  break;
-
-	case 149:
-	  fprintf(stderr_, "->");
-	  break;
-
-	case 150:
-	  fprintf(stderr_, "<->");
-	  break;
-
-	case 152:
-	  fprintf(stderr_, "up");
-	  break;
-
-	case 153:
-	  fprintf(stderr_, "down");
-	  break;
-
-	case 154:
-	  fprintf(stderr_, "right");
-	  break;
-
-	case 155:
-	  fprintf(stderr_, "left");
-	  break;
-
-	case 157:
-	  fprintf(stderr_, "box");
-	  break;
-
-	case 158:
-	  fprintf(stderr_, "circle");
-	  break;
-
-	case 159:
-	  fprintf(stderr_, "ellipse");
-	  break;
-
-	case 160:
-	  fprintf(stderr_, "arc");
-	  break;
-
-	case 161:
-	  fprintf(stderr_, "line");
-	  break;
-
-	case 162:
-	  fprintf(stderr_, "arrow");
-	  break;
-
-	case 163:
-	  fprintf(stderr_, "move");
-	  break;
-
-	case 164:
-	  fprintf(stderr_, "spline");
-	  break;
-
-	case 166:
-	  fprintf(stderr_, "arcrad");
-	  break;
-
-	case 167:
-	  fprintf(stderr_, "arrowht");
-	  break;
-
-	case 168:
-	  fprintf(stderr_, "arrowwid");
-	  break;
-
-	case 169:
-	  fprintf(stderr_, "boxht");
-	  break;
-
-	case 170:
-	  fprintf(stderr_, "boxrad");
-	  break;
-
-	case 171:
-	  fprintf(stderr_, "boxwid");
-	  break;
-
-	case 172:
-	  fprintf(stderr_, "circlerad");
-	  break;
-
-	case 173:
-	  fprintf(stderr_, "dashwid");
-	  break;
-
-	case 174:
-	  fprintf(stderr_, "ellipseht");
-	  break;
-
-	case 175:
-	  fprintf(stderr_, "ellipsewid");
-	  break;
-
-	case 176:
-	  fprintf(stderr_, "lineht");
-	  break;
-
-	case 177:
-	  fprintf(stderr_, "linewid");
-	  break;
-
-	case 178:
-	  fprintf(stderr_, "moveht");
-	  break;
-
-	case 179:
-	  fprintf(stderr_, "movewid");
-	  break;
-
-	case 180:
-	  fprintf(stderr_, "textht");
-	  break;
-
-	case 181:
-	  fprintf(stderr_, "textoffset");
-	  break;
-
-	case 182:
-	  fprintf(stderr_, "textwid");
-	  break;
-
-	case 183:
-	  fprintf(stderr_, "arrowhead");
-	  break;
-
-	case 184:
-	  fprintf(stderr_, "fillval");
-	  break;
-
-	case 185:
-	  fprintf(stderr_, "linethick");
-	  break;
-
-	case 186:
-	  fprintf(stderr_, "maxpsht");
-	  break;
-
-	case 187:
-	  fprintf(stderr_, "maxpswid");
-	  break;
-
-	case 188:
-	  fprintf(stderr_, "scale");
-	  break;
-	  /*B%include controlerrB*/
-
-	default:
-	  fprintf(stderr_, "Punctuation characters");
-	  break;
-	}
-      }
-      fprintf(stderr_, " found.\n");
-      fprintf(stderr_, " The following were expected:\n");
+      else if (symb_ >= XLenvvar)
+	fprintf(stderr_, "Environment keyword");
+      else if (symb_ >= XLprimitiv)
+	fprintf(stderr_, "Draw object");
+      else if (symb_ >= XLdirecton)
+	fprintf(stderr_, "Direction word");
+      else if (symb_ >= XLarrowhd)
+	fprintf(stderr_, "Arrowhead keyword");
+      else if (symb_ >= XLtextpos)
+	fprintf(stderr_, "Text position keyword");
+      else if (symb_ >= XLcolrspec)
+	fprintf(stderr_, "Color keyword");
+      else if (symb_ >= XLlinetype)
+	fprintf(stderr_, "Line draw-type keyword");
+      else if (symb_ >= XLfunc1)
+	fprintf(stderr_, "Function keyword");
+      else if (symb_ >= XLparam)
+	fprintf(stderr_, "Size parameter keyword");
+      else if (symb_ >= XLcorner)
+	fprintf(stderr_, "Object feature keyword");
+      else if (symb_ > XLKWDS)
+	fprintf(stderr_, "Reserved word");
+      else
+	fprintf(stderr_, "Punctuation characters");
+      fprintf(stderr_, " found, the following were expected:\n");
     }
 
     switch (emi) {
@@ -8005,164 +7121,176 @@ void writeerror(void)
 
     case 12:
       fprintf(stderr_,
-	" <name> <envvar> + - ( <corner> Here ! <string> <Label> <float> rand <func1> <func2> sprintf last ` {\n");
+	" + - <string> <name> <envvar> sprintf ! ( <float> rand <func1> <func2> <corner> Here <Label> last ` {\n");
       break;
 
     case 13:
-      fprintf(stderr_, " <string>\n");
-      break;
-
-    case 14:
       fprintf(stderr_,
 	" <envvar> <name> <float> ( rand <func1> <func2> <Label> <corner> Here last ` {\n");
       break;
 
+    case 14:
+      fprintf(stderr_, " <string>\n");
+      break;
+
     case 15:
-      fprintf(stderr_, " )\n");
-      break;
-
-    case 16:
-      fprintf(stderr_, " <string> sprintf\n");
-      break;
-
-    case 17:
       fprintf(stderr_, " ( <corner> Here <Label> last <float> ` {\n");
       break;
 
-    case 18:
+    case 16:
       fprintf(stderr_, " between of < , + -\n");
       break;
 
-    case 19:
+    case 17:
       fprintf(stderr_, " ,\n");
       break;
 
-    case 20:
-      fprintf(stderr_, " <compare>\n");
+    case 18:
+      fprintf(stderr_, " >\n");
       break;
 
-    case 21:
+    case 19:
       fprintf(stderr_, " the\n");
       break;
 
-    case 22:
+    case 20:
       fprintf(stderr_, " way\n");
       break;
 
-    case 23:
+    case 21:
       fprintf(stderr_, " between\n");
       break;
 
-    case 24:
+    case 22:
       fprintf(stderr_, " and\n");
       break;
 
-    case 25:
+    case 23:
       fprintf(stderr_, " ) ,\n");
       break;
 
+    case 24:
+      fprintf(stderr_, " )\n");
+      break;
+
+    case 25:
+      fprintf(stderr_, " ) + - between of < ,\n");
+      break;
+
     case 26:
-      fprintf(stderr_, " <name> <envvar>\n");
-      break;
-
-    case 27:
-      fprintf(stderr_, " =\n");
-      break;
-
-    case 28:
-      fprintf(stderr_, " ) ||\n");
-      break;
-
-    case 29:
       fprintf(stderr_, " ) + -\n");
       break;
 
+    case 27:
+      fprintf(stderr_, " <name> <envvar>\n");
+      break;
+
+    case 28:
+      fprintf(stderr_, " =\n");
+      break;
+
+    case 29:
+      fprintf(stderr_, " <compare> +\n");
+      break;
+
     case 30:
-      fprintf(stderr_, " , + -\n");
+      fprintf(stderr_, " <string> sprintf\n");
       break;
 
     case 31:
-      fprintf(stderr_, " ] + -\n");
+      fprintf(stderr_, " ) +\n");
       break;
 
     case 32:
-      fprintf(stderr_, " ' + -\n");
+      fprintf(stderr_, " ) ||\n");
       break;
 
     case 33:
-      fprintf(stderr_, " } + -\n");
+      fprintf(stderr_, " , + -\n");
       break;
 
     case 34:
-      fprintf(stderr_, " <NL> <ERROR>\n");
+      fprintf(stderr_, " ] + -\n");
       break;
 
     case 35:
-      fprintf(stderr_, " [ []\n");
+      fprintf(stderr_, " ' + -\n");
       break;
 
     case 36:
-      fprintf(stderr_, " to ,\n");
+      fprintf(stderr_, " } + -\n");
       break;
 
     case 37:
-      fprintf(stderr_, " + - do by\n");
+      fprintf(stderr_, " <NL> <ERROR>\n");
       break;
 
     case 38:
-      fprintf(stderr_, " do + -\n");
+      fprintf(stderr_, " [ []\n");
       break;
 
     case 39:
-      fprintf(stderr_, " if\n");
+      fprintf(stderr_, " to ,\n");
       break;
 
     case 40:
-      fprintf(stderr_, " then ||\n");
+      fprintf(stderr_, " + - do by\n");
       break;
 
     case 41:
-      fprintf(stderr_, " <name> <Label>\n");
+      fprintf(stderr_, " do + -\n");
       break;
 
     case 42:
-      fprintf(stderr_,
-	" <corner> at . + - ( Here ! <Label> <envvar> <name> <float> rand <func1> <func2> last ` {\n");
+      fprintf(stderr_, " if\n");
       break;
 
     case 43:
-      fprintf(stderr_, " at\n");
+      fprintf(stderr_, " then ||\n");
       break;
 
     case 44:
-      fprintf(stderr_, " at of <Label> last <float> ` {\n");
+      fprintf(stderr_, " <name> <Label>\n");
       break;
 
     case 45:
-      fprintf(stderr_, " {\n");
+      fprintf(stderr_,
+	" <corner> start end . + - ( Here ! <Label> <envvar> <name> <float> rand <func1> <func2> last ` {\n");
       break;
 
     case 46:
-      fprintf(stderr_, " }\n");
+      fprintf(stderr_, " <Label>\n");
       break;
 
     case 47:
-      fprintf(stderr_, " <envvar>\n");
+      fprintf(stderr_, " at\n");
       break;
 
     case 48:
-      fprintf(stderr_, " <compare> <string> sprintf\n");
+      fprintf(stderr_, " at of <Label> last <float> ` {\n");
       break;
 
     case 49:
-      fprintf(stderr_, " } <NL>\n");
+      fprintf(stderr_, " {\n");
       break;
 
     case 50:
-      fprintf(stderr_, " :\n");
+      fprintf(stderr_, " }\n");
       break;
 
     case 51:
+      fprintf(stderr_, " <envvar>\n");
+      break;
+
+    case 52:
+      fprintf(stderr_, " } <NL>\n");
+      break;
+
+    case 53:
+      fprintf(stderr_, " <NL>\n");
+      break;
+
+    case 54:
       fprintf(stderr_, " .PE <NL> <ERROR>\n");
       break;
       /*B%include parserrB*/
@@ -8239,7 +7367,7 @@ void writeerror(void)
       break;
 
     case 861:
-      fprintf(stderr_, "Missing or blank string\n");
+      fprintf(stderr_, "Missing string\n");
       break;
 
     case 862:
@@ -8271,10 +7399,6 @@ void writeerror(void)
       fprintf(stderr_, "Function argument out of bounds\n");
       break;
 
-    case 869:
-      fprintf(stderr_, "Improper use of logical operator\n");
-      break;
-
     /* lexical warning messages */
     case 901:
       fprintf(stderr_, "String character generated at end of line\n");
@@ -8297,7 +7421,7 @@ void writeerror(void)
       break;
 
     case 906:
-      fprintf(stderr_, "Safe mode: sh, copy, and print to file disallowed\n");
+      fprintf(stderr_, "Dpic in safe mode: sh and copy not allowed\n");
       break;
     }/* case */
 
@@ -8459,53 +7583,27 @@ void disposebufs(fbuffer **buf)
 }
 
 
-void readline(FILE **infname)
+void readline(FILE **infile)
 {
   int ll,c;
-  if (feof( *infname )) { inputeof = true; return; }
+  if (feof( *infile )) { inputeof = true; return; }
   for (ll = CHBUFSIZ-2; inbuf->savedlen < ll; ) {
-     c = getc( *infname );
+     c = getc( *infile );
      if ((char)c == '\n') ll = inbuf->savedlen;
-     else if ((char)c == '\r') {
-        if ((char)(c=getc( *infname )) != '\n') {
-           if (c != EOF) ungetc(c, *infname );
-           else if (inbuf->savedlen == 0) { inputeof = true; return; }
-           c = '\n'; }
-        ll = inbuf->savedlen; }
+     else if ((char)c == '\r') { ll = inbuf->savedlen;
+        if ((char)(c=getc( *infile )) != '\n') ungetc(c, *infile ); }
      else if (c != EOF) {
         inbuf->savedlen++; inbuf->carray[inbuf->savedlen] = (char)c; }
      else if (inbuf->savedlen == 0) { inputeof = true; return; }
      else ll = inbuf->savedlen;
   }
-  if (ll != CHBUFSIZ-2) { }
-  else if ((char)c == '\n' || c == EOF) { }
-  else {
+  if ((ll == CHBUFSIZ-2) && ((char)(c=getc( *infile )) != '\n')
+     && ((char)c != '\r') && (c != EOF)){
      markerror(902);
-     fscanf( *infname, "%*[^\n\r]"); getc( *infname );
+     fscanf( *infile, "%*[^\n\r]"); getc( *infile );
   }
   inbuf->savedlen++; inbuf->carray[inbuf->savedlen] = '\n';
   inbuf->savedlen++; inbuf->carray[inbuf->savedlen] = ' ';
-  /* [previous] P2CC
-     int ll,c;
-     if (feof( *infname )) { inputeof = true; return; }
-     for (ll = CHBUFSIZ-2; inbuf->savedlen < ll; ) {
-        c = getc( *infname );
-        if ((char)c == '\n') ll = inbuf->savedlen;
-        else if ((char)c == '\r') { ll = inbuf->savedlen;
-           if ((char)(c=getc( *infname )) != '\n') ungetc(c, *infname ); }
-        else if (c != EOF) {
-           inbuf->savedlen++; inbuf->carray[inbuf->savedlen] = (char)c; }
-        else if (inbuf->savedlen == 0) { inputeof = true; return; }
-        else ll = inbuf->savedlen;
-     }
-     if ((ll == CHBUFSIZ-2) && ((char)(c=getc( *infname )) != '\n')
-        && ((char)c != '\r') && (c != EOF)){
-        markerror(902);
-        fscanf( *infname, "%*[^\n\r]"); getc( *infname );
-     }
-     inbuf->savedlen++; inbuf->carray[inbuf->savedlen] = '\n';
-     inbuf->savedlen++; inbuf->carray[inbuf->savedlen] = ' ';
-     */
 
   /*D; if debuglevel = 2 then begin write(log,'readline');
      if inputeof then writeln(log,' inputeof') else wrbuf(inbuf,3,0) end D*/
@@ -8550,7 +7648,7 @@ void nextline(void)
 	    WITH->readx = 4;
 	  } else if (WITH->carray[3] == 'E') {
 	    inpic = 3;
-	    WITH->readx = 4;
+	    WITH->readx = 3;
 	  }
 	}
       } else if (WITH->savedlen < 4 || WITH->carray[2] != 'P' ||
@@ -8561,7 +7659,7 @@ void nextline(void)
 	WITH->readx = 4;
       } else if (WITH->carray[3] == 'E') {
 	inpic = 3;
-	WITH->readx = 4;
+	WITH->readx = 3;
       } else
 	WITH->savedlen = 0;
     }
@@ -8582,13 +7680,7 @@ void nextline(void)
     }
     /* D; if debuglevel > 0 then begin
        write(log,'nextline:');
-       with inbuf^ do for i:=1 to savedlen do case ord(carray^[i]) of
-          ordETX: write(log,'^C');
-          ordNL: writeln(log);
-          ordCR: write(log,'\r');
-          ordTAB: write(log,'\t');
-          otherwise write(log,carray^[i])
-          end;
+       with inbuf^ do for i := 1 to savedlen do write(log,carray^[i]);
        end D */
   } while (!(inbuf->savedlen > 0 || inputeof));
 }
@@ -8660,7 +7752,7 @@ void inchar(void)
      if inputeof then writeln(log,' inputeof, ch=nlch')
      else writeln(log,' ch(',readx-1:1,')=',ord(ch):4,' "',ch,'"') end; D*/
   if (WITH1->readx <= 0) {
-    ch = '~';
+    ch = ':';
     writeerror();
     WITH1->readx = 1;
     return;
@@ -8719,6 +7811,47 @@ void backup(void)
 }
 
 
+void pointinput(nametype *txt)
+{
+  /* txt: strptr */
+  int i, FORLIM;
+
+  if (txt == NULL)
+    return;
+  if (txt->segmnt == NULL)
+    return;
+  if (txt->len >= FILENAMELEN)
+    txt->len = FILENAMELEN - 1;
+  FORLIM = txt->len;
+  for (i = 0; i < FORLIM; i++)
+    infile[i] = txt->segmnt[txt->seginx + i];
+  for (i = txt->len; i < FILENAMELEN; i++)
+    infile[i] = ' ';
+  /*DUGHM if debuglevel > 0 then begin
+     write(log,'Pointinput(segmnt ',seginx:1,', len ',len:1,') ');
+     for i := 1 to len do write(log,infile[i]); writeln(log) end; MHGUD*/
+
+  if (savebuf != NULL) {
+    markerror(853);
+    return;
+  }
+  if (checkfile(infile, true) != 0) {
+    markerror(859);
+    return;
+  }
+  if (copyin != NULL)
+    copyin = freopen(P_trimname(infile, sizeof(mstring)), "r", copyin);
+  else
+    copyin = fopen(P_trimname(infile, sizeof(mstring)), "r");
+  if (copyin == NULL)
+    _EscIO(FileNotFound);
+  backup();
+  ch = nlch;
+  savebuf = inbuf;
+  inbuf = NULL;
+}
+
+
 /*--------------------------------------------------------------------*/
 
 
@@ -8737,12 +7870,12 @@ void pushch(void)
 }  /*pushch*/
 
 
-void readlatex(void)
+void readtroff(void)
 {
   /* read complete line into chbuf */
   while (ch != nlch)
     pushch();
-  newsymb = XLaTeX;
+  newsymb = XLtroff;
 }
 
 
@@ -8751,96 +7884,6 @@ boolean isprint_(Char ch)
   return (ch >= 32 && ch <= 126);
 }
 
-
-#ifndef SAFE_MODE
-
-void pointinput(nametype *txt)
-{
-  /* txt: strptr */
-  int i, FORLIM;
-
-  if (txt == NULL)
-    return;
-  if (txt->segmnt == NULL)
-    return;
-  if (txt->len >= FILENAMELEN)
-    txt->len = FILENAMELEN - 1;
-  FORLIM = txt->len;
-  for (i = 0; i < FORLIM; i++)
-    infname[i] = txt->segmnt[txt->seginx + i];
-  for (i = txt->len; i < FILENAMELEN; i++)
-    infname[i] = ' ';
-  /*DUGHM if debuglevel > 0 then begin
-     write(log,'Pointinput(segmnt ',seginx:1,', len ',len:1,') ');
-     for i := 1 to len do write(log,infname[i]); writeln(log) end; MHGUD*/
-
-  if (savebuf != NULL) {
-    markerror(853);
-    return;
-  }
-  if (checkfile(infname, true) != 0) {
-    markerror(859);
-    return;
-  }
-  if (copyin != NULL)
-    copyin = freopen(P_trimname(infname, sizeof(mstring)), "r", copyin);
-  else
-    copyin = fopen(P_trimname(infname, sizeof(mstring)), "r");
-  if (copyin == NULL)
-    _EscIO(FileNotFound);
-  backup();
-  ch = nlch;
-  savebuf = inbuf;
-  inbuf = NULL;
-}
-
-
-void pointoutput(boolean nw, nametype *txt, int *ier)
-{
-  /* nw: boolean; txt: strptr; var ier: integer */
-  int i, FORLIM;
-
-  *ier = 1;
-  if (txt->segmnt == NULL)
-    return;
-  if (txt->len >= FILENAMELEN)
-    txt->len = FILENAMELEN - 1;
-  FORLIM = txt->len;
-  for (i = 0; i < FORLIM; i++) {
-    outfnam[i] = txt->segmnt[txt->seginx + i];
-    if (*ier == 1) {
-      if (outfnam[i] > 32 && outfnam[i] <= 126)
-	*ier = 0;
-    }
-  }
-  outfnam[txt->len] = '\0';
-  /*DUGHM if debuglevel > 0 then begin
-     write(log,'Pointoutput(',nw,' segmnt ',seginx:1,', len ',len:1,') "');
-     for i := 1 to len do write(log,outfnam[i]); writeln(log,'"') end;
-  MHGUD*/
-  if (*ier != 0) {
-    markerror(861);
-    return;
-  }
-  if (nw) {
-    if (redirect != NULL)
-      redirect = freopen(P_trimname(outfnam, sizeof(mstring)), "w", redirect);
-    else
-      redirect = fopen(P_trimname(outfnam, sizeof(mstring)), "w");
-    if (redirect == NULL)
-      _EscIO(FileNotFound);
-    return;
-  }
-  if (redirect != NULL)
-    redirect = freopen(P_trimname(outfnam, sizeof(mstring)), "a", redirect);
-  else
-    redirect = fopen(P_trimname(outfnam, sizeof(mstring)), "a");
-  if (redirect == NULL)
-    _EscIO(FileNotFound);
-}
-
-
-#endif
 
 int argcount(arg *ar)
 {
@@ -9023,12 +8066,12 @@ procedure prlex(acc: boolean);
 var i: integer;
 begin
    if debuglevel > 0 then begin
-      write(log, 'LEXICAL(oldsymb=',oldsymb:1,' newsymb=',newsymb:1,')');
-      if newsymb <> XLaTeX then begin
-         write(log,' chbuf(',oldbufi:1,':',chbufi-1:1,')="');
+      write(log, 'LEXICAL(oldsymb=',oldsymb:1,' newsymb=',newsymb:1,') chbuf');
+      if newsymb <> XLtroff then begin
+         write(log,'(',oldbufi:1,':',chbufi-1:1,')="');
          for i := oldbufi to chbufi-1 do write(log, chbuf^[i]);
          write(log,'"') end
-      else write(log,'=<LaTeX>');
+      else write(log,'=<troff>');
       if newsymb = XLfloat then write( log,' value=',floatvalue:10:7);
       write(log,' nextch(', ord(ch):1,')"',ch,'" ');
       if not acc then write( log,'not accepted');
@@ -9430,16 +8473,16 @@ void lexical(void)
       if (firstch == '\\' && (WITH->readx == WITH->savedlen || ch == '#'))
       {  /* continuation line */
 	ch = ' ';
-	newsymb = -2;   /* flag for LaTeX test */
+	newsymb = -2;   /* flag for troff test */
 	WITH->readx = WITH->savedlen + 2;
 	terminalaccepted = false;
       } else if (firstch == '\\')
-	readlatex();
+	readtroff();
       else if (firstch == '.' && isdigit(ch) != 0)
 	readconst(firstch);
       else if (firstch == '.' && WITH->readx == 3 && inbuf->prevb == NULL &&
 	       newsymb != -2)
-	readlatex();
+	readtroff();
       else {
 	/* search in lex tree */
 	newsymb = entrytv[firstch];
@@ -9497,14 +8540,17 @@ void lexical(void)
 	  terminalaccepted = false;
 	} else if (newsymb == XNL &&
 		   (oldsymb == XLelse || oldsymb == XLBRACE ||
-		    oldsymb == XLthen || oldsymb == XCOLON || oldsymb == XNL))
+		    oldsymb == XLthen || oldsymb == XNL))
 	  terminalaccepted = false;
-	else if (newsymb == XLT && inlogic) {
+	else if (newsymb == XGT && inlogic) {
+	  lexsymb = XGG;
+	  newsymb = XLlogic;
+	} else if (newsymb == XLT && inlogic) {
 	  lexsymb = XLL;
-	  newsymb = XLcompare;
-	} else if (newsymb > XEQ && newsymb <= XLremeq) {
+	  newsymb = XLlogic;
+	} else if (newsymb > XLeq && newsymb <= XLremeq) {
 	  lexsymb = newsymb;
-	  newsymb = XEQ;
+	  newsymb = XLeq;
 	} else if (newsymb > XLcorner) {
 	  lexsymb = newsymb;
 	  if (newsymb > XLenvvar)
@@ -9527,8 +8573,8 @@ void lexical(void)
 	    newsymb = XLfunc1;
 	  else if (newsymb > XLparam)
 	    newsymb = XLparam;
-	  else if (newsymb > XLcompare)
-	    newsymb = XLcompare;
+	  else if (newsymb > XLlogic)
+	    newsymb = XLlogic;
 	  else
 	    newsymb = XLcorner;
 	} else if (newsymb == XLarg) {
@@ -9571,14 +8617,10 @@ void lexical(void)
 	  else
 	    newsymb = XLname;
 	} else if (newsymb == 0) {
-	  /*D if debuglevel > 0 then
-	     writeln (log,'800:',ord(firstch),ord(ch)); D*/
-	  if (errmp == 0) {
-	    fprintf(stderr_, "Char chr(%d)", firstch);
-	    if (firstch > 32 && (firstch & 255) < 127)
-	      fprintf(stderr_, "\"%c\"", firstch);
-	    fprintf(stderr_, " unknown\n");
-	  }
+	  fprintf(stderr_, "Char chr(%d)", firstch);
+	  if (firstch > 32 && (firstch & 255) < 127)
+	    fprintf(stderr_, "\"%c\"", firstch);
+	  fprintf(stderr_, " unknown\n");
 	  markerror(800);
 	  terminalaccepted = false;
 	}
@@ -9586,7 +8628,7 @@ void lexical(void)
     }
 
     /*D prlex( terminalaccepted ); D*/
-    if (newsymb != XLaTeX && newsymb != XLstring && newsymb != XLabel &&
+    if (newsymb != XLtroff && newsymb != XLstring && newsymb != XLabel &&
 	newsymb != XLname)
       chbufi = oldbufi;
   } while (!terminalaccepted);
@@ -9597,6 +8639,8 @@ void lexical(void)
 
 
   /* char not recognized */
+  /*D if debuglevel > 0 then
+     writeln (log,'800:',ord(firstch),ord(ch)); D*/
   /*lookahead terminals*/
 }  /* lexical */
 
@@ -9744,13 +8788,10 @@ void advance(void)
     WITH = &redubuf[reduinx + REDUMAX];
     /*D if debuglevel > 1 then begin
        j := newtop; if oldtop > newtop then j := oldtop;
-       writeln(log,'Attstack for next production:');
        write(log,'attstack: ');
        for i := 1 to j do write(log,i:4);                   writeln(log);
-       write(log,'lexval  : ');
+       write(log,'lexical : ');
        for i := 1 to j do write(log,attstack^[i].lexval:4); writeln(log);
-       write(log,'state   : ');
-       for i := 1 to j do write(log,attstack^[i].state:4) ; writeln(log);
        write(log,'chbufx  : ');
        for i := 1 to j do write(log,attstack^[i].chbufx:4); writeln(log);
        write(log,'length  : ');
@@ -9987,7 +9028,6 @@ void parse(void)
   entrytv[ordNL] = XNL;
   entrytv[ordCR] = XNL;   /* treat ^M as line end */
 
-  errmp = 0;
   errcount = 0;
   /* change for debugging */
   /* linesignal := 0; */
@@ -10069,9 +9109,9 @@ void getoptions(void)
   argct = 1;
   istop = P_argc;   /*GH ParamCount+1; HG*/
   while (argct < istop) {
-    P_sun_argv(infname, sizeof(mstring), argct);
-	/*GH infname := ParamStr(argct); HG*/
-    cht = optionchar(infname);
+    P_sun_argv(infile, sizeof(mstring), argct);
+	/*GH infile := ParamStr(argct); HG*/
+    cht = optionchar(infile);
     if (cht == 0) {
       istop = argct;
       continue;
@@ -10120,8 +9160,7 @@ void getoptions(void)
       fprintf(stderr_, "     -s MetaPost output\n");
       fprintf(stderr_, "     -t eepicemu output\n");
       fprintf(stderr_, "     -x xfig output\n");
-      fprintf(stderr_,
-	      "     -z safe mode (sh, copy, and print to file disabled)\n");
+      fprintf(stderr_, "     -z safe mode (sh and copy disabled)\n");
       fatal(0);
     } else {
       fprintf(stderr_, " *** dpic terminating: Unknown option \"");
@@ -10150,7 +9189,6 @@ main(int argc, Char *argv[])
 {
   PASCAL_MAIN(argc, argv);
   /* dpic */
-  redirect = NULL;
   copyin = NULL;
   stderr_ = NULL;
   output = NULL;
@@ -10174,8 +9212,6 @@ main(int argc, Char *argv[])
     fclose(stderr_);
   if (copyin != NULL)
     fclose(copyin);
-  if (redirect != NULL)
-    fclose(redirect);
   exit(EXIT_SUCCESS);
 }
 

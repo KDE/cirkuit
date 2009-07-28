@@ -15,11 +15,9 @@
 #include <time.h>
 
 
-#define Version         "dpic version 13.Jul.09"
+#define Version         "dpic version 08.Jun.08"
 
-/* UMBX distmax = 1E25; XBMU */
-
-#define distmax         3.40282347e+38   /* assumes at least IEEE single */
+#define distmax         1e25
 /*GH distmax = MaxReal; HG*/
 #define mdistmax        (-distmax)
 #define pi              3.1415926535897931
@@ -39,9 +37,9 @@
 
 /* include parscst.i */
 #define symbmax         241
-#define prodmax         180
-#define lrmax           4742
-#define lxmax           455
+#define prodmax         177
+#define lrmax           4594
+#define lxmax           457
 /*B%include parscstB*/
 
 /* include parscdc.i */
@@ -74,94 +72,94 @@
 #define element10       26
 #define element11       27
 #define element12       28
-#define lbrace1         29
-#define namedbox1       30
-#define namedbox2       31
-#define suffix1         32
-#define suffix2         33
-#define position1       34
-#define position2       35
-#define position3       36
-#define position4       37
-#define assignlist1     38
-#define assignlist2     39
-#define command1        40
-#define command2        41
-#define command3        42
-#define command4        43
-#define command5        44
-#define command6        45
-#define command7        46
-#define command8        47
-#define command9        48
-#define command10       49
-#define optnl1          50
-#define optnl2          51
-#define ifpart1         52
-#define elsehead1       53
-#define for1            54
-#define for2            55
-#define stringexpr1     56
-#define stringexpr2     57
-#define string1         58
-#define string2         59
-#define assignment1     60
-#define assignment2     61
-#define assignment3     62
-#define assignment4     63
-#define expression1     64
-#define expression2     65
-#define expression3     66
-#define expression4     67
-#define expression5     68
-#define ifhead1         69
-#define setlogic1       70
-#define logexpr1        71
-#define logexpr2        72
-#define forhead1        73
-#define forincr1        74
-#define do1             75
-#define do2             76
-#define by1             77
-#define by2             78
-#define redirect1       79
-#define redirect2       80
-#define redirect3       81
-#define resetlist1      82
-#define resetlist2      83
-#define defhead1        84
-#define defhead2        85
-#define sprintf1        86
-#define sprintf2        87
-#define exprlist1       88
-#define exprlist2       89
-#define object1         90
-#define object2         91
-#define object3         92
-#define object4         93
-#define object5         94
-#define object6         95
-#define object7         96
-#define object8         97
-#define object9         98
-#define object10        99
-#define object11        100
-#define object12        101
-#define object13        102
-#define object14        103
-#define object15        104
-#define object16        105
-#define object17        106
-#define object18        107
-#define object19        108
-#define object20        109
-#define object21        110
-#define object22        111
-#define object23        112
-#define object24        113
-#define object25        114
-#define object26        115
-#define object27        116
+#define element13       29
+#define lbrace1         30
+#define namedbox1       31
+#define namedbox2       32
+#define suffix1         33
+#define suffix2         34
+#define position1       35
+#define position2       36
+#define position3       37
+#define position4       38
+#define assignlist1     39
+#define assignlist2     40
+#define command1        41
+#define command2        42
+#define command3        43
+#define command4        44
+#define command5        45
+#define command6        46
+#define command7        47
+#define command8        48
+#define command9        49
+#define command10       50
+#define optnl1          51
+#define optnl2          52
+#define ifpart1         53
+#define elsehead1       54
+#define for1            55
+#define for2            56
+#define stringexpr1     57
+#define stringexpr2     58
+#define string1         59
+#define string2         60
+#define assignment1     61
+#define assignment2     62
+#define assignment3     63
+#define assignment4     64
+#define expression1     65
+#define expression2     66
+#define expression3     67
+#define expression4     68
+#define expression5     69
+#define ifhead1         70
+#define setlogic1       71
+#define logexpr1        72
+#define logexpr2        73
+#define forhead1        74
+#define forincr1        75
+#define do1             76
+#define do2             77
+#define by1             78
+#define by2             79
+#define resetlist1      80
+#define resetlist2      81
+#define defhead1        82
+#define defhead2        83
+#define sprintf1        84
+#define sprintf2        85
+#define exprlist1       86
+#define exprlist2       87
+#define object1         88
+#define object2         89
+#define object3         90
+#define object4         91
+#define object5         92
+#define object6         93
+#define object7         94
+#define object8         95
+#define object9         96
+#define object10        97
+#define object11        98
+#define object12        99
+#define object13        100
+#define object14        101
+#define object15        102
+#define object16        103
+#define object17        104
+#define object18        105
+#define object19        106
+#define object20        107
+#define object21        108
+#define object22        109
+#define object23        110
+#define object24        111
+#define object25        112
+#define object26        113
+#define object27        114
+#define object28        115
+#define object29        116
 #define openblock1      117
 #define block1          118
 #define block2          119
@@ -172,219 +170,201 @@
 #define closeblock1     124
 #define pair1           125
 #define pair2           126
-#define objectwith1     127
-#define objectwith2     128
-#define objectwith3     129
-#define nth1            130
-#define nth2            131
-#define nth3            132
-#define primobj1        133
-#define primobj2        134
-#define primobj3        135
-#define primobj4        136
-#define shift1          137
-#define shift2          138
-#define shift3          139
-#define location1       140
-#define location2       141
-#define location3       142
-#define location4       143
-#define location5       144
-#define place1          145
-#define place2          146
-#define place3          147
-#define place4          148
-#define place5          149
-#define factor1         150
-#define factor2         151
-#define factor3         152
-#define placename1      153
-#define placename2      154
-#define placename3      155
-#define placename4      156
-#define ncount1         157
-#define ncount2         158
-#define ncount3         159
-#define logprod1        160
-#define logprod2        161
-#define logval1         162
-#define logval2         163
-#define logval3         164
-#define lcompare1       165
-#define lcompare2       166
-#define lcompare3       167
-#define lcompare4       168
-#define primary1        169
-#define primary2        170
-#define primary3        171
-#define primary4        172
-#define primary5        173
-#define primary6        174
-#define primary7        175
-#define primary8        176
-#define primary9        177
-#define primary10       178
-#define primary11       179
-#define primary12       180
+#define withobj1        127
+#define withobj2        128
+#define shift1          129
+#define shift2          130
+#define shift3          131
+#define location1       132
+#define location2       133
+#define location3       134
+#define location4       135
+#define location5       136
+#define place1          137
+#define place2          138
+#define place3          139
+#define place4          140
+#define place5          141
+#define factor1         142
+#define factor2         143
+#define factor3         144
+#define placename1      145
+#define placename2      146
+#define placename3      147
+#define placename4      148
+#define nth1            149
+#define nth2            150
+#define nth3            151
+#define primobj1        152
+#define primobj2        153
+#define primobj3        154
+#define primobj4        155
+#define ncount1         156
+#define ncount2         157
+#define ncount3         158
+#define logprod1        159
+#define logprod2        160
+#define logval1         161
+#define logval2         162
+#define primary1        163
+#define primary2        164
+#define primary3        165
+#define primary4        166
+#define primary5        167
+#define primary6        168
+#define primary7        169
+#define primary8        170
+#define primary9        171
+#define primary10       172
+#define primary11       173
+#define primary12       174
+#define primary13       175
+#define primary14       176
+#define primary15       177
 
 /* include lxcst.h */
-/*D XAND = 36; D*/
-#define XBLOCK          26
-#define XLBRACKET       21
-#define XRBRACKET       22
-#define XCOMMENT        42
-#define XLcolrspec      137
-#define XLcolour        138
-#define XCARET          15
-#define XCOLON          20
-#define XD              25
-#define XDOUBLEHEAD     150
-#define XDc             98
-#define XDe             94
-#define XDend           97
-#define XDn             92
-#define XDne            88
-#define XDnw            90
-#define XDs             93
-#define XDse            89
-#define XDstart         96
-#define XDsw            91
-#define XDw             95
+/*D XAND = 37; D*/
+#define XBLOCK          27
+#define XCOMMENT        43
+#define XLcolrspec      139
+#define XLcolour        140
+#define XDOUBLEHEAD     152
+#define XDc             100
+#define XDe             96
+#define XDend           99
+#define XDn             94
+#define XDne            90
+#define XDnw            92
+#define XDs             95
+#define XDse            91
+#define XDstart         98
+#define XDsw            93
+#define XDw             97
 #define XEMPTY          2
-#define XEND            46
-#define XEQEQ           100
-#define XEQ             29
-#define XGE             102
-#define XLE             103
+#define XEND            47
 #define XERROR          3
-#define XFOR            84
-#define XGT             105
-#define XLBRACE         23
-#define XLEFTHEAD       148
-#define XLL             104
+#define XFOR            85
+#define XGG             107
+#define XGT             5
+#define XLBRACE         24
+#define XLBRACKET       22
+#define XLEFTHEAD       150
+#define XLKWDS          45
+#define XLL             106
 #define XLT             4
-#define XLabel          39
-#define XLabove         145
-#define XLabs           112
-#define XLacos          113
-#define XLarc           160
-#define XLarcrad        166
+#define XLabel          40
+#define XLabove         147
+#define XLabs           114
+#define XLacos          115
+#define XLarc           162
+#define XLarcrad        168
 #define XLarg           44
-#define XLarrow         162
-#define XLarrowhd       147
-#define XLarrowhead     183
-#define XLarrowht       167
-#define XLarrowwid      168
-#define XLasin          114
-#define XLat            55
-#define XLatan2         127
-#define XLbelow         146
-#define XLbox           157
-#define XLboxht         169
-#define XLboxrad        170
-#define XLboxwid        171
-#define XLccw           6
-#define XLcenter        142
-#define XLchop          60
-#define XLcircle        158
-#define XLcirclerad     172
-#define XLcoloneq       30
-#define XLcontinue      59
-#define XLcorner        87
-#define XLcos           115
-#define XLcw            5
-#define XLdashed        134
-#define XLdashwid       173
-#define XLdefine        79
-#define XLdiameter      110
-#define XLdirecton      151
-#define XLdiveq         34
-#define XLdo            85
-#define XLdotted        133
-#define XLdown          153
-#define XLellipse       159
-#define XLellipseht     174
-#define XLellipsewid    175
-#define XLelse          83
-#define XLenvvar        165
-#define XLexp           116
-#define XLexpe          117
-#define XLfillval       184
-#define XLfloat         37
-#define XLfloor         125
-#define XLfrom          53
-#define XLfunc1         111
-#define XLfunc2         126
-#define XLheight        107
-#define XLint           118
-#define XLinvis         135
-#define XLlastenv       188
-#define XLlastsc        182
-#define XLleft          155
-#define XLline          161
-#define XLlineht        176
-#define XLlinethick     185
-#define XLlinetype      131
-#define XLlinewid       177
-#define XLljust         143
-#define XLlog           119
-#define XLloge          120
-#define XLcompare       99
-#define XLmax           128
-#define XLmaxpsht       186
-#define XLmaxpswid      187
-#define XLmin           129
-#define XLminuseq       32
-#define XLmove          163
-#define XLmoveht        178
-#define XLmovewid       179
-#define XLmulteq        33
-#define XLname          38
-#define XLoutlined      139
-#define XLparam         106
-#define XLpath          136
-#define XLpluseq        31
-#define XLpmod          130
-#define XLprimitiv      156
-#define XLradius        109
-#define XLremeq         35
-#define XLright         154
-#define XLrjust         144
-#define XLscale         188
-#define XLshaded        140
-#define XLsign          121
-#define XLsin           122
-#define XLsolid         132
-#define XLspline        164
-#define XLsqrt          123
-#define XLstring        41
-#define XLtan           124
-#define XLtextht        180
-#define XLtextoffset    181
-#define XLtextpos       141
-#define XLtextwid       182
-#define XLthen          58
-#define XLto            54
-#define XLaTeX          40
-#define XLundefine      80
-#define XLup            152
-#define XLwidth         108
-#define XNEQ            101
-#define XNOT            16
-#define XNL             14
-#define XRBRACE         24
-#define XRIGHTHEAD      149
-#define XSEMICOLON      14
-#define XSTAR           9
-#define XSTART          45
-#define XANDAND         17
-#define XOROR           18
-#define Xlparen         7
-#define Xrparen         8
-#define Xplus           10
-#define Xcomma          19
-#define Xminus          11
-#define XSLASH          12
+#define XLarrow         164
+#define XLarrowhd       149
+#define XLarrowhead     185
+#define XLarrowht       169
+#define XLarrowwid      170
+#define XLasin          116
+#define XLat            56
+#define XLatan2         129
+#define XLbelow         148
+#define XLbox           159
+#define XLboxht         171
+#define XLboxrad        172
+#define XLboxwid        173
+#define XLccw           7
+#define XLcenter        144
+#define XLchop          61
+#define XLcircle        160
+#define XLcirclerad     174
+#define XLcoloneq       31
+#define XLcontinue      60
+#define XLcorner        89
+#define XLcos           117
+#define XLcw            6
+#define XLdashed        136
+#define XLdashwid       175
+#define XLdefine        80
+#define XLdiameter      112
+#define XLdirecton      153
+#define XLdiveq         35
+#define XLdo            86
+#define XLdotted        135
+#define XLdown          155
+#define XLellipse       161
+#define XLellipseht     176
+#define XLellipsewid    177
+#define XLelse          84
+#define XLenvvar        167
+#define XLeq            30
+#define XLexp           118
+#define XLexpe          119
+#define XLfillval       186
+#define XLfloat         38
+#define XLfloor         127
+#define XLfrom          54
+#define XLfunc1         113
+#define XLfunc2         128
+#define XLheight        109
+#define XLint           120
+#define XLinvis         137
+#define XLlastenv       190
+#define XLlastsc        184
+#define XLleft          157
+#define XLline          163
+#define XLlineht        178
+#define XLlinethick     187
+#define XLlinetype      133
+#define XLlinewid       179
+#define XLljust         145
+#define XLlog           121
+#define XLloge          122
+#define XLlogic         101
+#define XLmax           130
+#define XLmaxpsht       188
+#define XLmaxpswid      189
+#define XLmin           131
+#define XLminuseq       33
+#define XLmove          165
+#define XLmoveht        180
+#define XLmovewid       181
+#define XLmulteq        34
+#define XLname          39
+#define XLoutlined      141
+#define XLparam         108
+#define XLpath          138
+#define XLpluseq        32
+#define XLpmod          132
+#define XLprimitiv      158
+#define XLradius        111
+#define XLremeq         36
+#define XLright         156
+#define XLrjust         146
+#define XLscale         190
+#define XLshaded        142
+#define XLsign          123
+#define XLsin           124
+#define XLsolid         134
+#define XLspline        166
+#define XLsqrt          125
+#define XLstring        42
+#define XLtan           126
+#define XLtextht        182
+#define XLtextoffset    183
+#define XLtextpos       143
+#define XLtextwid       184
+#define XLthen          59
+#define XLto            55
+#define XLtroff         41
+#define XLundefine      81
+#define XLup            154
+#define XLwidth         110
+#define XNL             15
+#define XRBRACE         25
+#define XRIGHTHEAD      151
+#define XSEMICOLON      15
+#define XSTAR           10
+#define XSTART          46
 
 /* Machine constants                                                  */
 #define ordMINCH        0   /* first element of type character    */
@@ -516,7 +496,7 @@ typedef struct primitive {
       postype here;
       nametype *vars;
       double *env;
-    } UEMPTY6;
+    } UEMPTY7;
     struct {
       double cfill, radius;
     } Ucircle;
@@ -632,16 +612,14 @@ extern Char tabch, nlch, crch, etxch;
 /* File names                                                         */
 extern FILE *input, *output, *stderr_;   /*G asmname 'std_err'; G*/
 extern FILE *copyin;   /*G asmname 'copy_in'; G*/
-extern FILE *redirect;   /*G asmname 'redi_rect'; G*/
 /*D log: text; D*/
 /*DG asmname 'log_file'; GD*/
 
-extern mstring infname;   /* name of current input file       */
-extern mstring outfnam;   /* name of current output file     */
-/*X infname: string; X*/
+extern mstring infile;   /* name of current input file         */
+/*X infile: string; X*/
 
 extern boolean inputeof;   /* end of input flag                  */
-extern int argct;   /* argument counter for options     */
+extern int argct;   /* argument counter for options       */
 extern char drawmode;   /* output conversion                  */
 extern boolean safemode;   /* disable sh and copy                */
 /*D oflag: integer; D*/
@@ -655,7 +633,7 @@ extern Char ch;   /* current character                  */
 extern short newsymb;   /* current lexical symbol             */
 extern int inpic, lexsymb;
 extern _REC_errmsg errmsg[ERRMAX + 1];
-extern boolean inlogic;   /* set < to <^ in logical context     */
+extern boolean inlogic;   /* set < to << in logical context     */
 extern fbuffer *inbuf, *savebuf, *freebuf;
 
 /* Error handling                                                     */
@@ -676,14 +654,10 @@ extern double north, south, east, west;
     /* compass corners of a primitive     */
 extern double xfheight;   /* for calculating xfig coordinates   */
 extern Char *freeseg;   /* segment open to store strings      */
-extern short freex;   /* next free location                 */
+extern chbufinx freex;   /* next free location                 */
 extern Char *tmpbuf;   /* buffer for snprintf or sprintf     */
 extern double scale, fsc;   /* scale factor and final scale factor*/
 extern int splcount, spltot;   /* spline depth counter               */
-extern primitive *snode;   /* temporary node storage             */
-extern boolean sfill;   /* fill flag for linear objects       */
-extern double vfill;   /* fill value */
-extern nametype *sshade, *soutline;   /* temp values for linear objects     */
 extern double lastfillval;   /* last-used fill density             */
 extern double lastthick;   /* last-used line thickness           */
 extern int printstate;   /* for passing output state info      */
@@ -738,7 +712,7 @@ extern double linlen(double x, double y);
 
 extern int lspec(int n);
 
-/*DGHM function ordp(p:pointer): integer; forward; MHGD*/
+/*DGH function ordp(p:pointer): integer; forward; HGD*/
 extern double principal(double x, double r);
 
 extern void checkjust(nametype *tp, boolean *A, boolean *B, boolean *L,
@@ -767,12 +741,8 @@ void newarg(arg **arg_);
 
 void newbuf(fbuffer **buf);
 
-#ifndef SAFE_MODE
 void pointinput(nametype *txt);
 
-void pointoutput(boolean nw, nametype *txt, int *ier);
-
-#endif
 void produce(stackinx newp, int p);
 
 void readfor(fbuffer *p0, int attx, fbuffer **p2);
@@ -802,33 +772,6 @@ void ddash(void);
 
 void mpocorner(postype ctr, double x, double y, double r, double ct,
 		      double st);
-
-void getlinshade(primitive *n, primitive **tn, nametype **ss,
-			nametype **so, double *f, boolean *sf);
-
-int ahlex(int atyp);
-
-int ahnum(int atyp);
-
-int pahlex(int atyp, int alex);
-
-int pahnum(int atyp, int anum);
-
-double ahoffset(primitive *node);
-
-void dahead(postype point, postype shaft, double ht, double wid,
-		   double ltp, postype *P, postype *L, postype *R, postype *Q,
-		   double *x, double *y);
-
-void startarc(primitive *n, postype X0, double *h, double *w,
-		     postype *X1);
-
-void endarc(primitive *n, postype X0, double *h, double *w,
-		   postype *X1);
-
-postype arcstart(primitive *n);
-
-postype arcend(primitive *n);
 
 
 /*--------------------------------------------------------------------*/
@@ -861,67 +804,6 @@ void ddot(void)
 void ddash(void)
 {
   printf("\n --");
-}
-
-
-void getlinshade(primitive *n, primitive **tn, nametype **ss,
-			nametype **so, double *f, boolean *sf)
-{
-  /* n:primitivep;
-     var tn:primitivep; var ss,so:strptr; var f:real; var sf:boolean */
-  primitive *WITH;
-
-  *tn = n;
-  *ss = NULL;
-  *so = NULL;
-  *f = -1.0;
-  while (*tn != NULL) {
-    WITH = *tn;
-    if (WITH->outlinep != NULL)
-      *so = WITH->outlinep;
-    *tn = (*tn)->son;
-  }
-  *tn = n;
-  if (*sf)
-    *sf = false;
-  else {
-    while (n != NULL) {
-      WITH = n;
-      if (WITH->shadedp != NULL)
-	*ss = WITH->shadedp;
-      if (WITH->UU.Uline.lfill >= 0.0 && WITH->UU.Uline.lfill <= 1.0)
-	*f = WITH->UU.Uline.lfill;
-      *tn = n;
-      n = n->son;
-    }
-  }
-  if (*ss != NULL || *f >= 0.0)
-    *sf = true;
-}
-
-
-/* Arrowhead location (lex value) and number */
-int ahlex(int atyp)
-{
-  return (atyp >> 3);
-}
-
-
-int ahnum(int atyp)
-{
-  return (atyp & 7);
-}
-
-
-int pahlex(int atyp, int alex)
-{
-  return ((atyp & 7) + alex * 8);
-}
-
-
-int pahnum(int atyp, int anum)
-{
-  return ((atyp >> 3) * 8 + anum);
 }
 
 
@@ -981,20 +863,6 @@ void wstring(FILE **iou, nametype *p)
   /* var iou: text; p: strptr */
   int i, FORLIM;
 
-  /*D if debuglevel <= 0 then begin end
-      else if p = nil then begin end
-      else if p^.segmnt = nil then begin end
-      else with p^ do begin
-         write(log,' seginx:len:seginx+len-1=',
-            seginx:1,':',len:1,':',seginx+len-1:1);
-         if seginx+len-1 > CHBUFSIZ then begin
-            writeln(log,' Offending string:');
-            write(log,'|');
-            for i:=seginx to CHBUFSIZ do write(log,segmnt^[i]);
-            writeln(log,'|')
-            end;
-         end;
-D*/
   if (p == NULL)
     return;
   if (p->segmnt != NULL) {
@@ -1072,7 +940,7 @@ primitive *findenv(primitive *p)
   while (p != q) {
     if (p->ptype != XBLOCK)
       p = p->parent;
-    else if (p->UU.UEMPTY6.env == NULL)
+    else if (p->UU.UEMPTY7.env == NULL)
       p = p->parent;
     else
       q = p;
@@ -1093,7 +961,7 @@ double venv(primitive *p, int ind)
     return v;
   p = findenv(p);
   if (p != NULL)
-    v = p->UU.UEMPTY6.env[ind - XLenvvar - 1];
+    v = p->UU.UEMPTY7.env[ind - XLenvvar - 1];
   return v;
 }
 
@@ -1186,7 +1054,6 @@ Local void neswline(primitive *pmp, struct LOC_nesw *LINK)
 {
   double aht, awd;
   postype cs, cc, cd;
-  int TEMP;
 
   if (pmp == NULL)
     return;
@@ -1194,8 +1061,7 @@ Local void neswline(primitive *pmp, struct LOC_nesw *LINK)
   east = Max(east, Max(pmp->aat.xpos, pmp->UU.Uline.endpos.xpos));
   south = Min(south, Min(pmp->aat.ypos, pmp->UU.Uline.endpos.ypos));
   north = Max(north, Max(pmp->aat.ypos, pmp->UU.Uline.endpos.ypos));
-  TEMP = ahlex(pmp->UU.Uline.atype);
-  if (TEMP == XLEFTHEAD || TEMP == XDOUBLEHEAD) {
+  if (pmp->UU.Uline.atype == XLEFTHEAD || pmp->UU.Uline.atype == XDOUBLEHEAD) {
     cs = affang(pmp->aat, pmp->UU.Uline.endpos);
     awd = qenv(pmp, XLarrowht, pmp->UU.Uline.width);
     aht = qenv(pmp, XLarrowwid, pmp->UU.Uline.height);
@@ -1206,8 +1072,7 @@ Local void neswline(primitive *pmp, struct LOC_nesw *LINK)
     south = Min(south, Min(cc.ypos, cd.ypos));
     north = Max(north, Max(cc.ypos, cd.ypos));
   }
-  TEMP = ahlex(pmp->UU.Uline.atype);
-  if (!(TEMP == XRIGHTHEAD || TEMP == XDOUBLEHEAD))
+  if (pmp->UU.Uline.atype != XRIGHTHEAD && pmp->UU.Uline.atype != XDOUBLEHEAD)
     return;
   cs = affang(pmp->UU.Uline.endpos, pmp->aat);
   awd = qenv(pmp, XLarrowht, pmp->UU.Uline.width);
@@ -1271,8 +1136,8 @@ void nesw(primitive *ptmp)
     break;
 
   case XBLOCK:
-    V.heght = ptmp->UU.UEMPTY6.blockheight;
-    V.wdth = ptmp->UU.UEMPTY6.blockwidth;
+    V.heght = ptmp->UU.UEMPTY7.blockheight;
+    V.wdth = ptmp->UU.UEMPTY7.blockwidth;
     break;
 
   case XLcircle:
@@ -1308,7 +1173,7 @@ void nesw(primitive *ptmp)
     neswline(ptmp, &V);
     break;
 
-  case XLaTeX:
+  case XLtroff:
   case XLabel:
     /* blank case */
     break;
@@ -1464,7 +1329,7 @@ int hcf(int x, int y)
   while (small > 0) {
     i = small;
     small = large % small;
-/* p2c: dpic2.p, line 862:
+/* p2c: dpic2.p, line 778:
  * Note: Using % for possibly-negative arguments [317] */
     large = i;
   }
@@ -1554,142 +1419,6 @@ boolean drawn(primitive *node, int lsp, double fill)
 }
 
 
-/* Arrowhead control points */
-void dahead(postype point, postype shaft, double ht, double wid,
-		   double ltp, postype *P, postype *L, postype *R, postype *Q,
-		   double *x, double *y)
-{
-  double h, v, po;
-
-  ht *= fsc;
-  wid *= fsc;
-  ltp = ltp / 72 * fsc;
-  *Q = affang(point, shaft);   /* shaft direction cosines */
-  if (wid == 0.0)
-    po = 0.0;
-  else
-    po = ltp * sqrt(ht * ht + wid * wid / 4) / wid;
-  *P = affine(po, 0.0, point, *Q);   /* point adjusted by line thickness */
-  h = ht - ltp / 2;
-  *x = h - po;
-  if (ht == 0.0)
-    v = 0.0;
-  else
-    v = wid / 2 * *x / ht;
-  *R = affine(h, v, point, *Q);
-  *L = affine(h, -v, point, *Q);
-  if (ht == 0.0)
-    *y = ht;
-  else
-    *y = ht - po + ltp * wid / ht / 4;
-}
-
-
-void arcptang(int job, primitive *node, postype X0, double *h,
-		     double *w, postype *X1)
-{
-  double d, s, c, x, y, TEMP, TEMP1;
-
-  *h = qenv(node, XLarrowht, node->UU.Uline.height);
-  *w = qenv(node, XLarrowwid, node->UU.Uline.width);
-  TEMP = 2 * node->UU.Uline.aradius;
-  TEMP1 = *w / 6;
-  d = TEMP * TEMP / (*h * *h + TEMP1 * TEMP1);
-  if (d < 1)
-    s = 0.0;
-  else
-    s = (*h - *w / 6 * sqrt(d - 1)) / (2 * node->UU.Uline.aradius);
-  s = Min(Max(0.0, s), *w / 2 / sqrt(*h * *h + *w * *w / 4));
-  c = sqrt(1 - s * s);
-  x = X0.xpos - node->aat.xpos;
-  y = X0.ypos - node->aat.ypos;
-  if (job * node->UU.Uline.endpos.ypos < 0.0) {
-    x = -x;
-    y = -y;
-    s = -s;
-  }
-  X1->xpos = X0.xpos - c * y - s * x;
-  X1->ypos = X0.ypos - s * y + c * x;
-}
-
-
-double ahoffset(primitive *node)
-{
-  /* distance to P control point */
-  double ht, wid;
-
-  wid = qenv(node, XLarrowwid, node->UU.Uline.width);
-  if (wid == 0.0)
-    return 0.0;
-  else {
-    ht = qenv(node, XLarrowht, node->UU.Uline.height);
-    return (qenv(node, XLlinethick, node->lthick) / 72 *
-	    sqrt(ht * ht + wid * wid / 4) / wid);
-  }
-}
-
-
-void startarc(primitive *n, postype X0, double *h, double *w,
-		     postype *X1)
-{
-  double x, y;
-
-  y = ahoffset(n);
-  if (n->UU.Uline.aradius * n->UU.Uline.aradius - y * y <= 0.0)
-    x = 0.0;
-  else
-    x = 2 * atan(y / sqrt(n->UU.Uline.aradius * n->UU.Uline.aradius - y * y));
-  if (n->UU.Uline.endpos.ypos >= 0.0) {
-    n->UU.Uline.endpos.xpos += x;
-    n->UU.Uline.endpos.ypos -= x;
-  } else {
-    n->UU.Uline.endpos.xpos -= x;
-    n->UU.Uline.endpos.ypos += x;
-  }
-  arcptang(1, n, X0, h, w, X1);
-}
-
-
-void endarc(primitive *n, postype X0, double *h, double *w,
-		   postype *X1)
-{
-  double x, y;
-
-  y = ahoffset(n);
-  if (n->UU.Uline.aradius * n->UU.Uline.aradius - y * y <= 0.0)
-    x = 0.0;
-  else
-    x = 2 * atan(y / sqrt(n->UU.Uline.aradius * n->UU.Uline.aradius - y * y));
-  if (n->UU.Uline.endpos.ypos >= 0.0)
-    n->UU.Uline.endpos.ypos -= x;
-  else
-    n->UU.Uline.endpos.ypos += x;
-  arcptang(-1, n, X0, h, w, X1);
-}
-
-
-postype arcstart(primitive *n)
-{
-  postype X;
-
-  X.xpos = n->aat.xpos + n->UU.Uline.aradius * cos(n->UU.Uline.endpos.xpos);
-  X.ypos = n->aat.ypos + n->UU.Uline.aradius * sin(n->UU.Uline.endpos.xpos);
-  return X;
-}
-
-
-postype arcend(primitive *n)
-{
-  postype X;
-
-  X.xpos = n->aat.xpos + n->UU.Uline.aradius *
-			 cos(n->UU.Uline.endpos.xpos + n->UU.Uline.endpos.ypos);
-  X.ypos = n->aat.ypos + n->UU.Uline.aradius *
-			 sin(n->UU.Uline.endpos.xpos + n->UU.Uline.endpos.ypos);
-  return X;
-}
-
-
 /* include xfig.h */
 /* xfig.x */
 /* Output routines for xfig */
@@ -1736,14 +1465,11 @@ void wfigcoord(double x, double y)
 }
 
 
-void arrowline(int atype, double wid, double ht, double lth)
+void arrowline(double wid, double ht, double lth)
 {
   /* arrowtype,arrowstyle: integer;
      arrowthickness,arrowwidth,arrowheight: real */
-  if (ahnum(atype) == 0)
-    printf("%c0 0 ", tabch);
-  else
-    printf("%c1 1 ", tabch);
+  printf("%c1 1 ", tabch);   /* style: closed, filled */
   wfloat(&output, lth * dispres / points);
   putchar(' ');
   wfloat(&output, wid * xfigres);
@@ -1800,7 +1526,7 @@ void hdrline(int object_code, int sub_type, int line_style, double lth,
 
 int fwdarrow(int i)
 {
-  if ((ahlex(i) == XRIGHTHEAD) | (ahlex(i) == XDOUBLEHEAD))
+  if (i == XRIGHTHEAD || i == XDOUBLEHEAD)
     return 1;
   else
     return 0;
@@ -1809,7 +1535,7 @@ int fwdarrow(int i)
 
 int bckarrow(int i)
 {
-  if ((ahlex(i) == XLEFTHEAD) | (ahlex(i) == XDOUBLEHEAD))
+  if (i == XLEFTHEAD || i == XDOUBLEHEAD)
     return 1;
   else
     return 0;
@@ -1828,9 +1554,9 @@ void polyline(int object_code, int sub_type, int line_style,
     printf("0 0 %ld ", (long)floor(lrad * dispres + 0.5));
   printf("%d %d %d\n", fwdarrow(atype), bckarrow(atype), npoints);
   if (fwdarrow(atype) == 1)
-    arrowline(atype, lwid, lht, lth);
+    arrowline(lwid, lht, lth);
   if (bckarrow(atype) == 1)
-    arrowline(atype, lwid, lht, lth);
+    arrowline(lwid, lht, lth);
 }
 
 
@@ -1913,9 +1639,9 @@ void farc(int object_code, int sub_type, int line_style, double lth,
 	    y + radius * sin(strtang + arcang));
   putchar('\n');
   if (fwdarrow(atype) == 1)
-    arrowline(atype, lwid, lht, lth);
+    arrowline(lwid, lht, lth);
   if (bckarrow(atype) == 1)
-    arrowline(atype, lwid, lht, lth);
+    arrowline(lwid, lht, lth);
 }
 
 
@@ -2086,7 +1812,7 @@ void xfigdraw(primitive *node)
 	       node->UU.Ubox.boxwidth, node->aat.xpos, node->aat.ypos);
     break;
 
-  case XLaTeX:
+  case XLtroff:
     if (node->textp != NULL) {
       wstring(&output, node->textp);
       putchar('\n');
@@ -2207,32 +1933,22 @@ void pgfbox(postype ctr, double halfwid, double halfht, double rad)
 }
 
 
-void pgfahead(int atyp, postype *point, postype shaft, double ht,
-		     double wid, double lth)
+void pgfahead(postype *point, postype shaft, double ht, double wid)
 {
-  postype P, L, R, Q;
-  double x, y;
+  postype butx, cs;
 
-  dahead(*point, shaft, ht, wid, lth, &P, &L, &R, &Q, &x, &y);
-  if (atyp == 0) {
-    wprop(P, L, x - y, y, x);
-    ddash();
-    wpos(P);
-    ddash();
-    wprop(P, R, x - y, y, x);
-    putchar('\n');
-  } else {
-    wpos(affine(ht, 0.0, *point, Q));
-    ddash();
-    wpos(affine(ht, wid / 2, *point, Q));
-    ddash();
-    wpos(*point);
-    ddash();
-    wpos(affine(ht, wid / -2, *point, Q));
-    printf("\n --cycle");
-  }
+  cs = affang(*point, shaft);
+  butx = affine(ht, 0.0, *point, cs);
+  wpos(butx);
+  ddash();
+  wpos(affine(ht, wid / 2, *point, cs));
+  ddash();
+  wpos(*point);
+  ddash();
+  wpos(affine(ht, wid / -2, *point, cs));
+  printf("\n --cycle");
   pgfendpath();
-  *point = P;
+  *point = butx;
 }
 
 
@@ -2241,7 +1957,7 @@ void pgfstartdraw(int initial, primitive *node, int lsp)
   Char sep;
   double fill;
 
-  if (lsp == XLinvis)   /* initial = 1 for filled arrowheads */
+  if (lsp == XLinvis)
     printf("\\fill");
   else if (initial == 0)
     printf("\\dpicdraw");
@@ -2266,7 +1982,6 @@ void pgfstartdraw(int initial, primitive *node, int lsp)
     fill = node->UU.Uellipse.efill;
     break;
 
-  case XLarc:
   case XLline:
   case XLarrow:
   case XLmove:
@@ -2275,12 +1990,9 @@ void pgfstartdraw(int initial, primitive *node, int lsp)
     break;
   }
   fill = (long)floor(fill * 1000000L + 0.5) / 1000000.0;
-  if (node->shadedp != NULL || sshade != NULL) {
+  if (node->shadedp != NULL) {
     printf("[fill=");
-    if (node->shadedp != NULL)
-      wstring(&output, node->shadedp);
-    else
-      wstring(&output, sshade);
+    wstring(&output, node->shadedp);
     sep = ',';
   } else if (fill >= 0.0 && fill <= 1.0) {
     printf("[fill=");
@@ -2308,18 +2020,12 @@ void pgfstartdraw(int initial, primitive *node, int lsp)
     printf("bp");
     sep = ',';
   }
-  if (node->outlinep != NULL || soutline != NULL) {
+  if (node->outlinep != NULL) {
     printf("%cdraw=", sep);
-    if (node->outlinep != NULL)
-      wstring(&output, node->outlinep);
-    else
-      wstring(&output, soutline);
+    wstring(&output, node->outlinep);
     if (initial == 1) {
       printf(",fill=");
-      if (node->outlinep != NULL)
-	wstring(&output, node->outlinep);
-      else
-	wstring(&output, soutline);
+      wstring(&output, node->outlinep);
     }
     sep = ',';
   }
@@ -2356,11 +2062,10 @@ void pgfdraw(primitive *node)
 {
   /* node is always <> nil */
   int lsp, n;
-  postype tmpat, X0, X1, X3;
+  postype tmpat, X0, X3;
   primitive *tn;
-  double h, w, x, y, xx, xy;
+  double x, y, xx, xy;
   boolean v;
-  int TEMP;
 
   lsp = lspec(node->spec);
   switch (node->ptype) {
@@ -2414,22 +2119,22 @@ void pgfdraw(primitive *node)
       else
 	x = node->UU.Uline.aradius;
       if (!isthen(node)) {  /* first spline */
-	getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
+	tn = node;
+	while (tn->son != NULL)
+	  tn = tn->son;
 	spltot = primdepth(node);
 	splcount = spltot;
-	X0 = node->aat;
-	TEMP = ahlex(tn->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD) {
-	  pgfstartdraw(ahnum(node->UU.Uline.atype), node, lsp);
-	  pgfahead(ahnum(tn->UU.Uline.atype), &node->aat, node->UU.Uline.endpos,
+	tmpat = node->aat;
+	if (tn->UU.Uline.atype == XDOUBLEHEAD || tn->UU.Uline.atype == XLEFTHEAD) {
+	  pgfstartdraw(1, node, lsp);
+	  pgfahead(&node->aat, node->UU.Uline.endpos,
 		   qenv(node, XLarrowht, tn->UU.Uline.height),
-		   qenv(node, XLarrowwid, tn->UU.Uline.width),
-		   qenv(node, XLlinethick, node->lthick));
+		   qenv(node, XLarrowwid, tn->UU.Uline.width));
 	}
 	/* pgflinecap(lsp); */
 	pgfstartdraw(0, node, lsp);
 	wpos(node->aat);
-	node->aat = X0;
+	node->aat = tmpat;
 	if (node->UU.Uline.aradius == mdistmax) {
 	  ddash();
 	  if (spltot > 1) {
@@ -2450,8 +2155,7 @@ void pgfdraw(primitive *node)
 	wprop(node->aat, node->UU.Uline.endpos, (1 - x) / 2, (1 + x) / 2, 1.0);
       }
       if (splcount == 1) {
-	/*D if debuglevel > 0 then
-	        writeln(log,'pgfdraw: last node started');D*/
+	/*D; if debuglevel > 0 then writeln(log,'last node started');D*/
 	if (spltot > 1 && node->UU.Uline.aradius == mdistmax) {
 	  wrand();
 	  wprop(node->aat, node->UU.Uline.endpos, 5.0, 1.0, 6.0);
@@ -2463,32 +2167,25 @@ void pgfdraw(primitive *node)
 	  wprop(node->aat, node->UU.Uline.endpos, x, 1 - x, 1.0);
 	  ddot();
 	}
-	X0 = node->UU.Uline.endpos;
-	TEMP = ahlex(node->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
+	tmpat = node->UU.Uline.endpos;
+	if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	    node->UU.Uline.atype == XRIGHTHEAD) {
 	  x = linlen(node->UU.Uline.endpos.xpos - node->aat.xpos,
 		     node->UU.Uline.endpos.ypos - node->aat.ypos);
-	  if (ahnum(node->UU.Uline.atype) == 0)
-	    y = ahoffset(node);
-	  else
-	    y = qenv(node, XLarrowht, node->UU.Uline.height);
-	  if (x != 0.0)
-	    pprop(node->aat, &X0, y, x - y, x);
+	  y = qenv(node, XLarrowht, node->UU.Uline.height);
+	  pprop(node->aat, &tmpat, y, x - y, x);
 	}
-	wpos(X0);
+	wpos(tmpat);
 	pgfendpath();
-	TEMP = ahlex(node->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
-	  pgfstartdraw(ahnum(node->UU.Uline.atype), node, lsp);
-	  pgfahead(ahnum(node->UU.Uline.atype), &node->UU.Uline.endpos,
-		   node->aat, qenv(node, XLarrowht, node->UU.Uline.height),
-		   qenv(node, XLarrowwid, node->UU.Uline.width),
-		   qenv(node, XLlinethick, node->lthick));
+	if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	    node->UU.Uline.atype == XRIGHTHEAD) {
+	  pgfstartdraw(1, node, lsp);
+	  pgfahead(&node->UU.Uline.endpos, node->aat, y,
+		   qenv(node, XLarrowwid, node->UU.Uline.width));
 	}
       }
       node->ptype = XLline;
-      /*D; if debuglevel > 0 then
-              writeln(log,'pgfdraw: node ',splcount:1);D*/
+      /*D; if debuglevel > 0 then writeln(log,'node ',splcount:1);D*/
       splcount--;
     }
     break;
@@ -2501,37 +2198,30 @@ void pgfdraw(primitive *node)
       while (tn->son != NULL)
 	tn = tn->son;
       if (!isthen(node)) {
-	getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
-	TEMP = ahlex(tn->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD) {
-	  pgfstartdraw(ahnum(node->UU.Uline.atype), node, lsp);
-	  pgfahead(ahnum(tn->UU.Uline.atype), &node->aat, node->UU.Uline.endpos,
+	tmpat = node->aat;
+	if (tn->UU.Uline.atype == XDOUBLEHEAD || tn->UU.Uline.atype == XLEFTHEAD) {
+	  pgfstartdraw(1, node, lsp);
+	  pgfahead(&node->aat, node->UU.Uline.endpos,
 		   qenv(node, XLarrowht, tn->UU.Uline.height),
-		   qenv(node, XLarrowwid, tn->UU.Uline.width),
-		   qenv(node, XLlinethick, node->lthick));
+		   qenv(node, XLarrowwid, tn->UU.Uline.width));
 	}
 	/* pgflinecap(lsp); */
 	pgfstartdraw(0, node, lsp);
 	wpos(node->aat);
       }
-      TEMP = ahlex(tn->UU.Uline.atype);
-      if ((node->son == NULL) & (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD)) {
-	if (ahnum(node->UU.Uline.atype) == 0)
-	  y = ahoffset(node);
-	else
-	  y = qenv(node, XLarrowht, tn->UU.Uline.height);
+      if (node->son == NULL &&
+	  (tn->UU.Uline.atype == XDOUBLEHEAD ||
+	   tn->UU.Uline.atype == XRIGHTHEAD)) {
+	y = qenv(node, XLarrowht, tn->UU.Uline.height);
 	ddash();
 	wpos(affine(y, 0.0, node->UU.Uline.endpos,
 		    affang(node->UU.Uline.endpos, node->aat)));
 	pgfendpath();
-	pgfstartdraw(ahnum(node->UU.Uline.atype), node, lsp);
-	pgfahead(ahnum(node->UU.Uline.atype), &node->UU.Uline.endpos, node->aat,
-		 qenv(node, XLarrowht, tn->UU.Uline.height),
-		 qenv(node, XLarrowwid, tn->UU.Uline.width),
-		 qenv(node, XLlinethick, node->lthick));
+	pgfstartdraw(1, node, lsp);
+	pgfahead(&node->UU.Uline.endpos, node->aat, y,
+		 qenv(node, XLarrowwid, tn->UU.Uline.width));
       } else if (node->son == NULL) {
-	/*D; if debuglevel > 0 then
-	        writeln(log,'pgfdraw: last node started');D*/
+	/*D; if debuglevel > 0 then writeln(log,'last node started');D*/
 	ddash();
 	wpos(node->UU.Uline.endpos);
 	pgfendpath();
@@ -2539,7 +2229,7 @@ void pgfdraw(primitive *node)
 	ddash();
 	wpos(node->UU.Uline.endpos);
       }
-      /*D; if debuglevel > 0 then writeln(log,'pgfdraw: node ');D*/
+      /*D; if debuglevel > 0 then writeln(log,'node ');D*/
       /* ptype := XLline */
     }
     pgfwrtext(node, node->textp,
@@ -2550,23 +2240,56 @@ void pgfdraw(primitive *node)
   case XLarc:
     if (drawn(node, lsp, -1.0)) {
       /* pgflinecap(lsp); */
-      X0 = arcstart(node);
-      TEMP = ahlex(node->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD) {
-	startarc(node, X0, &h, &w, &X1);
-	pgfstartdraw(ahnum(node->UU.Uline.atype), node, lsp);
-	pgfahead(ahnum(node->UU.Uline.atype), &X0, X1, h, w,
-		 qenv(node, XLlinethick, node->lthick));
-	X0 = arcstart(node);
+      X0.xpos = node->aat.xpos +
+		node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+      X0.ypos = node->aat.ypos +
+		node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
+      if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	  node->UU.Uline.atype == XLEFTHEAD) {
+	if (node->UU.Uline.aradius == 0.0)
+	  x = 0.0;
+	else
+	  x = atan(qenv(node, XLarrowht, node->UU.Uline.height) /
+		   node->UU.Uline.aradius);
+	if (node->UU.Uline.endpos.ypos >= 0.0) {
+	  node->UU.Uline.endpos.xpos += x;
+	  node->UU.Uline.endpos.ypos -= x;
+	} else {
+	  node->UU.Uline.endpos.xpos -= x;
+	  node->UU.Uline.endpos.ypos += x;
+	}
+	tmpat = X0;
+	X0.xpos = node->aat.xpos +
+		  node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+	X0.ypos = node->aat.ypos +
+		  node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
+	pgfstartdraw(1, node, lsp);
+	pgfahead(&tmpat, X0, qenv(node, XLarrowht, node->UU.Uline.height),
+		 qenv(node, XLarrowwid, node->UU.Uline.width));
       }
-      X3 = arcend(node);
-      TEMP = ahlex(node->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
-	endarc(node, X3, &h, &w, &X1);
-	pgfstartdraw(ahnum(node->UU.Uline.atype), node, lsp);
-	pgfahead(ahnum(node->UU.Uline.atype), &X3, X1, h, w,
-		 qenv(node, XLlinethick, node->lthick));
-	X3 = arcend(node);
+      X3.xpos = node->aat.xpos + node->UU.Uline.aradius *
+		  cos(node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+      X3.ypos = node->aat.ypos + node->UU.Uline.aradius *
+		  sin(node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+      if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	  node->UU.Uline.atype == XRIGHTHEAD) {
+	if (node->UU.Uline.aradius == 0.0)
+	  x = 0.0;
+	else
+	  x = atan(qenv(node, XLarrowht, node->UU.Uline.height) /
+		   node->UU.Uline.aradius);
+	if (node->UU.Uline.endpos.ypos >= 0.0)
+	  node->UU.Uline.endpos.ypos -= x;
+	else
+	  node->UU.Uline.endpos.ypos += x;
+	tmpat = X3;
+	X3.xpos = node->aat.xpos + node->UU.Uline.aradius * cos(
+		      node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+	X3.ypos = node->aat.ypos + node->UU.Uline.aradius * sin(
+		      node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+	pgfstartdraw(1, node, lsp);
+	pgfahead(&tmpat, X3, qenv(node, XLarrowht, node->UU.Uline.height),
+		 qenv(node, XLarrowwid, node->UU.Uline.width));
       }
       pgfstartdraw(0, node, lsp);
       n = (long)(1.0 + fabs(node->UU.Uline.endpos.ypos) / pi);
@@ -2593,7 +2316,10 @@ void pgfdraw(primitive *node)
 	ddot();
 	if (n > 1) {
 	  node->UU.Uline.endpos.xpos += node->UU.Uline.endpos.ypos;
-	  X0 = arcstart(node);
+	  X0.xpos = node->aat.xpos +
+		    node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+	  X0.ypos = node->aat.ypos +
+		    node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
 	}
 	n--;
       }
@@ -2607,7 +2333,7 @@ void pgfdraw(primitive *node)
     pgfwrtext(node, node->textp, node->aat.xpos, node->aat.ypos);
     break;
 
-  case XLaTeX:
+  case XLtroff:
     if (node->textp != NULL) {
       wstring(&output, node->textp);
       putchar('\n');
@@ -2718,8 +2444,7 @@ void pstlineoptions(primitive *node, int lsp, Char sep)
   }
   if ((node->ptype == XLarc || node->ptype == XLspline ||
        node->ptype == XLline ||
-       node->ptype == XLarrow) & (ahlex(node->UU.Uline.atype) != XEMPTY) &
-      (ahnum(node->UU.Uline.atype) != 0)) {
+       node->ptype == XLarrow) && node->UU.Uline.atype != XEMPTY) {
     printf("%carrowsize=", sep);
     wfloat(&output, node->UU.Uline.width / scale);
     printf("in 0,arrowlength=");
@@ -2735,7 +2460,7 @@ void pstlineoptions(primitive *node, int lsp, Char sep)
 }
 
 
-void pstfilloptions(primitive *node, int lsp, double a)
+void pstfilloptions(primitive *node, int lsp)
 {
   Char sep;
   double fill;
@@ -2759,7 +2484,6 @@ void pstfilloptions(primitive *node, int lsp, double a)
     fill = node->UU.Uellipse.efill;
     break;
 
-  case XLarc:
   case XLline:
   case XLarrow:
   case XLmove:
@@ -2789,26 +2513,10 @@ void pstfilloptions(primitive *node, int lsp, double a)
   case XLcircle:
     printf("\\pscircle");
     break;
-
-  case XLspline:
-    printf("\\psbezier");
-    break;
-
-  case XLline:
-  case XLarrow:
-    printf("\\psline");
-    break;
-
-  case XLarc:
-    if (a >= 0.0)
-      printf("\\psarc");
-    else
-      printf("\\psarcn");
-    break;
   }
-  if (sshade != NULL) {
+  if (node->shadedp != NULL) {
     printf("[fillstyle=solid,fillcolor=");
-    wstring(&output, sshade);
+    wstring(&output, node->shadedp);
     sep = ',';
   } else if (fill >= 0.0 && fill <= 1.0) {
     printf("[fillstyle=solid,fillcolor=");
@@ -2838,33 +2546,13 @@ void pstfilloptions(primitive *node, int lsp, double a)
 }
 
 
-void pstahead(postype *point, postype shaft, double ht, double wid,
-		     double lth)
-{
-  postype P, L, R, Q;
-  double x, y;
-
-  printf("\\psline");   /* pstfilloptions(node,lsp,0.0); */
-  dahead(*point, shaft, ht, wid, lth, &P, &L, &R, &Q, &x, &y);
-  wprop(P, L, x - y, y, x);
-  wpos(P);
-  wprop(P, R, x - y, y, x);
-  putchar('\n');
-  *point = P;
-}
-
-
 void pstdraw(primitive *node)
 {
   int lsp;
-  postype X0, X1;
   boolean v;
-  double h, w;
   primitive *tn;
-  int TEMP;
 
-  lsp = lspec(node->spec);
-  sshade = node->shadedp;   /* printobject(node); */
+  lsp = lspec(node->spec);   /* printobject(node); */
   /*D if debuglevel > 0 then begin write(log,'pstdraw: ');
      snaptype(log,ptype); D*/
   /*D
@@ -2882,7 +2570,7 @@ void pstdraw(primitive *node)
     else
       v = drawn(node, lsp, node->UU.Ubox.boxfill);
     if (v) {
-      pstfilloptions(node, lsp, 0.0);
+      pstfilloptions(node, lsp);
       wcoord(&output, west, south);
       wcoord(&output, east, north);
       putchar('\n');
@@ -2893,44 +2581,28 @@ void pstdraw(primitive *node)
   case XLspline:
     if (drawn(node, lsp, node->UU.Uline.lfill)) {
       if (!isthen(node)) {  /* first spline */
-	getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
-	if (sfill && vfill >= 0.0)
-	  node->UU.Uline.lfill = vfill;
-	if (ahnum(tn->UU.Uline.atype) == 0) {
-	  TEMP = ahlex(tn->UU.Uline.atype);
-	  if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD)
-	    pstahead(&tn->UU.Uline.endpos, tn->aat,
-		     qenv(node, XLarrowht, node->UU.Uline.height),
-		     qenv(node, XLarrowwid, node->UU.Uline.width),
-		     qenv(node, XLlinethick, node->lthick));
-	  TEMP = ahlex(tn->UU.Uline.atype);
-	  if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD)
-	    pstahead(&node->aat, node->UU.Uline.endpos,
-		     qenv(node, XLarrowht, node->UU.Uline.height),
-		     qenv(node, XLarrowwid, node->UU.Uline.width),
-		     qenv(node, XLlinethick, node->lthick));
-	}
-	pstfilloptions(tn, lsp, 0.0);
+	printf("\\psbezier");
+	pstfilloptions(node, lsp);
+	tn = node;
+	while (tn->son != NULL)
+	  tn = tn->son;
 	spltot = primdepth(node);
 	splcount = spltot;
-	if (ahnum(tn->UU.Uline.atype) != 0) {
-	  switch (ahlex(tn->UU.Uline.atype)) {
+	switch (tn->UU.Uline.atype) {
 
-	  case XLEFTHEAD:
-	    printf("{<-}");
-	    break;
+	case XLEFTHEAD:
+	  printf("{<-}");
+	  break;
 
-	  case XDOUBLEHEAD:
-	    printf("{<->}");
-	    break;
+	case XDOUBLEHEAD:
+	  printf("{<->}");
+	  break;
 
-	  case XRIGHTHEAD:
-	    printf("{->}");
-	    break;
-	  }
+	case XRIGHTHEAD:
+	  printf("{->}");
+	  break;
 	}
 	wpos(node->aat);
-	sfill = false;
       }
       if (node->UU.Uline.aradius == mdistmax) {
 	if (splcount == spltot && splcount > 1) {  /* 1st seg */
@@ -2982,102 +2654,49 @@ void pstdraw(primitive *node)
     }
     break;
 
+  case XLline:
+  case XLarrow:
   case XLarc:
     if (drawn(node, lsp, node->UU.Uline.lfill)) {
       if (!isthen(node)) {
-	/* tn := node; while tn^.son <> nil do tn := tn^.son; */
-	getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
-	if (sfill && vfill >= 0.0)
-	  node->UU.Uline.lfill = vfill;
-	TEMP = ahlex(node->UU.Uline.atype);
-	if ((ahnum(tn->UU.Uline.atype) == 0) & (TEMP == XDOUBLEHEAD ||
-					       TEMP == XLEFTHEAD)) {
-	  X0 = arcstart(node);
-	  startarc(node, X0, &h, &w, &X1);
-	  pstahead(&X0, X1, h, w, qenv(node, XLlinethick, node->lthick));
+	tn = node;
+	while (tn->son != NULL)
+	  tn = tn->son;
+	if (node->ptype == XLline || node->ptype == XLarrow)
+	  printf("\\psline");
+	else if (node->UU.Uline.endpos.ypos > 0)
+	  printf("\\psarc");
+	else
+	  printf("\\psarcn");
+	pstfilloptions(node, lsp);
+	if (tn->UU.Uline.atype == XLEFTHEAD)
+	  printf("{<-}");
+	else if (tn->UU.Uline.atype == XRIGHTHEAD)
+	  printf("{->}");
+	else if (tn->UU.Uline.atype == XDOUBLEHEAD) {
+	  printf("{<->}");
+	  /* else write('lbrace-rbrace') */
 	}
-	TEMP = ahlex(tn->UU.Uline.atype);
-	if ((ahnum(tn->UU.Uline.atype) == 0) & (TEMP == XDOUBLEHEAD ||
-					       TEMP == XRIGHTHEAD)) {
-	  X0 = arcend(tn);
-	  endarc(tn, X0, &h, &w, &X1);
-	  pstahead(&X0, X1, h, w, qenv(tn, XLlinethick, node->lthick));
-	}
-	pstfilloptions(tn, lsp, node->UU.Uline.endpos.ypos);
-	if (ahnum(tn->UU.Uline.atype) != 0) {
-	  switch (ahlex(tn->UU.Uline.atype)) {
-
-	  case XLEFTHEAD:
-	    printf("{<-}");
-	    break;
-
-	  case XDOUBLEHEAD:
-	    printf("{<->}");
-	    break;
-
-	  case XRIGHTHEAD:
-	    printf("{->}");
-	    break;
-	  }
-	}
-	sfill = false;
+	wpos(node->aat);
       }
-      wpos(node->aat);
-      wbrace(node->UU.Uline.aradius / fsc);
-      wbrace(180.0 / pi * node->UU.Uline.endpos.xpos);
-      wbrace(180.0 / pi * (node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos));
-      putchar('\n');
-    }
-    pstwrtext(node, node->textp, node->aat.xpos, node->aat.ypos);
-    break;
-
-  case XLline:
-  case XLarrow:
-    if (drawn(node, lsp, node->UU.Uline.lfill)) {
-      if (!isthen(node)) {
-	getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
-	if (sfill && vfill >= 0.0)
-	  node->UU.Uline.lfill = vfill;
-	if (ahnum(tn->UU.Uline.atype) == 0) {
-	  TEMP = ahlex(tn->UU.Uline.atype);
-	  if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD)
-	    pstahead(&node->aat, node->UU.Uline.endpos,
-		     qenv(node, XLarrowht, node->UU.Uline.height),
-		     qenv(node, XLarrowwid, node->UU.Uline.width),
-		     qenv(node, XLlinethick, node->lthick));
-	  TEMP = ahlex(tn->UU.Uline.atype);
-	  if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD)
-	    pstahead(&tn->UU.Uline.endpos, tn->aat,
-		     qenv(node, XLarrowht, node->UU.Uline.height),
-		     qenv(node, XLarrowwid, node->UU.Uline.width),
-		     qenv(node, XLlinethick, node->lthick));
-	}
-	pstfilloptions(tn, lsp, 0.0);
-	if (ahnum(tn->UU.Uline.atype) != 0) {
-	  switch (ahlex(tn->UU.Uline.atype)) {
-
-	  case XLEFTHEAD:
-	    printf("{<-}");
-	    break;
-
-	  case XDOUBLEHEAD:
-	    printf("{<->}");
-	    break;
-
-	  case XRIGHTHEAD:
-	    printf("{->}");
-	    break;
-	  }
-	}
-	sfill = false;
+      if (node->ptype == XLarc) {
+	wbrace(node->UU.Uline.aradius / fsc);
+	wbrace(180.0 / pi * node->UU.Uline.endpos.xpos);
+	wbrace(180.0 / pi *
+	       (node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos));
+	putchar('\n');
+      } else {
+	wpos(node->UU.Uline.endpos);
+	/* if son = nil then */
+	putchar('\n');
       }
-      wpos(node->aat);
-      wpos(node->UU.Uline.endpos);
-      putchar('\n');
     }
-    pstwrtext(node, node->textp,
-	      0.5 * (node->UU.Uline.endpos.xpos + node->aat.xpos),
-	      0.5 * (node->aat.ypos + node->UU.Uline.endpos.ypos));
+    if (node->ptype == XLarc)
+      pstwrtext(node, node->textp, node->aat.xpos, node->aat.ypos);
+    else
+      pstwrtext(node, node->textp,
+		0.5 * (node->UU.Uline.endpos.xpos + node->aat.xpos),
+		0.5 * (node->aat.ypos + node->UU.Uline.endpos.ypos));
     break;
 
   case XLmove:
@@ -3088,7 +2707,7 @@ void pstdraw(primitive *node)
 
   case XLellipse:
     if (drawn(node, lsp, node->UU.Uellipse.efill)) {
-      pstfilloptions(node, lsp, 0.0);
+      pstfilloptions(node, lsp);
       wpos(node->aat);
       wcoord(&output, 0.5 * node->UU.Uellipse.elwidth,
 	     0.5 * node->UU.Uellipse.elheight);
@@ -3099,7 +2718,7 @@ void pstdraw(primitive *node)
 
   case XLcircle:
     if (drawn(node, lsp, node->UU.Ucircle.cfill)) {
-      pstfilloptions(node, lsp, 0.0);
+      pstfilloptions(node, lsp);
       wpos(node->aat);
       putchar('{');
       wfloat(&output, node->UU.Ucircle.radius / fsc);
@@ -3112,7 +2731,7 @@ void pstdraw(primitive *node)
     pstwrtext(node, node->textp, node->aat.xpos, node->aat.ypos);
     break;
 
-  case XLaTeX:
+  case XLtroff:
     if (node->textp != NULL) {
       wstring(&output, node->textp);
       putchar('\n');
@@ -3199,6 +2818,34 @@ void commacr(void)
 }
 
 
+void mfpheadshape(int atype, double height, double width)
+{
+  if (atype != XDOUBLEHEAD && atype != XRIGHTHEAD && atype != XLEFTHEAD)
+    return;
+  printf("\\headlen=");
+  wfloat(&output, height / scale * 72.27);
+  printf("pt\\headshape{");
+  if (height == 0.0)
+    wfloat(&output, 0.0);
+  else
+    wfloat(&output, width / height);
+  printf("}{infinity}{true}\n");
+}
+
+
+void mfpcheckarrow(int atype)
+{
+  if (atype == XLEFTHEAD) {
+    printf("\\arrow\\reverse");
+    return;
+  }
+  if (atype == XRIGHTHEAD)
+    printf("\\arrow");
+  else if (atype == XDOUBLEHEAD)
+    printf("\\arrow\\reverse\\arrow");
+}
+
+
 void mfpsetshade(double fill)
 {
   if (fill == 0.0) {
@@ -3276,46 +2923,13 @@ void mfpdashdot(int lsp, double param)
 }
 
 
-void mfpahead(int atyp, postype *point, postype shaft, double ht,
-		     double wid, double lth)
-{
-  postype P, L, R, Q;
-  double x, y;
-
-  dahead(*point, shaft, ht, wid, lth, &P, &L, &R, &Q, &x, &y);
-  if (atyp == 0) {
-    printf("\\polyline{");
-    wprop(P, L, x - y, y, x);
-    comma();
-    wpos(P);
-    comma();
-    wprop(P, R, x - y, y, x);
-    printf("}\n");
-  } else {
-    mfsetthick(0.0);
-    printf("\\gfill\\lclosed\\polyline{");
-    wpos(*point);
-    comma();
-    wpos(affine(ht, wid / 2, *point, Q));
-    comma();
-    wpos(affine(ht, wid / -2, *point, Q));
-    comma();
-    wpos(*point);
-    printf("}\n");
-    mfsetthick(lth);
-  }
-  *point = P;
-}
-
-
 void mfpdraw(primitive *node)
 {
   /* node is always <> nil */
   int i, lsp;
-  postype tmpos, X0, X1;
+  postype tmpos;
   primitive *tn;
-  double h, w, x, y, t, r;
-  int TEMP;
+  double t, r;
 
   lsp = lspec(node->spec);
   switch (node->ptype) {
@@ -3380,20 +2994,13 @@ void mfpdraw(primitive *node)
 	  tn = tn->son;
 	spltot = primdepth(node);
 	splcount = spltot;
+	mfpheadshape(tn->UU.Uline.atype, tn->UU.Uline.height, tn->UU.Uline.width);
 	mfsetthick(node->lthick);
-	X0 = node->aat;
-	TEMP = ahlex(tn->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD) {
-	  mfpahead(ahnum(tn->UU.Uline.atype), &node->aat, node->UU.Uline.endpos,
-		   qenv(node, XLarrowht, tn->UU.Uline.height),
-		   qenv(node, XLarrowwid, tn->UU.Uline.width),
-		   qenv(node, XLlinethick, tn->lthick));
-	  mfpdashdot(lsp, node->lparam);
-	}
+	mfpdashdot(lsp, node->lparam);
+	mfpcheckarrow(tn->UU.Uline.atype);
 	printf("\\curve{");
 	wpos(node->aat);
 	comma();
-	node->aat = X0;
 	if (node->UU.Uline.aradius == mdistmax) {  /* spline x ie tensioned */
 	  wprop(node->aat, node->UU.Uline.endpos, 3.0, 1.0, 4.0);
 	  comma();
@@ -3406,20 +3013,8 @@ void mfpdraw(primitive *node)
       if (splcount > 1) {
 	if (node->UU.Uline.aradius == mdistmax || splcount > 2)
 	  pprop(node->son->UU.Uline.endpos, &node->son->aat, 1.0, 1.0, 2.0);
-	else {
-	  X1 = node->son->aat;
-	  X0 = node->son->UU.Uline.endpos;
-	  TEMP = ahlex(node->UU.Uline.atype);
-	  if ((ahnum(node->UU.Uline.atype) == 0) & (TEMP == XDOUBLEHEAD ||
-						   TEMP == XRIGHTHEAD)) {
-	    x = linlen(node->UU.Uline.endpos.xpos - node->aat.xpos,
-		       node->UU.Uline.endpos.ypos - node->aat.ypos);
-	    y = ahoffset(node);
-	    if (x > 0.0)
-	      pprop(X1, &X0, y, x - y, x);
-	  }
+	else
 	  node->son->aat = node->son->UU.Uline.endpos;
-	}
 	if (node->UU.Uline.aradius == mdistmax)
 	  r = 2.0 / 3;
 	else
@@ -3433,44 +3028,16 @@ void mfpdraw(primitive *node)
 		1.0, 1.0);
 	  comma();
 	}
-	if (node->UU.Uline.aradius == mdistmax || splcount > 2) {
-	  wpos(node->son->aat);
+	wpos(node->son->aat);
+	if (node->UU.Uline.aradius == mdistmax || splcount > 2)
 	  commacr();
-	} else {
-	  TEMP = ahlex(node->UU.Uline.atype);
-	  if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
-	    wpos(X0);
-	    printf("}\n");
-	    mfpahead(ahnum(node->UU.Uline.atype), &node->son->aat, X1,
-		     qenv(node, XLarrowht, node->UU.Uline.height),
-		     qenv(node, XLarrowwid, node->UU.Uline.width),
-		     qenv(node, XLlinethick, node->lthick));
-	  } else {
-	    wpos(node->son->aat);
-	    printf("}\n");
-	  }
-	}
+	else
+	  printf("}\n");
       } else if (node->UU.Uline.aradius == mdistmax) {
 	wprop(node->aat, node->UU.Uline.endpos, 1.0, 1.0, 2.0);
 	comma();
-	TEMP = ahlex(node->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
-	  X0 = node->UU.Uline.endpos;
-	  x = linlen(node->UU.Uline.endpos.xpos - node->aat.xpos,
-		     node->UU.Uline.endpos.ypos - node->aat.ypos);
-	  y = ahoffset(node);
-	  if (x > 0.0)
-	    pprop(node->aat, &node->UU.Uline.endpos, y, x - y, x);
-	  wpos(node->UU.Uline.endpos);
-	  printf("}\n");
-	  mfpahead(ahnum(node->UU.Uline.atype), &X0, node->aat,
-		   qenv(node, XLarrowht, node->UU.Uline.height),
-		   qenv(node, XLarrowwid, node->UU.Uline.width),
-		   qenv(node, XLlinethick, node->lthick));
-	} else {
-	  wpos(node->UU.Uline.endpos);
-	  printf("}\n");
-	}
+	wpos(node->UU.Uline.endpos);
+	printf("}\n");
       }
       splcount--;
     }
@@ -3481,25 +3048,13 @@ void mfpdraw(primitive *node)
   case XLmove:
     if (drawn(node, lsp, -1.0)) {
       if (!isthen(node)) {
-	/* tn := node; while tn^.son <> nil do tn := tn^.son; */
-	getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
-	if (sfill && vfill >= 0.0)
-	  node->UU.Uline.lfill = vfill;
-	TEMP = ahlex(node->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD)
-	  mfpahead(ahnum(node->UU.Uline.atype), &node->aat,
-		   node->UU.Uline.endpos,
-		   qenv(node, XLarrowht, node->UU.Uline.height),
-		   qenv(node, XLarrowwid, node->UU.Uline.width),
-		   qenv(node, XLlinethick, node->lthick));
-	TEMP = ahlex(tn->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD)
-	  mfpahead(ahnum(tn->UU.Uline.atype), &tn->UU.Uline.endpos, tn->aat,
-		   qenv(node, XLarrowht, tn->UU.Uline.height),
-		   qenv(node, XLarrowwid, tn->UU.Uline.width),
-		   qenv(node, XLlinethick, tn->lthick));
+	tn = node;
+	while (tn->son != NULL)
+	  tn = tn->son;
+	mfpheadshape(tn->UU.Uline.atype, tn->UU.Uline.height, tn->UU.Uline.width);
 	mfsetthick(node->lthick);
 	mfpdashdot(lsp, node->lparam);
+	mfpcheckarrow(tn->UU.Uline.atype);
 	printf("\\polyline{");
 	wpos(node->aat);
 	comma();
@@ -3518,21 +3073,11 @@ void mfpdraw(primitive *node)
 
   case XLarc:
     if (drawn(node, lsp, -1.0)) {
-      TEMP = ahlex(node->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD) {
-	X0 = arcstart(node);
-	startarc(node, X0, &h, &w, &X1);
-	mfpahead(ahnum(node->UU.Uline.atype), &X0, X1, h, w,
-		 qenv(node, XLlinethick, node->lthick));
-      }
-      TEMP = ahlex(node->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
-	X0 = arcend(node);
-	endarc(node, X0, &h, &w, &X1);
-	mfpahead(ahnum(node->UU.Uline.atype), &X0, X1, h, w,
-		 qenv(node, XLlinethick, node->lthick));
-      }
+      mfpheadshape(node->UU.Uline.atype, node->UU.Uline.height,
+		   node->UU.Uline.width);
+      mfsetthick(node->lthick);
       mfpdashdot(lsp, node->lparam);
+      mfpcheckarrow(node->UU.Uline.atype);
       printf("\\arc[p]{");
       wpos(node->aat);
       comma();
@@ -3551,7 +3096,7 @@ void mfpdraw(primitive *node)
     mfpwrtext(node, node->textp, node->aat.xpos, node->aat.ypos);
     break;
 
-  case XLaTeX:
+  case XLtroff:
     if (node->textp != NULL) {
       wstring(&output, node->textp);
       putchar('\n');
@@ -3623,33 +3168,22 @@ void mpowrtext(nametype *tp, double x, double y)
 }
 
 
-void mpoahead(int atyp, postype *point, postype shaft, double ht,
-		     double wid, double lth)
+void mpoahead(postype *point, postype shaft, double ht, double wid)
 {
-  postype P, L, R, Q;
-  double x, y;
+  postype butx, cs;
 
-  dahead(*point, shaft, ht * 72, wid * 72, lth * 72, &P, &L, &R, &Q, &x, &y);
-  if (atyp == 0) {
-    printf("drw ");
-    wprop(P, L, x - y, y, x);
-    ddash();
-    wpos(P);
-    ddash();
-    wprop(P, R, x - y, y, x);
-    printf(" X\n");
-  } else {
-    printf("fill ");
-    wpos(affine(ht, 0.0, *point, Q));
-    ddash();
-    wpos(affine(ht, wid / 2, *point, Q));
-    ddash();
-    wpos(*point);
-    ddash();
-    wpos(affine(ht, wid / -2, *point, Q));
-    printf("\n --cycle X\n");
-  }
-  *point = P;
+  cs = affang(*point, shaft);
+  butx = affine(ht, 0.0, *point, cs);
+  printf("fill ");
+  wpos(butx);
+  ddash();
+  wpos(affine(ht, wid / 2, *point, cs));
+  ddash();
+  wpos(*point);
+  ddash();
+  wpos(affine(ht, wid / -2, *point, cs));
+  printf("\n --cycle X\n");
+  *point = butx;
 }
 
 
@@ -3819,329 +3353,300 @@ void mpoellipse(Char *initial, postype ctr, double halfwid,
 #undef r
 
 
-void mpoarc(primitive *node, postype X0, postype X3)
-{
-  int n;
-  double x, y, xx, xy, s, a;
-  postype tmpat;
-
-  n = (long)(1.0 + fabs(node->UU.Uline.endpos.ypos) / pi);
-  s = node->UU.Uline.endpos.xpos;
-  a = node->UU.Uline.endpos.ypos / n;
-  while (n > 0) {
-    wpos(X0);
-    controls();
-    x = cos(a / 2);
-    y = sin(a / 2);
-    xx = (4 - x) / 3;
-    if (y != 0.0)
-      xy = (1.0 - x * xx) / y;
-    else
-      xy = 0.0;
-    tmpat.xpos = cos(s + a / 2.0);
-    tmpat.ypos = sin(s + a / 2.0);
-    wpos(affine(node->UU.Uline.aradius * xx, -node->UU.Uline.aradius * xy,
-		node->aat, tmpat));
-    wrand();
-    wpos(affine(node->UU.Uline.aradius * xx, node->UU.Uline.aradius * xy,
-		node->aat, tmpat));
-    ddot();
-    s += a;
-    X0.xpos = node->aat.xpos + node->UU.Uline.aradius * cos(s);
-    X0.ypos = node->aat.ypos + node->UU.Uline.aradius * sin(s);
-    n--;
-  }
-  wpos(X3);
-}
-
-
 void mpodraw(primitive *node)
 {
   /* node is always <> nil */
-  int lsp;
-  postype tmpat, X0, X1, X3;
+  int lsp, n;
+  postype tmpat, X0, X3;
   primitive *tn;
-  double h, w, x, y;
-  primitive *WITH, *WITH1;
-  int TEMP;
+  double x, y, xx, xy;
 
   lsp = lspec(node->spec);
-  WITH = node;
-  switch (WITH->ptype) {
+  switch (node->ptype) {
 
   case XLbox:
   case XBLOCK:
     initnesw();
     nesw(node);
-    if (WITH->ptype == XLbox) {
-      if (WITH->shadedp != NULL ||
-	  WITH->UU.Ubox.boxfill >= 0.0 && WITH->UU.Ubox.boxfill <= 1.0) {
-	mpobox("fill ", WITH->aat, WITH->UU.Ubox.boxwidth / 2,
-	       WITH->UU.Ubox.boxheight / 2, WITH->UU.Ubox.boxradius);
-	addcolor(WITH->shadedp, WITH->UU.Ubox.boxfill);
+    if (node->ptype == XLbox) {
+      if (node->shadedp != NULL ||
+	  node->UU.Ubox.boxfill >= 0.0 && node->UU.Ubox.boxfill <= 1.0) {
+	mpobox("fill ", node->aat, node->UU.Ubox.boxwidth / 2,
+	       node->UU.Ubox.boxheight / 2, node->UU.Ubox.boxradius);
+	addcolor(node->shadedp, node->UU.Ubox.boxfill);
 	printf(";\n");
       }
       if (drawn(node, lsp, -1.0)) {
-	mposetthick(WITH->lthick);
+	mposetthick(node->lthick);
 	mpolinecap(lsp);
-	mpobox("drw ", WITH->aat, WITH->UU.Ubox.boxwidth / 2,
-	       WITH->UU.Ubox.boxheight / 2, WITH->UU.Ubox.boxradius);
-	mpodashdot(lsp, WITH->lparam, WITH->outlinep);
+	mpobox("drw ", node->aat, node->UU.Ubox.boxwidth / 2,
+	       node->UU.Ubox.boxheight / 2, node->UU.Ubox.boxradius);
+	mpodashdot(lsp, node->lparam, node->outlinep);
       }
     }
-    mpowrtext(WITH->textp, 0.5 * (east + west), 0.5 * (north + south));
+    mpowrtext(node->textp, 0.5 * (east + west), 0.5 * (north + south));
     break;
 
   case XLellipse:
-    if (WITH->shadedp != NULL ||
-	WITH->UU.Uellipse.efill >= 0.0 && WITH->UU.Uellipse.efill <= 1.0) {
-      mpoellipse("fill ", WITH->aat, WITH->UU.Uellipse.elwidth / 2,
-		 WITH->UU.Uellipse.elheight / 2);
-      addcolor(WITH->shadedp, WITH->UU.Uellipse.efill);
+    if (node->shadedp != NULL ||
+	node->UU.Uellipse.efill >= 0.0 && node->UU.Uellipse.efill <= 1.0) {
+      mpoellipse("fill ", node->aat, node->UU.Uellipse.elwidth / 2,
+		 node->UU.Uellipse.elheight / 2);
+      addcolor(node->shadedp, node->UU.Uellipse.efill);
       printf(";\n");
     }
     if (drawn(node, lsp, -1.0)) {
-      mposetthick(WITH->lthick);
+      mposetthick(node->lthick);
       mpolinecap(lsp);
-      mpoellipse("drw ", WITH->aat, WITH->UU.Uellipse.elwidth / 2,
-		 WITH->UU.Uellipse.elheight / 2);
-      mpodashdot(lsp, WITH->lparam, WITH->outlinep);
+      mpoellipse("drw ", node->aat, node->UU.Uellipse.elwidth / 2,
+		 node->UU.Uellipse.elheight / 2);
+      mpodashdot(lsp, node->lparam, node->outlinep);
     }
-    mpowrtext(WITH->textp, WITH->aat.xpos, WITH->aat.ypos);
+    mpowrtext(node->textp, node->aat.xpos, node->aat.ypos);
     break;
 
   case XLcircle:
-    if (WITH->shadedp != NULL ||
-	WITH->UU.Ucircle.cfill >= 0.0 && WITH->UU.Ucircle.cfill <= 1.0) {
+    if (node->shadedp != NULL ||
+	node->UU.Ucircle.cfill >= 0.0 && node->UU.Ucircle.cfill <= 1.0) {
       printf("fill fullcircle scaled ");
-      wfloat(&output, WITH->UU.Ucircle.radius * 2 / fsc);
+      wfloat(&output, node->UU.Ucircle.radius * 2 / fsc);
       printf(" shifted ");
-      wpos(WITH->aat);
-      addcolor(WITH->shadedp, WITH->UU.Ucircle.cfill);
+      wpos(node->aat);
+      addcolor(node->shadedp, node->UU.Ucircle.cfill);
       printf(";\n");
     }
     if (drawn(node, lsp, -1.0)) {
-      mposetthick(WITH->lthick);
+      mposetthick(node->lthick);
       mpolinecap(lsp);
       printf("drw fullcircle scaled ");
-      wfloat(&output, WITH->UU.Ucircle.radius * 2 / fsc);
+      wfloat(&output, node->UU.Ucircle.radius * 2 / fsc);
       printf(" shifted ");
-      wpos(WITH->aat);
-      mpodashdot(lsp, WITH->lparam, WITH->outlinep);
+      wpos(node->aat);
+      mpodashdot(lsp, node->lparam, node->outlinep);
     }
-    mpowrtext(WITH->textp, WITH->aat.xpos, WITH->aat.ypos);
+    mpowrtext(node->textp, node->aat.xpos, node->aat.ypos);
     break;
 
   case XLspline:
     if (drawn(node, lsp, -1.0)) {
-      while (node != NULL) {
-	if (node->UU.Uline.aradius == mdistmax)
-	  x = 2.0 / 3;
-	else
-	  x = node->UU.Uline.aradius;
-	if (!isthen(node)) {
-	  getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
-	  mposetthick(node->lthick);
-	  spltot = primdepth(node);
-	  splcount = spltot;
-	  tmpat = node->aat;
-	  TEMP = ahlex(tn->UU.Uline.atype);
-	  if ((!sfill) & (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD))
-	    mpoahead(ahnum(tn->UU.Uline.atype), &node->aat,
-		     node->UU.Uline.endpos,
-		     qenv(node, XLarrowht, tn->UU.Uline.height),
-		     qenv(node, XLarrowwid, tn->UU.Uline.width),
-		     qenv(node, XLlinethick, tn->lthick));
-	  mpolinecap(lsp);
-	  if (sfill)
-	    printf("fill ");
-	  else
-	    printf("drw ");
-	  wpos(node->aat);
-	  node->aat = tmpat;
-	  if (node->UU.Uline.aradius == mdistmax) {
-	    ddash();
-	    if (spltot > 1) {
-	      wprop(node->UU.Uline.endpos, node->aat, 1.0, 1.0, 2.0);
-	      controls();
-	      wprop(node->aat, node->UU.Uline.endpos, 1.0, 5.0, 6.0);
-	    }
-	  } else if (spltot > 1) {
+      if (node->UU.Uline.aradius == mdistmax)
+	x = 2.0 / 3;
+      else
+	x = node->UU.Uline.aradius;
+      if (!isthen(node)) {  /* first spline */
+	tn = node;
+	while (tn->son != NULL)
+	  tn = tn->son;
+	mposetthick(node->lthick);
+	spltot = primdepth(node);
+	splcount = spltot;
+	tmpat = node->aat;
+	if (tn->UU.Uline.atype == XDOUBLEHEAD || tn->UU.Uline.atype == XLEFTHEAD)
+	  mpoahead(&node->aat, node->UU.Uline.endpos,
+		   qenv(node, XLarrowht, tn->UU.Uline.height),
+		   qenv(node, XLarrowwid, tn->UU.Uline.width));
+	mpolinecap(lsp);
+	printf("drw ");
+	wpos(node->aat);
+	node->aat = tmpat;
+	if (node->UU.Uline.aradius == mdistmax) {
+	  ddash();
+	  if (spltot > 1) {
+	    wprop(node->UU.Uline.endpos, node->aat, 1.0, 1.0, 2.0);
 	    controls();
-	    wprop(node->aat, node->UU.Uline.endpos, 1 - x, x, 1.0);
+	    wprop(node->aat, node->UU.Uline.endpos, 1.0, 5.0, 6.0);
 	  }
-	} else if (splcount > 1) {
+	} else if (spltot > 1) {
+	  controls();
+	  wprop(node->aat, node->UU.Uline.endpos, 1 - x, x, 1.0);
+	}
+      } else if (splcount > 1) {
+	wrand();
+	wprop(node->aat, node->UU.Uline.endpos, (1 + x) / 2, (1 - x) / 2, 1.0);
+	ddot();
+	wprop(node->aat, node->UU.Uline.endpos, 1.0, 1.0, 2.0);
+	controls();
+	wprop(node->aat, node->UU.Uline.endpos, (1 - x) / 2, (1 + x) / 2, 1.0);
+      }
+      if (splcount == 1) {
+	/*D; if debuglevel > 0 then writeln(log,'last node started');D*/
+	if (spltot > 1 && node->UU.Uline.aradius == mdistmax) {
 	  wrand();
-	  wprop(node->aat, node->UU.Uline.endpos, (1 + x) / 2, (1 - x) / 2,
-		1.0);
+	  wprop(node->aat, node->UU.Uline.endpos, 5.0, 1.0, 6.0);
 	  ddot();
 	  wprop(node->aat, node->UU.Uline.endpos, 1.0, 1.0, 2.0);
-	  controls();
-	  wprop(node->aat, node->UU.Uline.endpos, (1 - x) / 2, (1 + x) / 2,
-		1.0);
+	  ddash();
+	} else if (node->UU.Uline.aradius != distmax) {
+	  wrand();
+	  wprop(node->aat, node->UU.Uline.endpos, x, 1 - x, 1.0);
+	  ddot();
 	}
-	if (splcount == 1) {
-	  /*D; if debuglevel > 0 then writeln(log,'last node started');D*/
-	  if (spltot > 1 && node->UU.Uline.aradius == mdistmax) {
-	    wrand();
-	    wprop(node->aat, node->UU.Uline.endpos, 5.0, 1.0, 6.0);
-	    ddot();
-	    wprop(node->aat, node->UU.Uline.endpos, 1.0, 1.0, 2.0);
-	    ddash();
-	  } else if (node->UU.Uline.aradius != distmax) {
-	    wrand();
-	    wprop(node->aat, node->UU.Uline.endpos, x, 1 - x, 1.0);
-	    ddot();
-	  }
-	  tmpat = node->UU.Uline.endpos;
-	  TEMP = ahlex(node->UU.Uline.atype);
-	  if ((!sfill) & (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD)) {
-	    x = linlen(node->UU.Uline.endpos.xpos - node->aat.xpos,
-		       node->UU.Uline.endpos.ypos - node->aat.ypos);
-	    y = ahoffset(node);
-	    if (x > 0.0)
-	      pprop(node->aat, &tmpat, y, x - y, x);
-	  }
-	  wpos(tmpat);
-	  if (sfill) {
-	    printf(" ..cycle");
-	    addcolor(sshade, vfill);
-	    printf(";\n");
-	  } else
-	    mpodashdot(lsp, node->lparam, node->outlinep);
-	  TEMP = ahlex(node->UU.Uline.atype);
-	  if ((!sfill) & (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD))
-	    mpoahead(ahnum(node->UU.Uline.atype), &node->UU.Uline.endpos,
-		     node->aat, qenv(node, XLarrowht, node->UU.Uline.height),
-		     qenv(node, XLarrowwid, node->UU.Uline.width),
-		     qenv(node, XLlinethick, node->lthick));
+	tmpat = node->UU.Uline.endpos;
+	if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	    node->UU.Uline.atype == XRIGHTHEAD) {
+	  x = linlen(node->UU.Uline.endpos.xpos - node->aat.xpos,
+		     node->UU.Uline.endpos.ypos - node->aat.ypos);
+	  y = qenv(node, XLarrowht, node->UU.Uline.height);
+	  pprop(node->aat, &tmpat, y, x - y, x);
 	}
-	if (!sfill)
-	  node->ptype = XLline;
-	/*D; if debuglevel > 0 then writeln(log,'node ',splcount:1);D*/
-	splcount--;
-	if (sfill)
-	  node = node->son;
-	else
-	  node = NULL;
+	wpos(tmpat);
+	mpodashdot(lsp, node->lparam, node->outlinep);
+	if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	    node->UU.Uline.atype == XRIGHTHEAD)
+	  mpoahead(&node->UU.Uline.endpos, node->aat, y,
+		   qenv(node, XLarrowwid, node->UU.Uline.width));
       }
+      node->ptype = XLline;
+      /*D; if debuglevel > 0 then writeln(log,'node ',splcount:1);D*/
+      splcount--;
     }
     break;
 
   case XLline:
   case XLarrow:
   case XLmove:
-    snode = node;
     if (drawn(node, lsp, -1.0)) {
-      while (node != NULL) {
-	if (!isthen(node)) {
-	  getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
-	  mposetthick(node->lthick);
-	  tmpat = node->aat;
-	  TEMP = ahlex(tn->UU.Uline.atype);
-	  if ((!sfill) & (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD))
-	    mpoahead(ahnum(tn->UU.Uline.atype), &node->aat,
-		     node->UU.Uline.endpos,
-		     qenv(node, XLarrowht, tn->UU.Uline.height),
-		     qenv(node, XLarrowwid, tn->UU.Uline.width),
-		     qenv(node, XLlinethick, tn->lthick));
-	  mpolinecap(lsp);
-	  if (sfill)
-	    printf("fill ");
-	  else
-	    printf("drw ");
-	  wpos(node->aat);
-	}
-	TEMP = ahlex(node->UU.Uline.atype);
-	if ((!sfill && node->son == NULL) & (TEMP == XDOUBLEHEAD ||
-					     TEMP == XRIGHTHEAD)) {
-	  x = ahoffset(node);
-	  ddash();
-	  wpos(affine(x, 0.0, node->UU.Uline.endpos,
-		      affang(node->UU.Uline.endpos, node->aat)));
-	  mpodashdot(lsp, node->lparam, node->outlinep);
-	  mpoahead(ahnum(node->UU.Uline.atype), &node->UU.Uline.endpos,
-		   node->aat, qenv(node, XLarrowht, node->UU.Uline.height),
-		   qenv(node, XLarrowwid, node->UU.Uline.width),
-		   qenv(node, XLlinethick, node->lthick));
-	} else if (node->son == NULL) {
-	  /*D; if debuglevel > 0 then writeln(log,'last node started');D*/
-	  ddash();
-	  wpos(node->UU.Uline.endpos);
-	  if (sfill) {
-	    printf(" ..cycle");
-	    addcolor(sshade, vfill);
-	    printf(";\n");
-	  } else
-	    mpodashdot(lsp, node->lparam, node->outlinep);
-	} else {
-	  ddash();
-	  wpos(node->UU.Uline.endpos);
-	}
-	if (sfill)
-	  node = node->son;
-	else {
-	  node = NULL;
-	  /*D; if debuglevel > 0 then writeln(log,'node ');D*/
-	}
+      tn = node;
+      while (tn->son != NULL)
+	tn = tn->son;
+      if (!isthen(node)) {
+	mposetthick(node->lthick);
+	tmpat = node->aat;
+	if (tn->UU.Uline.atype == XDOUBLEHEAD || tn->UU.Uline.atype == XLEFTHEAD)
+	  mpoahead(&node->aat, node->UU.Uline.endpos,
+		   qenv(node, XLarrowht, tn->UU.Uline.height),
+		   qenv(node, XLarrowwid, tn->UU.Uline.width));
+	mpolinecap(lsp);
+	printf("drw ");
+	wpos(node->aat);
       }
+      if (node->son == NULL &&
+	  (tn->UU.Uline.atype == XDOUBLEHEAD ||
+	   tn->UU.Uline.atype == XRIGHTHEAD)) {
+	y = qenv(node, XLarrowht, tn->UU.Uline.height);
+	ddash();
+	wpos(affine(y, 0.0, node->UU.Uline.endpos,
+		    affang(node->UU.Uline.endpos, node->aat)));
+	mpodashdot(lsp, node->lparam, node->outlinep);
+	mpoahead(&node->UU.Uline.endpos, node->aat, y,
+		 qenv(node, XLarrowwid, tn->UU.Uline.width));
+      } else if (node->son == NULL) {
+	/*D; if debuglevel > 0 then writeln(log,'last node started');D*/
+	ddash();
+	wpos(node->UU.Uline.endpos);
+	mpodashdot(lsp, node->lparam, node->outlinep);
+      } else {
+	ddash();
+	wpos(node->UU.Uline.endpos);
+      }
+      /*D; if debuglevel > 0 then writeln(log,'node ');D*/
+      /* ptype := XLline */
     }
-    if (!sfill && snode != NULL) {
-      WITH1 = snode;
-      mpowrtext(WITH1->textp,
-		0.5 * (WITH1->UU.Uline.endpos.xpos + WITH1->aat.xpos),
-		0.5 * (WITH1->UU.Uline.endpos.ypos + WITH1->aat.ypos));
-    }
+    mpowrtext(node->textp, 0.5 * (node->UU.Uline.endpos.xpos + node->aat.xpos),
+	      0.5 * (node->aat.ypos + node->UU.Uline.endpos.ypos));
     break;
 
   case XLarc:
     if (drawn(node, lsp, -1.0)) {
-      X0 = arcstart(node);
-      if (WITH->shadedp != NULL ||
-	  WITH->UU.Uline.lfill >= 0.0 && WITH->UU.Uline.lfill <= 1.0) {
-	X3 = arcend(node);
-	printf("fill ");
-	wpos(X3);
-	ddash();
-	mpoarc(node, X0, X3);
-	printf(" ..cycle");
-	addcolor(WITH->shadedp, WITH->UU.Uline.lfill);
-	printf(";\n");
-      }
-      mposetthick(WITH->lthick);
+      mposetthick(node->lthick);
       mpolinecap(lsp);
-      TEMP = ahlex(WITH->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD) {
-	startarc(node, X0, &h, &w, &X1);
-	mpoahead(ahnum(WITH->UU.Uline.atype), &X0, X1, h, w,
-		 qenv(node, XLlinethick, WITH->lthick));
-	X0 = arcstart(node);
+      X0.xpos = node->aat.xpos +
+		node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+      X0.ypos = node->aat.ypos +
+		node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
+      if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	  node->UU.Uline.atype == XLEFTHEAD) {
+	if (node->UU.Uline.aradius == 0.0)
+	  x = 0.0;
+	else
+	  x = atan(qenv(node, XLarrowht, node->UU.Uline.height) /
+		   node->UU.Uline.aradius);
+	if (node->UU.Uline.endpos.ypos >= 0.0) {
+	  node->UU.Uline.endpos.xpos += x;
+	  node->UU.Uline.endpos.ypos -= x;
+	} else {
+	  node->UU.Uline.endpos.xpos -= x;
+	  node->UU.Uline.endpos.ypos += x;
+	}
+	tmpat = X0;
+	X0.xpos = node->aat.xpos +
+		  node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+	X0.ypos = node->aat.ypos +
+		  node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
+	mpoahead(&tmpat, X0, qenv(node, XLarrowht, node->UU.Uline.height),
+		 qenv(node, XLarrowwid, node->UU.Uline.width));
       }
-      X3 = arcend(node);
-      TEMP = ahlex(WITH->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
-	endarc(node, X3, &h, &w, &X1);
-	mpoahead(ahnum(WITH->UU.Uline.atype), &X3, X1, h, w,
-		 qenv(node, XLlinethick, WITH->lthick));
-	X3 = arcend(node);
+      X3.xpos = node->aat.xpos + node->UU.Uline.aradius *
+		  cos(node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+      X3.ypos = node->aat.ypos + node->UU.Uline.aradius *
+		  sin(node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+      if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	  node->UU.Uline.atype == XRIGHTHEAD) {
+	if (node->UU.Uline.aradius == 0.0)
+	  x = 0.0;
+	else
+	  x = atan(qenv(node, XLarrowht, node->UU.Uline.height) /
+		   node->UU.Uline.aradius);
+	if (node->UU.Uline.endpos.ypos >= 0.0)
+	  node->UU.Uline.endpos.ypos -= x;
+	else
+	  node->UU.Uline.endpos.ypos += x;
+	tmpat = X3;
+	X3.xpos = node->aat.xpos + node->UU.Uline.aradius * cos(
+		      node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+	X3.ypos = node->aat.ypos + node->UU.Uline.aradius * sin(
+		      node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+	mpoahead(&tmpat, X3, qenv(node, XLarrowht, node->UU.Uline.height),
+		 qenv(node, XLarrowwid, node->UU.Uline.width));
       }
       printf("drw ");
-      mpoarc(node, X0, X3);
-      mpodashdot(lsp, WITH->lparam, WITH->outlinep);
+      n = (long)(1.0 + fabs(node->UU.Uline.endpos.ypos) / pi);
+      node->UU.Uline.endpos.ypos /= n;
+      while (n > 0) {
+	wpos(X0);
+	controls();
+	x = cos(node->UU.Uline.endpos.ypos / 2);
+	y = sin(node->UU.Uline.endpos.ypos / 2);
+	xx = (4 - x) / 3;
+	if (y != 0.0)
+	  xy = (1.0 - x * xx) / y;
+	else
+	  xy = 0.0;
+	tmpat.xpos = cos(
+	    node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos / 2.0);
+	tmpat.ypos = sin(
+	    node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos / 2.0);
+	wpos(affine(node->UU.Uline.aradius * xx, -node->UU.Uline.aradius * xy,
+		    node->aat, tmpat));
+	wrand();
+	wpos(affine(node->UU.Uline.aradius * xx, node->UU.Uline.aradius * xy,
+		    node->aat, tmpat));
+	ddot();
+	if (n > 1) {
+	  node->UU.Uline.endpos.xpos += node->UU.Uline.endpos.ypos;
+	  X0.xpos = node->aat.xpos +
+		    node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+	  X0.ypos = node->aat.ypos +
+		    node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
+	}
+	n--;
+      }
+      wpos(X3);
+      mpodashdot(lsp, node->lparam, node->outlinep);
     }
-    mpowrtext(WITH->textp, WITH->aat.xpos, WITH->aat.ypos);
+    mpowrtext(node->textp, node->aat.xpos, node->aat.ypos);
     break;
 
   case XLstring:
-    mpowrtext(WITH->textp, WITH->aat.xpos, WITH->aat.ypos);
+    mpowrtext(node->textp, node->aat.xpos, node->aat.ypos);
     break;
 
-  case XLaTeX:
-    if (WITH->textp != NULL) {
-      wstring(&output, WITH->textp);
+  case XLtroff:
+    if (node->textp != NULL) {
+      wstring(&output, node->textp);
       putchar('\n');
-    } else if (WITH->lthick >= 0.0)
-      mposetthick(WITH->lthick);
+    } else if (node->lthick >= 0.0)
+      mposetthick(node->lthick);
     break;
   }
 }  /* mpodraw */
@@ -4376,43 +3881,32 @@ void pswtext(nametype *tp, double x, double y)
 }
 
 
-void pswprop(postype p1, postype p2, double a, double b, double c)
+void psahead(postype *point, postype shaft, double ht, double wid,
+		    double lth)
 {
-  pprop(p1, &p2, a, b, c);
-  pswpos(p2);
-}
+  postype butx, cs;
+  double st;
 
-
-void psahead(int atyp, postype *point, postype shaft, double ht,
-		    double wid, double lth)
-{
-  postype P, L, R, Q;
-  double x, y;
-
-  dahead(*point, shaft, ht * 72, wid * 72, lth * 72, &P, &L, &R, &Q, &x, &y);
+  lth /= 72.27;
+  if (ht == 0.0 && wid == 0.0)
+    st = 1.0;
+  else
+    st = wid / 2 / sqrt(ht * ht + wid * wid / 4);
+  cs = affang(*point, shaft);
+  *point = affine(lth / 2 / st, 0.0, *point, cs);
+      /*point adjusted by line thickness*/
+  butx = affine(ht, 0.0, *point, cs);   /*point+((ht,0) rotated) */
   printf("newpath");
-  if (atyp == 0) {
-    pswprop(P, L, x - y, y, x);
-    printf(" moveto");
-    pswpos(P);
-    printf(" lineto");
-    pswprop(P, R, x - y, y, x);
-    printf(" lineto\n");
-  } else {
-    Q.xpos = (L.xpos + R.xpos) / 2;
-    Q.ypos = (L.ypos + R.ypos) / 2;
-    pswpos(Q);
-    printf(" moveto\n");
-    pswpos(L);
-    printf(" lineto");
-    pswpos(P);
-    printf(" lineto");
-    pswpos(R);
-    printf(" lineto\n");
-    printf(" closepath gsave fill grestore");
-  }
-  printf(" 0 setlinejoin stroke setlineparms\n");
-  *point = P;
+  pswpos(butx);
+  printf(" moveto\n");
+  pswpos(affine(ht, wid / 2, *point, cs));
+  printf(" lineto");
+  pswpos(*point);
+  printf(" lineto");
+  pswpos(affine(ht, wid / -2, *point, cs));
+  printf(" lineto\n");
+  printf(" closepath gsave fill grestore 0 setlinejoin stroke setlineparms\n");
+  *point = butx;
 }
 
 
@@ -4536,20 +4030,10 @@ void psellipse(double x, double y)
 #undef r
 
 
-void pslinearfill(double f, nametype *ss)
+void pswprop(postype p1, postype p2, double a, double b, double c)
 {
-  if (f >= 0.0 && f <= 1.0) {
-    printf(" gsave\n");
-    pswfloat(&output, f);
-    printf(" setgray fill grestore\n");
-    return;
-  }
-  if (ss == NULL)
-    return;
-  printf(" gsave\n");
-  putchar(' ');
-  wstring(&output, ss);
-  printf(" setrgbcolor fill grestore\n");
+  pprop(p1, &p2, a, b, c);
+  pswpos(p2);
 }
 
 
@@ -4557,10 +4041,9 @@ void psdraw(primitive *node)
 {
   /* node is always <> nil */
   int lsp;
-  postype X0, X1;
+  postype tmpat, X0;
   primitive *tn;
-  double h, w, x, y, lth, fill;
-  int TEMP;
+  double x, y, lth, fill;
 
   lsp = lspec(node->spec);
   lth = qenv(node, XLlinethick, node->lthick);   /* printobject(node); */
@@ -4667,20 +4150,21 @@ void psdraw(primitive *node)
   case XLspline:
     if (drawn(node, lsp, -1.0)) {
       if (!isthen(node)) {  /* first spline */
-	/* tn := node; while tn^.son <> nil do tn := tn^.son; */
-	getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
+	tn = node;
+	while (tn->son != NULL)
+	  tn = tn->son;
 	spltot = primdepth(node);
 	splcount = spltot;
-	X0 = node->aat;
+	tmpat = node->aat;
 	pssetthick(lth);
-	TEMP = ahlex(tn->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD)
-	  psahead(ahnum(tn->UU.Uline.atype), &node->aat, node->UU.Uline.endpos,
-		  qenv(node, XLarrowht, node->UU.Uline.height),
-		  qenv(node, XLarrowwid, node->UU.Uline.width), lth);
+	if (tn->UU.Uline.atype == XDOUBLEHEAD || tn->UU.Uline.atype == XLEFTHEAD)
+	  psahead(&node->aat, node->UU.Uline.endpos,
+		  qenv(node, XLarrowht, tn->UU.Uline.height),
+		  qenv(node, XLarrowwid, tn->UU.Uline.width), lth);
+	pslineopts(lsp, node->lparam, node->outlinep);
 	psnewpath();
 	pswpos(node->aat);
-	node->aat = X0;
+	node->aat = tmpat;
 	printf(" moveto\n");
 	if (spltot > 1 && node->UU.Uline.aradius == mdistmax) {
 	  pswprop(node->UU.Uline.endpos, node->aat, 1.0, 1.0, 2.0);
@@ -4712,27 +4196,24 @@ void psdraw(primitive *node)
 	} else if (spltot > 1)
 	  pswprop(node->aat, node->UU.Uline.endpos, node->UU.Uline.aradius,
 		  1 - node->UU.Uline.aradius, 1.0);
-	X0 = node->UU.Uline.endpos;
-	TEMP = ahlex(node->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
+	tmpat = node->UU.Uline.endpos;
+	if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	    node->UU.Uline.atype == XRIGHTHEAD) {
 	  x = linlen(node->UU.Uline.endpos.xpos - node->aat.xpos,
 		     node->UU.Uline.endpos.ypos - node->aat.ypos);
-	  y = ahoffset(node);
-	  if (x != 0.0)
-	    pprop(node->aat, &X0, y, x - y, x);
+	  y = qenv(node, XLarrowht, node->UU.Uline.height);
+	  pprop(node->aat, &tmpat, y, x - y, x);
 	}
-	pswpos(X0);
+	pswpos(tmpat);
 	if (node->UU.Uline.aradius == mdistmax)
 	  printf(" lineto");
 	else
 	  printf(" curveto");
-	pslinearfill(node->UU.Uline.lfill, sshade);
-	pslineopts(lsp, node->lparam, node->outlinep);
 	psendline(node->outlinep);
-	TEMP = ahlex(node->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD)
-	  psahead(ahnum(node->UU.Uline.atype), &node->UU.Uline.endpos,
-		  node->aat, qenv(node, XLarrowht, node->UU.Uline.height),
+	if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	    node->UU.Uline.atype == XRIGHTHEAD)
+	  psahead(&node->UU.Uline.endpos, node->aat,
+		  qenv(node, XLarrowht, node->UU.Uline.height),
 		  qenv(node, XLarrowwid, node->UU.Uline.width), lth);
       }
       node->ptype = XLline;
@@ -4745,35 +4226,35 @@ void psdraw(primitive *node)
   case XLarrow:
   case XLmove:
     if (drawn(node, lsp, -1.0)) {
+      tn = node;
+      while (tn->son != NULL)
+	tn = tn->son;
       if (!isthen(node)) {
-	getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
-	X0 = node->aat;
+	tmpat = node->aat;
 	pssetthick(lth);
-	TEMP = ahlex(tn->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD)
-	  psahead(ahnum(node->UU.Uline.atype), &node->aat,
-		  node->UU.Uline.endpos,
+	if (tn->UU.Uline.atype == XDOUBLEHEAD || tn->UU.Uline.atype == XLEFTHEAD)
+	  psahead(&node->aat, node->UU.Uline.endpos,
 		  qenv(node, XLarrowht, tn->UU.Uline.height),
 		  qenv(node, XLarrowwid, tn->UU.Uline.width), lth);
+	pslineopts(lsp, node->lparam, node->outlinep);
 	psnewpath();
 	pswpos(node->aat);
 	printf(" moveto\n");
       }
-      TEMP = ahlex(node->UU.Uline.atype);
-      if ((node->son == NULL) & (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD)) {
-	x = linlen(node->UU.Uline.endpos.xpos - node->aat.xpos,
-		   node->UU.Uline.endpos.ypos - node->aat.ypos);
-	y = ahoffset(node);
-	pswprop(node->aat, node->UU.Uline.endpos, y, x - y, x);
-	printf(" lineto endstroke\n");
-	psahead(ahnum(node->UU.Uline.atype), &node->UU.Uline.endpos, node->aat,
-		qenv(node, XLarrowht, node->UU.Uline.height),
-		qenv(node, XLarrowwid, node->UU.Uline.width), lth);
+      if (node->son == NULL &&
+	  (tn->UU.Uline.atype == XDOUBLEHEAD ||
+	   tn->UU.Uline.atype == XRIGHTHEAD)) {
+	y = qenv(node, XLarrowht, tn->UU.Uline.height);
+	pswpos(affine(y, 0.0, node->UU.Uline.endpos,
+		      affang(node->UU.Uline.endpos, node->aat)));
+	printf(" lineto");
+	psendline(node->outlinep);
+	psahead(&node->UU.Uline.endpos, node->aat, y,
+		qenv(node, XLarrowwid, tn->UU.Uline.width), lth);
       } else if (node->son == NULL) {
+	/*D; if debuglevel > 0 then writeln(log,'last node started');D*/
 	pswpos(node->UU.Uline.endpos);
 	printf(" lineto");
-	pslinearfill(node->UU.Uline.lfill, sshade);
-	pslineopts(lsp, node->lparam, node->outlinep);
 	psendline(node->outlinep);
       } else {
 	pswpos(node->UU.Uline.endpos);
@@ -4788,18 +4269,52 @@ void psdraw(primitive *node)
   case XLarc:
     pssetthick(lth);
     if (drawn(node, lsp, -1.0)) {
-      getlinshade(node, &tn, &sshade, &soutline, &vfill, &sfill);
-      TEMP = ahlex(node->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD) {
-	X0 = arcstart(node);
-	startarc(node, X0, &h, &w, &X1);
-	psahead(ahnum(node->UU.Uline.atype), &X0, X1, h, w, lth);
+      if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	  node->UU.Uline.atype == XLEFTHEAD) {
+	tmpat.xpos = node->aat.xpos +
+		     node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+	tmpat.ypos = node->aat.ypos +
+		     node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
+	if (node->UU.Uline.aradius == 0.0)
+	  x = 0.0;
+	else
+	  x = atan(qenv(node, XLarrowht, node->UU.Uline.height) /
+		   node->UU.Uline.aradius);
+	if (node->UU.Uline.endpos.ypos >= 0.0) {
+	  node->UU.Uline.endpos.xpos += x;
+	  node->UU.Uline.endpos.ypos -= x;
+	} else {
+	  node->UU.Uline.endpos.xpos -= x;
+	  node->UU.Uline.endpos.ypos += x;
+	}
+	X0.xpos = node->aat.xpos +
+		  node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+	X0.ypos = node->aat.ypos +
+		  node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
+	psahead(&tmpat, X0, qenv(node, XLarrowht, node->UU.Uline.height),
+		qenv(node, XLarrowwid, node->UU.Uline.width), lth);
       }
-      TEMP = ahlex(node->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
-	X0 = arcend(node);
-	endarc(node, X0, &h, &w, &X1);
-	psahead(ahnum(node->UU.Uline.atype), &X0, X1, h, w, lth);
+      if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	  node->UU.Uline.atype == XRIGHTHEAD) {
+	tmpat.xpos = node->aat.xpos + node->UU.Uline.aradius *
+	      cos(node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+	tmpat.ypos = node->aat.ypos + node->UU.Uline.aradius *
+	      sin(node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+	if (node->UU.Uline.aradius == 0.0)
+	  x = 0.0;
+	else
+	  x = atan(qenv(node, XLarrowht, node->UU.Uline.height) /
+		   node->UU.Uline.aradius);
+	if (node->UU.Uline.endpos.ypos >= 0.0)
+	  node->UU.Uline.endpos.ypos -= x;
+	else
+	  node->UU.Uline.endpos.ypos += x;
+	X0.xpos = node->aat.xpos + node->UU.Uline.aradius * cos(
+		      node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+	X0.ypos = node->aat.ypos + node->UU.Uline.aradius * sin(
+		      node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+	psahead(&tmpat, X0, qenv(node, XLarrowht, node->UU.Uline.height),
+		qenv(node, XLarrowwid, node->UU.Uline.width), lth);
       }
       psnewpath();
       pswpos(node->aat);
@@ -4811,7 +4326,6 @@ void psdraw(primitive *node)
 	printf(" arc");
       else
 	printf(" arcn");
-      pslinearfill(node->UU.Uline.lfill, sshade);
       pslineopts(lsp, node->lparam, node->outlinep);
       psendline(node->outlinep);
     }
@@ -4822,7 +4336,7 @@ void psdraw(primitive *node)
     pswtext(node->textp, node->aat.xpos, node->aat.ypos);
     break;
 
-  case XLaTeX:
+  case XLtroff:
     if (node->textp != NULL) {
       wstring(&output, node->textp);
       putchar('\n');
@@ -4943,7 +4457,6 @@ void texdraw(primitive *node)
   double r, x, y, x1, y1, ct, st, lgth, lth;
   primitive *tn, *p;
   postype tmpat, X0, X3;
-  int TEMP;
 
   lsp = lspec(node->spec);
   lth = qenv(node, XLlinethick, node->lthick);
@@ -4977,7 +4490,7 @@ void texdraw(primitive *node)
       if (node->ptype == XLbox)
 	wcoord(&output, node->UU.Ubox.boxwidth, node->UU.Ubox.boxheight);
       else
-	wcoord(&output, node->UU.UEMPTY6.blockwidth, node->UU.UEMPTY6.blockheight);
+	wcoord(&output, node->UU.UEMPTY7.blockwidth, node->UU.UEMPTY7.blockheight);
       putchar('{');
       stacktext(node->textp, false);
       printf("}}\n");
@@ -4993,13 +4506,13 @@ void texdraw(primitive *node)
       if (!isthen(node)) {  /* first segment */
 	if (drawmode == pict2e)
 	  p2setthick(lth);
-	TEMP = ahlex(tn->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD)
+	if (tn->UU.Uline.atype == XDOUBLEHEAD || tn->UU.Uline.atype == XLEFTHEAD)
 	  p2ahead(&node->aat, node->UU.Uline.endpos,
 		  qenv(node, XLarrowht, tn->UU.Uline.height));
       }
-      TEMP = ahlex(node->UU.Uline.atype);
-      if ((node->son == NULL) & (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD))
+      if (node->son == NULL &&
+	  (node->UU.Uline.atype == XDOUBLEHEAD ||
+	   node->UU.Uline.atype == XRIGHTHEAD))
 	p2ahead(&node->UU.Uline.endpos, node->aat,
 		qenv(node, XLarrowht, tn->UU.Uline.height));
       lgth = linlen(node->UU.Uline.endpos.xpos - node->aat.xpos,
@@ -5052,8 +4565,7 @@ void texdraw(primitive *node)
 	splcount = spltot;
 	tmpat = node->aat;
 	p2setthick(lth);
-	TEMP = ahlex(tn->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD)
+	if (tn->UU.Uline.atype == XDOUBLEHEAD || tn->UU.Uline.atype == XLEFTHEAD)
 	  p2ahead(&node->aat, node->UU.Uline.endpos,
 		  qenv(node, XLarrowht, tn->UU.Uline.height));
 	/* p2lineopts(lsp,lparam,outlinep); */
@@ -5095,8 +4607,8 @@ void texdraw(primitive *node)
       }
       if (splcount == 1) {
 	tmpat = node->UU.Uline.endpos;
-	TEMP = ahlex(node->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
+	if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	    node->UU.Uline.atype == XRIGHTHEAD) {
 	  x = linlen(node->UU.Uline.endpos.xpos - node->aat.xpos,
 		     node->UU.Uline.endpos.ypos - node->aat.ypos);
 	  y = qenv(node, XLarrowht, node->UU.Uline.height);
@@ -5118,8 +4630,8 @@ void texdraw(primitive *node)
 	  wpos(node->UU.Uline.endpos);
 	  printf("%%\n");
 	}
-	TEMP = ahlex(node->UU.Uline.atype);
-	if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD)
+	if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	    node->UU.Uline.atype == XRIGHTHEAD)
 	  p2ahead(&tmpat, node->aat,
 		  qenv(node, XLarrowht, node->UU.Uline.height));
       }
@@ -5127,8 +4639,9 @@ void texdraw(primitive *node)
       /*D; if debuglevel > 0 then writeln(log,'node ',splcount:1) ;D*/
       splcount--;
     } else if (lsp == XLdotted || lsp == XLdashed || lsp == XLsolid) {
-      if ((!isthen(node)) & ((ahlex(node->UU.Uline.atype) == XDOUBLEHEAD) |
-			     (ahlex(node->UU.Uline.atype) == XLEFTHEAD)))
+      if (!isthen(node) &&
+	  (node->UU.Uline.atype == XDOUBLEHEAD ||
+	   node->UU.Uline.atype == XLEFTHEAD))
 	    /* first spline */
 	      arrowhead(node->aat.xpos, node->aat.ypos,
 			node->UU.Uline.endpos.xpos, node->UU.Uline.endpos.ypos);
@@ -5139,8 +4652,8 @@ void texdraw(primitive *node)
 	putchar('\n');
       else if (node->son->son == NULL) {
 	wpos(node->son->UU.Uline.endpos);
-	if ((ahlex(node->UU.Uline.atype) == XRIGHTHEAD) |
-	    (ahlex(node->UU.Uline.atype) == XDOUBLEHEAD))
+	if (node->UU.Uline.atype == XRIGHTHEAD ||
+	    node->UU.Uline.atype == XDOUBLEHEAD)
 	  arrowhead(node->son->UU.Uline.endpos.xpos,
 		    node->son->UU.Uline.endpos.ypos, node->son->aat.xpos,
 		    node->son->aat.ypos);
@@ -5196,9 +4709,12 @@ void texdraw(primitive *node)
   case XLarc:
     if ((drawmode == pict2e) & drawn(node, lsp, -1.0)) {
       p2setthick(node->lthick);   /* p2linecap(lsp); */
-      X0 = arcstart(node);
-      TEMP = ahlex(node->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XLEFTHEAD) {
+      X0.xpos = node->aat.xpos +
+		node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+      X0.ypos = node->aat.ypos +
+		node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
+      if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	  node->UU.Uline.atype == XLEFTHEAD) {
 	if (node->UU.Uline.aradius == 0.0)
 	  x = 0.0;
 	else
@@ -5212,12 +4728,18 @@ void texdraw(primitive *node)
 	  node->UU.Uline.endpos.ypos += x;
 	}
 	tmpat = X0;
-	X0 = arcstart(node);
+	X0.xpos = node->aat.xpos +
+		  node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+	X0.ypos = node->aat.ypos +
+		  node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
 	p2ahead(&tmpat, X0, qenv(node, XLarrowht, node->UU.Uline.height));
       }
-      X3 = arcend(node);
-      TEMP = ahlex(node->UU.Uline.atype);
-      if (TEMP == XDOUBLEHEAD || TEMP == XRIGHTHEAD) {
+      X3.xpos = node->aat.xpos + node->UU.Uline.aradius *
+		  cos(node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+      X3.ypos = node->aat.ypos + node->UU.Uline.aradius *
+		  sin(node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+      if (node->UU.Uline.atype == XDOUBLEHEAD ||
+	  node->UU.Uline.atype == XRIGHTHEAD) {
 	if (node->UU.Uline.aradius == 0.0)
 	  x = 0.0;
 	else
@@ -5228,7 +4750,10 @@ void texdraw(primitive *node)
 	else
 	  node->UU.Uline.endpos.ypos += x;
 	tmpat = X3;
-	X3 = arcend(node);
+	X3.xpos = node->aat.xpos + node->UU.Uline.aradius * cos(
+		      node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
+	X3.ypos = node->aat.ypos + node->UU.Uline.aradius * sin(
+		      node->UU.Uline.endpos.xpos + node->UU.Uline.endpos.ypos);
 	p2ahead(&tmpat, X3, qenv(node, XLarrowht, node->UU.Uline.height));
       }
       npts = (long)(1.0 + fabs(node->UU.Uline.endpos.ypos) / pi);
@@ -5253,7 +4778,10 @@ void texdraw(primitive *node)
 		    node->aat, tmpat));
 	if (npts > 1) {
 	  node->UU.Uline.endpos.xpos += node->UU.Uline.endpos.ypos;
-	  X0 = arcstart(node);
+	  X0.xpos = node->aat.xpos +
+		    node->UU.Uline.aradius * cos(node->UU.Uline.endpos.xpos);
+	  X0.ypos = node->aat.ypos +
+		    node->UU.Uline.aradius * sin(node->UU.Uline.endpos.xpos);
 	  wpos(X0);
 	  printf("%%\n");
 	}
@@ -5317,12 +4845,12 @@ void texdraw(primitive *node)
 	else
 	  wbrace(fabs(y1 - y) / fsc);
 	printf("}\n");
-	if ((i == 1) & ((ahlex(node->UU.Uline.atype) == XDOUBLEHEAD) |
-			(ahlex(node->UU.Uline.atype) == XLEFTHEAD)))
+	if (i == 1 && (node->UU.Uline.atype == XDOUBLEHEAD ||
+		       node->UU.Uline.atype == XLEFTHEAD))
 	  arrowhead(node->aat.xpos + x, node->aat.ypos + y,
 		    node->aat.xpos + x1, node->aat.ypos + y1);
-	else if ((i == npts) & ((ahlex(node->UU.Uline.atype) == XDOUBLEHEAD) |
-				(ahlex(node->UU.Uline.atype) == XRIGHTHEAD)))
+	else if (i == npts && (node->UU.Uline.atype == XDOUBLEHEAD ||
+			       node->UU.Uline.atype == XRIGHTHEAD))
 	  arrowhead(node->aat.xpos + x1, node->aat.ypos + y1,
 		    node->aat.xpos + x, node->aat.ypos + y);
 	x = x1;
@@ -5336,7 +4864,7 @@ void texdraw(primitive *node)
     texwrtext(node->textp, node->aat.xpos, node->aat.ypos);
     break;
 
-  case XLaTeX:
+  case XLtroff:
     if (node->textp != NULL) {
       wstring(&output, node->textp);
       putchar('\n');
@@ -5378,8 +4906,6 @@ void treedraw(primitive *node)
     /* PSmps: mpsdraw(node); */
     case MPost:
       mpodraw(node);
-      if (sfill)
-	mpodraw(node);
       break;
 
     case xfig:
@@ -5392,12 +4918,8 @@ void treedraw(primitive *node)
       if (node->ptype == XBLOCK && node->direction == -1)
 	printf("-6\n");
     }
-    sfill = false;
-    sshade = NULL;
-    soutline = NULL;
     node = node->next_;
   }
-  /*D; if debuglevel > 0 then writeln(log,' treedraw done') D*/
 }
 
 
@@ -5406,9 +4928,6 @@ void drawtree(double n, double s, double e, double w, primitive *eb)
   /* n,s,e,w: real; eb: primitivep */
   double fsctmp;
 
-  sfill = false;
-  sshade = NULL;
-  soutline = NULL;
   switch (drawmode) {
 
   case PGF:   /* n,s,e,w */
