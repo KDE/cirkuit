@@ -226,7 +226,15 @@ void MainWindow::saveAs()
 	
 	if (!filename.isEmpty())
 	{
-		if (QFile::exists(filename) && KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes)
+		if (QFile::exists(filename))
+		{
+			if(KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes)
+			{
+				recentFilesAction->addUrl(KUrl(filename));
+				saveAsFile(filename);
+			}
+		}
+		else
 		{
 			recentFilesAction->addUrl(KUrl(filename));
 			saveAsFile(filename);
@@ -262,8 +270,10 @@ void MainWindow::exportFile()
 		if (QFile::exists(path) && KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes)
 			QFile::remove(path);
 		
-		m_generator->builder()->generateFormat(fileinfo.suffix());
-		QFile::copy(m_generator->builder()->filePath(fileinfo.suffix()), path);
+		if (m_generator->builder()->generateFormat(fileinfo.suffix()))
+			QFile::copy(m_generator->builder()->filePath(fileinfo.suffix()), path);
+		else
+			QMessageBox::warning(this, i18n("Error"), i18n("Something went wrong with the generation of the desired output format"));
 	}
 }
 
