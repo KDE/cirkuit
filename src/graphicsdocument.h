@@ -27,8 +27,6 @@ class GraphicsDocument : public KTextEditor::Document
 {
 	public:
 		GraphicsDocument(QObject* parent = 0);
-		
-		//virtual bool saveAs(const KUrl& url);
 };
 
 #endif // GRAPHICSDOCUMENT_H

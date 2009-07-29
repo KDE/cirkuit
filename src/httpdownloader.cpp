@@ -66,7 +66,6 @@ void HttpDownloader::spawnDownloader()
 		http->setProxy(proxyUrl.host(), proxyUrl.port());
 	}
 	
-	qDebug() << "START DLING";
 	connect(http, SIGNAL(requestFinished(int, bool)), SLOT(requestFinished(int, bool)));
 	connect(http, SIGNAL(dataReadProgress(int,int)), this, SIGNAL(progress(int,int)));
 	connect(http, SIGNAL(done(bool)), SLOT(objectDone(bool)));
@@ -88,7 +87,6 @@ void HttpDownloader::requestFinished(int , bool err)
 
 void HttpDownloader::objectDone(bool)
 {
-	qDebug() << "DONE";
 	QHttp *http = (QHttp*)sender();
 	if(m_pending.isEmpty()){
 		m_objects.remove(http);
@@ -102,7 +100,6 @@ void HttpDownloader::objectDone(bool)
 
 void HttpDownloader::startRequert(QHttp *http)
 {
-	qDebug() << "START REQ";
 	Download dnld = m_pending.dequeue();
 	http->setHost(dnld.first.host(), dnld.first.port(80));
 	m_objects[http] = dnld.first;

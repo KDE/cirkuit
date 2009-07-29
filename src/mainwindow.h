@@ -48,7 +48,10 @@ class MainWindow : public KParts::MainWindow
 	private slots:
 		void clear();
 		void openFile();
-		void saveAsFile();
+		void saveAsFile(const KUrl& url);
+		void saveAs();
+		void save();
+		void substituteSaveAsAction();
 		void exportFile();
 		
 		void documentModified(KTextEditor::Document*);

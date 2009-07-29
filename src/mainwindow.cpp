@@ -88,6 +88,7 @@ MainWindow::MainWindow(QWidget *)
 	
 	setXMLFile("cirkuitui.rc");
 	createShellGUI(true);
+	substituteSaveAsAction();
 	
 	guiFactory()->addClient(m_view);
 	m_view->setContextMenu(qobject_cast<KMenu *> (factory()->container("ktexteditor_popup", this)));
@@ -117,7 +118,8 @@ void MainWindow::setupActions()
 {
 	KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
 	KStandardAction::open(this, SLOT(openFile()), actionCollection());
-	KStandardAction::saveAs(this, SLOT(saveAsFile()), actionCollection());
+	KStandardAction::save(this, SLOT(save()), actionCollection());
+	KStandardAction::saveAs(this, SLOT(saveAs()), actionCollection());			
 	KStandardAction::clear(this, SLOT(clear()), actionCollection());
 	KStandardAction::preferences(this, SLOT(configure()),
 										  actionCollection());
@@ -157,6 +159,17 @@ void MainWindow::setupActions()
 	recentFilesAction->loadEntries(config->group("recent_files"));
 }
 
+void MainWindow::substituteSaveAsAction()
+{
+	foreach (QAction* action, m_view->actionCollection()->actions())
+	{
+		if (action->text().contains("Save"))
+		{
+			m_view->actionCollection()->removeAction(action);
+		}
+	}
+}
+
 void MainWindow::clear()
 {
 	m_doc->clear();
@@ -189,9 +202,41 @@ void MainWindow::loadFile(const KUrl& url)
 	updateTitle();
 }
 
-void MainWindow::saveAsFile()
+void MainWindow::save()
 {
+	if (m_currentFile.isEmpty())
+	{
+		saveAs();
+		return;
+	}
+	
+	m_doc->save();
+}
 
+void MainWindow::saveAs()
+{
+	QString filename;
+	
+	KFileDialog saveFileDialog(KUrl(), "", this);
+	saveFileDialog.setWindowTitle(i18n("Save file - Cirkuit"));
+	saveFileDialog.setOperationMode(KFileDialog::Saving);
+	saveFileDialog.setMimeFilter(mimeTypes);
+	if (saveFileDialog.exec() == QDialog::Accepted)
+		filename = saveFileDialog.selectedFile();
+	
+	if (!filename.isEmpty())
+	{
+		if (QFile::exists(filename) && KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes)
+		{
+			recentFilesAction->addUrl(KUrl(filename));
+			saveAsFile(filename);
+		}
+	}
+}
+
+void MainWindow::saveAsFile(const KUrl& url)
+{
+	m_doc->saveAs(url);
 }
 
 void MainWindow::exportFile()
@@ -251,6 +296,7 @@ void MainWindow::startBuildNotification()
 void MainWindow::newCmDocument()
 {
 	m_doc->closeUrl();
+	m_currentFile = "";
 	m_doc->clear();
 	m_doc->setText(".PS\ncct_init\n\n\n\n.PE");
 	
@@ -263,6 +309,7 @@ void MainWindow::newCmDocument()
 void MainWindow::newTikzDocument()
 {
 	m_doc->closeUrl();
+	m_currentFile = "";
 	m_doc->clear();
 	m_doc->setText("\\begin{tikzpicture}\n\n\\end{tikzpicture}");
 	

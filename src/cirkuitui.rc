@@ -14,6 +14,8 @@
     <Action name="file_open" />
 	 <Action name="file_open_recent" />
 	 <DefineGroup name="save_merge"/>
+	 <Action name="file_save" />
+	 <Action name="file_save_as" />
 	 <Action name="export" />
     <Separator/>
  
@@ -43,6 +45,8 @@
 <ToolBar name="mainToolBar" noMerge="1"><text>Main Toolbar</text>
   <Action name="file_open" />
   <DefineGroup name="file_operations" />
+  <Action name="file_save" />
+  <Action name="file_save_as" />
   <Separator />
   <DefineGroup name="print_merge" />
   <Separator />
