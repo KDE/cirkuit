@@ -34,6 +34,8 @@ class TikzBuilder : public GraphicsBuilder
 		
 	private:
 		bool generatePdf();
+		bool generateDvi();
+		bool generateEps();
 };
 
 #endif // TIKZBUILDER_H

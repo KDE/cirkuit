@@ -25,7 +25,7 @@ LatexProcess::LatexProcess(const QString& jobName, const QString& interpreter, Q
 	
 }
 
-bool LatexProcess::build(const QString& doc)
+bool LatexProcess::build(const QString& doc, const QStringList& additionalArgs)
 {
 	QStringList args;
 	
@@ -34,7 +34,7 @@ bool LatexProcess::build(const QString& doc)
 	environment << QString("TEXINPUTS=.:%1:").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
 	setEnvironment(environment);
 	
-	args << QString("-jobname=%1").arg(m_jobName);
+	args << QString("-jobname=%1").arg(m_jobName) << additionalArgs;
 	
 	start(m_appName, args);
 	

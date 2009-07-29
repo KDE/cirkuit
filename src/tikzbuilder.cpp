@@ -29,7 +29,7 @@
 TikzBuilder::TikzBuilder(KTextEditor::Document* doc, const QString& origDir, QObject* parent): GraphicsBuilder(doc,origDir,parent)
 {
 	m_tempFile = new KTemporaryFile;
-	m_tempFile->setPrefix(m_workingDir->absolutePath());
+	m_tempFile->setPrefix(m_workingDir->absolutePath()+"/");
 	m_tempFile->setSuffix("");
 	
 	m_tempFile->open();
@@ -65,10 +65,77 @@ bool TikzBuilder::generatePdf()
 	return latexProcess.build(latexDoc);
 }
 
+bool TikzBuilder::generateDvi()
+{
+	LatexProcess latexProcess(m_tempFileInfo->baseName(), "pdflatex");
+	//QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
+	QString latexDoc = "\\documentclass{article}\n"
+	"\\usepackage{tikz,amsmath,siunitx}\n"
+	"\\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}"
+	"\\usepackage[graphics,tightpage,active]{preview}\n"
+	"\\usepackage[siunitx]{circuitikz}"
+	"\\PreviewEnvironment{tikzpicture}"
+	"\\PreviewEnvironment{equation}"
+	"\\PreviewEnvironment{equation*}"
+	"\\newlength{\\imagewidth}"
+	"\\newlength{\\imagescale}"
+	"\\pagestyle{empty}\n"
+	"\\thispagestyle{empty}\n"
+	"\\begin{document}\n" +
+	m_doc->text() +
+	"\n\\end{document}\n";
+	
+	QStringList args;
+	args << "-output-format=dvi";
+	return latexProcess.build(latexDoc, args);
+}
+
 bool TikzBuilder::generateFormat(const QString& extension)
 {
-	if (extension == ".pdf")
+	if (extension == "pdf")
 		return generatePdf();
+	else if (extension == "png")
+	{
+		if (!generatePdf())
+			return false;
+		if (!generateEps())
+			return false;
+		if (!generatePng())
+			return false;
+	}
+	else if (extension.contains("eps"))
+	{
+		if (!generatePdf())
+			return false;
+		if (!generateEps())
+			return false;
+	}
+	else if (extension == "svg")
+	{
+		if (!generatePdf())
+			return false;
+		if (!generateSvg())
+			return false;
+	}
+	else
+		return false;
+	
+	return true;
+}
+
+bool TikzBuilder::generateEps()
+{
+	qDebug() << "Generating EPS...";
+	ExternalProcess epstopdfproc("pdftops");
+	QStringList epstopdfargs;
+	epstopdfargs << "-eps" << m_tempFileInfo->baseName()+".pdf";
+	if (!epstopdfproc.startWith("", epstopdfargs))
+	{
+		emit applicationError(epstopdfproc.appName(), epstopdfproc.readAllStandardError());
+		qDebug() << epstopdfproc.readAllStandardOutput();
+		qDebug() << epstopdfproc.readAllStandardError();
+		return false;
+	}
 	
 	return true;
 }

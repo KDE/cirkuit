@@ -19,8 +19,11 @@
 ***************************************************************************/
 
 #include "graphicsbuilder.h"
+#include "externalprocess.h"
+
 #include <KStandardDirs>
 #include <QDir>
+#include <QDebug>
 
 GraphicsBuilder::GraphicsBuilder(KTextEditor::Document* doc, const QString& origDir, QObject* parent): QObject(parent), m_doc(doc), m_origDir(origDir)
 {
@@ -44,5 +47,39 @@ QString GraphicsBuilder::filePath(const QString& extension) const
 		return QString("%1/%2.%3").arg(m_workingDir->canonicalPath()).arg(m_tempFileInfo->baseName()).arg(extension);
 	
 	return "";
+}
+
+bool GraphicsBuilder::generatePng()
+{
+	qDebug() << "Generating PNG...";
+	ExternalProcess epstopngproc("convert");
+	QStringList epstopngargs;
+	epstopngargs << "-density" << "300" << m_tempFileInfo->baseName()+".eps" << m_tempFileInfo->baseName()+".png";
+	if (!epstopngproc.startWith("", epstopngargs))
+	{
+		emit applicationError(epstopngproc.appName(), epstopngproc.readAllStandardError());
+		qDebug() << epstopngproc.readAllStandardOutput();
+		qDebug() << epstopngproc.readAllStandardError();
+		return false;
+	}
+	
+	return true;
+}
+
+bool GraphicsBuilder::generateSvg()
+{
+	qDebug() << "Generating SVG...";
+	ExternalProcess pdftosvgproc("pdf2svg");
+	QStringList pdftosvgargs;
+	pdftosvgargs << m_tempFileInfo->baseName()+".pdf" << m_tempFileInfo->baseName()+".svg";
+	if (!pdftosvgproc.startWith("", pdftosvgargs))
+	{
+		emit applicationError(pdftosvgproc.appName(), pdftosvgproc.readAllStandardError());
+		qDebug() << pdftosvgproc.readAllStandardOutput();
+		qDebug() << pdftosvgproc.readAllStandardError();
+		return false;
+	}
+	
+	return true;
 }
 

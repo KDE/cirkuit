@@ -73,6 +73,8 @@ bool CircuitMacrosBuilder::generateFormat(const QString& extension)
 			return false;
 		if (!generateEps())
 			return false;
+		if (!generatePdf())
+			return false;
 		if (!generatePng())
 			return false;
 	}
@@ -174,36 +176,3 @@ bool CircuitMacrosBuilder::generatePdf()
 	return true;
 }
 
-bool CircuitMacrosBuilder::generatePng()
-{
-	qDebug() << "Generating PNG...";
-	ExternalProcess epstopngproc("convert");
-	QStringList epstopngargs;
-	epstopngargs << "-density" << "300" << m_tempFileInfo->baseName()+".eps" << m_tempFileInfo->baseName()+".png";
-	if (!epstopngproc.startWith("", epstopngargs))
-	{
-		emit applicationError(epstopngproc.appName(), epstopngproc.readAllStandardError());
-		qDebug() << epstopngproc.readAllStandardOutput();
-		qDebug() << epstopngproc.readAllStandardError();
-		return false;
-	}
-	
-	return true;
-}
-
-bool CircuitMacrosBuilder::generateSvg()
-{
-	qDebug() << "Generating SVG...";
-	ExternalProcess pdftosvgproc("pdf2svg");
-	QStringList pdftosvgargs;
-	pdftosvgargs << m_tempFileInfo->baseName()+".pdf" << m_tempFileInfo->baseName()+".svg";
-	if (!pdftosvgproc.startWith("", pdftosvgargs))
-	{
-		emit applicationError(pdftosvgproc.appName(), pdftosvgproc.readAllStandardError());
-		qDebug() << pdftosvgproc.readAllStandardOutput();
-		qDebug() << pdftosvgproc.readAllStandardError();
-		return false;
-	}
-	
-	return true;
-}

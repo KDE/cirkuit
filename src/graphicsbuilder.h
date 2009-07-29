@@ -46,6 +46,10 @@ class GraphicsBuilder : public QObject
 		
 	signals:
 		void applicationError(const QString&, const QString&);
+		
+	protected slots:
+		bool generatePng();
+		bool generateSvg();
 				
 	protected:
 		KTextEditor::Document* m_doc;
