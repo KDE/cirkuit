@@ -5,6 +5,7 @@ find_package(Poppler REQUIRED)
 include_directories(${KDE4_INCLUDES} ${POPPLER_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${QT_QTNETWORK_INCLUDE_DIR})
 
 add_subdirectory( mimetypes )
+add_subdirectory( syntax )
 
 set(cirkuit_SRCS 
 	main.cpp
