@@ -44,7 +44,7 @@ bool LatexProcess::build(const QString& doc)
 	write(doc.toLatin1());
 	closeWriteChannel();
 	
-	if (waitForFinished())
+	if (!waitForFinished())
 		return false;	
 	
 	return true;

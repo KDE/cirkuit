@@ -22,26 +22,27 @@
 #include <KStandardDirs>
 #include <QDir>
 
-GraphicsBuilder::GraphicsBuilder(QObject* parent): QObject(parent), tempFileInfo(0)
+GraphicsBuilder::GraphicsBuilder(KTextEditor::Document* doc, const QString& origDir, QObject* parent): QObject(parent), m_doc(doc), m_origDir(origDir)
 {
-	tempFile = 0;
+	m_tempFile = 0;
+	m_tempFileInfo = 0;
 	
-	workingDir = new QDir(KStandardDirs::locateLocal("data", "cirkuit/build/", true));
+	m_workingDir = new QDir(KStandardDirs::locateLocal("data", "cirkuit/build/", true));
 }
 
-
-bool GraphicsBuilder::fileExists(const QString& extension)
+bool GraphicsBuilder::fileExists(const QString& extension) const
 {
-	if (tempFileInfo == 0)
+	if (m_tempFileInfo == 0)
 		return false;
 	
-	return workingDir->exists(tempFileInfo->baseName() + extension);
+	return m_workingDir->exists(m_tempFileInfo->baseName() + extension);
 }
 
-QString GraphicsBuilder::generatedPath(const QString& extension) const
+QString GraphicsBuilder::filePath(const QString& extension) const
 {
-	if (tempFileInfo == 0)
-		return "";
+	if (fileExists(extension))
+		return m_workingDir->canonicalPath() + "/" + m_tempFileInfo->baseName() + extension;
 	
-	return workingDir->canonicalPath() + "/" + tempFileInfo->baseName() + extension;
+	return "";
 }
+

@@ -26,21 +26,25 @@
 
 #include <KTextEditor/Document>
 
-TikzBuilder::TikzBuilder(QObject* parent): GraphicsBuilder(parent)
+TikzBuilder::TikzBuilder(KTextEditor::Document* doc, const QString& origDir, QObject* parent): GraphicsBuilder(doc,origDir,parent)
 {
+	m_tempFile = new KTemporaryFile;
+	m_tempFile->setPrefix(m_workingDir->absolutePath());
+	m_tempFile->setSuffix("");
 	
+	m_tempFile->open();
+	m_tempFileInfo = new QFileInfo(m_tempFile->fileName());
 }
 
-void TikzBuilder::build(KTextEditor::Document* doc, const QString& origDir)
+TikzBuilder::~TikzBuilder()
 {
-	tempFile = new KTemporaryFile;
-	tempFile->setPrefix(workingDir->absolutePath());
-	tempFile->setSuffix("");
-	
-	tempFile->open();
-	tempFileInfo = new QFileInfo(tempFile->fileName());
-	
-	LatexProcess latexProcess(tempFileInfo->baseName(), "pdflatex");
+	delete m_tempFile;
+	delete m_tempFileInfo;
+}
+
+bool TikzBuilder::generatePdf()
+{
+	LatexProcess latexProcess(m_tempFileInfo->baseName(), "pdflatex");
 	//QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
 	QString latexDoc = "\\documentclass{article}\n"
 	"\\usepackage{tikz,amsmath,siunitx}\n"
@@ -55,10 +59,18 @@ void TikzBuilder::build(KTextEditor::Document* doc, const QString& origDir)
 	"\\pagestyle{empty}\n"
 	"\\thispagestyle{empty}\n"
 	"\\begin{document}\n" +
-	doc->text() +
+	m_doc->text() +
 	"\n\\end{document}\n";
-	latexProcess.build(latexDoc);
 	
-	delete tempFile;
+	return latexProcess.build(latexDoc);
 }
+
+bool TikzBuilder::generateFormat(const QString& extension)
+{
+	if (extension == ".pdf")
+		return generatePdf();
+	
+	return true;
+}
+
 

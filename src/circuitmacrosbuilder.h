@@ -35,14 +35,17 @@ class CircuitMacrosBuilder : public GraphicsBuilder
 {
 	Q_OBJECT
 	public:
-		CircuitMacrosBuilder(QObject* parent = 0);
+		CircuitMacrosBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
+		~CircuitMacrosBuilder();
 		
-		virtual void build(KTextEditor::Document* doc, const QString& origDir="");
+	public slots:
+		//virtual void build();
+		virtual bool generateFormat(const QString& extension);
 		
 	private:
-		QString generateDvi(KTextEditor::Document* doc, const QString& origDir="");
-		QString generateEps();
-		QString generatePdf();
+		bool generateDvi();
+		bool generateEps();
+		bool generatePdf();
 };
 
 #endif // CIRCUITMACROSBUILDER_H

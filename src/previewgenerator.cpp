@@ -48,19 +48,19 @@ void PreviewGenerator::build(KTextEditor::Document* doc, const QString& origDir)
 	if (doc->text().contains(".PS") || doc->text().contains("cct_init") || doc->text().contains(".PE"))
 	{
 		// this is a circuit macros document
-		m_builder = new CircuitMacrosBuilder;
+		m_builder = new CircuitMacrosBuilder(doc,origDir);
 	}
 	else //if (doc->text().contains("\\begin{tikzpicture}"))
 	{
 		// this is a Tikz document
-		m_builder = new TikzBuilder;
+		m_builder = new TikzBuilder(doc,origDir);
 	}
 	
 	if (m_builder)
 	{
 		connect(m_builder, SIGNAL(applicationError(const QString&, const QString&)),
 							    SIGNAL(applicationError(const QString&, const QString&)));
-		m_builder->build(doc, origDir);
+		m_builder->generateFormat(".pdf");
 	}
 }
 
@@ -79,7 +79,7 @@ void PreviewGenerator::clearTempFiles()
 QImage PreviewGenerator::preview()
 {
 	QImage image;
-	QString pdfPath = m_builder->generatedPath(".pdf");
+	QString pdfPath = m_builder->filePath(".pdf");
 	
 	Poppler::Document* document = Poppler::Document::load(pdfPath);
 	if (!document || document->isLocked()) 

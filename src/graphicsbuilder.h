@@ -35,21 +35,25 @@ class GraphicsBuilder : public QObject
 {
 	Q_OBJECT
 	public:
-		GraphicsBuilder(QObject* parent = 0);
+		GraphicsBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
 		
-		virtual void build(KTextEditor::Document* doc, const QString& origDir="") = 0;
-		bool fileExists(const QString& extension);
+		bool fileExists(const QString& extension) const;
+		QString filePath(const QString& extension) const;
 		
-		virtual QString generatedPath(const QString& extension) const;
+	public slots:
+		//virtual void build() = 0;
+		virtual bool generateFormat(const QString& extension) = 0;
 		
 	signals:
 		void applicationError(const QString&, const QString&);
 				
 	protected:
-		KTemporaryFile* tempFile;
-		QFileInfo* tempFileInfo;
+		KTextEditor::Document* m_doc;
+		QString m_origDir;
+		KTemporaryFile* m_tempFile;
+		QFileInfo* m_tempFileInfo;
 		
-		QDir* workingDir;
+		QDir* m_workingDir;
 };
 
 #endif // GRAPHICSBUILDER_H

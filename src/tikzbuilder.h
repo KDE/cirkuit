@@ -26,8 +26,14 @@
 class TikzBuilder : public GraphicsBuilder
 {
 	public:
-		TikzBuilder(QObject* parent = 0);
-		virtual void build(KTextEditor::Document* doc, const QString& origDir="");
+		TikzBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
+		~TikzBuilder();
+		
+	public slots:
+		virtual bool generateFormat(const QString& extension);
+		
+	private:
+		bool generatePdf();
 };
 
 #endif // TIKZBUILDER_H

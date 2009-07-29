@@ -29,42 +29,65 @@
 #include <QTextStream>
 #include <QDir>
 
-CircuitMacrosBuilder::CircuitMacrosBuilder(QObject* parent): GraphicsBuilder(parent)
+CircuitMacrosBuilder::CircuitMacrosBuilder(KTextEditor::Document* doc, const QString& origDir, QObject* parent): GraphicsBuilder(doc, origDir, parent)
 {
+	m_tempFile = new KTemporaryFile;
+	m_tempFile->setPrefix(m_workingDir->absolutePath() + "/");
+	m_tempFile->setSuffix(".m4");
 	
+	m_tempFile->open();
+	m_tempFileInfo = new QFileInfo(m_tempFile->fileName());
 }
 
-
-void CircuitMacrosBuilder::build(KTextEditor::Document* doc, const QString& origDir)
+CircuitMacrosBuilder::~CircuitMacrosBuilder()
 {
-	tempFile = new KTemporaryFile;
-	tempFile->setPrefix(workingDir->absolutePath() + "/");
-	tempFile->setSuffix(".m4");
-	
-	tempFile->open();
-	tempFileInfo = new QFileInfo(tempFile->fileName());
-	
-	generateDvi(doc, origDir);
-	generateEps();
-	generatePdf();	
-	
-	delete tempFile;
+	delete m_tempFile;
+	delete m_tempFileInfo;
 }
 
-QString CircuitMacrosBuilder::generateDvi(KTextEditor::Document* doc, const QString& origDir)
+bool CircuitMacrosBuilder::generateFormat(const QString& extension)
 {
-	QTextStream out(tempFile);
-	out << doc->text();
-	tempFile->close();
+	if (extension == ".pdf")
+	{
+		if (!generateDvi())
+			return false;
+		if (!generateEps())
+			return false;
+		if (!generatePdf())
+			return false;
+	}
+	else if (extension == ".eps")
+	{
+		if (!generateDvi())
+			return false;
+		if (!generateEps())
+			return false;
+	}
+	else if (extension == ".dvi")
+	{
+		return generateDvi();
+	}
+	else
+		return false;
+	
+	return true;
+}
+
+bool CircuitMacrosBuilder::generateDvi()
+{
+	qDebug() << "Generating DVI...";
+	QTextStream out(m_tempFile);
+	out << m_doc->text();
+	m_tempFile->close();
 	
 	QStringList env = QProcess::systemEnvironment();
-	env 	<< QString("M4PATH=%1:%2").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false)).arg(origDir);
+	env 	<< QString("M4PATH=%1:%2").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false)).arg(m_origDir);
 	
 	ExternalProcess m4proc("m4");
 	QStringList m4args;
 	m4args << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/libcct.m4", false)
 	<< KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/pstricks.m4", false)
-	<< tempFileInfo->fileName();
+	<< m_tempFileInfo->fileName();
 	
 	m4proc.setEnvironment(env);
 	if (!m4proc.startWith("", m4args))
@@ -80,7 +103,7 @@ QString CircuitMacrosBuilder::generateDvi(KTextEditor::Document* doc, const QStr
 		emit applicationError(picproc.appName(), picproc.readAllStandardError());
 	QString picout = picproc.readAllStandardOutput();
 	
-	LatexProcess latexProcess(tempFileInfo->baseName());
+	LatexProcess latexProcess(m_tempFileInfo->baseName());
 	//QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
 	QString latexDoc = "\\documentclass{article}\n\\usepackage{pstricks,pst-eps,boxdims,graphicx,ifpdf,pst-grad,amsmath}\n"
 	"\\pagestyle{empty}\n"
@@ -93,38 +116,41 @@ QString CircuitMacrosBuilder::generateDvi(KTextEditor::Document* doc, const QStr
 	"\\graph\n"
 	"\\end{TeXtoEPS}\n"
 	"\\end{document}\n";
-	latexProcess.build(latexDoc);
 	
-	return tempFileInfo->baseName() + ".dvi";
+	return latexProcess.build(latexDoc);
 }
 
-QString CircuitMacrosBuilder::generateEps()
+bool CircuitMacrosBuilder::generateEps()
 {
+	qDebug() << "Generating EPS...";
 	ExternalProcess dvipsproc("dvips");
 	QStringList dvipsargs;
-	dvipsargs << "-Ppdf" << "-G0" << "-E" << tempFileInfo->baseName()+".dvi" << "-o" << tempFileInfo->baseName()+".eps";
+	dvipsargs << "-Ppdf" << "-G0" << "-E" << m_tempFileInfo->baseName()+".dvi" << "-o" << m_tempFileInfo->baseName()+".eps";
 	if (!dvipsproc.startWith("", dvipsargs))
 	{
 		emit applicationError(dvipsproc.appName(), dvipsproc.readAllStandardError());
 		qDebug() << dvipsproc.readAllStandardOutput();
 		qDebug() << dvipsproc.readAllStandardError();
+		return false;
 	}
 	
-	return tempFileInfo->baseName() + ".eps";
+	return true;
 }
 
-QString CircuitMacrosBuilder::generatePdf()
+bool CircuitMacrosBuilder::generatePdf()
 {
+	qDebug() << "Generating PDF...";
 	ExternalProcess epstopdfproc("epstopdf");
 	QStringList epstopdfargs;
-	epstopdfargs << tempFileInfo->baseName()+".eps";
+	epstopdfargs << m_tempFileInfo->baseName()+".eps";
 	if (!epstopdfproc.startWith("", epstopdfargs))
 	{
 		emit applicationError(epstopdfproc.appName(), epstopdfproc.readAllStandardError());
 		qDebug() << epstopdfproc.readAllStandardOutput();
 		qDebug() << epstopdfproc.readAllStandardError();
+		return false;
 	}
 	
-	return tempFileInfo->baseName() + ".pdf";
+	return true;
 }
 

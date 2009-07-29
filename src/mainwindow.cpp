@@ -237,6 +237,8 @@ void MainWindow::saveAs()
 void MainWindow::saveAsFile(const KUrl& url)
 {
 	m_doc->saveAs(url);
+	m_currentFile = url.fileName();
+	updateTitle();
 }
 
 void MainWindow::exportFile()
@@ -251,7 +253,7 @@ void MainWindow::exportFile()
 		if (QFile::exists(path) && KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes)
 			QFile::remove(path);
 		
-		QFile::copy(m_generator->builder()->generatedPath(".pdf"), path);
+		QFile::copy(m_generator->builder()->filePath(".pdf"), path);
 	}
 }
 
