@@ -60,7 +60,7 @@ void PreviewGenerator::build(KTextEditor::Document* doc, const QString& origDir)
 	{
 		connect(m_builder, SIGNAL(applicationError(const QString&, const QString&)),
 							    SIGNAL(applicationError(const QString&, const QString&)));
-		m_builder->generateFormat(".pdf");
+		m_builder->generateFormat("pdf");
 	}
 }
 
@@ -79,7 +79,7 @@ void PreviewGenerator::clearTempFiles()
 QImage PreviewGenerator::preview()
 {
 	QImage image;
-	QString pdfPath = m_builder->filePath(".pdf");
+	QString pdfPath = m_builder->filePath("pdf");
 	
 	Poppler::Document* document = Poppler::Document::load(pdfPath);
 	if (!document || document->isLocked()) 

@@ -25,7 +25,25 @@ GraphicsDocument::GraphicsDocument(QObject* parent): Document(parent)
 
 }
 
-// bool GraphicsDocument::saveAs(const KUrl& url)
-// {
-// 
-// }
+
+CircuitMacrosDocument::CircuitMacrosDocument(QObject* parent): QObject(parent)
+{
+
+}
+
+QString CircuitMacrosDocument::initialize()
+{
+	return ".PS\ncct_init\n\n\n\n.PE";	
+}
+
+TikzDocument::TikzDocument(QObject* parent): QObject(parent)
+{
+
+}
+
+QString TikzDocument::initialize()
+{
+	return "\\begin{tikzpicture}\n\n\\end{tikzpicture}";
+}
+
+

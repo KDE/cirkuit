@@ -35,13 +35,13 @@ bool GraphicsBuilder::fileExists(const QString& extension) const
 	if (m_tempFileInfo == 0)
 		return false;
 	
-	return m_workingDir->exists(m_tempFileInfo->baseName() + extension);
+	return m_workingDir->exists(m_tempFileInfo->baseName() + "." + extension);
 }
 
 QString GraphicsBuilder::filePath(const QString& extension) const
 {
 	if (fileExists(extension))
-		return m_workingDir->canonicalPath() + "/" + m_tempFileInfo->baseName() + extension;
+		return QString("%1/%2.%3").arg(m_workingDir->canonicalPath()).arg(m_tempFileInfo->baseName()).arg(extension);
 	
 	return "";
 }

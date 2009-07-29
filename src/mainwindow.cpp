@@ -244,16 +244,17 @@ void MainWindow::saveAsFile(const KUrl& url)
 void MainWindow::exportFile()
 {
 	QString origDir = m_currentFile.directory();
-	m_generator->build(m_doc, origDir);
 	
 	QString path = KFileDialog::getSaveFileName(KUrl(), "*.pdf|" + i18n("PDF files (*.pdf)"));
+	QFileInfo fileinfo(path);
 	
 	if (path != 0)
 	{
 		if (QFile::exists(path) && KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes)
 			QFile::remove(path);
 		
-		QFile::copy(m_generator->builder()->filePath(".pdf"), path);
+		m_generator->builder()->generateFormat(fileinfo.suffix());
+		QFile::copy(m_generator->builder()->filePath(fileinfo.suffix()), path);
 	}
 }
 
@@ -300,7 +301,7 @@ void MainWindow::newCmDocument()
 	m_doc->closeUrl();
 	m_currentFile = "";
 	m_doc->clear();
-	m_doc->setText(".PS\ncct_init\n\n\n\n.PE");
+	m_doc->setText(CircuitMacrosDocument::initialize());
 	
 	KTextEditor::Cursor cursor = m_view->cursorPosition();
 	cursor.setLine(3);
@@ -313,7 +314,7 @@ void MainWindow::newTikzDocument()
 	m_doc->closeUrl();
 	m_currentFile = "";
 	m_doc->clear();
-	m_doc->setText("\\begin{tikzpicture}\n\n\\end{tikzpicture}");
+	m_doc->setText(TikzDocument::initialize());
 	
 	KTextEditor::Cursor cursor = m_view->cursorPosition();
 	cursor.setLine(1);

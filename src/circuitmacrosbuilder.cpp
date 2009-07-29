@@ -47,7 +47,7 @@ CircuitMacrosBuilder::~CircuitMacrosBuilder()
 
 bool CircuitMacrosBuilder::generateFormat(const QString& extension)
 {
-	if (extension == ".pdf")
+	if (extension == "pdf")
 	{
 		if (!generateDvi())
 			return false;
@@ -56,14 +56,14 @@ bool CircuitMacrosBuilder::generateFormat(const QString& extension)
 		if (!generatePdf())
 			return false;
 	}
-	else if (extension == ".eps")
+	else if (extension == "eps")
 	{
 		if (!generateDvi())
 			return false;
 		if (!generateEps())
 			return false;
 	}
-	else if (extension == ".dvi")
+	else if (extension == "dvi")
 	{
 		return generateDvi();
 	}
