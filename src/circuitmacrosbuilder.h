@@ -46,6 +46,8 @@ class CircuitMacrosBuilder : public GraphicsBuilder
 		bool generateDvi();
 		bool generateEps();
 		bool generatePdf();
+		bool generatePng();
+		bool generateSvg();
 };
 
 #endif // CIRCUITMACROSBUILDER_H

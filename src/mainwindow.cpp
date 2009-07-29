@@ -243,13 +243,22 @@ void MainWindow::saveAsFile(const KUrl& url)
 
 void MainWindow::exportFile()
 {
-	QString origDir = m_currentFile.directory();
+	QString path;
 	
-	QString path = KFileDialog::getSaveFileName(KUrl(), "*.pdf|" + i18n("PDF files (*.pdf)"));
-	QFileInfo fileinfo(path);
+	QStringList exportTypes;
+	exportTypes << "application/pdf" << "image/x-eps" << "image/png" << "image/svg+xml";
 	
-	if (path != 0)
+	KFileDialog saveFileDialog(KUrl(), "", this);
+	saveFileDialog.setWindowTitle(i18n("Export image - Cirkuit"));
+	saveFileDialog.setOperationMode(KFileDialog::Saving);
+	saveFileDialog.setMimeFilter(exportTypes, "application/pdf");
+	if (saveFileDialog.exec() == QDialog::Accepted)
+		path = saveFileDialog.selectedFile();
+	
+	if (!path.isEmpty())
 	{
+		QFileInfo fileinfo(path);
+		
 		if (QFile::exists(path) && KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes)
 			QFile::remove(path);
 		

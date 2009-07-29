@@ -3,9 +3,9 @@ Better text editor thanks to the use of KParts
 Support for syntax highlighting
 Preview built directly from the PDF with LibPoppler
 Reworked preview generation
-Error messages now correctly shown
+Improved handling of error messages
 Added TikZ support
-Added CircuiTikz support 
+Added CircuiTikz support
 
 - 0.1.2
 Faster preview generation
