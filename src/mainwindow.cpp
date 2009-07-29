@@ -220,7 +220,7 @@ void MainWindow::saveAs()
 	KFileDialog saveFileDialog(KUrl(), "", this);
 	saveFileDialog.setWindowTitle(i18n("Save file - Cirkuit"));
 	saveFileDialog.setOperationMode(KFileDialog::Saving);
-	saveFileDialog.setMimeFilter(mimeTypes);
+	saveFileDialog.setMimeFilter(mimeTypes, "application/x-cirkuit");
 	if (saveFileDialog.exec() == QDialog::Accepted)
 		filename = saveFileDialog.selectedFile();
 	
