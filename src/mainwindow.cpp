@@ -144,6 +144,11 @@ void MainWindow::setupActions()
 	actionCollection()->addAction("build_preview", buildPreviewAction);
 	connect(buildPreviewAction, SIGNAL(triggered()), this, SLOT(buildPreview()));
 	
+	KAction* openPreviewAction = new KAction(i18n("Open preview"), 0);
+	openPreviewAction->setShortcut(Qt::ALT + Qt::Key_2);
+	actionCollection()->addAction("open_preview", openPreviewAction);
+	connect(openPreviewAction, SIGNAL(triggered()), this, SLOT(openPreview()));
+	
 	KAction* showManualAction = new KAction(KIcon("help-contents"), i18n("Show Circuit Macros manual"),0);
 	actionCollection()->addAction( "showManual", showManualAction );
 	connect(showManualAction, SIGNAL(triggered()), this, SLOT(showManual()));
@@ -308,6 +313,17 @@ void MainWindow::buildPreview()
 	m_livePreviewWidget->setImage(m_generator->preview());
 	m_updateTimer->stop();
 	statusBar()->showMessage("Preview built", 3000);
+}
+
+void MainWindow::openPreview()
+{
+	buildPreview();
+	QProcess* previewProc = new QProcess;
+	
+	QStringList args;
+	args << m_generator->builder()->filePath("pdf");
+	
+	previewProc->start("okular", args);  
 }
 
 void MainWindow::startBuildNotification()

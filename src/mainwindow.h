@@ -56,6 +56,7 @@ class MainWindow : public KParts::MainWindow
 		
 		void documentModified(KTextEditor::Document*);
 		void buildPreview();
+		void openPreview();
 		
 		void newCmDocument();
 		void newTikzDocument();

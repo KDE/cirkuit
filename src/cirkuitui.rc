@@ -25,8 +25,9 @@
  
     <Action name="file_quit"/>
   </Menu>
-  <Menu name="build"><text>&amp;Build</text>
+  <Menu name="build"><text>&amp;Preview</text>
 		<Action name="build_preview"/>
+		<Action name="open_preview"/>
   </Menu>
   <Menu name="view" noMerge="1"><text>&amp;View</text>
 		<Action name="show_live_preview" />
