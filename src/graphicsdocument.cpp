@@ -46,4 +46,15 @@ QString TikzDocument::initialize()
 	return "\\begin{tikzpicture}\n\n\\end{tikzpicture}";
 }
 
+GnuplotDocument::GnuplotDocument(QObject* parent): QObject(parent)
+{
+
+}
+
+QString GnuplotDocument::initialize()
+{
+	return "set terminal epslatex\n";
+}
+
+
 

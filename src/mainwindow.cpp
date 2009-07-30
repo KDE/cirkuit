@@ -139,6 +139,10 @@ void MainWindow::setupActions()
 	actionCollection()->addAction("new_tikzfile", newTikzFileAction);
 	connect(newTikzFileAction, SIGNAL(triggered()), this, SLOT(newTikzDocument()));
 	
+	KAction* newGnuplotFileAction = new KAction(i18n("Gnuplot file"), 0);
+	actionCollection()->addAction("new_gnuplotfile", newGnuplotFileAction);
+	connect(newGnuplotFileAction, SIGNAL(triggered()), this, SLOT(newGnuplotDocument()));
+	
 	KAction* buildPreviewAction = new KAction(i18n("Build preview"), 0);
 	buildPreviewAction->setShortcut(Qt::ALT + Qt::Key_1);
 	actionCollection()->addAction("build_preview", buildPreviewAction);
@@ -333,30 +337,44 @@ void MainWindow::startBuildNotification()
 
 void MainWindow::newCmDocument()
 {
-	m_doc->closeUrl();
-	m_currentFile = "";
-	m_doc->clear();
+	if (!m_doc->closeUrl())
+		return;
+		
+	reset();
+
 	m_doc->setText(CircuitMacrosDocument::initialize());
-	
 	KTextEditor::Cursor cursor = m_view->cursorPosition();
 	cursor.setLine(3);
 	m_view->setCursorPosition(cursor);
 	m_doc->setModified(false);
-	updateTitle();
 }
 
 void MainWindow::newTikzDocument()
 {
-	m_doc->closeUrl();
-	m_currentFile = "";
-	m_doc->clear();
-	m_doc->setText(TikzDocument::initialize());
+	if (!m_doc->closeUrl())
+		return;
 	
+	reset();
+	
+	m_doc->setText(TikzDocument::initialize());	
 	KTextEditor::Cursor cursor = m_view->cursorPosition();
 	cursor.setLine(1);
 	m_view->setCursorPosition(cursor);
 	m_doc->setModified(false);
-	updateTitle();
+}
+
+void MainWindow::newGnuplotDocument()
+{
+	if (!m_doc->closeUrl())
+		return;
+	
+	reset();
+	
+	m_doc->setText(GnuplotDocument::initialize());
+	KTextEditor::Cursor cursor = m_view->cursorPosition();
+	cursor.setLine(1);
+	m_view->setCursorPosition(cursor);
+	m_doc->setModified(false);
 }
 
 void MainWindow::displayError(const QString& app, const QString& msg)
@@ -373,6 +391,13 @@ void MainWindow::updateTitle()
 	
 	m_windowTitle += "[*]";
 	setWindowTitle(m_windowTitle);
+}
+
+void MainWindow::reset()
+{
+	m_currentFile = "";
+	m_doc->clear();
+	updateTitle();	
 }
 
 void MainWindow::configure()

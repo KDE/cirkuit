@@ -14,6 +14,7 @@ set(cirkuit_SRCS
 	latexprocess.cpp
 	circuitmacrosbuilder.cpp
 	tikzbuilder.cpp
+	gnuplotbuilder.cpp
 	graphicsbuilder.cpp
 	externalprocess.cpp
 	qimagedisplay.cpp

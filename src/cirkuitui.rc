@@ -8,6 +8,7 @@
 		<text>&amp;New</text>
 		
 		<Action name="new_cmfile"/>
+		<Action name="new_gnuplotfile"/>
 		<Action name="new_tikzfile"/>
 	 </Menu>
  

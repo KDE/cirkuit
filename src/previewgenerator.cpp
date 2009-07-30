@@ -21,6 +21,7 @@
 #include "previewgenerator.h"
 #include "circuitmacrosbuilder.h"
 #include "tikzbuilder.h"
+#include "gnuplotbuilder.h"
 #include "graphicsbuilder.h"
 
 #include <poppler-qt4.h>
@@ -49,6 +50,10 @@ void PreviewGenerator::build(KTextEditor::Document* doc, const QString& origDir)
 	{
 		// this is a circuit macros document
 		m_builder = new CircuitMacrosBuilder(doc,origDir);
+	}
+	else if (doc->text().contains("set terminal"))
+	{
+		m_builder = new GnuplotBuilder(doc,origDir);
 	}
 	else //if (doc->text().contains("\\begin{tikzpicture}"))
 	{

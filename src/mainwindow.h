@@ -59,6 +59,7 @@ class MainWindow : public KParts::MainWindow
 		void openPreview();
 		
 		void newCmDocument();
+		void newGnuplotDocument();
 		void newTikzDocument();
 		
 		void updateTitle();
@@ -72,6 +73,7 @@ class MainWindow : public KParts::MainWindow
 		void checkCircuitMacros();
 		void circuitMacrosConfigured();
 		void askIfUpgrade(const QString&);
+		void reset();
 		
 	private:
 		void setupActions();

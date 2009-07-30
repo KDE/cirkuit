@@ -47,4 +47,13 @@ class TikzDocument: public QObject
 		static QString initialize();
 };
 
+class GnuplotDocument: public QObject
+{
+	public:
+		GnuplotDocument(QObject* parent = 0);
+		
+	public slots:
+		static QString initialize();
+};
+
 #endif // GRAPHICSDOCUMENT_H
