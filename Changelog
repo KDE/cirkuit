@@ -1,7 +1,7 @@
 - 0.2
-Better text editor thanks to the use of KParts
+Improved text editor, now based on the Kate part
 Support for syntax highlighting
-Preview built directly from the PDF with LibPoppler
+Preview generated directly from PDF with LibPoppler
 Reworked preview generation
 Improved handling of error messages
 Added TikZ support

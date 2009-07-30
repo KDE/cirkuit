@@ -342,6 +342,7 @@ void MainWindow::newCmDocument()
 	cursor.setLine(3);
 	m_view->setCursorPosition(cursor);
 	m_doc->setModified(false);
+	updateTitle();
 }
 
 void MainWindow::newTikzDocument()
@@ -355,6 +356,7 @@ void MainWindow::newTikzDocument()
 	cursor.setLine(1);
 	m_view->setCursorPosition(cursor);
 	m_doc->setModified(false);
+	updateTitle();
 }
 
 void MainWindow::displayError(const QString& app, const QString& msg)
