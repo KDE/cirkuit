@@ -142,37 +142,4 @@ bool CircuitMacrosBuilder::generateDvi()
 	return latexProcess.build(latexDoc);
 }
 
-bool CircuitMacrosBuilder::generateEps()
-{
-	qDebug() << "Generating EPS...";
-	ExternalProcess dvipsproc("dvips");
-	QStringList dvipsargs;
-	dvipsargs << "-Ppdf" << "-G0" << "-E" << m_tempFileInfo->baseName()+".dvi" << "-o" << m_tempFileInfo->baseName()+".eps";
-	if (!dvipsproc.startWith("", dvipsargs))
-	{
-		emit applicationError(dvipsproc.appName(), dvipsproc.readAllStandardError());
-		qDebug() << dvipsproc.readAllStandardOutput();
-		qDebug() << dvipsproc.readAllStandardError();
-		return false;
-	}
-	
-	return true;
-}
-
-bool CircuitMacrosBuilder::generatePdf()
-{
-	qDebug() << "Generating PDF...";
-	ExternalProcess epstopdfproc("epstopdf");
-	QStringList epstopdfargs;
-	epstopdfargs << m_tempFileInfo->baseName()+".eps";
-	if (!epstopdfproc.startWith("", epstopdfargs))
-	{
-		emit applicationError(epstopdfproc.appName(), epstopdfproc.readAllStandardError());
-		qDebug() << epstopdfproc.readAllStandardOutput();
-		qDebug() << epstopdfproc.readAllStandardError();
-		return false;
-	}
-	
-	return true;
-}
 

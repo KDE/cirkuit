@@ -33,9 +33,9 @@ class TikzBuilder : public GraphicsBuilder
 		virtual bool generateFormat(const QString& extension);
 		
 	private:
-		bool generatePdf();
-		bool generateDvi();
-		bool generateEps();
+		virtual bool generatePdf();
+		virtual bool generateDvi();
+		virtual bool generateEps();
 };
 
 #endif // TIKZBUILDER_H

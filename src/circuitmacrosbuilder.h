@@ -44,8 +44,6 @@ class CircuitMacrosBuilder : public GraphicsBuilder
 		
 	private:
 		bool generateDvi();
-		bool generateEps();
-		bool generatePdf();
 		
 };
 

@@ -48,8 +48,10 @@ class GraphicsBuilder : public QObject
 		void applicationError(const QString&, const QString&);
 		
 	protected slots:
-		bool generatePng();
-		bool generateSvg();
+		virtual bool generatePng();
+		virtual bool generateSvg();
+		virtual bool generateEps();
+		virtual bool generatePdf();
 				
 	protected:
 		KTextEditor::Document* m_doc;
