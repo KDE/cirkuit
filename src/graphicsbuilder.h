@@ -26,40 +26,41 @@ class KTemporaryFile;
 class QFileInfo;
 class QDir;
 
-namespace KTextEditor 
+namespace KTextEditor
 {
-	class Document;
+class Document;
 }
 
 class GraphicsBuilder : public QObject
 {
-	Q_OBJECT
-	public:
-		GraphicsBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
-		
-		bool fileExists(const QString& extension) const;
-		QString filePath(const QString& extension) const;
-		
-	public slots:
-		//virtual void build() = 0;
-		virtual bool generateFormat(const QString& extension) = 0;
-		
-	signals:
-		void applicationError(const QString&, const QString&);
-		
-	protected slots:
-		virtual bool generatePng();
-		virtual bool generateSvg();
-		virtual bool generateEps();
-		virtual bool generatePdf();
-				
-	protected:
-		KTextEditor::Document* m_doc;
-		QString m_origDir;
-		KTemporaryFile* m_tempFile;
-		QFileInfo* m_tempFileInfo;
-		
-		QDir* m_workingDir;
+    Q_OBJECT
+public:
+    GraphicsBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
+
+    bool fileExists(const QString& extension) const;
+    QString filePath(const QString& extension) const;
+
+public slots:
+    //virtual void build() = 0;
+    virtual bool generateFormat(const QString& extension) = 0;
+
+signals:
+    void applicationError(const QString&, const QString&);
+	 void applicationMessage(const QString&, const QString&);
+
+protected slots:
+    virtual bool generatePng();
+    virtual bool generateSvg();
+    virtual bool generateEps();
+    virtual bool generatePdf();
+
+protected:
+    KTextEditor::Document* m_doc;
+    QString m_origDir;
+    KTemporaryFile* m_tempFile;
+    QFileInfo* m_tempFileInfo;
+
+    QDir* m_workingDir;
 };
 
 #endif // GRAPHICSBUILDER_H

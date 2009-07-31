@@ -25,17 +25,17 @@
 
 class TikzBuilder : public GraphicsBuilder
 {
-	public:
-		TikzBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
-		~TikzBuilder();
-		
-	public slots:
-		virtual bool generateFormat(const QString& extension);
-		
-	private:
-		virtual bool generatePdf();
-		virtual bool generateDvi();
-		virtual bool generateEps();
+public:
+    TikzBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
+    ~TikzBuilder();
+
+public slots:
+    virtual bool generateFormat(const QString& extension);
+
+private:
+    virtual bool generatePdf();
+    virtual bool generateDvi();
+    virtual bool generateEps();
 };
 
 #endif // TIKZBUILDER_H

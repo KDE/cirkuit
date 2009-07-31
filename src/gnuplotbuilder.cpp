@@ -135,12 +135,16 @@ bool GnuplotBuilder::generateDvi()
 	qDebug() << gnuplot_outputfile;
 
 	if (!gnuplot.startWith("", gnuplot_args))
- 		emit applicationError(gnuplot.appName(), gnuplot.readAllStandardError());
+ 		emit applicationError(gnuplot.appName(), "Application not found");
+	
+	QString appError = gnuplot.readAllStandardError();
+	if (!appError.isEmpty())
+		emit applicationError(gnuplot.appName(), appError);
 	
 	QString gnuplot_out = gnuplot.readAllStandardOutput();
 	
 	LatexProcess latexProcess(m_tempFileInfo->baseName());
-	//QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
+	
 	QString latexDoc = "\\documentclass{article}\n"
 	"\\usepackage{graphicx}\n"
 	"\\pagestyle{empty}\n"

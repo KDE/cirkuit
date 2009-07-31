@@ -113,7 +113,11 @@ bool CircuitMacrosBuilder::generateDvi()
 	
 	m4proc.setEnvironment(env);
 	if (!m4proc.startWith("", m4args))
-		emit applicationError(m4proc.appName(), m4proc.readAllStandardError());
+		emit applicationError(m4proc.appName(), "Application not found");
+	
+	QString m4err = m4proc.readAllStandardError();
+	if (!m4err.isEmpty())
+		emit applicationError(m4proc.appName(), m4err);
 	
 	QString m4out = m4proc.readAllStandardOutput();
 	
@@ -122,11 +126,16 @@ bool CircuitMacrosBuilder::generateDvi()
 	picargs << "-p";
 	
 	if (!picproc.startWith(m4out, picargs))
-		emit applicationError(picproc.appName(), picproc.readAllStandardError());
+		emit applicationError(picproc.appName(), "Application not found");
+	
+ 	QString picerr = picproc.readAllStandardError();
+ 	if (!picerr.isEmpty())
+ 		emit applicationError(picproc.appName(), picerr);
+	
 	QString picout = picproc.readAllStandardOutput();
 	
 	LatexProcess latexProcess(m_tempFileInfo->baseName());
-	//QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
+	
 	QString latexDoc = "\\documentclass{article}\n\\usepackage{pstricks,pst-eps,boxdims,graphicx,ifpdf,pst-grad,amsmath}\n"
 	"\\pagestyle{empty}\n"
 	"\\thispagestyle{empty}\n"

@@ -25,13 +25,13 @@
 
 class GnuplotBuilder : public GraphicsBuilder
 {
-	public:
-		GnuplotBuilder(KTextEditor::Document* doc, const QString& origDir = "", QObject* parent = 0);
-		~GnuplotBuilder();
-		virtual bool generateFormat(const QString& extension);
-		
-	private:
-		bool generateDvi();
+public:
+    GnuplotBuilder(KTextEditor::Document* doc, const QString& origDir = "", QObject* parent = 0);
+    ~GnuplotBuilder();
+    virtual bool generateFormat(const QString& extension);
+
+private:
+    bool generateDvi();
 };
 
 #endif // GNUPLOTBUILDER_H

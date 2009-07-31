@@ -25,19 +25,21 @@
 
 class ExternalProcess : public QProcess
 {
-	public:
-		ExternalProcess(const QString& externalApp, QObject* parent = 0);
-		
-		QString appName() const { return m_appName; }
-		bool checkExistence(const QString&) const;
-		
-	public slots:
-		bool startWith(const QString& input, const QStringList& args);
-		
-	protected:
-		QString m_appName;
-		
-		bool checkPresenceInDir(const QString& appname, const QString& dirname) const;
+public:
+    ExternalProcess(const QString& externalApp, QObject* parent = 0);
+
+    QString appName() const {
+        return m_appName;
+    }
+    bool checkExistence(const QString&) const;
+
+public slots:
+    bool startWith(const QString& input, const QStringList& args);
+
+protected:
+    QString m_appName;
+
+    bool checkPresenceInDir(const QString& appname, const QString& dirname) const;
 };
 
 #endif // EXTERNALPROCESS_H

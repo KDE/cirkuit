@@ -29,21 +29,21 @@ class QTimer;
 
 class LivePreviewWidget : public QDockWidget
 {
-  Q_OBJECT
-  public:
+    Q_OBJECT
+public:
     LivePreviewWidget(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0);
-  
-  private:
+
+private:
     QImageDisplay* imageDisplay;
     QTimer* timer;
-    
-  public slots:
+
+public slots:
     void setImage(const QImage&);
     void clear();
-    
+
     void setSmoothTransformation();
-    
-  protected:
+
+protected:
 //     void dragEnterEvent ( QDragEnterEvent * event );
 //     void dragLeaveEvent ( QDragLeaveEvent * event );
 //     void moveEvent ( QMoveEvent * event );

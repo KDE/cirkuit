@@ -64,7 +64,9 @@ void PreviewGenerator::build(KTextEditor::Document* doc, const QString& origDir)
 	if (m_builder)
 	{
 		connect(m_builder, SIGNAL(applicationError(const QString&, const QString&)),
-							    SIGNAL(applicationError(const QString&, const QString&)));
+				  this,      SIGNAL(applicationError(const QString&, const QString&)));
+		connect(m_builder, SIGNAL(applicationMessage(const QString&, const QString&)), 
+				  this,      SIGNAL(applicationMessage(const QString&, const QString&)));
 		m_builder->generateFormat("pdf");
 	}
 }
@@ -106,6 +108,7 @@ QImage PreviewGenerator::preview()
 	delete pdfPage;
 	delete document;
 	
+	emit done();
 	return image;
 }
 

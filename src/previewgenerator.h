@@ -23,30 +23,34 @@
 
 #include <QObject>
 
-namespace KTextEditor 
+namespace KTextEditor
 {
-	class Document;
+class Document;
 }
 class QImage;
 class GraphicsBuilder;
 
 class PreviewGenerator : public QObject
 {
-	Q_OBJECT
-	public:
-		PreviewGenerator(QObject* parent = 0);
-		
-		void build(KTextEditor::Document* doc, const QString& origDir = "");
-		void clearTempFiles();
-		
-		QImage preview();
-		GraphicsBuilder* builder() const { return m_builder; }
-		
-	signals:
-		void applicationError(const QString& app, const QString& msg);
-		
-	protected:
-		GraphicsBuilder* m_builder;
+    Q_OBJECT
+public:
+    PreviewGenerator(QObject* parent = 0);
+
+    void build(KTextEditor::Document* doc, const QString& origDir = "");
+    void clearTempFiles();
+
+    QImage preview();
+    GraphicsBuilder* builder() const {
+        return m_builder;
+    }
+
+signals:
+    void applicationError(const QString& app, const QString& msg);
+	 void applicationMessage(const QString& app, const QString& msg);
+	 void done();
+
+protected:
+    GraphicsBuilder* m_builder;
 };
 
 #endif // PREVIEWGENERATOR_H

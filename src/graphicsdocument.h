@@ -25,35 +25,35 @@
 
 class GraphicsDocument : public KTextEditor::Document
 {
-	public:
-		GraphicsDocument(QObject* parent = 0);
+public:
+    GraphicsDocument(QObject* parent = 0);
 };
 
 class CircuitMacrosDocument: public QObject
 {
-	public:
-		CircuitMacrosDocument(QObject* parent = 0);
-		
-	public slots:
-		static QString initialize();
+public:
+    CircuitMacrosDocument(QObject* parent = 0);
+
+public slots:
+    static QString initialize();
 };
 
 class TikzDocument: public QObject
 {
-	public:
-		TikzDocument(QObject* parent = 0);
-		
-	public slots:
-		static QString initialize();
+public:
+    TikzDocument(QObject* parent = 0);
+
+public slots:
+    static QString initialize();
 };
 
 class GnuplotDocument: public QObject
 {
-	public:
-		GnuplotDocument(QObject* parent = 0);
-		
-	public slots:
-		static QString initialize();
+public:
+    GnuplotDocument(QObject* parent = 0);
+
+public slots:
+    static QString initialize();
 };
 
 #endif // GRAPHICSDOCUMENT_H

@@ -105,11 +105,12 @@ MainWindow::MainWindow(QWidget *)
 	statusBar()->showMessage("Ready", 3000);
 	
 	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(buildPreview()));
-	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(startBuildNotification()));
+	connect(m_generator, SIGNAL(done()), this, SLOT(builtNotification()));
 	connect(m_doc, SIGNAL(textChanged(KTextEditor::Document*)), m_updateTimer, SLOT(start()));
 	connect(m_doc, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(documentModified(KTextEditor::Document*)));
 	
 	connect(m_generator, SIGNAL(applicationError(const QString&,const QString&)), this, SLOT(displayError(const QString&,const QString&)));
+	connect(m_generator, SIGNAL(applicationMessage(const QString&,const QString&)), this, SLOT(displayMessage(const QString&,const QString&)));
 	
 	checkCircuitMacros();
 }
@@ -312,11 +313,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::buildPreview()
 {
+	m_updateTimer->stop();
+	statusBar()->showMessage("Building preview...", 1000);
 	QString origDir = m_currentFile.directory();
 	m_generator->build(m_doc, origDir);
-	m_livePreviewWidget->setImage(m_generator->preview());
-	m_updateTimer->stop();
-	statusBar()->showMessage("Preview built", 3000);
+	m_livePreviewWidget->setImage(m_generator->preview());	
 }
 
 void MainWindow::openPreview()
@@ -330,9 +331,9 @@ void MainWindow::openPreview()
 	previewProc->start("okular", args);  
 }
 
-void MainWindow::startBuildNotification()
+void MainWindow::builtNotification()
 {
-	statusBar()->showMessage("Building preview...", 1000);
+	statusBar()->showMessage("Preview built", 3000);
 }
 
 void MainWindow::newCmDocument()
@@ -379,7 +380,12 @@ void MainWindow::newGnuplotDocument()
 
 void MainWindow::displayError(const QString& app, const QString& msg)
 {
-	KMessageBox::information(this, i18n("Error"), i18n("Error reported by %1: %2").arg(app).arg(msg));
+	KMessageBox::information(this, i18n("Error reported by %1: %2").arg(app).arg(msg), i18n("Error"));
+}
+
+void MainWindow::displayMessage(const QString& app, const QString& msg)
+{
+	qDebug() << i18n("Message reported by %1: %2").arg(app).arg(msg);
 }
 
 void MainWindow::updateTitle()

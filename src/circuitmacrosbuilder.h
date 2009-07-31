@@ -26,25 +26,25 @@
 class KTemporaryFile;
 class QFileInfo;
 
-namespace KTextEditor 
+namespace KTextEditor
 {
-	class Document;
+class Document;
 }
 
 class CircuitMacrosBuilder : public GraphicsBuilder
 {
-	Q_OBJECT
-	public:
-		CircuitMacrosBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
-		~CircuitMacrosBuilder();
-		
-	public slots:
-		//virtual void build();
-		virtual bool generateFormat(const QString& extension);
-		
-	private:
-		bool generateDvi();
-		
+    Q_OBJECT
+public:
+    CircuitMacrosBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
+    ~CircuitMacrosBuilder();
+
+public slots:
+    //virtual void build();
+    virtual bool generateFormat(const QString& extension);
+
+private:
+    bool generateDvi();
+
 };
 
 #endif // CIRCUITMACROSBUILDER_H

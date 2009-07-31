@@ -27,8 +27,8 @@
 
 namespace KTextEditor
 {
-	class Document;
-	class View;
+class Document;
+class View;
 }
 
 class LivePreviewWidget;
@@ -40,62 +40,63 @@ class CircuitMacrosManager;
 
 class MainWindow : public KParts::MainWindow
 {
-	Q_OBJECT
-	
-	public:
-		MainWindow(QWidget *parent=0);
-		
-	private slots:
-		void clear();
-		void openFile();
-		void saveAsFile(const KUrl& url);
-		void saveAs();
-		void save();
-		void substituteSaveAsAction();
-		void exportFile();
-		
-		void documentModified(KTextEditor::Document*);
-		void buildPreview();
-		void openPreview();
-		
-		void newCmDocument();
-		void newGnuplotDocument();
-		void newTikzDocument();
-		
-		void updateTitle();
-		void updateConfiguration();
-		void configure();
-		void startBuildNotification();
-		
-		void showManual();
-		void showExamples();
-		
-		void checkCircuitMacros();
-		void circuitMacrosConfigured();
-		void askIfUpgrade(const QString&);
-		void reset();
-		
-	private:
-		void setupActions();
-		
-		KTextEditor::View *m_view;
-		GraphicsDocument *m_doc;
-		QTimer* m_updateTimer;
-		QStringList mimeTypes;
-		KUrl m_currentFile;
-		KRecentFilesAction* recentFilesAction;
-		CircuitMacrosManager* cmm;
-		
-		QString m_windowTitle;
-		LivePreviewWidget *m_livePreviewWidget;
-		PreviewGenerator *m_generator;
-		
-	public slots:
-		void loadFile(const KUrl& url);
-		void displayError(const QString& app, const QString& msg);
-		
-	protected:
-		void closeEvent(QCloseEvent *event);
+    Q_OBJECT
+
+public:
+    MainWindow(QWidget *parent=0);
+
+private slots:
+    void clear();
+    void openFile();
+    void saveAsFile(const KUrl& url);
+    void saveAs();
+    void save();
+    void substituteSaveAsAction();
+    void exportFile();
+
+    void documentModified(KTextEditor::Document*);
+    void buildPreview();
+    void openPreview();
+
+    void newCmDocument();
+    void newGnuplotDocument();
+    void newTikzDocument();
+
+    void updateTitle();
+    void updateConfiguration();
+    void configure();
+    void builtNotification();
+
+    void showManual();
+    void showExamples();
+
+    void checkCircuitMacros();
+    void circuitMacrosConfigured();
+    void askIfUpgrade(const QString&);
+    void reset();
+
+private:
+    void setupActions();
+
+    KTextEditor::View *m_view;
+    GraphicsDocument *m_doc;
+    QTimer* m_updateTimer;
+    QStringList mimeTypes;
+    KUrl m_currentFile;
+    KRecentFilesAction* recentFilesAction;
+    CircuitMacrosManager* cmm;
+
+    QString m_windowTitle;
+    LivePreviewWidget *m_livePreviewWidget;
+    PreviewGenerator *m_generator;
+
+public slots:
+    void loadFile(const KUrl& url);
+    void displayError(const QString& app, const QString& msg);
+	 void displayMessage(const QString& app, const QString& msg);
+
+protected:
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif

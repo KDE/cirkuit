@@ -28,26 +28,28 @@
 */
 class QImageDisplay : public QWidget
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
     QImageDisplay(QWidget* parent = 0);
 
     ~QImageDisplay();
-    
-    QPixmap* pixmap() {return &_pixmap;}
+
+    QPixmap* pixmap() {
+        return &_pixmap;
+    }
 
 public slots:
-   void setImage(const QImage&);
-   void clear();
-   
-   void setFastTransformation(bool fast = false);
-   
+    void setImage(const QImage&);
+    void clear();
+
+    void setFastTransformation(bool fast = false);
+
 private:
-   QPixmap _pixmap;
-   bool _fastTransform;
-   
+    QPixmap _pixmap;
+    bool _fastTransform;
+
 protected:
-   void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event);
 };
 
 #endif
