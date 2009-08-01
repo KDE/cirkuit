@@ -26,8 +26,10 @@
 
 #include <KTextEditor/Document>
 
-TikzBuilder::TikzBuilder(KTextEditor::Document* doc, const QString& origDir, QObject* parent): GraphicsBuilder(doc,origDir,parent)
+TikzBuilder::TikzBuilder(KTextEditor::Document* doc, const QString& origDir, bool enableCircuitikz, QObject* parent): GraphicsBuilder(doc,origDir,parent)
 {
+	m_enableCircuitikz = enableCircuitikz;
+	
 	m_tempFile = new KTemporaryFile;
 	m_tempFile->setPrefix(m_workingDir->absolutePath()+"/");
 	m_tempFile->setSuffix("");
@@ -47,10 +49,13 @@ bool TikzBuilder::generatePdf()
 	LatexProcess latexProcess(m_tempFileInfo->baseName(), "pdflatex");
 	//QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
 	QString latexDoc = "\\documentclass{article}\n"
-	"\\usepackage{tikz,amsmath,siunitx}\n"
-	"\\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}"
+	"\\usepackage{tikz,amsmath,siunitx}\n";
+	
+	if (m_enableCircuitikz)
+		latexDoc += "\\usepackage{circuitikz}";
+	
+	latexDoc += "\\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}"
 	"\\usepackage[graphics,tightpage,active]{preview}\n"
-	"\\usepackage[siunitx]{circuitikz}"
 	"\\PreviewEnvironment{tikzpicture}"
 	"\\PreviewEnvironment{equation}"
 	"\\PreviewEnvironment{equation*}"
@@ -70,10 +75,13 @@ bool TikzBuilder::generateDvi()
 	LatexProcess latexProcess(m_tempFileInfo->baseName(), "pdflatex");
 	//QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
 	QString latexDoc = "\\documentclass{article}\n"
-	"\\usepackage{tikz,amsmath,siunitx}\n"
-	"\\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}"
+	"\\usepackage{tikz,amsmath,siunitx}\n";
+	
+	if (m_enableCircuitikz)
+		latexDoc += "\\usepackage{circuitikz}";
+	
+	latexDoc += "\\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}"
 	"\\usepackage[graphics,tightpage,active]{preview}\n"
-	"\\usepackage[siunitx]{circuitikz}"
 	"\\PreviewEnvironment{tikzpicture}"
 	"\\PreviewEnvironment{equation}"
 	"\\PreviewEnvironment{equation*}"

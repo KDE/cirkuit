@@ -55,10 +55,15 @@ void PreviewGenerator::build(KTextEditor::Document* doc, const QString& origDir)
 	{
 		m_builder = new GnuplotBuilder(doc,origDir);
 	}
-	else //if (doc->text().contains("\\begin{tikzpicture}"))
+	else if (doc->text().contains("\\begin{circuitikz}"))
+	{
+		// this is a CircuiTikz document
+		m_builder = new TikzBuilder(doc,origDir,true);
+	}
+	else
 	{
 		// this is a Tikz document
-		m_builder = new TikzBuilder(doc,origDir);
+		m_builder = new TikzBuilder(doc,origDir,false);
 	}
 	
 	if (m_builder)

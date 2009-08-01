@@ -26,7 +26,7 @@
 class TikzBuilder : public GraphicsBuilder
 {
 public:
-    TikzBuilder(KTextEditor::Document* doc, const QString& origDir="", QObject* parent = 0);
+    TikzBuilder(KTextEditor::Document* doc, const QString& origDir="", bool enableCircuitikz = false, QObject* parent = 0);
     ~TikzBuilder();
 
 public slots:
@@ -36,6 +36,8 @@ private:
     virtual bool generatePdf();
     virtual bool generateDvi();
     virtual bool generateEps();
+	 
+	 bool m_enableCircuitikz;
 };
 
 #endif // TIKZBUILDER_H
