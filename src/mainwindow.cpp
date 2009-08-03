@@ -414,7 +414,7 @@ void MainWindow::configure()
 	KConfigDialog* dialog = new KConfigDialog(this, "settings", CirkuitSettings::self() );
 	
 	CirkuitGeneralForm* confWdg = new CirkuitGeneralForm();
-	dialog->addPage( confWdg, i18n("General"), "general" ); 
+	dialog->addPage( confWdg, i18n("General"), "configure" ); 
 	
 	connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(updateConfiguration()));
 	dialog->show();

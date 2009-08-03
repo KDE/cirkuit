@@ -24,18 +24,18 @@
       </widget>
      </item>
      <item>
-      <widget class="KIntNumInput" name="kcfg_RefreshInterval">
+      <widget class="QSpinBox" name="kcfg_RefreshInterval">
        <property name="minimum">
-        <number>0</number>
+        <number>100</number>
        </property>
        <property name="maximum">
         <number>60000</number>
        </property>
        <property name="singleStep">
-        <number>100</number>
+        <number>1000</number>
        </property>
-       <property name="sliderEnabled">
-        <bool>true</bool>
+       <property name="value">
+        <number>1000</number>
        </property>
       </widget>
      </item>
@@ -43,13 +43,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

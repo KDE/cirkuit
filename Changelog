@@ -1,3 +1,8 @@
+- 0.2.1
+Experimental support for Gnuplot epslatex terminal
+Fixed bug in generation of TikZ previews
+Should be compatible with KDE 4.2
+
 - 0.2
 Improved text editor, now based on the Kate part
 Support for syntax highlighting
