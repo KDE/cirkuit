@@ -19,23 +19,23 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Preview refresh interval (ms):</string>
+        <string>Preview refresh interval (sec):</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QSpinBox" name="kcfg_RefreshInterval">
        <property name="minimum">
-        <number>100</number>
+        <number>1</number>
        </property>
        <property name="maximum">
-        <number>60000</number>
+        <number>60</number>
        </property>
        <property name="singleStep">
-        <number>1000</number>
+        <number>1</number>
        </property>
        <property name="value">
-        <number>1000</number>
+        <number>1</number>
        </property>
       </widget>
      </item>

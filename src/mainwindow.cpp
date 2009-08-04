@@ -422,7 +422,7 @@ void MainWindow::configure()
 
 void MainWindow::updateConfiguration()
 {
-	m_updateTimer->setInterval(CirkuitSettings::refreshInterval());
+	m_updateTimer->setInterval(CirkuitSettings::refreshInterval()*1000);
 }
 
 void MainWindow::showManual()
