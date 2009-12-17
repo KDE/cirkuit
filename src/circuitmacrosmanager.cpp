@@ -19,6 +19,7 @@
 ***************************************************************************/
 
 #include "circuitmacrosmanager.h"
+#include "externalprocess.h"
 
 #include <KStandardDirs>
 #include <KTar>
@@ -131,25 +132,27 @@ void CircuitMacrosManager::readmeDone()
 
 void CircuitMacrosManager::configureCircuitMacros()
 {
-	QString homelibFilename = KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/homelib.txt", false);
-	QString defineString = QString("`define(`HOMELIB_',`%1')')").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
-	
-	QFile homelibFile(homelibFilename);
-	if (!homelibFile.open(QIODevice::WriteOnly | QIODevice::Text))
-		return;
-	
-	QTextStream out(&homelibFile);
-	out << defineString << "\n";
-	
-	homelibFile.close();
-	
-	QStringList args;
-	args << "homelib" << "psdefault";
-	QProcess::startDetached("make", args, KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
-	
-	QFile::remove(KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", false));
-	
-	qDebug() << "Circuit macros configured";
+    QString homelibFilename = KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/homelib.txt", false);
+    QString defineString = QString("`define(`HOMELIB_',`%1')')").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
+
+    QFile homelibFile(homelibFilename);
+    if (!homelibFile.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QTextStream out(&homelibFile);
+    out << defineString << "\n";
+
+    homelibFile.close();
+
+    QStringList args;
+    args << "homelib";
+
+    foreach (QString arg, args) {
+        QProcess::startDetached("make", QStringList(arg), KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
+    }
+
+    QFile::remove(KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", false));
+    qDebug() << "Circuit macros configured";
 }
 
 QString CircuitMacrosManager::installedVersion() const
