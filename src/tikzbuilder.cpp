@@ -46,7 +46,7 @@ TikzBuilder::~TikzBuilder()
 
 bool TikzBuilder::generatePdf()
 {
-	LatexProcess latexProcess(m_tempFileInfo->baseName(), "pdflatex");
+        LatexProcess latexProcess(m_tempFileInfo->baseName(), "pdflatex");
 	//QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
 	QString latexDoc = "\\documentclass{article}\n"
 	"\\usepackage{tikz,amsmath,siunitx}\n";
@@ -67,7 +67,9 @@ bool TikzBuilder::generatePdf()
 	m_doc->text() +
 	"\n\\end{document}\n";
 	
-	return latexProcess.build(latexDoc);
+        QStringList args, dirs;
+        dirs << m_origDir;
+	return latexProcess.build(latexDoc, args, dirs);
 }
 
 bool TikzBuilder::generateDvi()

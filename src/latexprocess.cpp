@@ -25,13 +25,17 @@ LatexProcess::LatexProcess(const QString& jobName, const QString& interpreter, Q
 	
 }
 
-bool LatexProcess::build(const QString& doc, const QStringList& additionalArgs)
+bool LatexProcess::build(const QString& doc, const QStringList& additionalArgs, const QStringList& inputDirs)
 {
 	QStringList args;
 	
 	QStringList environment = QProcess::systemEnvironment();
 	// the following enviroment variable is needed to find boxdims.sty in the circuit maaros distribution
-	environment << QString("TEXINPUTS=.:%1:").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
+        QString dirString = QString("TEXINPUTS=.:%1:").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
+        foreach (QString dir, inputDirs) {
+            dirString += dir + ":";
+        }
+        environment << dirString;
 	setEnvironment(environment);
 	
 	args << QString("-jobname=%1").arg(m_jobName) << additionalArgs;

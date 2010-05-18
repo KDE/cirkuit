@@ -27,7 +27,7 @@ class LatexProcess : public ExternalProcess
 public:
     LatexProcess(const QString& jobName = "temp", const QString& interpreter = "latex", QObject* parent = 0);
 
-    bool build(const QString& doc, const QStringList& additionalArgs = QStringList());
+    bool build(const QString& doc, const QStringList& additionalArgs = QStringList(), const QStringList& inputDirs = QStringList());
 
 private:
     QString m_jobName, m_interpreter;
