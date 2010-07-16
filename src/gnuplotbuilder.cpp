@@ -48,10 +48,10 @@ bool GnuplotBuilder::generateFormat(const QString& extension)
 {
 	if (extension == "pdf")
 	{
-		if (!generateDvi())
-			return false;
-		if (!generateEps())
-			return false;
+// 		if (!generateDvi())
+// 			return false;
+// 		if (!generateEps())
+// 			return false;
 		if (!generatePdf())
 			return false;
 	}
@@ -96,52 +96,7 @@ bool GnuplotBuilder::generateFormat(const QString& extension)
 
 bool GnuplotBuilder::generateDvi()
 {
-	QTextStream out(m_tempFile);
-		
-	ExternalProcess gnuplot("gnuplot");
-	QStringList gnuplot_args;
-	gnuplot_args << m_tempFileInfo->fileName();
-	
-	QRegExp regex1("[\'\"]([\\w\\./\\-]+)[\'\"]");
-	
-	QStringList origFileNames;
-	QStringList lines = m_doc->text().split("\n");
-	
-	QString gnuplot_outputfile;
-	foreach (QString line, lines)
-	{
-		int pos = 0;
-		while ((pos = regex1.indexIn(line,pos)) != -1)
-		{
-			QString capture = regex1.cap(1);
-			
-			if (QFile::exists(m_origDir + "/" + capture))
-			{
-				if (!line.startsWith("set output"))
-				{
-					origFileNames << capture;
-					line = line.replace(capture, QString("%1/%2").arg(m_origDir).arg(capture));
-				}
-				else
-					gnuplot_outputfile = capture;
-			}
-			pos += regex1.matchedLength();
-		}
-		out << line + "\n";
-	}
-	m_tempFile->close();
-	
-	qDebug() << origFileNames;			
-	qDebug() << gnuplot_outputfile;
-
-	if (!gnuplot.startWith("", gnuplot_args))
- 		emit applicationError(gnuplot.appName(), "Application not found");
-	
-	QString appError = gnuplot.readAllStandardError();
-	if (!appError.isEmpty())
-		emit applicationError(gnuplot.appName(), appError);
-	
-	QString gnuplot_out = gnuplot.readAllStandardOutput();
+	/*
 	
 	LatexProcess latexProcess(m_tempFileInfo->baseName());
 	
@@ -156,8 +111,82 @@ bool GnuplotBuilder::generateDvi()
 	"\\graph\n"
 	"\\end{document}\n";
 	
-	return latexProcess.build(latexDoc);
+	return latexProcess.build(latexDoc);*/
+    return false;
 }
+
+bool GnuplotBuilder::generatePdf()
+{
+    QTextStream out(m_tempFile);
+        
+    ExternalProcess gnuplot("gnuplot");
+    QStringList gnuplot_args;
+    gnuplot_args << m_tempFileInfo->fileName();
+    
+    QRegExp regex1("[\'\"]([\\w\\./\\-]+)[\'\"]");
+    
+    QStringList origFileNames;
+    QStringList lines = m_doc->text().split("\n");
+    
+    QString gnuplot_outputfile = "tempgnuplotluatikz.tex";
+    out << "set output '" + gnuplot_outputfile + "'\n";
+    foreach (QString line, lines)
+    {
+        int pos = 0;
+        while ((pos = regex1.indexIn(line,pos)) != -1) {
+            QString capture = regex1.cap(1);
+            
+            if (QFile::exists(m_origDir + "/" + capture)) {
+                if (!line.startsWith("set output")) {
+                    origFileNames << capture;
+                    line = line.replace(capture, QString("%1/%2").arg(m_origDir).arg(capture));
+                }
+            }
+             
+            if (line.simplified().startsWith("set output")) {
+                line = QString("");
+            }
+            
+            pos += regex1.matchedLength();
+        }
+        out << line + "\n";
+    }
+    m_tempFile->close();
+    
+    if (!gnuplot.startWith("", gnuplot_args)) {
+        emit applicationError(gnuplot.appName(), "Application not found");
+    }
+    
+    QString appError = gnuplot.readAllStandardError();
+    if (!appError.isEmpty()) {
+        emit applicationError(gnuplot.appName(), appError);
+    }
+    
+    QString gnuplot_out = gnuplot.readAllStandardOutput();
+    
+    LatexProcess latexProcess(m_tempFileInfo->baseName(), "pdflatex");
+    //QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
+    QString latexDoc = "\\documentclass{article}\n"
+    "\\usepackage{tikz,amsmath,siunitx}\n"
+    "\\usepackage{gnuplot-lua-tikz}"
+    "\\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,decorations.markings}"
+    "\\usepackage[graphics,tightpage,active]{preview}\n"
+    "\\PreviewEnvironment{tikzpicture}"
+    "\\PreviewEnvironment{equation}"
+    "\\PreviewEnvironment{equation*}"
+    "\\newlength{\\imagewidth}"
+    "\\newlength{\\imagescale}"
+    "\\pagestyle{empty}\n"
+    "\\begin{document}\n" 
+    "\\thispagestyle{empty}\n" + 
+    QString("\\input " + gnuplot_outputfile + "\n") + 
+    "\n\\end{document}\n";
+
+    QStringList args, dirs;
+    dirs << m_origDir;
+    return latexProcess.build(latexDoc, args, dirs);
+}
+
 
 
 

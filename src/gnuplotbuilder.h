@@ -32,6 +32,7 @@ public:
 
 private:
     bool generateDvi();
+    bool generatePdf();
 };
 
 #endif // GNUPLOTBUILDER_H
