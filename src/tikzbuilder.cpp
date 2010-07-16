@@ -75,31 +75,7 @@ bool TikzBuilder::generatePdf()
 
 bool TikzBuilder::generateDvi()
 {
-    LatexProcess latexProcess(m_tempFileInfo->baseName(), "pdflatex");
-    //QString latexDoc = QString("\\documentclass{article}\n\\begin{document}\n%1\n\\end{document}\n").arg("Hello");
-    QString latexDoc = "\\documentclass{article}\n"
-    "\\usepackage{tikz,amsmath,siunitx}\n";
-
-    if (m_enableCircuitikz) {
-        latexDoc += "\\usepackage[siunitx]{circuitikz}";
-    }
-
-    latexDoc += "\\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}"
-    "\\usepackage[graphics,tightpage,active]{preview}\n"
-    "\\PreviewEnvironment{tikzpicture}"
-    "\\PreviewEnvironment{equation}"
-    "\\PreviewEnvironment{equation*}"
-    "\\newlength{\\imagewidth}"
-    "\\newlength{\\imagescale}"
-    "\\pagestyle{empty}\n"
-    "\\thispagestyle{empty}\n"
-    "\\begin{document}\n" +
-    m_doc->text() +
-    "\n\\end{document}\n";
-
-    QStringList args;
-    args << "-output-format=dvi";
-    return latexProcess.build(latexDoc, args);
+    return false;   
 }
 
 bool TikzBuilder::generateFormat(const QString& extension)
@@ -107,14 +83,12 @@ bool TikzBuilder::generateFormat(const QString& extension)
     if (extension == "pdf") {
         return generatePdf();
     } else if (extension == "png") {
-        if (!generateDvi())
+        if (!generatePdf())
             return false;
-        if (!generateEps())
-            return false;
-        if (!generatePng())
+        if (!generatePng(true))
             return false;
     } else if (extension.contains("eps")) {
-        if (!generateDvi())
+        if (!generatePdf())
             return false;
         if (!generateEps())
             return false;
@@ -133,9 +107,9 @@ bool TikzBuilder::generateFormat(const QString& extension)
 bool TikzBuilder::generateEps()
 {
     qDebug() << "Generating EPS...";
-    ExternalProcess dvipsproc("dvips");
+    ExternalProcess dvipsproc("pdf2ps");
     QStringList dvipsargs;
-    dvipsargs << m_tempFileInfo->baseName()+".dvi" << "-o" << m_tempFileInfo->baseName()+".ps";
+    dvipsargs << m_tempFileInfo->baseName()+".pdf" << "-dLanguageLevel=3";
     if (!dvipsproc.startWith("", dvipsargs))
     {
         emit applicationError(dvipsproc.appName(), dvipsproc.readAllStandardError());

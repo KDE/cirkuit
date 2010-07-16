@@ -49,12 +49,16 @@ QString GraphicsBuilder::filePath(const QString& extension) const
 	return "";
 }
 
-bool GraphicsBuilder::generatePng()
+bool GraphicsBuilder::generatePng(bool fromPdf)
 {
 	qDebug() << "Generating PNG...";
 	ExternalProcess epstopngproc("convert");
 	QStringList epstopngargs;
-	epstopngargs << "-density" << "300" << m_tempFileInfo->baseName()+".eps" << m_tempFileInfo->baseName()+".png";
+    if (fromPdf) {
+        epstopngargs << "-density" << "300" << m_tempFileInfo->baseName()+".pdf" << m_tempFileInfo->baseName()+".png";
+    } else {
+    	epstopngargs << "-density" << "300" << m_tempFileInfo->baseName()+".eps" << m_tempFileInfo->baseName()+".png";
+    }
 	if (!epstopngproc.startWith("", epstopngargs))
 	{
 		emit applicationError(epstopngproc.appName(), epstopngproc.readAllStandardError());

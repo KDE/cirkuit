@@ -49,7 +49,7 @@ signals:
 	 void applicationMessage(const QString&, const QString&);
 
 protected slots:
-    virtual bool generatePng();
+    virtual bool generatePng(bool fromPdf = false);
     virtual bool generateSvg();
     virtual bool generateEps();
     virtual bool generatePdf();
