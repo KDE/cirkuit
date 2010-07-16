@@ -53,7 +53,7 @@ GnuplotDocument::GnuplotDocument(QObject* parent): QObject(parent)
 
 QString GnuplotDocument::initialize()
 {
-	return "set terminal lua tikz\nset output 'test.tex'";
+	return "set terminal lua tikz\n";
 }
 
 
