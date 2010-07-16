@@ -147,8 +147,11 @@ bool CircuitMacrosBuilder::generateDvi()
 	"\\graph\n"
 	"\\end{TeXtoEPS}\n"
 	"\\end{document}\n";
+
+    QStringList args, dirs;
+    dirs << m_origDir;
 	
-	return latexProcess.build(latexDoc);
+	return latexProcess.build(latexDoc,args,dirs);
 }
 
 
