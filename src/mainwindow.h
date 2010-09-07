@@ -1,5 +1,5 @@
 /***************************************************************************
-*   Copyright (C) 2009 by Matteo Agostinelli                              *
+*   Copyright (C) 2010 by Matteo Agostinelli                              *
 *   agostinelli@gmail.com                                                 *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
@@ -27,8 +27,8 @@
 
 namespace KTextEditor
 {
-class Document;
-class View;
+    class Document;
+    class View;
 }
 
 class LivePreviewWidget;
@@ -93,7 +93,7 @@ private:
 public slots:
     void loadFile(const KUrl& url);
     void displayError(const QString& app, const QString& msg);
-	 void displayMessage(const QString& app, const QString& msg);
+    void displayMessage(const QString& app, const QString& msg);
 
 protected:
     void closeEvent(QCloseEvent *event);
