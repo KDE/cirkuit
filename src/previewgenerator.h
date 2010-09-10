@@ -22,12 +22,12 @@
 #define PREVIEWGENERATOR_H
 
 #include <QObject>
+#include <QImage>
 
 namespace KTextEditor
 {
 class Document;
 }
-class QImage;
 class GraphicsBuilder;
 
 class PreviewGenerator : public QObject
@@ -36,21 +36,25 @@ class PreviewGenerator : public QObject
 public:
     PreviewGenerator(QObject* parent = 0);
 
-    void build(KTextEditor::Document* doc, const QString& origDir = "");
+    void setDocument(KTextEditor::Document* doc, const QString& origDir = "");
     void clearTempFiles();
 
     QImage preview();
     GraphicsBuilder* builder() const {
         return m_builder;
     }
-
+    
+    void run();
+    void generatePreview();
+    
 signals:
     void applicationError(const QString& app, const QString& msg);
-	 void applicationMessage(const QString& app, const QString& msg);
-	 void done();
+    void applicationMessage(const QString& app, const QString& msg);
+    void finished();
 
 protected:
     GraphicsBuilder* m_builder;
+    QImage m_image;
 };
 
 #endif // PREVIEWGENERATOR_H
