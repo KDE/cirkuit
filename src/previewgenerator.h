@@ -21,22 +21,17 @@
 #ifndef PREVIEWGENERATOR_H
 #define PREVIEWGENERATOR_H
 
-#include <QObject>
+#include <QThread>
 #include <QImage>
 
-namespace KTextEditor
-{
-class Document;
-}
+class GraphicsDocument;
 class GraphicsBuilder;
 
-class PreviewGenerator : public QObject
+class PreviewGenerator : public QThread
 {
     Q_OBJECT
 public:
-    PreviewGenerator(QObject* parent = 0);
-
-    void setDocument(KTextEditor::Document* doc, const QString& origDir = "");
+    void setDocument(GraphicsDocument* doc, const QString& origDir = "");
     void clearTempFiles();
 
     QImage preview();
@@ -50,10 +45,13 @@ public:
 signals:
     void applicationError(const QString& app, const QString& msg);
     void applicationMessage(const QString& app, const QString& msg);
-    void finished();
+    //void finished();
 
 protected:
     GraphicsBuilder* m_builder;
+    GraphicsDocument* m_doc;
+    QString m_origDir;
+    
     QImage m_image;
 };
 

@@ -312,7 +312,7 @@ void MainWindow::buildPreview()
     QString origDir = m_currentFile.directory();
     
     m_generator->setDocument(m_doc, origDir);
-    m_generator->run();    
+    m_generator->start();    
     qDebug() << "Preview generation in progress...";
 }
 
@@ -338,46 +338,34 @@ void MainWindow::builtNotification()
     statusBar()->showMessage("Preview built", 3000);
 }
 
-void MainWindow::newCmDocument()
+void MainWindow::newDocument(GraphicsDocument::DocumentType type)
 {
     if (!m_doc->closeUrl()) {
         return;
     }
     reset();
 
-    m_doc->setText(CircuitMacrosDocument::initialize());
+    m_doc->setType(type);
+    m_doc->setText(m_doc->initialText());
     KTextEditor::Cursor cursor = m_view->cursorPosition();
-    cursor.setLine(3);
+    cursor.setLine(m_doc->initialCursorPosition());
     m_view->setCursorPosition(cursor);
     m_doc->setModified(false);
+}
+
+void MainWindow::newCmDocument()
+{
+    newDocument(GraphicsDocument::CircuitMacros);
 }
 
 void MainWindow::newTikzDocument()
 {
-    if (!m_doc->closeUrl()) {
-        return;
-    }
-    reset();
-
-    m_doc->setText(TikzDocument::initialize());	
-    KTextEditor::Cursor cursor = m_view->cursorPosition();
-    cursor.setLine(1);
-    m_view->setCursorPosition(cursor);
-    m_doc->setModified(false);
+    newDocument(GraphicsDocument::Tikz);
 }
 
 void MainWindow::newGnuplotDocument()
 {
-    if (!m_doc->closeUrl()) {
-        return;
-    }
-    reset();
-
-    m_doc->setText(GnuplotDocument::initialize());
-    KTextEditor::Cursor cursor = m_view->cursorPosition();
-    cursor.setLine(1);
-    m_view->setCursorPosition(cursor);
-    m_doc->setModified(false);
+    newDocument(GraphicsDocument::Gnuplot);
 }
 
 void MainWindow::displayError(const QString& app, const QString& msg)

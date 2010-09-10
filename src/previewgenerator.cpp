@@ -23,57 +23,52 @@
 #include "tikzbuilder.h"
 #include "gnuplotbuilder.h"
 #include "graphicsbuilder.h"
+#include "graphicsdocument.h"
 
 #include <poppler-qt4.h>
 
-#include <KTextEditor/Document>
 #include <KStandardDirs>
 #include <QDir>
 #include <QImage>
 
-PreviewGenerator::PreviewGenerator(QObject* parent): QObject(parent)
+void PreviewGenerator::setDocument(GraphicsDocument* doc, const QString& origDir)
 {
-	m_builder = 0;
+    m_doc = doc;
+    m_origDir = origDir;
 }
 
-void PreviewGenerator::setDocument(KTextEditor::Document* doc, const QString& origDir)
-{
-    if (m_builder) {
-        delete m_builder;
-        m_builder = 0;
-    }
-
+void PreviewGenerator::run()
+{ 
+    m_builder = 0;
+    
     clearTempFiles();
 
-    if (doc->text().contains(".PS") || doc->text().contains("cct_init") || doc->text().contains(".PE")) {
-        // this is a circuit macros document
-        m_builder = new CircuitMacrosBuilder(doc,origDir);
-    } else if (doc->text().contains("set terminal")) {
-        m_builder = new GnuplotBuilder(doc,origDir);
-    } else if (doc->text().contains("\\begin{circuitikz}")) {
-        // this is a CircuiTikz document
-        m_builder = new TikzBuilder(doc,origDir,true);
-    } else {
-        // this is a Tikz document
-        m_builder = new TikzBuilder(doc,origDir,false);
+    m_doc->identify(m_doc->text());
+    
+    switch (m_doc->type()) {
+        case GraphicsDocument::CircuitMacros:
+            m_builder = new CircuitMacrosBuilder(m_doc,m_origDir);
+            break;
+        case GraphicsDocument::Gnuplot:
+            m_builder = new GnuplotBuilder(m_doc,m_origDir);
+            break;
+        case GraphicsDocument::Tikz:
+            m_builder = new TikzBuilder(m_doc,m_origDir,false);
+            break;
+        case GraphicsDocument::Unknown:
+            m_builder = 0;
+            break;        
     }
-
+    
     if (m_builder) {
         connect(m_builder, SIGNAL(applicationError(const QString&, const QString&)),
                     this,  SIGNAL(applicationError(const QString&, const QString&)));
         connect(m_builder, SIGNAL(applicationMessage(const QString&, const QString&)), 
                     this,  SIGNAL(applicationMessage(const QString&, const QString&)));
-    }
-}
-
-void PreviewGenerator::run()
-{
-    if (m_builder) {
+        
         m_builder->generateFormat("pdf");
         generatePreview();
-    }
-    
-    emit finished();
+    }    
 }
 
 void PreviewGenerator::clearTempFiles()
@@ -112,6 +107,7 @@ void PreviewGenerator::generatePreview()
     // Generate a QImage of the rendered page
     m_image = pdfPage->renderToImage(600,600);
 
+    //emit finished();
     delete pdfPage;
     delete document;
 }

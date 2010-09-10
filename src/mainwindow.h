@@ -24,6 +24,7 @@
 #include <KParts/MainWindow>
 #include <QtGui/QKeyEvent>
 #include <KUrl>
+#include "graphicsdocument.h"
 
 namespace KTextEditor
 {
@@ -59,6 +60,7 @@ private slots:
     void showPreview();
     void openPreview();
 
+    void newDocument(GraphicsDocument::DocumentType);
     void newCmDocument();
     void newGnuplotDocument();
     void newTikzDocument();

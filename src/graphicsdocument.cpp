@@ -20,41 +20,64 @@
 
 #include "graphicsdocument.h"
 
-GraphicsDocument::GraphicsDocument(QObject* parent): Document(parent)
+GraphicsDocument::GraphicsDocument(DocumentType type, QObject* parent): Document(parent)
 {
-
+    setType(type);
 }
 
-
-CircuitMacrosDocument::CircuitMacrosDocument(QObject* parent): QObject(parent)
+void GraphicsDocument::setType(GraphicsDocument::DocumentType t)
 {
-
+    m_type = t;
 }
 
-QString CircuitMacrosDocument::initialize()
+GraphicsDocument::DocumentType GraphicsDocument::type() const
 {
-	return ".PS\ncct_init\n\n\n\n.PE";	
+    return m_type;
 }
 
-TikzDocument::TikzDocument(QObject* parent): QObject(parent)
+int GraphicsDocument::initialCursorPosition()
 {
-
+    switch (m_type) {
+        case CircuitMacros:
+            return 3;
+        case Tikz:
+            return 1;
+        case Gnuplot:
+            return 1;
+        case Unknown:
+            return 0;
+    }
+    
+    return 0;
 }
 
-QString TikzDocument::initialize()
+QString GraphicsDocument::initialText()
 {
-	return "\\begin{tikzpicture}\n\n\\end{tikzpicture}";
+    switch (m_type) {
+        case CircuitMacros:
+            return QString(".PS\ncct_init\n\n\n\n.PE");  
+        case Tikz:
+            return QString("\\begin{tikzpicture}\n\n\\end{tikzpicture}");
+        case Gnuplot:
+            return QString("set terminal lua tikz\n");
+        case Unknown:
+            return QString("");
+    }
+    
+    return QString("");
 }
 
-GnuplotDocument::GnuplotDocument(QObject* parent): QObject(parent)
+void GraphicsDocument::identify(const QString& text)
 {
-
+    if (text.contains(".PS") || text.contains("cct_init") || text.contains(".PE")) {
+        m_type = CircuitMacros;
+    } else if (text.contains("set terminal")) {
+        m_type = Gnuplot;
+    } else if (text.contains("\\begin{") || text.contains("tikzpicture")) {
+        m_type = Tikz;
+    } else {
+        m_type = Unknown;
+    }
 }
-
-QString GnuplotDocument::initialize()
-{
-	return "set terminal lua tikz\n";
-}
-
 
 
