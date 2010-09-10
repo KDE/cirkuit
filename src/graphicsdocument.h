@@ -29,6 +29,7 @@ public:
     enum DocumentType {
         CircuitMacros,
         Tikz,
+        Circuitikz,
         Gnuplot,
         Unknown
     };
@@ -41,7 +42,7 @@ public:
     void setType(DocumentType);
     DocumentType type() const;
     
-    void identify(const QString&);
+    void identify();
     
 protected:
     DocumentType m_type;

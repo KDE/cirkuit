@@ -40,6 +40,7 @@ int GraphicsDocument::initialCursorPosition()
     switch (m_type) {
         case CircuitMacros:
             return 3;
+        case Circuitikz:
         case Tikz:
             return 1;
         case Gnuplot:
@@ -56,6 +57,7 @@ QString GraphicsDocument::initialText()
     switch (m_type) {
         case CircuitMacros:
             return QString(".PS\ncct_init\n\n\n\n.PE");  
+        case Circuitikz:
         case Tikz:
             return QString("\\begin{tikzpicture}\n\n\\end{tikzpicture}");
         case Gnuplot:
@@ -67,12 +69,15 @@ QString GraphicsDocument::initialText()
     return QString("");
 }
 
-void GraphicsDocument::identify(const QString& text)
+void GraphicsDocument::identify()
 {
+    QString text = this->text();
     if (text.contains(".PS") || text.contains("cct_init") || text.contains(".PE")) {
         m_type = CircuitMacros;
     } else if (text.contains("set terminal")) {
         m_type = Gnuplot;
+    } else if (text.contains("circuitikz")) {
+        m_type = Circuitikz;
     } else if (text.contains("\\begin{") || text.contains("tikzpicture")) {
         m_type = Tikz;
     } else {

@@ -31,6 +31,11 @@
 #include <QDir>
 #include <QImage>
 
+PreviewGenerator::PreviewGenerator(QObject* parent): QThread(parent)
+{
+    m_builder = 0;
+}
+
 void PreviewGenerator::setDocument(GraphicsDocument* doc, const QString& origDir)
 {
     m_doc = doc;
@@ -39,11 +44,10 @@ void PreviewGenerator::setDocument(GraphicsDocument* doc, const QString& origDir
 
 void PreviewGenerator::run()
 { 
-    m_builder = 0;
-    
+    delete m_builder;    
     clearTempFiles();
 
-    m_doc->identify(m_doc->text());
+    m_doc->identify();
     
     switch (m_doc->type()) {
         case GraphicsDocument::CircuitMacros:
@@ -54,6 +58,9 @@ void PreviewGenerator::run()
             break;
         case GraphicsDocument::Tikz:
             m_builder = new TikzBuilder(m_doc,m_origDir,false);
+            break;
+        case GraphicsDocument::Circuitikz:
+            m_builder = new TikzBuilder(m_doc,m_origDir,true);
             break;
         case GraphicsDocument::Unknown:
             m_builder = 0;
@@ -107,7 +114,6 @@ void PreviewGenerator::generatePreview()
     // Generate a QImage of the rendered page
     m_image = pdfPage->renderToImage(600,600);
 
-    //emit finished();
     delete pdfPage;
     delete document;
 }

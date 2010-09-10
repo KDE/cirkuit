@@ -308,7 +308,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::buildPreview()
 {
     m_updateTimer->stop();
-    statusBar()->showMessage("Building preview...", 1000);
+    statusBar()->showMessage("Building preview...");
     QString origDir = m_currentFile.directory();
     
     m_generator->setDocument(m_doc, origDir);
@@ -385,6 +385,7 @@ void MainWindow::updateTitle()
     if (!m_currentFile.isEmpty()) {
         m_windowTitle += " - " + m_currentFile.fileName();
     }
+    
     m_windowTitle += "[*]";
     setWindowTitle(m_windowTitle);
 }

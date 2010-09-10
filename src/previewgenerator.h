@@ -31,6 +31,7 @@ class PreviewGenerator : public QThread
 {
     Q_OBJECT
 public:
+    PreviewGenerator(QObject* parent = 0);
     void setDocument(GraphicsDocument* doc, const QString& origDir = "");
     void clearTempFiles();
 
