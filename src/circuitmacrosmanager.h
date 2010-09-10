@@ -1,5 +1,5 @@
 /***************************************************************************
-*   Copyright (C) 2009 by Matteo Agostinelli                              *
+*   Copyright (C) 2010 by Matteo Agostinelli                              *
 *   agostinelli@gmail.com                                                 *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *

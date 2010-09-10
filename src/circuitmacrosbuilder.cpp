@@ -98,9 +98,10 @@ bool CircuitMacrosBuilder::generateFormat(const QString& extension)
 bool CircuitMacrosBuilder::generateDvi()
 {
 	qDebug() << "Generating DVI...";
+    m_tempFile->open();
 	QTextStream out(m_tempFile);
 	out << m_doc->text();
-	m_tempFile->close();
+	m_tempFile->close();    
 	
 	QStringList env = QProcess::systemEnvironment();
 	env 	<< QString("M4PATH=%1:%2").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false)).arg(m_origDir);
@@ -110,6 +111,8 @@ bool CircuitMacrosBuilder::generateDvi()
 	m4args << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/libcct.m4", false)
 	<< KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/pstricks.m4", false)
 	<< m_tempFileInfo->fileName();
+    
+    qDebug() << m4args;
 	
 	m4proc.setEnvironment(env);
 	if (!m4proc.startWith("", m4args))
@@ -121,6 +124,7 @@ bool CircuitMacrosBuilder::generateDvi()
 	
 	QString m4out = m4proc.readAllStandardOutput();
 	
+    qDebug() << m4out;
 	ExternalProcess picproc("dpic");
 	QStringList picargs;
 	picargs << "-p";
@@ -151,6 +155,7 @@ bool CircuitMacrosBuilder::generateDvi()
     QStringList args, dirs;
     dirs << m_origDir;
 	
+    qDebug() << latexDoc;
 	return latexProcess.build(latexDoc,args,dirs);
 }
 

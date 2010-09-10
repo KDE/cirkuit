@@ -101,10 +101,11 @@ MainWindow::MainWindow(QWidget *)
     m_updateTimer->setSingleShot(true);
 
     updateConfiguration();
-    statusBar()->showMessage("Ready", 3000);
+    statusBar()->showMessage(i18n("Ready"), 3000);
 
     connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(buildPreview()));
-    connect(m_generator, SIGNAL(done()), this, SLOT(builtNotification()));
+    connect(m_generator, SIGNAL(finished()), this, SLOT(builtNotification()));
+    connect(m_generator, SIGNAL(finished()), this, SLOT(showPreview()));
     connect(m_doc, SIGNAL(textChanged(KTextEditor::Document*)), m_updateTimer, SLOT(start()));
     connect(m_doc, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(documentModified(KTextEditor::Document*)));
 
@@ -309,8 +310,16 @@ void MainWindow::buildPreview()
     m_updateTimer->stop();
     statusBar()->showMessage("Building preview...", 1000);
     QString origDir = m_currentFile.directory();
-    m_generator->build(m_doc, origDir);
-    m_livePreviewWidget->setImage(m_generator->preview());	
+    
+    m_generator->setDocument(m_doc, origDir);
+    m_generator->run();    
+    qDebug() << "Preview generation in progress...";
+}
+
+void MainWindow::showPreview()
+{
+    qDebug() << "Showing the preview...";
+    m_livePreviewWidget->setImage(m_generator->preview());
 }
 
 void MainWindow::openPreview()
@@ -385,9 +394,9 @@ void MainWindow::updateTitle()
 {
     m_windowTitle = "Cirkuit";
 
-    if (!m_currentFile.isEmpty())
+    if (!m_currentFile.isEmpty()) {
         m_windowTitle += " - " + m_currentFile.fileName();
-
+    }
     m_windowTitle += "[*]";
     setWindowTitle(m_windowTitle);
 }

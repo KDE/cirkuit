@@ -56,6 +56,7 @@ private slots:
 
     void documentModified(KTextEditor::Document*);
     void buildPreview();
+    void showPreview();
     void openPreview();
 
     void newCmDocument();
