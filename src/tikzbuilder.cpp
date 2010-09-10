@@ -68,8 +68,9 @@ bool TikzBuilder::generatePdf()
     m_doc->text() +
     "\n\\end{document}\n";
 
-        QStringList args, dirs;
-        dirs << m_origDir;
+    QStringList args, dirs;
+    dirs << m_origDir;
+    
     return latexProcess.build(latexDoc, args, dirs);
 }
 

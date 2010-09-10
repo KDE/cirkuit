@@ -105,6 +105,7 @@ MainWindow::MainWindow(QWidget *)
 
     connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(buildPreview()));
     connect(m_generator, SIGNAL(finished()), this, SLOT(builtNotification()));
+    connect(m_generator, SIGNAL(failed()), this, SLOT(failedNotification()));
     connect(m_generator, SIGNAL(finished()), this, SLOT(showPreview()));
     connect(m_doc, SIGNAL(textChanged(KTextEditor::Document*)), m_updateTimer, SLOT(start()));
     connect(m_doc, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(documentModified(KTextEditor::Document*)));
@@ -466,3 +467,7 @@ void MainWindow::circuitMacrosConfigured()
     statusBar()->showMessage(i18n("Ready"), 5000);
 }
 
+void MainWindow::failedNotification()
+{
+    KMessageBox::error(this, i18n("Unable to generate a preview for the current input"), i18n("Error"));
+}

@@ -46,7 +46,7 @@ public:
 signals:
     void applicationError(const QString& app, const QString& msg);
     void applicationMessage(const QString& app, const QString& msg);
-    //void finished();
+    void failed();
 
 protected:
     GraphicsBuilder* m_builder;

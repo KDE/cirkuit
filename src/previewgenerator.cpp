@@ -30,6 +30,8 @@
 #include <KStandardDirs>
 #include <QDir>
 #include <QImage>
+#include <KMessageBox>
+#include <KLocalizedString>
 
 PreviewGenerator::PreviewGenerator(QObject* parent): QThread(parent)
 {
@@ -63,7 +65,9 @@ void PreviewGenerator::run()
             m_builder = new TikzBuilder(m_doc,m_origDir,true);
             break;
         case GraphicsDocument::Unknown:
+        default:
             m_builder = 0;
+            emit failed();
             break;        
     }
     

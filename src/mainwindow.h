@@ -69,6 +69,7 @@ private slots:
     void updateConfiguration();
     void configure();
     void builtNotification();
+    void failedNotification();
 
     void showManual();
     void showExamples();
