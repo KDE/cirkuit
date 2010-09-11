@@ -30,8 +30,6 @@
 #include <KStandardDirs>
 #include <QDir>
 #include <QImage>
-#include <KMessageBox>
-#include <KLocalizedString>
 
 PreviewGenerator::PreviewGenerator(QObject* parent): QThread(parent)
 {
