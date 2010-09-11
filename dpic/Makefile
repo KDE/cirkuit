@@ -1,3 +1,15 @@
+# Installation shortcuts: change the following and type "make install"
+
+# For Fedora Linux (expects "make DESTDIR=xxx PREFIX=yyy install"):
+DESTDIR = $${HOME}
+PREFIX = .
+DEST = ${DESTDIR}/${PREFIX}/bin
+
+# For manual installation (uncomment and change as necessary):
+# DEST = $${HOME}/bin
+
+#-----------------------------------------------------------------------
+
 # Possible problems:
 # 1.  The definition of uchar in p2c.h
 # 2.  System routines: access, isatty, snprintf, system, random, srandom, time
@@ -7,11 +19,11 @@
 # System-dependent parameters.  These may need tweaking:
 
 # Uncomment this to force the use of rand() and srand() respectively instead of
-# random() and srandom(). This is necessary for some linux systems.
+# random() and srandom(). This is necessary for some Linux systems.
 # DEFINEA=-DRAND
 
-# If snprintf is not available then type `make clean',
-# uncomment this line, and try again:
+# If snprintf is unavailable then uncomment the following, type "make clean",
+# and try again:
 # DEFINEB=-DNO_SNPRINTF
 
 # Server operation: Use the -z option of dpic.o dpic2.or uncomment the following to
@@ -41,11 +53,19 @@ OBJECTS = dpic.o dpic2.o p2clib.o
 # If debug is enabled:
 # OBJECTS = dpic.o dpic2.o p2clib.o sysdep.o
 
-######################################
+#-----------------------------------------------------------------------
 
 
 dpic: $(OBJECTS)
 	$(CC) -o dpic $(OBJECTS) -lm $(LIBS)
+
+install: dpic
+	mkdir -p $(DEST)
+	if test -x dpic.exe ; then \
+      strip dpic.exe; install dpic.exe $(DEST) ; \
+    else \
+      strip dpic; install -m 755 dpic $(DEST) ; \
+    fi
 
 clean:
 	-rm -f *.o dpic dpic.exe *.LOG

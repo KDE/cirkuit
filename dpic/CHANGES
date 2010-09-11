@@ -1,0 +1,37 @@
+Recent changes have been as follows:
+
+2010 08 28 Newline (cosmetic) after first psbezier coordinate pair.
+2010 07 13 Adjusted justification of stacked text.
+2010 06 16 Type 3 arrowheads
+2010 05 11 Fix treatment of < character.
+2010 05 02 SVG tweaks.
+2010 03 15 Curved arc arrowheads for -f, -f, -m, -p, -s and updated -m output.
+2010 03 05 Curved arc arrowheads in Postscript and SVG output.
+2010 02 19 Fixed an obscure bug with macro args.
+2010 02 17 SVG output units changed to px and pt
+2010 02 11 -v option to produce SVG output
+2010 01 11 Generalized sprintf("string",args) to sprintf(stringexpr,args)
+2009 10 30 Tweaked Makefiles for easier Linux installation. Give an error
+  message on attempt to set scale parameter to 0.
+2009 10 21 Skip white space preceding pic macro arguments to avoid long
+  lines of arguments; e.g. macro( a, <newline> b ) is equivalent to macro(a,b )
+2009 07 13 Skip newline after ":" to conform with gpic (see 2008 10 29).
+2009 07 09 Added line "shade" for Postscript output, to fill arbitrary polygons.
+2009 06 12 Consistent arrowhead on multisegment linear objects.
+2009 06 03 More obscure grammar tweaks.
+2009 05 29 Slightly streamlined grammar; bugfix for nested x<A,B> constructs.
+2009 05 19 Allow "shade" attribute for linear objects with output in PSTricks,
+  MPost, and PGF format.  Bugfix for arrowhead.
+2009 04 04 Slight change to error message for unknown character.
+2009 01 16 Bugfix for continued lines ending in CR LF (PC text) in macros.
+2009 01 07 Require filename to contain at least one visible character.
+2009 01 04 Redirection added to the print command to allow
+  print arg > "filename" or print arg >> "filename" (except in safe mode).
+2008 11 20 Fixed some typos in dpic_man.txt
+2008 10 29 arrowhead = 0 implemented.
+2008 10 29 Previously the line A: <newline> was permitted, and was equivalent to
+  A: Here but this has been disallowed to conform to other pic processors.
+2008 10 29 More detailed syntax error messages.
+
+For several years prior to mid-2008, there were few changes to dpic except
+for the occasional bug fix.

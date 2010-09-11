@@ -1,0 +1,21 @@
+The file Examples.txt contains a minimal example of each of the
+different output modes of dpic.  In each case, the input file, LaTeX
+file, and processing commands are given.
+
+In a Unix-like environment, the modes can be tested by typing one of
+make
+make epic
+make pstricks
+make pgf
+make pdf
+make mfpic
+make psfrag
+make postscript
+make overlay
+make metapost
+make xfig
+make svg
+
+Typing
+make clean
+deletes unneeded files.

@@ -1,6 +1,6 @@
 .PS                            # Pic input begins with .PS
-# cct_init Version 6.51: PSTricks m4 macro settings used.
-# gen_init Version 6.51: PSTricks m4 macro settings used.
+# cct_init Version 6.81: PSTricks m4 macro settings used.
+# gen_init Version 6.81: PSTricks m4 macro settings used.
 
   define rpoint__ {
     rp_wid = last line.end.x-last line.start.x
@@ -17,10 +17,18 @@
   linethick = 0.8
   arrowwid = 0.05*scale; arrowht = 0.1*scale
   command "\psset{linewidth=0.8pt}%";
-  \ifx\MPSTPatchA\undefined{\makeatletter\def\psbezier@ii{\addto@pscode{%
-      \ifshowpoints true \else false \fi\tx@OpenBezier%
-      \ifshowpoints\tx@BezierShowPoints\fi}\end@OpenObj}\makeatother%
-      \global\def\MPSTPatchA{}}\fi%
+  command "\makeatletter%
+\@ifundefined{ifPst@noCurrentPoint}{%
+  \@ifundefined{MPS@PatchA}{\gdef\MPS@PatchA{}%
+    \typeout{ Dpic -p: patching psbezier in pstricks.tex (some versions) }%
+    \def\psbezier@ii{\addto@pscode{%
+    \ifshowpoints true \else false \fi\tx@OpenBezier%
+    \ifshowpoints\tx@BezierShowPoints\fi}\end@OpenObj}}{}}%
+{\@ifundefined{MPS@PatchB}{\gdef\MPS@PatchB{}%
+  \typeout{ Dpic -p: Use all psbezier coordinate pairs }%
+  \psset{noCurrentPoint}}{}}%
+\makeatother%"
+  
 # gen_init end
  \psset{arrowsize=1.1pt 4,arrowlength=1.64,arrowinset=0}%
 
@@ -32,12 +40,16 @@ Origin: Here                   # Position names are capitalized
   rpoint__
   
    
-  {line to (Here.x,Here.y)+((max(0,rp_len/2-(0.25*linewid)))*(cos(rp_ang)),(max(0,rp_len/2-(0.25*linewid)))*(sin(rp_ang)))
-   move to (Here.x,Here.y)+(((0.25*linewid))*(cos(rp_ang)),((0.25*linewid))*(sin(rp_ang)))
-  {[circle rad (0.25*linewid)] at Here}
+  { line to (Here.x,Here.y)+((rp_len/2-(0.25*linewid))*(cos(rp_ang)),(rp_len/2-(0.25*linewid))*(sin(rp_ang)))
+    move to (Here.x,Here.y)+(((0.25*linewid))*(cos(rp_ang)),((0.25*linewid))*(sin(rp_ang)))
+  { circle rad (0.25*linewid)  at Here }
   
-  line from (Here.x,Here.y)+(((0.25*linewid))*(cos(rp_ang)),((0.25*linewid))*(sin(rp_ang))) to (Here.x,Here.y)+(((0.25*linewid)+max(0,rp_len/2-(0.25*linewid)))*(cos(rp_ang)),((0.25*linewid)+max(0,rp_len/2-(0.25*linewid)))*(sin(rp_ang)))} 
-  line to (Here.x,Here.y)+((rp_len)*(cos(rp_ang)),(rp_len)*(sin(rp_ang))) invis ;  {"$ -$" at last [].s rjust below}; {"$ v_s$" at last [].w rjust}; {"$ +$" at last [].n rjust above}; 
+  line from (Here.x,Here.y)+(((0.25*linewid))*(cos(rp_ang)),((0.25*linewid))*(sin(rp_ang))) to (Here.x,Here.y)+((rp_len/2)*(cos(rp_ang)),(rp_len/2)*(sin(rp_ang)))} 
+  { [box invis wid (0.25*linewid)*2 ht (0.25*linewid)*2] at (Here.x,Here.y)+((rp_len/2)*(cos(rp_ang)),(rp_len/2)*(sin(rp_ang))) }
+  line to (Here.x,Here.y)+((rp_len)*(cos(rp_ang)),(rp_len)*(sin(rp_ang))) invis ;  {"$ -$" \
+     at last [].s rjust below }; {"$ v_s$" \
+     at last [].w rjust }; {"$ +$" \
+     at last [].n rjust above }; 
      line invis   right elen
   rpoint__
   
@@ -59,7 +71,8 @@ Origin: Here                   # Position names are capitalized
       }
   
   
-  line invis from 2nd last line.start to 2nd last line.end ;    {"$ R$" at last [].s below};  
+  line invis from 2nd last line.start to 2nd last line.end ;    {"$ R$" \
+     at last [].s below };  
    [  circle rad (0.04*linewid)  fill 0 
   ] with .c at Here
   move to last [].c
@@ -68,14 +81,19 @@ Origin: Here                   # Position names are capitalized
   rpoint__
   
    
-     { line to (Here.x,Here.y)+((rp_len/2-linewid/3*0.3/2)*(cos(rp_ang)),(rp_len/2-linewid/3*0.3/2)*(sin(rp_ang)))
-     {line from (Here.x,Here.y)+((-linewid/3/2)*(-sin(rp_ang)),(-linewid/3/2)*(cos(rp_ang))) to (Here.x,Here.y)+((linewid/3/2)*(-sin(rp_ang)),(linewid/3/2)*(cos(rp_ang)))}
-     move to (Here.x,Here.y)+((linewid/3*0.3)*(cos(rp_ang)),(linewid/3*0.3)*(sin(rp_ang)))
-     {line from (Here.x,Here.y)+((-linewid/3/2)*(-sin(rp_ang)),(-linewid/3/2)*(cos(rp_ang))) to (Here.x,Here.y)+((linewid/3/2)*(-sin(rp_ang)),(linewid/3/2)*(cos(rp_ang)))}
-     line to (Here.x,Here.y)+((rp_len/2-linewid/3*0.3/2)*(cos(rp_ang)),(rp_len/2-linewid/3*0.3/2)*(sin(rp_ang))) }
+    {       line to (Here.x,Here.y)+((rp_len/2-linewid/3*0.3/2)*(cos(rp_ang)),(rp_len/2-linewid/3*0.3/2)*(sin(rp_ang)))
+      {line from (Here.x,Here.y)+((-linewid/3/2)*(-sin(rp_ang)),(-linewid/3/2)*(cos(rp_ang))) to (Here.x,Here.y)+((linewid/3/2)*(-sin(rp_ang)),(linewid/3/2)*(cos(rp_ang)))}
+      move to (Here.x,Here.y)+((linewid/3*0.3)*(cos(rp_ang)),(linewid/3*0.3)*(sin(rp_ang)))
+      {line from (Here.x,Here.y)+((-linewid/3/2)*(-sin(rp_ang)),(-linewid/3/2)*(cos(rp_ang))) to (Here.x,Here.y)+((linewid/3/2)*(-sin(rp_ang)),(linewid/3/2)*(cos(rp_ang)))}
+      line to (Here.x,Here.y)+((rp_len/2-linewid/3*0.3/2)*(cos(rp_ang)),(rp_len/2-linewid/3*0.3/2)*(sin(rp_ang)))  }
+  
   {[box invis wid linewid/3 ht linewid/3*0.3 ] at (Here.x,Here.y)+((rp_len/2)*(cos(rp_ang)),(rp_len/2)*(sin(rp_ang)))}
   line to (Here.x,Here.y)+((rp_len)*(cos(rp_ang)),(rp_len)*(sin(rp_ang))) invis      #(Here,Origin) = (Here.x,Origin.y)
-       {"$ +$" at last [].n rjust above}; {"$ v$" at last [].l rjust}; {"$ -$" at last [].s rjust below}; ;   {"$ C$" at last [].e ljust};  
+       {"$ +$" \
+     at last [].n rjust above }; {"$ v$" \
+     at last [].l rjust }; {"$ -$" \
+     at last [].s rjust below }; ;   {"$ C$" \
+     at last [].e ljust };  
       [  circle rad (0.04*linewid)  fill 0 
   ] with .c at Here
   move to last [].c
@@ -93,8 +111,10 @@ Origin: Here                   # Position names are capitalized
  
  {[box invis wid linewid/16+0+0 ht 4*linewid/16*2] \
    at (Here.x,Here.y)+((rp_len/2)*(cos(rp_ang))+((linewid/16+0-0)/2)*(-sin(rp_ang)),(rp_len/2)*(sin(rp_ang))+((linewid/16+0-0)/2)*(cos(rp_ang)))}
- line to (Here.x,Here.y)+((rp_len)*(cos(rp_ang)),(rp_len)*(sin(rp_ang))) invis ;   {"$ L$" at last [].l rjust};  ;     
+ line to (Here.x,Here.y)+((rp_len)*(cos(rp_ang)),(rp_len)*(sin(rp_ang))) invis ;   {"$ L$" \
+     at last [].l rjust };  ;     
   { move to last line.start+((((rp_len-last [].ht)/2*2/3+arrowht/3))*(cos(rp_ang)),(((rp_len-last [].ht)/2*2/3+arrowht/3))*(sin(rp_ang)))
-    arrow <- to (Here.x,Here.y)+((-arrowht)*(cos(rp_ang)),(-arrowht)*(sin(rp_ang))) "$ i$" ljust}
+    arrow <- to (Here.x,Here.y)+((-arrowht)*(cos(rp_ang)),(-arrowht)*(sin(rp_ang))) "$ i$" \
+     ljust}
    line to Origin
 .PE                            # Pic input ends
