@@ -51,6 +51,7 @@
 #include <KTextEditor/Editor>
 #include <KTextEditor/EditorChooser>
 #include "graphicsbuilder.h"
+#include "graphicsgenerator.h"
 
 class CirkuitGeneralForm : public QWidget, public Ui::CirkuitGeneralForm
 {
@@ -78,7 +79,7 @@ MainWindow::MainWindow(QWidget *)
     m_livePreviewWidget = new LivePreviewWidget(i18n("Live preview"), this);
     addDockWidget(Qt::TopDockWidgetArea, m_livePreviewWidget);
 
-    mimeTypes << "application/x-cirkuit" << "text/x-tex";
+    mimeTypes << "application/x-cirkuit" << "text/x-tex" << "application/x-gnuplot";
     m_currentFile = KUrl("");
     updateTitle();
 
@@ -114,6 +115,9 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(applicationMessage(const QString&,const QString&)), this, SLOT(displayMessage(const QString&,const QString&)));
 
     checkCircuitMacros();
+    
+    GeneratorThread* m_grgen = new GeneratorThread(GraphicsGenerator::Dvi, GraphicsGenerator::Eps, m_doc);
+    m_grgen->start();
 }
 
 void MainWindow::setupActions()

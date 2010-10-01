@@ -25,6 +25,7 @@
 #include <QtGui/QKeyEvent>
 #include <KUrl>
 #include "graphicsdocument.h"
+#include "graphicsgenerator.h"
 
 namespace KTextEditor
 {

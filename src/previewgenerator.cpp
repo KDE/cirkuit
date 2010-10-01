@@ -49,9 +49,7 @@ void PreviewGenerator::run()
     delete m_builder;    
     clearTempFiles();
 
-    m_doc->identify();
-    
-    switch (m_doc->type()) {
+    switch (m_doc->identify()) {
         case GraphicsDocument::CircuitMacros:
             m_builder = new CircuitMacrosBuilder(m_doc,m_origDir);
             break;

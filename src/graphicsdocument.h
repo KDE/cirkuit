@@ -42,7 +42,7 @@ public:
     void setType(DocumentType);
     DocumentType type() const;
     
-    void identify();
+    DocumentType identify();
     
 protected:
     DocumentType m_type;

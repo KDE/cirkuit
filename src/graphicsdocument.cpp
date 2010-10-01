@@ -69,7 +69,7 @@ QString GraphicsDocument::initialText()
     return QString("");
 }
 
-void GraphicsDocument::identify()
+GraphicsDocument::DocumentType GraphicsDocument::identify()
 {
     QString text = this->text();
     if (text.contains(".PS") || text.contains("cct_init") || text.contains(".PE")) {
@@ -83,6 +83,8 @@ void GraphicsDocument::identify()
     } else {
         m_type = Unknown;
     }
+    
+    return m_type;
 }
 
 

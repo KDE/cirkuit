@@ -42,6 +42,7 @@ public:
     
     void run();
     void generatePreview();
+
     
 signals:
     void applicationError(const QString& app, const QString& msg);
