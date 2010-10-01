@@ -49,6 +49,7 @@ public:
         Eps,
         QtImage,
         Png,
+        Svg,
         Unknown
     };
     
@@ -70,11 +71,15 @@ public slots:
     //! Run the command queue
     bool start();
     
+    //! Render the image using poppler
+    bool render();
+    
 signals:
     void success();
     void fail();
     void error(const QString&);
     void output(const QString&);
+    void previewReady(const QImage&);
     
 protected:
     QList<Command*> m_commands;
@@ -104,7 +109,7 @@ public slots:
     void printMessage(const QString&);
     
 signals:
-    void previewReady(QImage);
+    void previewReady(const QImage);
     
 private:
     GraphicsDocument* m_doc;

@@ -20,9 +20,12 @@
 #include "graphicsdocument.h"
 #include "command.h"
 
+#include <poppler-qt4.h>
+
 #include <KStandardDirs>
 #include <KTemporaryFile>
 #include <QDir>
+#include <QImage>
 
 #include <QDebug>
 
@@ -46,7 +49,7 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
     qDebug() << "Inside the new converter!!...";
     
     // this class doesn't know how to convert from source
-    if (in == Source || out == Source) {
+    if (in == Source || out == Source || out == Dvi) {
         return false;
     }
     
@@ -56,13 +59,24 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
     }
     
     if (out == QtImage) {
-        return convert(in, Pdf);
+        bool b = true;
+        if (!convert(in, Pdf)) b = false;
+        if (!render()) b = false;
+        return b;
+    }
+    
+    if (out == Svg && in != Pdf) {
+        bool b = true;
+        if (!convert(in,Pdf)) b = false;
+        if (!convert(Pdf,Svg)) b = false;
+        return b;
+    }
+    
+    if (!formatExists(in)) {
+        return false;
     }
     
     if (in == Dvi) {
-        if (!formatExists(Dvi)) {
-            return false;
-        }
         if (out == Postscript) {
             QStringList args;
             args << filePath(Dvi) << QString("-o %1").arg(filePath(Postscript));
@@ -89,26 +103,54 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
     }
     
     if (in == Postscript) {
-        if (!formatExists(Postscript) || out == Dvi) {
-            return false;
-        } else if (out == Eps) {
+        if (out == Eps) {
             QStringList args;
-            args << filePath(Dvi) << QString("-E -Ppdf -G0 -o %1").arg(filePath(Eps));
-            m_commands.append(new Command("dvips", "", args, this));
+            args << filePath(Postscript) << filePath(Eps);
+            m_commands.append(new Command("ps2epsi", "", args, this));
             return true;
         } else if (out == Pdf) {
-            bool b = true;
-            if (!convert(Dvi,Eps)) b = false;
-            if (!convert(Eps,Pdf)) b = false;
-            return b;
+            QStringList args;
+            args << filePath(Postscript) << filePath(Pdf);
+            m_commands.append(new Command("ps2pdf", "", args, this));
+            return true;
         } else if (out == Png) {
             bool b = true;
-            if (!convert(Dvi,Eps)) b = false;
+            if (!convert(Postscript,Eps)) b = false;
             if (!convert(Eps,Png)) b = false;
             return b;
         } else {
             return false;
         }     
+    }
+    
+    if (in == Eps) {
+        if (out == Postscript) {
+            QStringList args;
+            args << filePath(Eps) << filePath(Postscript);
+            m_commands.append(new Command("ps2ps", "", args, this));
+            return true;
+        } else if (out == Pdf) {
+            QStringList args;
+            args << filePath(Eps) << "--outfile="+filePath(Pdf);
+            m_commands.append(new Command("epstopdf", "", args, this));
+            return true;
+        } else if (out == Png) {
+            QStringList args;
+            args << "-density 300" << filePath(Eps) << filePath(Png);
+            m_commands.append(new Command("epstopdf", "", args, this));
+            return true;
+        } else {
+            return false;
+        }     
+    }
+    
+    if (in == Pdf) {
+        if (out == Svg) {
+            QStringList args;
+            args << filePath(Pdf) << filePath(Svg);
+            m_commands.append(new Command("pdf2svg", "", args, this));
+            return true;
+        }
     }
     
     return false;
@@ -181,6 +223,8 @@ QString GraphicsGenerator::extension(GraphicsGenerator::Format format)
             return ".eps";
         case Png:
             return ".png";
+        case Svg:
+            return ".svg";
         case QtImage:
         case Unknown:
         default:
@@ -193,6 +237,35 @@ QString GraphicsGenerator::filePath(GraphicsGenerator::Format format) const
     return QString("%1/%2%3").arg(m_workingDir->canonicalPath()).arg(m_tempFileInfo->baseName()).arg(GraphicsGenerator::extension(format));
 }
 
+bool GraphicsGenerator::render()
+{
+    if (!formatExists(Pdf)) {
+        return false;
+    }
+
+    Poppler::Document* document = Poppler::Document::load(filePath(Pdf));
+    if (!document || document->isLocked()) {
+        delete document;
+        return false;
+    }
+
+    // Access page of the PDF file
+    Poppler::Page* pdfPage = document->page(0);  // Document starts at page 0
+    if (pdfPage == 0) {
+        return false;
+    }
+
+    // Generate a QImage of the rendered page
+    QImage m_image = pdfPage->renderToImage(600,600);
+    emit previewReady(m_image);
+
+    delete pdfPage;
+    delete document;
+    
+    return true;
+}
+
+
 GeneratorThread::GeneratorThread(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc, QObject* parent): QThread(parent)
 {
     m_input = in;
@@ -203,14 +276,17 @@ GeneratorThread::GeneratorThread(GraphicsGenerator::Format in, GraphicsGenerator
 
 void GeneratorThread::run()
 {
+    GraphicsGenerator* gen;
     switch (m_doc->identify()) {
         default:
-            GraphicsGenerator* gen = new GraphicsGenerator();
-            connect(gen, SIGNAL(error(QString)), this, SLOT(printMessage(QString)));
-            gen->convert(m_input,m_output);   
-            gen->start();
+            gen = new GraphicsGenerator();
+            
     }
     
+    connect(gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
+    connect(gen, SIGNAL(error(QString)), this, SLOT(printMessage(QString)));
+    gen->convert(m_input,m_output);   
+    gen->start();
     exec();
 }
 
