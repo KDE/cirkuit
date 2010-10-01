@@ -412,8 +412,8 @@
    </list>
 
    <contexts>
-      <context attribute="Normal Text" name="default" lineEndContext="#stay">
-          <RegExpr attribute="Keyword" context="#stay" String="^#!\/.*" />
+      <context attribute="Normal Text" name="default" lineEndContext="#stay">
+          <RegExpr attribute="Keyword" context="#stay" String="^#!\/.*" />
           <StringDetect attribute="Keyword" context="show" String="show" />
 	  <StringDetect attribute="Keyword" context="set" String="set" />
           <StringDetect attribute="Keyword" context="plot" String="plot" />
@@ -867,22 +867,21 @@
    </contexts>
 
    <itemDatas>
-         <itemData name="Normal Text"               defStyleNum="dsNormal" />
-         <itemData name="Keyword"                   defStyleNum="dsKeyword" />
-	 <itemData name="Funktion"                  defStyleNum="dsOthers" />
-	 <itemData name="Data Type"                 defStyleNum="dsDataType" />
-	 <itemData name="String"                    defStyleNum="dsBaseN" />
-	 <itemData name="Decimal"                   defStyleNum="dsDecVal" />
-	 <itemData name="FloatFunc"                 defStyleNum="dsFloat" />
-         <itemData name="Comment"                   defStyleNum="dsComment" />
-   </itemDatas>
+     <itemData name="Normal Text"       defStyleNum="dsNormal" />
+     <itemData name="Keyword"           defStyleNum="dsKeyword" />
+	 <itemData name="Function"          defStyleNum="dsOthers" />
+	 <itemData name="Data Type"         defStyleNum="dsDataType" />
+	 <itemData name="String"            defStyleNum="dsBaseN" />
+	 <itemData name="Decimal"           defStyleNum="dsDecVal" />
+	 <itemData name="FloatFunc"         defStyleNum="dsFloat" />
+	 <itemData name="Comment"           defStyleNum="dsComment" />
+   </itemDatas>
+</highlighting>
 
-   </highlighting>
-   <general>
-     <comments>
-       <comment name="singleLine" start="#" />
-     </comments>
-     <keywords casesensitive="1" />
-   </general>
- </language>
-
+    <general>
+        <comments>
+            <comment name="singleLine" start="#" />
+        </comments>
+        <keywords casesensitive="1" />
+    </general>
+</language>
