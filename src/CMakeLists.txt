@@ -25,6 +25,7 @@ set(cirkuit_SRCS
 	previewgenerator.cpp
 	graphicsgenerator.cpp
 	command.cpp
+	circuitmacrosbackend.cpp
 )
 kde4_add_kcfg_files(cirkuit_SRCS GENERATE_MOC cirkuitsettings.kcfgc)
 kde4_add_ui_files(cirkuit_SRCS cirkuit_general_settings.ui)

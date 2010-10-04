@@ -36,12 +36,18 @@ public:
     void setInput(const QString& input);
     void setArgs(const QStringList& args);
     
+    QString stderr() const;
+    QString stdout() const;
+    
 public slots:
-    bool execute();
-    bool executeWith(const QString& input, const QStringList& args = QStringList()); 
-       
+    bool execute(const QString& input = QString(), const QStringList& args = QStringList()); 
+    
+    void setStdErr(const QString&);
+    void setStdOut(const QString&);
+           
 private:
     QString m_name, m_input;
+    QString m_stderr, m_stdout;
     QStringList m_args;
     
     bool checkExistenceInDir(const QString& dirname) const;

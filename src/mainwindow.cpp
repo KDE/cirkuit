@@ -116,7 +116,8 @@ MainWindow::MainWindow(QWidget *)
 
     checkCircuitMacros();
     
-    GeneratorThread* m_grgen = new GeneratorThread(GraphicsGenerator::Dvi, GraphicsGenerator::Eps, m_doc);
+    GeneratorThread* m_grgen = new GeneratorThread(GraphicsGenerator::Source, GraphicsGenerator::Svg, m_doc);
+    connect(m_grgen, SIGNAL(previewReady(QImage)), this, SLOT(showPreview(QImage)));
     m_grgen->start();
 }
 
@@ -474,4 +475,9 @@ void MainWindow::circuitMacrosConfigured()
 void MainWindow::failedNotification()
 {
     KMessageBox::error(this, i18n("Unable to generate a preview for the current input"), i18n("Error"));
+}
+
+void MainWindow::showPreview(const QImage& image)
+{
+    m_livePreviewWidget->setImage(image);
 }

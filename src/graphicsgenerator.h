@@ -38,7 +38,7 @@ class GraphicsGenerator : public QObject
     Q_OBJECT
 public:
     //! Constructor
-    GraphicsGenerator(QObject* parent = 0);
+    GraphicsGenerator(const QString& origDir = "", QObject* parent = 0);
     
     //! An enum of the supported formats
     enum Format {
@@ -59,15 +59,13 @@ public:
     QString filePath(Format format) const;
     
 public slots:
-    void readOutput();
-    
     //! Clear the command queue
     void clear();
     
     //! Convert a format into another. Note that you need to call start() to actually do something
-    bool convert(Format in, Format out);
+    virtual bool convert(Format in, Format out);
     //! Generates a format from source
-    bool generate(Format format = GraphicsGenerator::Pdf);
+    virtual bool generate(const QString& source, Format format = GraphicsGenerator::Pdf);
     //! Run the command queue
     bool start();
     
@@ -86,11 +84,12 @@ protected:
     KTemporaryFile* m_tempFile;
     QFileInfo* m_tempFileInfo;
     QDir* m_workingDir;
+    QDir* m_origDir;
+    QString m_source;
     
     static QString extension(Format format);
-    
-    Format m_input;
-    Format m_output;
+    void createTempSource(const QString& extension);
+    bool execute(Command* c);
 };
 
 class GeneratorThread : public QThread
@@ -98,6 +97,7 @@ class GeneratorThread : public QThread
     Q_OBJECT
 public:
     GeneratorThread(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc = 0, QObject* parent = 0);
+    ~GeneratorThread();
     
     void run();
     
@@ -113,6 +113,7 @@ signals:
     
 private:
     GraphicsDocument* m_doc;
+    GraphicsGenerator* m_gen;
 };
 
 #endif // GRAPHICSGENERATOR_H

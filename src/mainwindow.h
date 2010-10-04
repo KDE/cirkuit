@@ -59,6 +59,7 @@ private slots:
     void documentModified(KTextEditor::Document*);
     void buildPreview();
     void showPreview();
+    void showPreview(const QImage& image);
     void openPreview();
 
     void newDocument(GraphicsDocument::DocumentType);

@@ -55,16 +55,11 @@ void Command::setInput(const QString& input)
     m_input = input;
 }
 
-bool Command::executeWith(const QString& input, const QStringList& args)
+bool Command::execute(const QString& input, const QStringList& args)
 {   
-    setInput(input);
-    setArgs(args);
+    if (!input.isEmpty()) setInput(input);
+    if (!args.isEmpty()) setArgs(args);
     
-    return execute();
-}
-
-bool Command::execute()
-{
     if (!checkExistence()) {
         qDebug() << "Program not found!!";
         return false;
@@ -106,3 +101,24 @@ bool Command::checkExistenceInDir(const QString& dirname) const
     QFileInfo fileinfo(QDir(dirname),m_name);
     return fileinfo.exists();
 }
+
+QString Command::stderr() const
+{
+    return m_stderr;
+}
+
+QString Command::stdout() const
+{
+    return m_stdout;
+}
+
+void Command::setStdErr(const QString& stderr)
+{
+    m_stderr = stderr;
+}
+
+void Command::setStdOut(const QString& stdout)
+{
+    m_stdout = stdout;
+}
+
