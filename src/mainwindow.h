@@ -34,7 +34,7 @@ namespace KTextEditor
 }
 
 class LivePreviewWidget;
-class PreviewGenerator;
+class GeneratorThread;
 class QTimer;
 class KRecentFilesAction;
 class GraphicsDocument;
@@ -58,7 +58,6 @@ private slots:
 
     void documentModified(KTextEditor::Document*);
     void buildPreview();
-    void showPreview();
     void showPreview(const QImage& image);
     void openPreview();
 
@@ -94,7 +93,7 @@ private:
 
     QString m_windowTitle;
     LivePreviewWidget *m_livePreviewWidget;
-    PreviewGenerator *m_generator;
+    GeneratorThread* m_generator;
 
 public slots:
     void loadFile(const KUrl& url);

@@ -75,8 +75,8 @@ public slots:
 signals:
     void success();
     void fail();
-    void error(const QString&);
-    void output(const QString&);
+    void error(const QString& appname, const QString& msg);
+    void output(const QString& appname, const QString& msg);
     void previewReady(const QImage&);
     
 protected:
@@ -105,15 +105,19 @@ protected:
     GraphicsGenerator::Format m_input, m_output;
     
 public slots:
-    void setDocument(GraphicsDocument* doc);
-    void printMessage(const QString&);
+    void setup(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc, const QString& origDir = QString());
     
 signals:
     void previewReady(const QImage);
     
+    void error(const QString& appname, const QString& msg);
+    void output(const QString& appname, const QString& msg);
+    void fail();
+    
 private:
     GraphicsDocument* m_doc;
     GraphicsGenerator* m_gen;
+    QString m_origDir;
 };
 
 #endif // GRAPHICSGENERATOR_H

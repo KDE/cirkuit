@@ -83,15 +83,18 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
         "\\end{TeXtoEPS}\n"
         "\\end{document}\n";
         
+        QStringList environment = QProcess::systemEnvironment();
+        // the following enviroment variable is needed to find boxdims.sty in the circuit maaros distribution
+        QString dirString = QString("TEXINPUTS=.:%1:%2:").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false)).arg(m_origDir->absolutePath());
+        environment << dirString;
+        
         QStringList latexArgs;
         latexArgs << QString("-jobname=%1").arg(m_tempFileInfo->baseName());
         
         Command* latexCmd = new Command("latex", latexDoc, latexArgs);
         latexCmd->setWorkingDirectory(m_workingDir->absolutePath());
+        latexCmd->setEnvironment(environment);
         execute(latexCmd);
-        
-        qDebug() << latexCmd->stderr();
-        qDebug() << latexCmd->stdout();
         
         GraphicsGenerator::convert(Dvi, out);
     }

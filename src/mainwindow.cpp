@@ -95,7 +95,7 @@ MainWindow::MainWindow(QWidget *)
 
     setGeometry(100,100,CirkuitSettings::width(),CirkuitSettings::height());
 
-    m_generator = new PreviewGenerator;
+    m_generator = new GeneratorThread(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc);
     newCmDocument();
 
     m_updateTimer = new QTimer;
@@ -106,19 +106,15 @@ MainWindow::MainWindow(QWidget *)
 
     connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(buildPreview()));
     connect(m_generator, SIGNAL(finished()), this, SLOT(builtNotification()));
-    connect(m_generator, SIGNAL(failed()), this, SLOT(failedNotification()));
-    connect(m_generator, SIGNAL(finished()), this, SLOT(showPreview()));
+    connect(m_generator, SIGNAL(fail()), this, SLOT(failedNotification()));
     connect(m_doc, SIGNAL(textChanged(KTextEditor::Document*)), m_updateTimer, SLOT(start()));
     connect(m_doc, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(documentModified(KTextEditor::Document*)));
 
-    connect(m_generator, SIGNAL(applicationError(const QString&,const QString&)), this, SLOT(displayError(const QString&,const QString&)));
-    connect(m_generator, SIGNAL(applicationMessage(const QString&,const QString&)), this, SLOT(displayMessage(const QString&,const QString&)));
-
-    checkCircuitMacros();
+    connect(m_generator, SIGNAL(previewReady(QImage)), this, SLOT(showPreview(QImage)));
+    connect(m_generator, SIGNAL(error(QString,QString)), this, SLOT(displayError(QString,QString)));
+    connect(m_generator, SIGNAL(output(QString,QString)), this, SLOT(displayMessage(QString,QString)));
     
-    GeneratorThread* m_grgen = new GeneratorThread(GraphicsGenerator::Source, GraphicsGenerator::Svg, m_doc);
-    connect(m_grgen, SIGNAL(previewReady(QImage)), this, SLOT(showPreview(QImage)));
-    m_grgen->start();
+    checkCircuitMacros();
 }
 
 void MainWindow::setupActions()
@@ -279,12 +275,12 @@ void MainWindow::exportFile()
         if (QFile::exists(path) && KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes) {
             QFile::remove(path);
         }
-        
-        if (m_generator->builder()->generateFormat(fileinfo.suffix())) {
-            QFile::copy(m_generator->builder()->filePath(fileinfo.suffix()), path);
-        } else {
-            QMessageBox::warning(this, i18n("Error"), i18n("Something went wrong with the generation of the desired output format"));
-        }
+        // TODO: FIX THIS!!!!
+//         if (m_generator->builder()->generateFormat(fileinfo.suffix())) {
+//             QFile::copy(m_generator->builder()->filePath(fileinfo.suffix()), path);
+//         } else {
+//             QMessageBox::warning(this, i18n("Error"), i18n("Something went wrong with the generation of the desired output format"));
+//         }
     }
 }
 
@@ -306,7 +302,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     if (!m_doc->closeUrl()) {
         event->ignore();
     } else {
-        m_generator->clearTempFiles();
+        //m_generator->clearTempFiles();
         event->accept();
     }
 }
@@ -317,15 +313,10 @@ void MainWindow::buildPreview()
     statusBar()->showMessage("Building preview...");
     QString origDir = m_currentFile.directory();
     
-    m_generator->setDocument(m_doc, origDir);
-    m_generator->start();    
+    m_generator->setup(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc, origDir);
+    m_generator->start();
+    
     qDebug() << "Preview generation in progress...";
-}
-
-void MainWindow::showPreview()
-{
-    qDebug() << "Showing the preview...";
-    m_livePreviewWidget->setImage(m_generator->preview());
 }
 
 void MainWindow::openPreview()
@@ -334,7 +325,8 @@ void MainWindow::openPreview()
     QProcess* previewProc = new QProcess;
 
     QStringList args;
-    args << m_generator->builder()->filePath("pdf");
+    // TODO: FIX THIS
+    //args << m_generator->builder()->filePath("pdf");
 
     previewProc->start("okular", args);  
 }
@@ -376,12 +368,12 @@ void MainWindow::newGnuplotDocument()
 
 void MainWindow::displayError(const QString& app, const QString& msg)
 {
-    KMessageBox::information(this, i18n("Error reported by %1: %2").arg(app).arg(msg), i18n("Error"));
+    qDebug() << i18n("Error reported by %1: %2").arg(app).arg(msg);
 }
 
 void MainWindow::displayMessage(const QString& app, const QString& msg)
 {
-    kDebug() << i18n("Message reported by %1: %2").arg(app).arg(msg);
+    qDebug() << i18n("Message reported by %1: %2").arg(app).arg(msg);
 }
 
 void MainWindow::updateTitle()

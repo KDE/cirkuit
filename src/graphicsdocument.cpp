@@ -56,7 +56,7 @@ QString GraphicsDocument::initialText()
 {
     switch (m_type) {
         case CircuitMacros:
-            return QString(".PS\ncct_init\n\nresistor\n\n.PE");  
+            return QString(".PS\ncct_init\n\n\n.PE");  
         case Circuitikz:
         case Tikz:
             return QString("\\begin{tikzpicture}\n\n\\end{tikzpicture}");
