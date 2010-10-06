@@ -39,6 +39,7 @@ class GraphicsGenerator : public QObject
 public:
     //! Constructor
     GraphicsGenerator(const QString& origDir = "", QObject* parent = 0);
+    virtual ~GraphicsGenerator();
     
     //! An enum of the supported formats
     enum Format {
@@ -68,6 +69,8 @@ public slots:
     virtual bool generate(const QString& source, Format format = GraphicsGenerator::Pdf);
     //! Run the command queue
     bool start();
+    //! Set the source
+    void setSource(const QString& source);
     
     //! Render the image using poppler
     bool render();

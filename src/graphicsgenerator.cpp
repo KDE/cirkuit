@@ -36,6 +36,14 @@ GraphicsGenerator::GraphicsGenerator(const QString& origDir, QObject* parent): Q
     m_origDir = new QDir(origDir);
 }
 
+GraphicsGenerator::~GraphicsGenerator()
+{
+    delete m_workingDir;
+    delete m_origDir;
+    delete m_tempFile;
+    delete m_tempFileInfo;
+}
+
 void GraphicsGenerator::createTempSource(const QString& extension)
 {
     m_tempFile = new KTemporaryFile;
@@ -44,6 +52,11 @@ void GraphicsGenerator::createTempSource(const QString& extension)
     
     m_tempFile->open();
     m_tempFileInfo = new QFileInfo(m_tempFile->fileName());
+}
+
+void GraphicsGenerator::setSource(const QString& source)
+{
+    m_source = source;
 }
 
 bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::Format out)
@@ -74,43 +87,36 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
     if (in == Dvi) {
         if (out == Postscript) {
             QStringList args;
-            args << filePath(Dvi) << "-q" << QString("-o %1").arg(filePath(Postscript));
+            args << filePath(in) << "-q" << QString("-o %1").arg(filePath(Postscript));
             m_commands.append(new Command("dvips", "", args, this));
             return true;
         } else if (out == Eps) {
             QStringList args;
-            args << "-E" << filePath(Dvi) << "-q" << "-o" << filePath(Eps);
+            args << "-E" << filePath(in) << "-q" << "-o" << filePath(Eps);
             m_commands.append(new Command("dvips", "", args, this));
             return true;
-        } else if (out == Pdf) {
-            bool b = true;
-            if (!convert(Dvi,Eps)) b = false;
-            if (!convert(Eps,Pdf)) b = false;
-            return b;
-        } else if (out == Png) {
-            bool b = true;
-            if (!convert(Dvi,Eps)) b = false;
-            if (!convert(Eps,Png)) b = false;
-            return b;
         } else {
-            return false;
+            bool b = true;
+            if (!convert(in,Eps)) b = false;
+            if (!convert(Eps,out)) b = false;
+            return b;
         }
     }
     
     if (in == Postscript) {
         if (out == Eps) {
             QStringList args;
-            args << filePath(Postscript) << filePath(Eps);
+            args << filePath(in) << filePath(Eps);
             m_commands.append(new Command("ps2epsi", "", args, this));
             return true;
         } else if (out == Pdf) {
             QStringList args;
-            args << filePath(Postscript) << filePath(Pdf);
+            args << filePath(in) << filePath(Pdf);
             m_commands.append(new Command("ps2pdf", "", args, this));
             return true;
         } else if (out == Png) {
             bool b = true;
-            if (!convert(Postscript,Eps)) b = false;
+            if (!convert(in,Eps)) b = false;
             if (!convert(Eps,Png)) b = false;
             return b;
         } else {
@@ -121,31 +127,39 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
     if (in == Eps) {
         if (out == Postscript) {
             QStringList args;
-            args << filePath(Eps) << filePath(Postscript);
+            args << filePath(in) << filePath(Postscript);
             m_commands.append(new Command("ps2ps", "", args, this));
             return true;
         } else if (out == Pdf) {
             QStringList args;
-            args << filePath(Eps);// << QString("--outfile=%1").arg(filePath(Pdf));
+            args << filePath(in);// << QString("--outfile=%1").arg(filePath(Pdf));
             m_commands.append(new Command("epstopdf", "", args, this));
             return true;
         } else if (out == Png) {
             QStringList args;
-            args << "-density 300" << filePath(Eps) << filePath(Png);
-            m_commands.append(new Command("epstopdf", "", args, this));
+            args << "-density 300" << filePath(in) << filePath(Png);
+            m_commands.append(new Command("convert", "", args, this));
             return true;
         } else {
-            return false;
-        }     
+            bool b = true;
+            if (!convert(in,Pdf)) b = false;
+            if (!convert(Pdf,out)) b = false;
+            return b;
+        }   
     }
     
     if (in == Pdf) {
         if (out == Svg) {
             QStringList args;
-            args << filePath(Pdf) << filePath(Svg);
+            args << filePath(in) << filePath(Svg);
             m_commands.append(new Command("pdf2svg", "", args, this));
             return true;
-        }
+        } else if (out == Png) {
+            QStringList args;
+            args << "-density 300" << filePath(in) << filePath(Png);
+            m_commands.append(new Command("convert", "", args, this));
+            return true;
+        }        
     }
     
     return true;
@@ -189,10 +203,9 @@ bool GraphicsGenerator::execute(Command* c)
     return success;
 }
 
-
 bool GraphicsGenerator::generate(const QString& source, GraphicsGenerator::Format format)
 {
-    m_source = source;
+    setSource(source);
     return convert(Source, format);
 }
 
@@ -241,7 +254,6 @@ QString GraphicsGenerator::extension(GraphicsGenerator::Format format)
 QString GraphicsGenerator::filePath(GraphicsGenerator::Format format) const
 {
     return QString("%1/%2%3").arg(m_workingDir->canonicalPath()).arg(m_tempFileInfo->baseName()).arg(GraphicsGenerator::extension(format));
-    //return QString("%2%3").arg(m_tempFileInfo->baseName()).arg(GraphicsGenerator::extension(format));
 }
 
 bool GraphicsGenerator::render()
@@ -280,6 +292,8 @@ GeneratorThread::GeneratorThread(GraphicsGenerator::Format in, GraphicsGenerator
 
 void GeneratorThread::run()
 {
+    delete m_gen;
+    
     switch (m_doc->identify()) {
         default:
             m_gen = new CircuitMacrosGenerator(m_origDir);            
@@ -289,7 +303,8 @@ void GeneratorThread::run()
     connect(m_gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));
     connect(m_gen, SIGNAL(output(QString,QString)), this, SIGNAL(output(QString,QString)));
     connect(m_gen, SIGNAL(fail()), this, SIGNAL(fail()));
-    m_gen->generate(m_doc->text().toLatin1(), m_output);   
+    m_gen->setSource(m_doc->text().toLatin1());
+    m_gen->convert(m_input, m_output);   
     m_gen->start();
     
     if (m_output == GraphicsGenerator::QtImage) {
