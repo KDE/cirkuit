@@ -50,7 +50,6 @@
 #include <KTextEditor/View>
 #include <KTextEditor/Editor>
 #include <KTextEditor/EditorChooser>
-#include "graphicsbuilder.h"
 #include "graphicsgenerator.h"
 
 class CirkuitGeneralForm : public QWidget, public Ui::CirkuitGeneralForm
