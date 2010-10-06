@@ -9,5 +9,6 @@
 	 </magic>
 	<glob pattern="*.cir" weight="100"/>
 	<glob pattern="*.m4"/>	
+    <glob pattern="*.gp"/>
   </mime-type>
 </mime-info>
