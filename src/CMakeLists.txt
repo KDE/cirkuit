@@ -12,19 +12,15 @@ set(cirkuit_SRCS
 	main.cpp
 	mainwindow.cpp
 	livepreviewwidget.cpp
-	latexprocess.cpp
-	gnuplotbuilder.cpp
-	graphicsbuilder.cpp
-	externalprocess.cpp
 	qimagedisplay.cpp
 	graphicsdocument.cpp
 	circuitmacrosmanager.cpp
 	httpdownloader.cpp
 	graphicsgenerator.cpp
 	command.cpp
-	circuitmacrosbackend.cpp
-	tikzbackend.cpp
 	documenttemplate.cpp
+	circuitmacrosbackend.cpp
+	tikzbackend.cpp	
 )
 kde4_add_kcfg_files(cirkuit_SRCS GENERATE_MOC cirkuitsettings.kcfgc)
 kde4_add_ui_files(cirkuit_SRCS cirkuit_general_settings.ui)

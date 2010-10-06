@@ -19,7 +19,6 @@
 ***************************************************************************/
 
 #include "circuitmacrosmanager.h"
-#include "externalprocess.h"
 
 #include <KStandardDirs>
 #include <KTar>
