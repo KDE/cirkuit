@@ -59,6 +59,7 @@ private slots:
     void documentModified(KTextEditor::Document*);
     void buildPreview();
     void showPreview(const QImage& image);
+    void saveFileToDisk(const QString& path);
     void openPreview();
 
     void newDocument(GraphicsDocument::DocumentType);
@@ -90,6 +91,7 @@ private:
     KUrl m_currentFile;
     KRecentFilesAction* recentFilesAction;
     CircuitMacrosManager* cmm;
+    QString m_tempSavePath;
 
     QString m_windowTitle;
     LivePreviewWidget *m_livePreviewWidget;

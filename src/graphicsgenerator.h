@@ -50,6 +50,7 @@ public:
         Eps,
         QtImage,
         Png,
+        Jpeg,
         Svg,
         Unknown
     };
@@ -58,6 +59,9 @@ public:
     bool formatExists(Format format) const;
     //! Return the full path to a file which represent a format
     QString filePath(Format format) const;
+    
+    static QString extension(Format format);
+    static Format format(const QString& extension);
     
 public slots:
     //! Clear the command queue
@@ -90,7 +94,6 @@ protected:
     QDir* m_origDir;
     QString m_source;
     
-    static QString extension(Format format);
     void createTempSource(const QString& extension);
     bool execute(Command* c);
 };
@@ -103,15 +106,17 @@ public:
     ~GeneratorThread();
     
     void run();
+    GraphicsGenerator* builder();
     
 protected:
     GraphicsGenerator::Format m_input, m_output;
     
 public slots:
-    void setup(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc, const QString& origDir = QString());
+    void setup(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc, const QString& origDir = QString(), bool saveToFile = false);
     
 signals:
     void previewReady(const QImage);
+    void fileReady(const QString);
     
     void error(const QString& appname, const QString& msg);
     void output(const QString& appname, const QString& msg);
@@ -121,6 +126,7 @@ private:
     GraphicsDocument* m_doc;
     GraphicsGenerator* m_gen;
     QString m_origDir;
+    bool m_saveToFile;
 };
 
 #endif // GRAPHICSGENERATOR_H

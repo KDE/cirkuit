@@ -26,6 +26,7 @@ set(cirkuit_SRCS
 	graphicsgenerator.cpp
 	command.cpp
 	circuitmacrosbackend.cpp
+	tikzbackend.cpp
 	documenttemplate.cpp
 )
 kde4_add_kcfg_files(cirkuit_SRCS GENERATE_MOC cirkuitsettings.kcfgc)

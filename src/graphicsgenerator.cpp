@@ -29,6 +29,7 @@
 #include <QImage>
 
 #include <QDebug>
+#include "tikzbackend.h"
 
 GraphicsGenerator::GraphicsGenerator(const QString& origDir, QObject* parent): QObject(parent), m_source(QString())
 {    
@@ -75,13 +76,6 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
     
     if (out == QtImage) {
         return convert(in, Pdf);
-    }
-    
-    if (out == Svg && in != Pdf) {
-        bool b = true;
-        if (!convert(in,Pdf)) b = false;
-        if (!convert(Pdf,Svg)) b = false;
-        return b;
     }
     
     if (in == Dvi) {
@@ -135,11 +129,6 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
             args << filePath(in);// << QString("--outfile=%1").arg(filePath(Pdf));
             m_commands.append(new Command("epstopdf", "", args, this));
             return true;
-        } else if (out == Png) {
-            QStringList args;
-            args << "-density 300" << filePath(in) << filePath(Png);
-            m_commands.append(new Command("convert", "", args, this));
-            return true;
         } else {
             bool b = true;
             if (!convert(in,Pdf)) b = false;
@@ -156,10 +145,25 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
             return true;
         } else if (out == Png) {
             QStringList args;
-            args << "-density 300" << filePath(in) << filePath(Png);
-            m_commands.append(new Command("convert", "", args, this));
+            args << "-png" << "-r 300" << filePath(in) << m_tempFileInfo->baseName();
+            m_commands.append(new Command("pdftoppm", "", args, this));
             return true;
-        }        
+        } else if (out == Jpeg) {
+            QStringList args;
+            args << "-jpeg" << "-r 300" << filePath(in) << m_tempFileInfo->baseName();
+            m_commands.append(new Command("pdftoppm", "", args, this));
+            return true;
+        } else if (out == Eps) {
+            QStringList args;
+            args << "-eps" << filePath(in) << filePath(out);
+            m_commands.append(new Command("pdftops", "", args, this));
+            return true;
+        } else if (out == Postscript) {
+            QStringList args;
+            args << filePath(in) << filePath(out);
+            m_commands.append(new Command("pdftops", "", args, this));
+            return true;
+        }
     }
     
     return true;
@@ -242,6 +246,8 @@ QString GraphicsGenerator::extension(GraphicsGenerator::Format format)
             return ".eps";
         case Png:
             return ".png";
+        case Jpeg:
+            return ".jpg";
         case Svg:
             return ".svg";
         case QtImage:
@@ -251,9 +257,36 @@ QString GraphicsGenerator::extension(GraphicsGenerator::Format format)
     }
 }
 
+GraphicsGenerator::Format GraphicsGenerator::format(const QString& extension)
+{
+    if (extension.contains("pdf")) {
+        return Pdf;
+    } else if (extension.contains("cir")) {
+        return Source;
+    } else if (extension.contains("dvi")) {
+        return Dvi;
+    } else if (extension.contains("eps")) {
+        return Eps;
+    } else if (extension.contains("ps")) {
+        return Postscript;
+    } else if (extension.contains("png")) {
+        return Png;
+    } else if (extension.contains("jpg")) {
+        return Jpeg;
+    } else if (extension.contains("svg")) {
+        return Svg;
+    }
+    
+    return Unknown;
+}
+
 QString GraphicsGenerator::filePath(GraphicsGenerator::Format format) const
 {
-    return QString("%1/%2%3").arg(m_workingDir->canonicalPath()).arg(m_tempFileInfo->baseName()).arg(GraphicsGenerator::extension(format));
+    if (format == Png || format == Jpeg) {
+        return QString("%1/%2-1%3").arg(m_workingDir->canonicalPath()).arg(m_tempFileInfo->baseName()).arg(GraphicsGenerator::extension(format));
+    } else {
+        return QString("%1/%2%3").arg(m_workingDir->canonicalPath()).arg(m_tempFileInfo->baseName()).arg(GraphicsGenerator::extension(format));
+    }
 }
 
 bool GraphicsGenerator::render()
@@ -287,16 +320,19 @@ bool GraphicsGenerator::render()
 
 GeneratorThread::GeneratorThread(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc, QObject* parent): QThread(parent)
 {
-    setup(in,out,doc);
+    setup(in,out,doc,QString(),false);
+    m_gen = 0;
 }
 
 void GeneratorThread::run()
 {
     delete m_gen;
+    qDebug() << "IDENTIFICATION: " << m_doc->identify();
     
-    switch (m_doc->identify()) {
-        default:
-            m_gen = new CircuitMacrosGenerator(m_origDir);            
+    if (m_doc->identify() == GraphicsDocument::CircuitMacros) {
+        m_gen = new CircuitMacrosGenerator(m_origDir);
+    } else if (m_doc->identify() == GraphicsDocument::Tikz || m_doc->identify() == GraphicsDocument::Circuitikz) {
+        m_gen = new TikzGenerator(m_origDir);
     }
     
     connect(m_gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
@@ -310,6 +346,10 @@ void GeneratorThread::run()
     if (m_output == GraphicsGenerator::QtImage) {
         m_gen->render();
     }
+    
+    if (m_saveToFile) {
+        emit fileReady(m_gen->filePath(m_output));
+    }
 }
 
 GeneratorThread::~GeneratorThread()
@@ -317,11 +357,17 @@ GeneratorThread::~GeneratorThread()
     delete m_gen;
 }
 
-void GeneratorThread::setup(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc, const QString& origDir)
+void GeneratorThread::setup(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc, const QString& origDir, bool saveToFile)
 {
     m_input = in;
     m_output = out;
     m_doc = doc;
     m_origDir = origDir;
+    m_saveToFile = saveToFile;
+}
+
+GraphicsGenerator* GeneratorThread::builder()
+{
+    return m_gen;
 }
 

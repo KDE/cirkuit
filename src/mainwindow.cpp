@@ -44,6 +44,7 @@
 #include <KXMLGUIFactory>
 #include <KConfigDialog>
 #include <KStatusBar>
+#include <KRun>
 #include <QProcess>
 
 #include <KTextEditor/Document>
@@ -111,6 +112,7 @@ MainWindow::MainWindow(QWidget *)
     connect(m_doc, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(documentModified(KTextEditor::Document*)));
 
     connect(m_generator, SIGNAL(previewReady(QImage)), this, SLOT(showPreview(QImage)));
+    connect(m_generator, SIGNAL(fileReady(QString)), this, SLOT(saveFileToDisk(QString)));
     connect(m_generator, SIGNAL(error(QString,QString)), this, SLOT(displayError(QString,QString)));
     connect(m_generator, SIGNAL(output(QString,QString)), this, SLOT(displayMessage(QString,QString)));
     
@@ -258,7 +260,7 @@ void MainWindow::exportFile()
     QString path;
 
     QStringList exportTypes;
-    exportTypes << "application/pdf" << "image/x-eps" << "image/png" << "image/svg+xml";
+    exportTypes << "application/pdf" << "image/x-eps" << "image/png" << "image/jpeg" << "image/svg+xml";
 
     KFileDialog saveFileDialog(KUrl(), "", this);
     saveFileDialog.setWindowTitle(i18n("Export image - Cirkuit"));
@@ -275,12 +277,12 @@ void MainWindow::exportFile()
         if (QFile::exists(path) && KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes) {
             QFile::remove(path);
         }
-        // TODO: FIX THIS!!!!
-//         if (m_generator->builder()->generateFormat(fileinfo.suffix())) {
-//             QFile::copy(m_generator->builder()->filePath(fileinfo.suffix()), path);
-//         } else {
-//             QMessageBox::warning(this, i18n("Error"), i18n("Something went wrong with the generation of the desired output format"));
-//         }
+        GraphicsGenerator::Format format = GraphicsGenerator::format(fileinfo.suffix());
+        m_generator->setup(GraphicsGenerator::Source, format, m_doc, m_currentFile.directory(), true);
+        qDebug() << "Exporting to format "  << GraphicsGenerator::extension(format);
+        statusBar()->showMessage("Exporting image...");
+        m_generator->start();
+        m_tempSavePath = path;
     }
 }
 
@@ -311,9 +313,8 @@ void MainWindow::buildPreview()
 {
     m_updateTimer->stop();
     statusBar()->showMessage("Building preview...");
-    QString origDir = m_currentFile.directory();
     
-    m_generator->setup(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc, origDir);
+    m_generator->setup(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc, m_currentFile.directory());
     m_generator->start();
     
     qDebug() << "Preview generation in progress...";
@@ -322,13 +323,9 @@ void MainWindow::buildPreview()
 void MainWindow::openPreview()
 {
     buildPreview();
-    QProcess* previewProc = new QProcess;
-
-    QStringList args;
-    // TODO: FIX THIS
-    //args << m_generator->builder()->filePath("pdf");
-
-    previewProc->start("okular", args);  
+    
+    KUrl url = m_generator->builder()->filePath(GraphicsGenerator::Pdf);
+    KRun::runUrl(url, "application/pdf", this);
 }
 
 void MainWindow::builtNotification()
@@ -368,12 +365,12 @@ void MainWindow::newGnuplotDocument()
 
 void MainWindow::displayError(const QString& app, const QString& msg)
 {
-    qDebug() << i18n("Error reported by %1: %2").arg(app).arg(msg);
+    //qDebug() << i18n("Error reported by %1: %2").arg(app).arg(msg);
 }
 
 void MainWindow::displayMessage(const QString& app, const QString& msg)
 {
-    qDebug() << i18n("Message reported by %1: %2").arg(app).arg(msg);
+    //qDebug() << i18n("Message reported by %1: %2").arg(app).arg(msg);
 }
 
 void MainWindow::updateTitle()
@@ -472,4 +469,11 @@ void MainWindow::failedNotification()
 void MainWindow::showPreview(const QImage& image)
 {
     m_livePreviewWidget->setImage(image);
+}
+
+void MainWindow::saveFileToDisk(const QString& path)
+{
+    qDebug() << "Copying "  << path << " to " << m_tempSavePath;
+    QFile::copy(path, m_tempSavePath);
+    statusBar()->showMessage("Export successfully completed!", 3000);
 }
