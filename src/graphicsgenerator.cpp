@@ -30,6 +30,7 @@
 
 #include <QDebug>
 #include "tikzbackend.h"
+#include "gnuplotbackend.h"
 
 GraphicsGenerator::GraphicsGenerator(const QString& origDir, QObject* parent): QObject(parent), m_source(QString())
 {    
@@ -333,6 +334,8 @@ void GeneratorThread::run()
         m_gen = new CircuitMacrosGenerator(m_origDir);
     } else if (m_doc->identify() == GraphicsDocument::Tikz || m_doc->identify() == GraphicsDocument::Circuitikz) {
         m_gen = new TikzGenerator(m_origDir);
+    } else if (m_doc->identify() == GraphicsDocument::Gnuplot) {
+        m_gen = new GnuplotGenerator(m_origDir);
     }
     
     connect(m_gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
