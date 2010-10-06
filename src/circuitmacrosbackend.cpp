@@ -34,7 +34,7 @@ CircuitMacrosGenerator::CircuitMacrosGenerator(const QString& origDir, QObject* 
 
 bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::Format out)
 {
-    //! Check if the conversion can be handled by the super-class
+    // Check if the conversion can be handled by the super-class
     bool done = GraphicsGenerator::convert(in, out);
     if (done) {
         return true;

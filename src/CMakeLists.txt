@@ -13,7 +13,6 @@ set(cirkuit_SRCS
 	mainwindow.cpp
 	livepreviewwidget.cpp
 	latexprocess.cpp
-	circuitmacrosbuilder.cpp
 	tikzbuilder.cpp
 	gnuplotbuilder.cpp
 	graphicsbuilder.cpp

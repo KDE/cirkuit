@@ -19,7 +19,6 @@
 ***************************************************************************/
 
 #include "previewgenerator.h"
-#include "circuitmacrosbuilder.h"
 #include "tikzbuilder.h"
 #include "gnuplotbuilder.h"
 #include "graphicsbuilder.h"
@@ -51,7 +50,7 @@ void PreviewGenerator::run()
 
     switch (m_doc->identify()) {
         case GraphicsDocument::CircuitMacros:
-            m_builder = new CircuitMacrosBuilder(m_doc,m_origDir);
+//            m_builder = new CircuitMacrosBuilder(m_doc,m_origDir);
             break;
         case GraphicsDocument::Gnuplot:
             m_builder = new GnuplotBuilder(m_doc,m_origDir);
