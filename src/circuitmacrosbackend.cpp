@@ -17,6 +17,8 @@
 */
 
 #include "circuitmacrosbackend.h"
+#include "command.h"
+#include "documenttemplate.h"
 
 #include <KStandardDirs>
 #include <KTemporaryFile>
@@ -24,7 +26,6 @@
 #include <QDebug>
 #include <QTextStream>
 #include <QProcess>
-#include "command.h"
 
 CircuitMacrosGenerator::CircuitMacrosGenerator(const QString& origDir, QObject* parent): GraphicsGenerator(origDir, parent)
 {
@@ -33,9 +34,8 @@ CircuitMacrosGenerator::CircuitMacrosGenerator(const QString& origDir, QObject* 
 
 bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::Format out)
 {
-    //! Check if the conversion can be done from the super-class
+    //! Check if the conversion can be handled by the super-class
     bool done = GraphicsGenerator::convert(in, out);
-    
     if (done) {
         return true;
     }
@@ -49,11 +49,11 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
         m_tempFile->close();    
         
         QStringList env = QProcess::systemEnvironment();
-        env << QString("M4PATH=%1:%2").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false)).arg(m_origDir->absolutePath());
+        env << QString("M4PATH=%1:%2").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(m_origDir->absolutePath());
                 
         QStringList m4args;
-        m4args << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/libcct.m4", false)
-               << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/pstricks.m4", false)
+        m4args << KStandardDirs::locate("data", "cirkuit/circuit_macros/libcct.m4")
+               << KStandardDirs::locate("data", "cirkuit/circuit_macros/pstricks.m4")
                << m_tempFileInfo->fileName();
         
         Command* m4command = new Command("m4", "", m4args);
@@ -71,21 +71,12 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
             
         QString picout = picCommand->stdout();
        
-        QString latexDoc = "\\documentclass{article}\n\\usepackage{pstricks,pst-eps,graphicx,ifpdf,pst-grad,amsmath}\n"
-        "\\pagestyle{empty}\n"
-        "\\thispagestyle{empty}\n"
-        "\\begin{document}\n"
-        "\\newbox\\graph\n"
-        "\\begin{TeXtoEPS}\n" +
-        picout +
-        "\\box\n"
-        "\\graph\n"
-        "\\end{TeXtoEPS}\n"
-        "\\end{document}\n";
+        DocumentTemplate latexTemplate(KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt"));
+        QString latexDoc = latexTemplate.insert(picout);
         
         QStringList environment = QProcess::systemEnvironment();
         // the following enviroment variable is needed to find boxdims.sty in the circuit maaros distribution
-        QString dirString = QString("TEXINPUTS=.:%1:%2:").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false)).arg(m_origDir->absolutePath());
+        QString dirString = QString("TEXINPUTS=.:%1:%2:").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(m_origDir->absolutePath());
         environment << dirString;
         
         QStringList latexArgs;
@@ -95,7 +86,9 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
         latexCmd->setWorkingDirectory(m_workingDir->absolutePath());
         latexCmd->setEnvironment(environment);
         execute(latexCmd);
-        
+    
+        // Now that a DVI has been generated, convert it to the
+        // desired output format
         GraphicsGenerator::convert(Dvi, out);
     }
     

@@ -21,13 +21,12 @@
 
 #include "graphicsgenerator.h"
 
-
 class CircuitMacrosGenerator : public GraphicsGenerator
 {
 public:
     CircuitMacrosGenerator(const QString& origDir = "", QObject* parent = 0);
     
-    virtual bool convert(Format in, Format out);    
+    virtual bool convert(Format in, Format out);
 };
 
 #endif // CIRCUITMACROSBACKEND_H
