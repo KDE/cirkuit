@@ -20,7 +20,6 @@
 
 #include "mainwindow.h"
 #include "livepreviewwidget.h"
-#include "previewgenerator.h"
 #include "cirkuitsettings.h"
 #include "graphicsdocument.h"
 #include "circuitmacrosmanager.h"

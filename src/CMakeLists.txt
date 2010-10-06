@@ -13,16 +13,13 @@ set(cirkuit_SRCS
 	mainwindow.cpp
 	livepreviewwidget.cpp
 	latexprocess.cpp
-	tikzbuilder.cpp
 	gnuplotbuilder.cpp
 	graphicsbuilder.cpp
 	externalprocess.cpp
 	qimagedisplay.cpp
-	previewgenerator.cpp
 	graphicsdocument.cpp
 	circuitmacrosmanager.cpp
 	httpdownloader.cpp
-	previewgenerator.cpp
 	graphicsgenerator.cpp
 	command.cpp
 	circuitmacrosbackend.cpp
