@@ -6,6 +6,7 @@ include_directories(${KDE4_INCLUDES} ${POPPLER_INCLUDE_DIR} ${CMAKE_CURRENT_BINA
 
 add_subdirectory( mimetypes )
 add_subdirectory( syntax )
+add_subdirectory( templates )
 
 set(cirkuit_SRCS 
 	main.cpp

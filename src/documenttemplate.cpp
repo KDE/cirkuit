@@ -17,4 +17,20 @@
 */
 
 #include "documenttemplate.h"
+#include <QTextStream>
+#include <QFile>
 
+DocumentTemplate::DocumentTemplate(const QString& path, QObject* parent): QObject(parent)
+{
+    m_path = path;
+}
+
+QString DocumentTemplate::insert(const QString& code)
+{
+    QFile file(m_path);
+    file.open(QIODevice::ReadOnly);
+    QTextStream stream(&file);
+    QString output = stream.readAll().replace("<!CODE!>", code);
+    file.close();
+    return output;
+}

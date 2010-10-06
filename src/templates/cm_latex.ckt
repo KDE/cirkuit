@@ -1,0 +1,14 @@
+\documentclass{article}
+
+\usepackage{pstricks,pst-eps,graphicx,ifpdf,pst-grad,amsmath}
+\pagestyle{empty}
+\thispagestyle{empty}
+
+\begin{document}
+\newbox\graph
+\begin{TeXtoEPS}
+<!CODE!>
+\box
+\graph
+\end{TeXtoEPS}
+\end{document}
