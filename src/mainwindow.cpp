@@ -20,6 +20,7 @@
 
 #include "mainwindow.h"
 #include "livepreviewwidget.h"
+#include "logviewwidget.h"
 #include "cirkuitsettings.h"
 #include "graphicsdocument.h"
 #include "circuitmacrosmanager.h"
@@ -77,6 +78,9 @@ MainWindow::MainWindow(QWidget *)
 
     m_livePreviewWidget = new LivePreviewWidget(i18n("Live preview"), this);
     addDockWidget(Qt::TopDockWidgetArea, m_livePreviewWidget);
+    
+    m_logViewWidget = new LogViewWidget(i18n("Log"), this);
+    addDockWidget(Qt::BottomDockWidgetArea, m_logViewWidget);
 
     mimeTypes << "application/x-cirkuit" << "text/x-tex" << "application/x-gnuplot";
     m_currentFile = KUrl("");
@@ -111,8 +115,8 @@ MainWindow::MainWindow(QWidget *)
 
     connect(m_generator, SIGNAL(previewReady(QImage)), this, SLOT(showPreview(QImage)));
     connect(m_generator, SIGNAL(fileReady(QString)), this, SLOT(saveFileToDisk(QString)));
-    connect(m_generator, SIGNAL(error(QString,QString)), this, SLOT(displayError(QString,QString)));
-    connect(m_generator, SIGNAL(output(QString,QString)), this, SLOT(displayMessage(QString,QString)));
+    connect(m_generator, SIGNAL(error(QString,QString)), m_logViewWidget, SLOT(displayError(QString,QString)));
+    connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));
     
     checkCircuitMacros();
 }
@@ -166,6 +170,9 @@ void MainWindow::setupActions()
 
     QAction* showLivePreviewAction = m_livePreviewWidget->toggleViewAction();
     actionCollection()->addAction( "show_live_preview", showLivePreviewAction );
+    
+    QAction* showLogViewAction = m_logViewWidget->toggleViewAction();
+    actionCollection()->addAction( "show_log_view", showLogViewAction );
 
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->loadEntries(config->group("recent_files"));
@@ -277,7 +284,6 @@ void MainWindow::exportFile()
         }
         GraphicsGenerator::Format format = GraphicsGenerator::format(fileinfo.suffix());
         m_generator->setup(GraphicsGenerator::Source, format, m_doc, m_currentFile.directory(), true);
-        qDebug() << "Exporting to format "  << GraphicsGenerator::extension(format);
         statusBar()->showMessage("Exporting image...");
         m_generator->start();
         m_tempSavePath = path;
@@ -302,7 +308,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
     if (!m_doc->closeUrl()) {
         event->ignore();
     } else {
-        //m_generator->clearTempFiles();
         event->accept();
     }
 }
@@ -311,6 +316,7 @@ void MainWindow::buildPreview()
 {
     m_updateTimer->stop();
     statusBar()->showMessage("Building preview...");
+    m_logViewWidget->clear();
     
     m_generator->setup(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc, m_currentFile.directory());
     m_generator->start();
@@ -359,16 +365,6 @@ void MainWindow::newTikzDocument()
 void MainWindow::newGnuplotDocument()
 {
     newDocument(GraphicsDocument::Gnuplot);
-}
-
-void MainWindow::displayError(const QString& app, const QString& msg)
-{
-    //qDebug() << i18n("Error reported by %1: %2").arg(app).arg(msg);
-}
-
-void MainWindow::displayMessage(const QString& app, const QString& msg)
-{
-    //qDebug() << i18n("Message reported by %1: %2").arg(app).arg(msg);
 }
 
 void MainWindow::updateTitle()

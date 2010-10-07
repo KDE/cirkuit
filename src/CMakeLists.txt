@@ -12,6 +12,7 @@ set(cirkuit_SRCS
 	main.cpp
 	mainwindow.cpp
 	livepreviewwidget.cpp
+	logviewwidget.cpp
 	qimagedisplay.cpp
 	graphicsdocument.cpp
 	circuitmacrosmanager.cpp

@@ -27,6 +27,7 @@
 #include "graphicsdocument.h"
 #include "graphicsgenerator.h"
 
+class LogViewWidget;
 namespace KTextEditor
 {
     class Document;
@@ -95,12 +96,11 @@ private:
 
     QString m_windowTitle;
     LivePreviewWidget *m_livePreviewWidget;
+    LogViewWidget* m_logViewWidget;
     GeneratorThread* m_generator;
 
 public slots:
     void loadFile(const KUrl& url);
-    void displayError(const QString& app, const QString& msg);
-    void displayMessage(const QString& app, const QString& msg);
 
 protected:
     void closeEvent(QCloseEvent *event);
