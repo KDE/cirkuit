@@ -20,6 +20,7 @@
 #include "graphicsdocument.h"
 #include "command.h"
 #include "circuitmacrosbackend.h"
+#include "cirkuitsettings.h"
 
 #include <poppler-qt4.h>
 
@@ -146,12 +147,12 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
             return true;
         } else if (out == Png) {
             QStringList args;
-            args << "-png" << "-r 300" << filePath(in) << m_tempFileInfo->baseName();
+            args << "-png" << "-r" << QString::number(CirkuitSettings::resolutionPpm()) << filePath(in) << m_tempFileInfo->baseName();
             m_commands.append(new Command("pdftoppm", "", args, this));
             return true;
         } else if (out == Jpeg) {
             QStringList args;
-            args << "-jpeg" << "-r 300" << filePath(in) << m_tempFileInfo->baseName();
+            args << "-jpeg" << "-r" << QString::number(CirkuitSettings::resolutionPpm()) << filePath(in) << m_tempFileInfo->baseName();
             m_commands.append(new Command("pdftoppm", "", args, this));
             return true;
         } else if (out == Eps) {

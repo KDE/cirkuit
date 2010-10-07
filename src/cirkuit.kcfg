@@ -10,6 +10,10 @@
       <label>Preview generation refresh timeout.</label>
 		<default>5000</default>
     </entry>
+    <entry name="ResolutionPpm" type="Int">
+      <label>PNG and JPEG resolution.</label>
+        <default>300</default>
+    </entry>
     <entry name="Width" type="Int">
       <label>Width of the main window.</label>
       <default>600</default>
