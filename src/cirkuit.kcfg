@@ -38,6 +38,10 @@
       <label>The location of the Circuit Macros template.</label>
       <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt")</default>
     </entry>
+    <entry name="cmtikztemplateurl" type="Url">
+      <label>The location of the Circuit Macros template with TikZ backend.</label>
+      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_tikz.ckt")</default>
+    </entry>
     <entry name="tikztemplateurl" type="Url">
       <label>The location of the TikZ template.</label>
       <default code="true">KStandardDirs::locate("data", "cirkuit/templates/tikz_latex.ckt")</default>

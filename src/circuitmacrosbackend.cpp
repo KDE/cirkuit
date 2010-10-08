@@ -100,7 +100,7 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
         QString latexDoc;        
         Command* latexCmd;
         if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_pgf) {
-            DocumentTemplate latexTemplate(CirkuitSettings::tikztemplateurl().path());
+            DocumentTemplate latexTemplate(CirkuitSettings::cmtikztemplateurl().path());
             latexDoc = latexTemplate.insert(picout);
             latexCmd = new Command("pdflatex", latexDoc, latexArgs);
         } else {

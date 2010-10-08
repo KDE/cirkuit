@@ -25,7 +25,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="lbl_cmtemplate">
          <property name="text">
           <string>Template path</string>
          </property>
@@ -41,14 +41,14 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="2" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>Pic interpreter</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <item row="2" column="1">
         <widget class="KComboBox" name="kcfg_PicInterpreter">
          <item>
           <property name="text">
@@ -66,6 +66,16 @@
           </property>
          </item>
         </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lbl_cmtikztemplate">
+         <property name="text">
+          <string>Template path</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="KUrlRequester" name="kcfg_cmtikztemplateurl"/>
        </item>
       </layout>
      </widget>

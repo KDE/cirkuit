@@ -24,8 +24,8 @@
 #include "cirkuitsettings.h"
 #include "graphicsdocument.h"
 #include "circuitmacrosmanager.h"
-#include "ui_cirkuit_general_settings.h"
-#include "ui_cirkuit_backend_settings.h"
+#include "graphicsgenerator.h"
+#include "settingsforms.h"
 
 #include <KApplication>
 #include <KAction>
@@ -52,27 +52,7 @@
 #include <KTextEditor/View>
 #include <KTextEditor/Editor>
 #include <KTextEditor/EditorChooser>
-#include "graphicsgenerator.h"
 
-class CirkuitGeneralForm : public QWidget, public Ui::CirkuitGeneralForm
-{
-    public:
-        CirkuitGeneralForm(QWidget *parent = 0)
-        : QWidget(parent)
-        {
-            setupUi(this);
-        }
-};
-
-class CirkuitBackendForm : public QWidget, public Ui::CirkuitBackendForm
-{
-    public:
-        CirkuitBackendForm(QWidget *parent = 0)
-        : QWidget(parent)
-        {
-            setupUi(this);
-        }
-};
 
 MainWindow::MainWindow(QWidget *)
 {	
