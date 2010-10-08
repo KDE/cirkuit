@@ -225,18 +225,13 @@ void MainWindow::saveAs()
     saveFileDialog.setWindowTitle(i18n("Save file - Cirkuit"));
     saveFileDialog.setOperationMode(KFileDialog::Saving);
     saveFileDialog.setMimeFilter(mimeTypes, "application/x-cirkuit");
+    saveFileDialog.setConfirmOverwrite(true);
     if (saveFileDialog.exec() == QDialog::Accepted) {
         filename = saveFileDialog.selectedFile();
     }
 
     if (!filename.isEmpty()) {
-        if (QFile::exists(filename)) {
-            if(KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes) {
-                saveAsFile(filename);
-            }
-        } else {
-            saveAsFile(filename);
-        }
+        saveAsFile(filename);
     }
 }
 
@@ -260,17 +255,15 @@ void MainWindow::exportFile()
     saveFileDialog.setStartDir(m_currentFile.directory());
     saveFileDialog.setOperationMode(KFileDialog::Saving);
     saveFileDialog.setMimeFilter(exportTypes, "application/pdf");
+    saveFileDialog.setInlinePreviewShown(true);
+    saveFileDialog.setConfirmOverwrite(true);
     if (saveFileDialog.exec() == QDialog::Accepted) {
         path = saveFileDialog.selectedFile();
     }
 
     if (!path.isEmpty()) {
         QFileInfo fileinfo(path);
-        
-        if (QFile::exists(path) && KMessageBox::questionYesNoCancel(0, i18n("Do you want to overwrite the existing file?"), i18n("File exists")) == KMessageBox::Yes) {
-            QFile::remove(path);
-        }
-        GraphicsGenerator::Format format = GraphicsGenerator::format(fileinfo.suffix());
+        GraphicsGenerator::Format format = GraphicsGenerator::format(saveFileDialog.currentFilterMimeType()->mainExtension());
         m_generator->setup(GraphicsGenerator::Source, format, m_doc, m_currentFile.directory(), true);
         statusBar()->showMessage("Exporting image...");
         m_generator->start();

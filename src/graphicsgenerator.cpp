@@ -274,7 +274,7 @@ GraphicsGenerator::Format GraphicsGenerator::format(const QString& extension)
         return Postscript;
     } else if (extension.contains("png")) {
         return Png;
-    } else if (extension.contains("jpg")) {
+    } else if (extension.contains("jpg") || extension.contains("jpeg")) {
         return Jpeg;
     } else if (extension.contains("svg")) {
         return Svg;
