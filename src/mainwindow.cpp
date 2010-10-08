@@ -81,6 +81,7 @@ MainWindow::MainWindow(QWidget *)
     
     m_logViewWidget = new LogViewWidget(i18n("Log"), this);
     addDockWidget(Qt::BottomDockWidgetArea, m_logViewWidget);
+    m_logViewWidget->hide();
 
     mimeTypes << "application/x-cirkuit" << "text/x-tex" << "application/x-gnuplot";
     m_currentFile = KUrl("");
@@ -317,6 +318,7 @@ void MainWindow::buildPreview()
     m_updateTimer->stop();
     statusBar()->showMessage("Building preview...");
     m_logViewWidget->clear();
+    m_logViewWidget->hide();
     
     m_generator->setup(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc, m_currentFile.directory());
     m_generator->start();

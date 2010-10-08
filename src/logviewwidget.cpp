@@ -35,8 +35,10 @@ void LogViewWidget::clear()
 
 void LogViewWidget::displayError ( const QString& app, const QString& msg )
 {
+    if (msg.isEmpty()) return;
     QString message = QString("--- [ %1 ] ---\n%2\n").arg(app).arg(msg);
     m_textEdit->append(message);
+    show();
 }
 
 void LogViewWidget::displayMessage ( const QString& app, const QString& msg )
