@@ -4,11 +4,15 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile />
-  
+  <include>kstandarddirs.h</include>  
   <group name="general">
     <entry name="RefreshInterval" type="Int">
       <label>Preview generation refresh timeout.</label>
-		<default>5000</default>
+		<default>10000</default>
+    </entry>
+    <entry name="AutoRefresh" type="Bool">
+      <label>Enable automatic refresh.</label>
+        <default>true</default>
     </entry>
     <entry name="ResolutionPpm" type="Int">
       <label>PNG and JPEG resolution.</label>
@@ -21,6 +25,18 @@
     <entry name="Height" type="Int">
       <label>Height of the main window.</label>
       <default>400</default>
+    </entry>
+    <entry name="cmtemplateurl" type="Url">
+      <label>The location of the Circuit Macros template.</label>
+      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt")</default>
+    </entry>
+    <entry name="tikztemplateurl" type="Url">
+      <label>The location of the TikZ template.</label>
+      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/tikz_latex.ckt")</default>
+    </entry>
+    <entry name="gptemplateurl" type="Url">
+      <label>The location of the Gnuplot template.</label>
+      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/gnuplot_latex.ckt")</default>
     </entry>
   </group>
 </kcfg>

@@ -25,7 +25,7 @@ set(cirkuit_SRCS
 	gnuplotbackend.cpp
 )
 kde4_add_kcfg_files(cirkuit_SRCS GENERATE_MOC cirkuitsettings.kcfgc)
-kde4_add_ui_files(cirkuit_SRCS cirkuit_general_settings.ui)
+kde4_add_ui_files(cirkuit_SRCS cirkuit_general_settings.ui cirkuit_backend_settings.ui)
 kde4_add_executable(cirkuit ${cirkuit_SRCS})
 
 target_link_libraries(cirkuit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${POPPLER_LIBRARY} ${QT_QTNETWORK_LIBRARIES})

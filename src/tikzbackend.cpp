@@ -19,6 +19,7 @@
 #include "tikzbackend.h"
 #include "documenttemplate.h"
 #include "command.h"
+#include "cirkuitsettings.h"
 
 #include <KStandardDirs>
 #include <QProcess>
@@ -43,7 +44,7 @@ bool TikzGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::For
     qDebug() << "Inside the TikZ backend...";
     
     if (in == Source) {
-        DocumentTemplate tikzTemplate(KStandardDirs::locate("data", "cirkuit/templates/tikz_latex.ckt"));
+        DocumentTemplate tikzTemplate(CirkuitSettings::tikztemplateurl().path());
         QString latexDoc = tikzTemplate.insert(m_source);
         
         QStringList environment = QProcess::systemEnvironment();

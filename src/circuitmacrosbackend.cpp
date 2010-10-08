@@ -19,6 +19,7 @@
 #include "circuitmacrosbackend.h"
 #include "command.h"
 #include "documenttemplate.h"
+#include "cirkuitsettings.h"
 
 #include <KStandardDirs>
 #include <KTemporaryFile>
@@ -71,7 +72,7 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
             
         QString picout = picCommand->stdout();
        
-        DocumentTemplate latexTemplate(KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt"));
+        DocumentTemplate latexTemplate(CirkuitSettings::cmtemplateurl().path());
         QString latexDoc = latexTemplate.insert(picout);
         
         QStringList environment = QProcess::systemEnvironment();

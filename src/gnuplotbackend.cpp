@@ -19,6 +19,7 @@
 #include "gnuplotbackend.h"
 #include "documenttemplate.h"
 #include "command.h"
+#include "cirkuitsettings.h"
 
 #include <KStandardDirs>
 #include <QProcess>
@@ -82,7 +83,7 @@ bool GnuplotGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::
     
         execute(gnuplot);
     
-        DocumentTemplate gpTemplate(KStandardDirs::locate("data", "cirkuit/templates/gnuplot_latex.ckt"));
+        DocumentTemplate gpTemplate(CirkuitSettings::gptemplateurl().path());
         QString latexDoc = gpTemplate.insert(gnuplotOutputFile);
         
         QStringList environment = QProcess::systemEnvironment();

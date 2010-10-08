@@ -25,6 +25,7 @@
 #include "graphicsdocument.h"
 #include "circuitmacrosmanager.h"
 #include "ui_cirkuit_general_settings.h"
+#include "ui_cirkuit_backend_settings.h"
 
 #include <KApplication>
 #include <KAction>
@@ -57,6 +58,16 @@ class CirkuitGeneralForm : public QWidget, public Ui::CirkuitGeneralForm
 {
     public:
         CirkuitGeneralForm(QWidget *parent = 0)
+        : QWidget(parent)
+        {
+            setupUi(this);
+        }
+};
+
+class CirkuitBackendForm : public QWidget, public Ui::CirkuitBackendForm
+{
+    public:
+        CirkuitBackendForm(QWidget *parent = 0)
         : QWidget(parent)
         {
             setupUi(this);
@@ -101,17 +112,13 @@ MainWindow::MainWindow(QWidget *)
 
     m_generator = new GeneratorThread(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc);
     newCmDocument();
-
-    m_updateTimer = new QTimer;
-    m_updateTimer->setSingleShot(true);
-
+    
+    m_updateTimer = 0;
     updateConfiguration();
     statusBar()->showMessage(i18n("Ready"), 3000);
-
-    connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(buildPreview()));
+    
     connect(m_generator, SIGNAL(finished()), this, SLOT(builtNotification()));
     connect(m_generator, SIGNAL(fail()), this, SLOT(failedNotification()));
-    connect(m_doc, SIGNAL(textChanged(KTextEditor::Document*)), m_updateTimer, SLOT(start()));
     connect(m_doc, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(documentModified(KTextEditor::Document*)));
 
     connect(m_generator, SIGNAL(previewReady(QImage)), this, SLOT(showPreview(QImage)));
@@ -315,7 +322,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::buildPreview()
 {
-    m_updateTimer->stop();
     statusBar()->showMessage("Building preview...");
     m_logViewWidget->clear();
     m_logViewWidget->hide();
@@ -396,7 +402,10 @@ void MainWindow::configure()
     KConfigDialog* dialog = new KConfigDialog(this, "settings", CirkuitSettings::self() );
 
     CirkuitGeneralForm* confWdg = new CirkuitGeneralForm();
-    dialog->addPage( confWdg, i18n("General"), "configure" ); 
+    dialog->addPage( confWdg, i18n("General"), "configure" );
+    
+    CirkuitBackendForm* backendWdg = new CirkuitBackendForm();
+    dialog->addPage( backendWdg, i18n("Backends"), "configure" ); 
 
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(updateConfiguration()));
     dialog->show();
@@ -404,7 +413,17 @@ void MainWindow::configure()
 
 void MainWindow::updateConfiguration()
 {
-    m_updateTimer->setInterval(CirkuitSettings::refreshInterval()*1000);
+    delete m_updateTimer;
+
+    if (CirkuitSettings::autoRefresh()) {
+        m_updateTimer = new QTimer;
+        m_updateTimer->setSingleShot(true);
+        connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(buildPreview()));
+        connect(m_doc, SIGNAL(textChanged(KTextEditor::Document*)), m_updateTimer, SLOT(start()));
+        m_updateTimer->setInterval(CirkuitSettings::refreshInterval()*1000);
+    } else {
+        m_updateTimer = 0;
+    }
 }
 
 void MainWindow::showManual()
