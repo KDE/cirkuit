@@ -53,10 +53,14 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
         env << QString("M4PATH=%1:%2").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(m_origDir->absolutePath());
                 
         QStringList m4args;
+        if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_ps) {
+            m4args << KStandardDirs::locate("data", "cirkuit/circuit_macros/pstricks.m4");
+        } else if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_pgf) {
+            m4args << KStandardDirs::locate("data", "cirkuit/circuit_macros/pgf.m4");
+        }
         m4args << KStandardDirs::locate("data", "cirkuit/circuit_macros/libcct.m4")
-               << KStandardDirs::locate("data", "cirkuit/circuit_macros/pstricks.m4")
                << m_tempFileInfo->fileName();
-        
+
         Command* m4command = new Command("m4", "", m4args);
         m4command->setEnvironment(env);
         m4command->setWorkingDirectory(m_workingDir->absolutePath());
@@ -64,16 +68,26 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
         
         QString m4out = m4command->stdout();
         
-        QStringList picargs;
-        picargs << "-p";
+        Command* picCommand;
+        if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_ps) {
+            QStringList picargs;
+            picargs << "-p";
             
-        Command* picCommand = new Command("dpic", m4out, picargs);
+            picCommand = new Command("dpic", m4out, picargs);
+        } else if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_pgf) {
+            QStringList picargs;
+            picargs << "-g";
+            
+            picCommand = new Command("dpic", m4out, picargs);
+        } else {
+            QStringList picargs;
+            picargs << "-t";
+            
+            picCommand = new Command("pic", m4out, picargs);
+        }       
         execute(picCommand);
             
         QString picout = picCommand->stdout();
-       
-        DocumentTemplate latexTemplate(CirkuitSettings::cmtemplateurl().path());
-        QString latexDoc = latexTemplate.insert(picout);
         
         QStringList environment = QProcess::systemEnvironment();
         // the following enviroment variable is needed to find boxdims.sty in the circuit maaros distribution
@@ -82,15 +96,30 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
         
         QStringList latexArgs;
         latexArgs << QString("-jobname=%1").arg(m_tempFileInfo->baseName());
-        
-        Command* latexCmd = new Command("latex", latexDoc, latexArgs);
+       
+        QString latexDoc;        
+        Command* latexCmd;
+        if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_pgf) {
+            DocumentTemplate latexTemplate(CirkuitSettings::tikztemplateurl().path());
+            latexDoc = latexTemplate.insert(picout);
+            latexCmd = new Command("pdflatex", latexDoc, latexArgs);
+        } else {
+            DocumentTemplate latexTemplate(CirkuitSettings::cmtemplateurl().path());
+            latexDoc = latexTemplate.insert(picout);
+            latexCmd = new Command("latex", latexDoc, latexArgs);
+        }              
         latexCmd->setWorkingDirectory(m_workingDir->absolutePath());
         latexCmd->setEnvironment(environment);
         execute(latexCmd);
     
         // Now that a DVI has been generated, convert it to the
         // desired output format
-        GraphicsGenerator::convert(Dvi, out);
+        
+        if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_pgf) {        
+            GraphicsGenerator::convert(Pdf, out);
+        } else {
+            GraphicsGenerator::convert(Dvi, out);
+        }
     }
     
     return false;

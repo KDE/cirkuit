@@ -322,6 +322,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::buildPreview()
 {
+    if (m_updateTimer) {
+        m_updateTimer->stop();
+    }
     statusBar()->showMessage("Building preview...");
     m_logViewWidget->clear();
     m_logViewWidget->hide();
@@ -424,6 +427,8 @@ void MainWindow::updateConfiguration()
     } else {
         m_updateTimer = 0;
     }
+    
+    cmm->configureIntepreter();
 }
 
 void MainWindow::showManual()

@@ -201,6 +201,7 @@ bool GraphicsGenerator::execute(Command* c)
     
     if (!stderr.isEmpty()) {
         emit error(c->name(), stderr);
+        emit fail();
     }
     if (!stdout.isEmpty()) {
         emit output(c->name(), stdout);

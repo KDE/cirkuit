@@ -40,6 +40,8 @@ public:
 
     QString installedVersion() const;
     void checkOnlineVersion();
+    
+    void configureIntepreter();
 
 private slots:
     void done();
@@ -47,6 +49,7 @@ private slots:
     void readmeDone();
 
     void configureCircuitMacros();
+
     QString findVersion(const QByteArray& byteArray) const;
 
 signals:

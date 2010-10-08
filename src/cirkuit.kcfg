@@ -26,6 +26,14 @@
       <label>Height of the main window.</label>
       <default>400</default>
     </entry>
+    <entry name="PicInterpreter" type="Enum">
+        <choices>
+            <choice name="dpic_ps"/>
+            <choice name="dpic_pgf"/>
+            <choice name="gpic"/>
+        </choices>
+        <default>dpic_ps</default>
+    </entry>    
     <entry name="cmtemplateurl" type="Url">
       <label>The location of the Circuit Macros template.</label>
       <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt")</default>

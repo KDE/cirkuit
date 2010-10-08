@@ -41,6 +41,32 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Pic interpreter</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="KComboBox" name="kcfg_PicInterpreter">
+         <item>
+          <property name="text">
+           <string>dpic + PSTricks</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>dpic + TikZ</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>gpic</string>
+          </property>
+         </item>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
@@ -86,6 +112,11 @@
    <class>KUrlRequester</class>
    <extends>QFrame</extends>
    <header>kurlrequester.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KTabWidget</class>
