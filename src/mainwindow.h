@@ -62,6 +62,7 @@ private slots:
     void showPreview(const QImage& image);
     void saveFileToDisk(const QString& path);
     void openPreview();
+    void openPreviewFile();
 
     void newDocument(GraphicsDocument::DocumentType);
     void newCmDocument();

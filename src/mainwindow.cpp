@@ -310,10 +310,17 @@ void MainWindow::buildPreview()
 
 void MainWindow::openPreview()
 {
-    buildPreview();
+    connect(m_generator, SIGNAL(finished()), this, SLOT(openPreviewFile()));
     
+    buildPreview();
+}
+
+void MainWindow::openPreviewFile()
+{
     KUrl url = m_generator->builder()->filePath(GraphicsGenerator::Pdf);
     KRun::runUrl(url, "application/pdf", this);
+    
+    disconnect(m_generator, SIGNAL(finished()), this, SLOT(openPreviewFile()));
 }
 
 void MainWindow::builtNotification()
