@@ -268,6 +268,8 @@ void MainWindow::exportFile()
         statusBar()->showMessage("Exporting image...");
         m_generator->start();
         m_tempSavePath = path;
+        QFile oldFile(path);
+        oldFile.remove();
     }
 }
 
