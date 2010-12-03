@@ -27,7 +27,6 @@
 #include <KStandardDirs>
 #include <KTemporaryFile>
 #include <QDir>
-#include <QImage>
 
 #include <QDebug>
 #include "tikzbackend.h"

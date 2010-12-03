@@ -20,8 +20,8 @@
 #define GRAPHICSGENERATOR_H
 
 #include <QThread>
+#include <QImage>
 
-class QImage;
 class Command;
 class GraphicsDocument;
 
