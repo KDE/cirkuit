@@ -113,7 +113,7 @@ void CircuitMacrosManager::progress(int done, int total)
 {	
     if (100*done/total % 10 == 0) {
         qDebug() << "Progress: " << 100*done/total;
-        //progressNotify->setText(i18n("Circuit Macros download in progress... %1\% complete").arg(100*done/total));
+        //progressNotify->setText(i18n("Circuit Macros download in progress... %1\% complete", 100*done/total));
         //progressNotify->sendEvent();
     }
 }

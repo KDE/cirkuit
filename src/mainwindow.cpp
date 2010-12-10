@@ -453,7 +453,7 @@ void MainWindow::checkCircuitMacros()
 
 void MainWindow::askIfUpgrade(const QString& version)
 {
-	if (KMessageBox::questionYesNo(this, i18n("A new version of Circuit Macros (version %1) is available. Do you want to upgrade?").arg(version), i18n("Upgrade")) == KMessageBox::Yes) {
+	if (KMessageBox::questionYesNo(this, i18n("A new version of Circuit Macros (version %1) is available. Do you want to upgrade?", version), i18n("Upgrade")) == KMessageBox::Yes) {
         cmm->downloadLatest();
     }
 }
