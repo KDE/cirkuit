@@ -46,6 +46,15 @@ bool TikzGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::For
         DocumentTemplate tikzTemplate(CirkuitSettings::tikztemplateurl().path());
         QString latexDoc = tikzTemplate.insert(m_source);
         
+        if (out == Tex) {
+            QFile fileout(filePath(Tex));
+            fileout.open(QFile::WriteOnly);
+            QTextStream stream(&fileout);
+            stream << m_source;
+            fileout.close();
+            return true;
+        }
+        
         QStringList environment = QProcess::systemEnvironment();
         // the following enviroment variable is needed to find boxdims.sty in the circuit maaros distribution
         QString dirString = QString("TEXINPUTS=.:%1:").arg(m_origDir->absolutePath());
