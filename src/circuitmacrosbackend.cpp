@@ -89,6 +89,16 @@ bool CircuitMacrosGenerator::convert(GraphicsGenerator::Format in, GraphicsGener
             
         QString picout = picCommand->stdout();
         
+        // if the desired output is the TeX source, dump it 
+        if (out == Tex) {
+            QFile fileout(filePath(Tex));
+            fileout.open(QFile::WriteOnly);
+            QTextStream stream(&fileout);
+            stream << picout;
+            fileout.close();
+            return true;
+        }
+        
         QStringList environment = QProcess::systemEnvironment();
         // the following enviroment variable is needed to find boxdims.sty in the circuit maaros distribution
         QString dirString = QString("TEXINPUTS=.:%1:%2:").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(m_origDir->absolutePath());
