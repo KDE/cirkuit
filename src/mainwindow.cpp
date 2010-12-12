@@ -248,7 +248,7 @@ void MainWindow::exportFile()
     QString path;
 
     QStringList exportTypes;
-    exportTypes << "application/pdf" << "image/x-eps" << "image/png" << "image/jpeg" << "image/svg+xml";
+    exportTypes << "application/pdf" << "image/x-eps" << "image/png" << "image/jpeg" << "image/svg+xml" << "image/gif" << "text/x-tex";
 
     KFileDialog saveFileDialog(KUrl(), "", this);
     saveFileDialog.setWindowTitle(i18n("Export image - Cirkuit"));

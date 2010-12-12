@@ -154,6 +154,16 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
             args << "-jpeg" << "-r" << QString::number(CirkuitSettings::resolutionPpm()) << filePath(in) << m_tempFileInfo->baseName();
             m_commands.append(new Command("pdftoppm", "", args, this));
             return true;
+        } else if (out == Gif) {
+            bool b = true;
+            if (!convert(in,Ppm)) b = false;
+            if (!convert(Ppm,out)) b = false;
+            return b;
+        } else if (out == Ppm) {
+            QStringList args;
+            args << "-r" << QString::number(CirkuitSettings::resolutionPpm()) << filePath(in) << m_tempFileInfo->baseName();
+            m_commands.append(new Command("pdftoppm", "", args, this));
+            return true;
         } else if (out == Eps) {
             QStringList args;
             args << "-eps" << filePath(in) << filePath(out);
@@ -166,7 +176,17 @@ bool GraphicsGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator:
             return true;
         }
     }
-    
+
+    if (in == Ppm) {
+        if (out == Gif) {
+            QStringList args;
+            args << filePath(Ppm) << filePath(Gif);
+            Command *c = new Command("convert", "", args, this);
+            m_commands.append(c);
+            return true;
+        }
+    }
+
     return true;
 }
 
@@ -191,13 +211,13 @@ bool GraphicsGenerator::execute(Command* c)
         emit fail();
         success = false;
     }
-    
+
     QString stderr = c->readAllStandardError();
     QString stdout = c->readAllStandardOutput();
-    
+
     c->setStdErr(stderr);
     c->setStdOut(stdout);
-    
+
     if (!stderr.isEmpty()) {
         emit error(c->name(), stderr);
         emit fail();
@@ -252,6 +272,12 @@ QString GraphicsGenerator::extension(GraphicsGenerator::Format format)
             return ".jpg";
         case Svg:
             return ".svg";
+        case Gif:
+            return ".gif";
+        case Tex:
+            return ".tex";
+        case Ppm:
+            return ".ppm";
         case QtImage:
         case Unknown:
         default:
@@ -277,6 +303,10 @@ GraphicsGenerator::Format GraphicsGenerator::format(const QString& extension)
         return Jpeg;
     } else if (extension.contains("svg")) {
         return Svg;
+    } else if (extension.contains("gif")) {
+        return Gif;
+    } else if (extension.contains("tex")) {
+        return Tex;
     }
     
     return Unknown;
@@ -284,7 +314,7 @@ GraphicsGenerator::Format GraphicsGenerator::format(const QString& extension)
 
 QString GraphicsGenerator::filePath(GraphicsGenerator::Format format) const
 {
-    if (format == Png || format == Jpeg) {
+    if (format == Png || format == Jpeg || format == Ppm) {
         return QString("%1/%2-1%3").arg(m_workingDir->canonicalPath()).arg(m_tempFileInfo->baseName()).arg(GraphicsGenerator::extension(format));
     } else {
         return QString("%1/%2%3").arg(m_workingDir->canonicalPath()).arg(m_tempFileInfo->baseName()).arg(GraphicsGenerator::extension(format));

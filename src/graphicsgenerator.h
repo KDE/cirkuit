@@ -52,6 +52,9 @@ public:
         Png,
         Jpeg,
         Svg,
+        Ppm,
+        Gif,
+        Tex,
         Unknown
     };
     
