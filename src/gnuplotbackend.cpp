@@ -56,7 +56,7 @@ bool GnuplotGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::
         QStringList origFileNames;
         QStringList lines = m_source.split("\n");
     
-        QString gnuplotOutputFile = m_tempFileInfo->baseName() + ".lua";
+        QString gnuplotOutputFile = m_tempFileInfo->baseName() + ".tex";
         stream << "set output '" + gnuplotOutputFile + "'\n";
     
         foreach (QString line, lines) {
@@ -82,6 +82,10 @@ bool GnuplotGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::
         m_tempFile->close();
     
         execute(gnuplot);
+        
+        if (out == Tex) {
+            return true;
+        }
     
         DocumentTemplate gpTemplate(CirkuitSettings::gptemplateurl().path());
         QString latexDoc = gpTemplate.insert(gnuplotOutputFile);
