@@ -51,7 +51,10 @@ bool GnuplotGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::
         args << m_tempFileInfo->fileName();
         Command* gnuplot = new Command("gnuplot", QString(), args);
         
+        // Regexp to match filenames
         QRegExp regex1("[\'\"]([\\w\\./\\-]+)[\'\"]");
+        // Regexp to match math expressions
+        QRegExp regex2("[\'\"]\\$(.+)\\$[\'\"]");
     
         QStringList origFileNames;
         QStringList lines = m_source.split("\n");
@@ -77,6 +80,17 @@ bool GnuplotGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::
                 
                 pos += regex1.matchedLength();
             }
+
+            pos = 0;
+            while ((pos = regex2.indexIn(line,pos)) != -1) {
+                QString capture = regex2.cap(1);
+                QString escaped = QString(capture).replace("\\", "\\\\");
+
+                line = line.replace(capture, escaped);
+
+                pos += regex2.matchedLength();
+            }
+
             stream << line + "\n";
         }
         m_tempFile->close();
