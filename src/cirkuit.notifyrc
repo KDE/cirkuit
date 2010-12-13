@@ -1,18 +1,53 @@
 [Global]
 Comment=Cirkuit
+Comment[pt]=Cirkuit
+Comment[pt_BR]=Cirkuit
+Comment[sv]=Cirkuit
+Comment[uk]=Cirkuit
+Comment[x-test]=xxCirkuitxx
 
 [Event/Preview Generated]
 Name=Preview generated
+Name[pt]=Antevisão gerada
+Name[pt_BR]=Visualização gerada
+Name[sv]=Förhandsgranskning skapades
+Name[uk]=Створено зображення попереднього перегляду
+Name[x-test]=xxPreview generatedxx
 Comment=The preview has been generated
+Comment[pt]=A antevisão foi gerada
+Comment[pt_BR]=A visualização foi gerada
+Comment[sv]=Förhandsgranskningen har skapats
+Comment[uk]=Завершено створення зображення попереднього перегляду
+Comment[x-test]=xxThe preview has been generatedxx
 Action=Popup
 
 [Event/Download progress]
 Name=Download progress
+Name[pt]=Transferência em curso
+Name[pt_BR]=Andamento do download
+Name[sv]=Nerladdning pågår
+Name[uk]=Поступ звантаження
+Name[x-test]=xxDownload progressxx
 Comment=Download progress
+Comment[pt]=Transferência em curso
+Comment[pt_BR]=Andamento do download
+Comment[sv]=Nerladdning pågår
+Comment[uk]=Поступ звантаження
+Comment[x-test]=xxDownload progressxx
 Action=Popup
 
 [Event/Download finished]
 Name=Download finished
+Name[pt]=Transferência terminada
+Name[pt_BR]=Download concluído
+Name[sv]=Nerladdning klar
+Name[uk]=Звантаження завершено
+Name[x-test]=xxDownload finishedxx
 Comment=Download finished
+Comment[pt]=Transferência terminada
+Comment[pt_BR]=Download concluído
+Comment[sv]=Nerladdning klar
+Comment[uk]=Звантаження завершено
+Comment[x-test]=xxDownload finishedxx
 Action=Popup
 
