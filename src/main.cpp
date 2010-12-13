@@ -32,7 +32,7 @@ int main (int argc, char *argv[])
     KAboutData aboutData( "cirkuit", "cirkuit", ki18n("Cirkuit"), "0.3.1", ki18n("An application to generate publication-ready figures. It is a KDE frontend for Circuit Macros by J. D. Aplevich, TikZ and Gnuplot. <p>Visit the <a href=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros>Circuit Macros</a> and <a href=http://www.texample.net/tikz/>TikZ</a> websites for further information."), KAboutData::License_GPL, ki18n("(c) 2010 Matteo Agostinelli"));
     aboutData.addAuthor(ki18n("Matteo Agostinelli"), ki18n("Maintainer"), "matteo@agostinelli.me");
     aboutData.setBugAddress("matteo@agostinelli.me");
-    aboutData.setHomepage("http://projects.kde.org/projects/playground/graphics/cirkuit");
+    aboutData.setHomepage("http://projects.kde.org/cirkuit");
     KCmdLineArgs::init( argc, argv, &aboutData );
 
     KCmdLineOptions options;
