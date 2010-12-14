@@ -62,9 +62,9 @@ void CircuitMacrosManager::downloadLatest()
     file = new QFile(filename);
 
     if (!file->open(QIODevice::WriteOnly)) {
-        QMessageBox::information(0, tr("HTTP"),
-                                    tr("Unable to save the file %1: %2.")
-                                    .arg(filename).arg(file->errorString()));
+        QMessageBox::information(0, i18n("HTTP"),
+                                    i18n("Unable to save the file %1: %2.",
+                                    filename,file->errorString()));
         delete file;
         file = 0;
         return;
