@@ -27,10 +27,8 @@
 
 #include <QFile>
 #include <QUrl>
-#include <QHttp>
 #include <QDebug>
 #include <QMessageBox>
-#include <QtNetwork>
 #include <QProcess>
 #include <QBuffer>
 #include "httpdownloader.h"

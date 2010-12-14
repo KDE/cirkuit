@@ -21,7 +21,6 @@
 #include "qimagedisplay.h"
 
 #include <QPainter>
-#include <QDebug>
 
 QImageDisplay::QImageDisplay(QWidget* parent)
  : QWidget(parent)

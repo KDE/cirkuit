@@ -21,7 +21,6 @@
 #include "httpdownloader.h"
 
 #include <KProtocolManager>
-#include <QDebug>
 
 HttpDownloader::HttpDownloader(QObject *parent) : QObject(parent)
 {

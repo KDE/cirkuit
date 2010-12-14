@@ -21,9 +21,6 @@
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
-#include <KLocalizedString>
-#include <KMessageBox>
-#include <QDebug>
 
 #include "mainwindow.h"
 

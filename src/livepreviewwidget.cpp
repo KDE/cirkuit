@@ -22,11 +22,8 @@
 #include "qimagedisplay.h"
 
 #include <QImage>
-#include <KMessageBox>
-#include <QDebug>
 #include <QTimer>
 
-#include <QMoveEvent>
 
 LivePreviewWidget::LivePreviewWidget(const QString & title, QWidget * parent, Qt::WindowFlags flags)
   : QDockWidget(title, parent, flags)

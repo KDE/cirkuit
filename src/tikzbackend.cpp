@@ -20,7 +20,6 @@
 #include "command.h"
 #include "cirkuitsettings.h"
 
-#include <KStandardDirs>
 #include <QProcess>
 #include <QDir>
 #include <QFile>
