@@ -31,7 +31,7 @@ kde4_add_executable(cirkuit ${cirkuit_SRCS})
 
 target_link_libraries(cirkuit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${POPPLER_LIBRARY} ${QT_QTNETWORK_LIBRARIES})
 
-install(TARGETS cirkuit DESTINATION ${BIN_INSTALL_DIR})
+install(TARGETS cirkuit ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES cirkuitui.rc 
 DESTINATION ${DATA_INSTALL_DIR}/cirkuit)
 install(FILES cirkuit.kcfg DESTINATION ${KCFG_INSTALL_DIR})
