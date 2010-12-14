@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="Gnuplot" version="0.1" kateversion="2.1" section="Scripts" extensions="*.gp;" mimetype="text/plain">
+<language name="Gnuplot" version="0.1" kateversion="2.1" section="Scripts" extensions="*.gp;" mimetype="application/gnuplot">
 <highlighting>
-
    <list name="set_no_keywords">
        <item> noarrow </item>
        <item> noborder </item>
