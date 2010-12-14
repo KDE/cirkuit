@@ -1,5 +1,6 @@
 [Global]
 Comment=Cirkuit
+Comment[nds]=Cirkuit
 Comment[pt]=Cirkuit
 Comment[pt_BR]=Cirkuit
 Comment[sv]=Cirkuit
@@ -8,12 +9,14 @@ Comment[x-test]=xxCirkuitxx
 
 [Event/Preview Generated]
 Name=Preview generated
+Name[nds]=Vöransicht opstellt...
 Name[pt]=Antevisão gerada
 Name[pt_BR]=Visualização gerada
 Name[sv]=Förhandsgranskning skapades
 Name[uk]=Створено зображення попереднього перегляду
 Name[x-test]=xxPreview generatedxx
 Comment=The preview has been generated
+Comment[nds]=De Vöransicht wöör opstellt...
 Comment[pt]=A antevisão foi gerada
 Comment[pt_BR]=A visualização foi gerada
 Comment[sv]=Förhandsgranskningen har skapats
@@ -23,12 +26,14 @@ Action=Popup
 
 [Event/Download progress]
 Name=Download progress
+Name[nds]=Daalladen-Vörankamen
 Name[pt]=Transferência em curso
 Name[pt_BR]=Andamento do download
 Name[sv]=Nerladdning pågår
 Name[uk]=Поступ звантаження
 Name[x-test]=xxDownload progressxx
 Comment=Download progress
+Comment[nds]=Daalladen-Vörankamen
 Comment[pt]=Transferência em curso
 Comment[pt_BR]=Andamento do download
 Comment[sv]=Nerladdning pågår
@@ -38,12 +43,14 @@ Action=Popup
 
 [Event/Download finished]
 Name=Download finished
+Name[nds]=Daalladen afslaten
 Name[pt]=Transferência terminada
 Name[pt_BR]=Download concluído
 Name[sv]=Nerladdning klar
 Name[uk]=Звантаження завершено
 Name[x-test]=xxDownload finishedxx
 Comment=Download finished
+Comment[nds]=Daalladen afslaten
 Comment[pt]=Transferência terminada
 Comment[pt_BR]=Download concluído
 Comment[sv]=Nerladdning klar
