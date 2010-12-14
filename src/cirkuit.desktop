@@ -24,4 +24,4 @@ Exec=cirkuit
 Icon=cirkuit
 Terminal=false
 MimeType=application/x-cirkuit;
-Categories=Qt;KDE;Graphics;VectorGraphics;Science
+Categories=Qt;KDE;Graphics;VectorGraphics;Science;
