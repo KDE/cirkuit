@@ -1,11 +1,15 @@
 Description
 -----------
+Cirkuit is a KDE4 interface for LaTeX graphic tools (such as TikZ, Gnuplot, Circuit Macros) to produce publication-ready pictures.
 
-Cirkuit is a KDE4 GUI for the Circuit macros by Dwight Aplevich, which is a set of macros for drawing high-quality line diagrams to include in TeX, LaTeX, or similar documents. Cirkuit builds a live preview of the source code and can export the resulting images in EPS, PDF, PNG or PSTricks format.
+Cirkuit can also be used as a GUI for Circuit macros by Dwight Aplevich, which is a set of macros for drawing high-quality line diagrams to include in TeX, LaTeX, or similar documents. Cirkuit builds a live preview of the source code and can export the resulting images in various formats. Cirkuit supports also live preview of TikZ and Gnuplot sources.
+
+Source code
+-----------
+Cirkuit source code is now hosted on git.kde.org. The project homepage is http://projects.kde.org/cirkuit.
 
 Requirements
 ------------
-
 To run this application you need to have the following applications installed:
 
 * latex
@@ -17,20 +21,20 @@ To run this application you need to have the following applications installed:
 
 On Debian-based systems (e.g. Ubuntu/Kubuntu) type the following command to install the required apps:
 
-sudo apt-get install texlive-latex-base texlive-base-bin texlive-extra-utils m4 ghostscript ps2eps
-
+sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-pstricks texlive-base-bin texlive-extra-utils preview-latex-style m4 ghostscript pdf2svg
 
 To build Cirkuit you need the KDE4 and Qt4 dev packages. To install them on Debian-based systems, type
 
-sudo apt-get install kdelibs5-dev libqt4-dev
+sudo apt-get install kdelibs5-dev libqt4-dev libpoppler-qt4
 
+Packages are also available for Arch Linux (in AUR).
 
-To build the application, follow the usual KDE4/CMake procedure:
+To build the application from source, follow the usual KDE4/CMake procedure:
 
-tar xzvf cirkuit-0.1.tar.gz
-cd cirkuit-0.1
+tar xzvf cirkuit-x.y.z.tar.gz
+cd cirkuit-x.y.z
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+cmake .. -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`
 make
 sudo make install

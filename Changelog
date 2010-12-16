@@ -1,3 +1,23 @@
+- 0.3.1
+Added possiblity to export to TeX source
+Can export to GIF
+Fixed a bug that caused wrong syntax highlighting detection in Kate
+Correct escaping of mathematical expressions in Gnuplot
+Fixed a bug that prevented the user to overwrite an exported file even when the user has confirmed that he wants to overwrite it
+Fixed compilation issues
+Improved localization
+Various minor bugfixes
+
+- 0.3
+A lot of new features, pointing out just the most important ones
+Multi-thread support
+Full Gnuplot support (Lua terminal needed)
+Support for different pic interpreters
+Support for custom document templates
+Improved handling of mime types
+Improved error handling
+Added more options in the settings
+
 - 0.2.2
 Fixed failed configuration of Circuit Macros
 
