@@ -20,9 +20,9 @@ else(POPPLER_INCLUDE_DIR AND POPPLER_LIBRARY)
 
 # use pkg-config to get the directories and then use these values
 # in the FIND_PATH() and FIND_LIBRARY() calls
-INCLUDE(UsePkgConfig)
+INCLUDE(FindPkgConfig)
 
-PkgConfig(poppler-qt4 _PopplerIncDir _PopplerLinkDir _PopplerLinkFlags _PopplerCflags)
+pkg_search_module(poppler-qt4 _PopplerIncDir _PopplerLinkDir _PopplerLinkFlags _PopplerCflags)
 
 if(_PopplerLinkFlags)
 
