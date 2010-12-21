@@ -6,3 +6,4 @@ SET(CMAKE_BUILD_TYPE Release)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 
 add_subdirectory(src)
+add_subdirectory(icons)
