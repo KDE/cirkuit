@@ -37,7 +37,4 @@ DESTINATION ${DATA_INSTALL_DIR}/cirkuit)
 install(FILES cirkuit.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 
 install( FILES cirkuit.notifyrc DESTINATION ${DATA_INSTALL_DIR}/cirkuit)
-kde4_install_icons( ${ICON_INSTALL_DIR} )
-install (FILES application-x-cirkuit.svgz DESTINATION ${ICON_INSTALL_DIR}/oxygen/scalable/mimetypes)
 install (PROGRAMS cirkuit.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-
