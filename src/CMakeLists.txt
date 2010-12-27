@@ -16,7 +16,6 @@ set(cirkuit_SRCS
 	qimagedisplay.cpp
 	graphicsdocument.cpp
 	circuitmacrosmanager.cpp
-	httpdownloader.cpp
 	graphicsgenerator.cpp
 	command.cpp
 	documenttemplate.cpp

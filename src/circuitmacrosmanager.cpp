@@ -31,7 +31,8 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QBuffer>
-#include "httpdownloader.h"
+
+#include <kio/netaccess.h>
 #include <cirkuitsettings.h>
 
 CircuitMacrosManager::CircuitMacrosManager(): QObject()
@@ -59,76 +60,23 @@ bool CircuitMacrosManager::checkExistence() const
 void CircuitMacrosManager::downloadLatest()
 {
     QString filename = KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", true);
-    file = new QFile(filename);
-
-    if (!file->open(QIODevice::WriteOnly)) {
-        QMessageBox::information(0, i18n("HTTP"),
-                                    i18n("Unable to save the file %1: %2.",
-                                    filename,file->errorString()));
-        delete file;
-        file = 0;
+      
+    if( !KIO::NetAccess::download(KUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/Circuit_macros.tar.gz"), filename, 0)) {
+        kDebug() << KIO::NetAccess::lastErrorString();
         return;
     }
 
-    dnldr = new HttpDownloader;
-
-    connect(dnldr, SIGNAL(done()), this, SLOT(done()));
-    connect(dnldr, SIGNAL(progress(int,int)), this, SLOT(progress(int,int)));
-    //progressNotify->setText(i18n("Circuit Macros download in progress... please wait"));
-    //progressNotify->sendEvent();
-
-    dnldr->addDownload(QUrl(QString("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/Circuit_macros.tar.gz")), file);
-}
-
-void CircuitMacrosManager::done()
-{
-    //progressNotify->setText(i18n("Circuit Macros download finished"));
-    //progressNotify->sendEvent();
-
-    file->close();
-
-    KTar tarfile(file->fileName());
+    KTar tarfile(filename);
     tarfile.open(QIODevice::ReadOnly);
-
+    
     const KArchiveDirectory* root = tarfile.directory();
-
+    
     const KArchiveDirectory* mainDir = (KArchiveDirectory*) root->entry(root->entries().at(0));
     mainDir->copyTo(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", true), true);
 
     configureCircuitMacros();
-
-    delete file;
-    file = 0;
-
-    //progressNotify->setText(i18n("Circuit Macros download finished!"));
-    //progressNotify->sendEvent();
-
-
+    
     emit(configured());
-}
-
-void CircuitMacrosManager::progress(int done, int total)
-{	
-    if (100*done/total % 10 == 0) {
-        qDebug() << "Progress: " << 100*done/total;
-        //progressNotify->setText(i18n("Circuit Macros download in progress... %1\% complete", 100*done/total));
-        //progressNotify->sendEvent();
-    }
-}
-
-
-void CircuitMacrosManager::readmeDone()
-{
-    buffer->close();
-
-    QString onlineVersion = findVersion(barray);
-    qDebug() << "ONLINE version: " << onlineVersion;
-
-    if (onlineVersion > installedVersion()) {
-        emit newVersionAvailable(onlineVersion);
-    }
-    delete buffer;
-    buffer = 0;
 }
 
 void CircuitMacrosManager::configureCircuitMacros()
@@ -172,17 +120,26 @@ QString CircuitMacrosManager::installedVersion() const
 
 void CircuitMacrosManager::checkOnlineVersion()
 {
-    barray.clear();
-    buffer = new QBuffer(&barray);
-    buffer->open(QIODevice::WriteOnly);
+    QString filename = KStandardDirs::locateLocal("data", "cirkuit/README", true);
+      
+    if( !KIO::NetAccess::download(KUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/README"), filename, 0)) {
+        kDebug() << KIO::NetAccess::lastErrorString();
+        return;
+    }
+    
+    QString onlineVersion = findVersion(filename);
+    qDebug() << "ONLINE version: " << onlineVersion;
 
-    dnldr = new HttpDownloader;
-    connect(dnldr, SIGNAL(done()), this, SLOT(readmeDone()));
-    dnldr->addDownload(QUrl(QString("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/README")), buffer);
+    if (onlineVersion > installedVersion()) {
+        emit newVersionAvailable(onlineVersion);
+    }
 }
 
-QString CircuitMacrosManager::findVersion(const QByteArray& byteArray) const
+QString CircuitMacrosManager::findVersion(const QString& filename) const
 {
+    QFile file(filename);
+    QByteArray byteArray = file.readAll();
+    
     bool versionStringFound = false;
 
     QRegExp rx("Version (\\d\\.\\d+)");

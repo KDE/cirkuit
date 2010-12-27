@@ -22,11 +22,6 @@
 #define CIRCUITMACROSMANAGER_H
 
 #include <QObject>
-#include "httpdownloader.h"
-
-class QFile;
-class QBuffer;
-class KNotification;
 
 class CircuitMacrosManager : public QObject
 {
@@ -44,25 +39,13 @@ public:
     void configureIntepreter();
 
 private slots:
-    void done();
-    void progress(int,int);
-    void readmeDone();
-
     void configureCircuitMacros();
 
-    QString findVersion(const QByteArray& byteArray) const;
+    QString findVersion(const QString& filename) const;
 
 signals:
     void newVersionAvailable(const QString&);
     void configured();
-
-private:
-    QFile* file;
-    QBuffer* buffer;
-    QByteArray barray;
-    HttpDownloader* dnldr;
-
-    KNotification* progressNotify;
 };
 
 #endif // CIRCUITMACROSMANAGER_H
