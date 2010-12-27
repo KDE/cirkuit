@@ -27,9 +27,18 @@
 
 using namespace Cirkuit;
 
-Command::Command(const QString& name, const QString& input, const QStringList& args, QObject* parent): KProcess(parent)
+class Cirkuit::CommandPrivate {
+public:
+    QString name, input;
+    QString stderr, stdout;
+    QStringList args;
+    
+    bool checkExistenceInDir(const QString& dirname) const;
+};
+
+Command::Command(const QString& name, const QString& input, const QStringList& args, QObject* parent): KProcess(parent), d(new CommandPrivate)
 {
-    m_name = name;
+    d->name = name;
     setOutputChannelMode(SeparateChannels);
     setInput(input);
     setArgs(args);
@@ -37,27 +46,27 @@ Command::Command(const QString& name, const QString& input, const QStringList& a
 
 QStringList Command::args() const
 {
-    return m_args;
+    return d->args;
 }
 
 QString Command::input() const
 {
-    return m_input;
+    return d->input;
 }
 
 QString Command::name() const
 {
-    return m_name;
+    return d->name;
 }
 
 void Command::setArgs(const QStringList& args)
 {
-    m_args = args;
+    d->args = args;
 }
 
 void Command::setInput(const QString& input)
 {
-    m_input = input;
+    d->input = input;
 }
 
 bool Command::execute(const QString& input, const QStringList& args)
@@ -70,19 +79,22 @@ bool Command::execute(const QString& input, const QStringList& args)
         return false;
     }
     
-    setProgram(m_name, m_args);
+    setProgram(d->name, d->args);
     start();
     
     if (!waitForStarted()) {
         return false;
     }
     
-    write(m_input.toLatin1());
+    write(d->input.toLatin1());
     closeWriteChannel();
     
     if (!waitForFinished()) {
         return false;   
     }
+    
+    d->stderr = readAllStandardError();
+    d->stdout = readAllStandardOutput();
 
     return true;
 }
@@ -94,7 +106,7 @@ bool Command::checkExistence() const
     
     bool found = false;
     foreach (QString dir, pathDirs) {
-        if (checkExistenceInDir(dir)) {
+        if (d->checkExistenceInDir(dir)) {
             found = true;
         }
     }
@@ -102,29 +114,18 @@ bool Command::checkExistence() const
     return found;
 }
 
-bool Command::checkExistenceInDir(const QString& dirname) const
+bool CommandPrivate::checkExistenceInDir(const QString& dirname) const
 {
-    QFileInfo fileinfo(QDir(dirname),m_name);
+    QFileInfo fileinfo(QDir(dirname),name);
     return fileinfo.exists();
 }
 
 QString Command::stderr() const
 {
-    return m_stderr;
+    return d->stderr;
 }
 
 QString Command::stdout() const
 {
-    return m_stdout;
+    return d->stdout;
 }
-
-void Command::setStdErr(const QString& stderr)
-{
-    m_stderr = stderr;
-}
-
-void Command::setStdOut(const QString& stdout)
-{
-    m_stdout = stdout;
-}
-

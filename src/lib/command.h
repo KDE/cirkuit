@@ -24,7 +24,8 @@
 #include <KProcess>
 
 namespace Cirkuit
-{
+{    
+class CommandPrivate;
 
 class CIRKUIT_EXPORT Command : public KProcess
 {
@@ -46,16 +47,9 @@ public:
     
 public slots:
     bool execute(const QString& input = QString(), const QStringList& args = QStringList()); 
-    
-    void setStdErr(const QString&);
-    void setStdOut(const QString&);
-           
+               
 private:
-    QString m_name, m_input;
-    QString m_stderr, m_stdout;
-    QStringList m_args;
-    
-    bool checkExistenceInDir(const QString& dirname) const;
+    CommandPrivate* d;
 };
 
 }
