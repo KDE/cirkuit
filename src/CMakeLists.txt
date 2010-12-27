@@ -22,6 +22,9 @@ set(cirkuit_SRCS
 	command.cpp
 	documenttemplate.cpp
 	settingsforms.cpp
+    circuitmacrosbackend.cpp
+    tikzbackend.cpp
+    gnuplotbackend.cpp
 )
 
 kde4_add_kcfg_files(cirkuit_SRCS GENERATE_MOC cirkuitsettings.kcfgc)
