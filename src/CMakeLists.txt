@@ -21,7 +21,6 @@ set(cirkuit_SRCS
 	circuitmacrosmanager.cpp
 	httpdownloader.cpp
 	graphicsgenerator.cpp
-	command.cpp
 	documenttemplate.cpp
 	settingsforms.cpp
     circuitmacrosbackend.cpp
@@ -33,7 +32,7 @@ kde4_add_kcfg_files(cirkuit_SRCS GENERATE_MOC cirkuitsettings.kcfgc)
 kde4_add_ui_files(cirkuit_SRCS cirkuit_general_settings.ui cirkuit_backend_settings.ui)
 kde4_add_executable(cirkuit ${cirkuit_SRCS})
 
-target_link_libraries(cirkuit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${POPPLER_LIBRARY} ${QT_QTNETWORK_LIBRARIES})
+target_link_libraries(cirkuit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${POPPLER_LIBRARY} ${QT_QTNETWORK_LIBRARIES} cirkuitlibs)
 
 install(TARGETS cirkuit ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES cirkuitui.rc 

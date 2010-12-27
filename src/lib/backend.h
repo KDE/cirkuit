@@ -20,8 +20,9 @@
 #ifndef BACKEND_H
 #define BACKEND_H
 
-#include <QtCore/QObject>
 #include "cirkuit_export.h"
+
+#include <QtCore/QObject>
 
 namespace Cirkuit
 {

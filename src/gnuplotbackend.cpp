@@ -28,6 +28,8 @@
 #include <QDebug>
 #include <KTemporaryFile>
 
+using namespace Cirkuit;
+
 GnuplotGenerator::GnuplotGenerator(const QString& origDir, QObject* parent): GraphicsGenerator(origDir, parent)
 {
     createTempSource(".gp");

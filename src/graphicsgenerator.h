@@ -22,7 +22,11 @@
 #include <QThread>
 #include <QImage>
 
+namespace Cirkuit
+{
 class Command;
+}
+
 class GraphicsDocument;
 
 class KTemporaryFile;
@@ -90,7 +94,7 @@ signals:
     void previewReady(const QImage&);
     
 protected:
-    QList<Command*> m_commands;
+    QList<Cirkuit::Command*> m_commands;
     KTemporaryFile* m_tempFile;
     QFileInfo* m_tempFileInfo;
     QDir* m_workingDir;
@@ -98,7 +102,7 @@ protected:
     QString m_source;
     
     void createTempSource(const QString& extension);
-    bool execute(Command* c);
+    bool execute(Cirkuit::Command* c);
 };
 
 class GeneratorThread : public QThread

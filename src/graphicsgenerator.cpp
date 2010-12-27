@@ -32,6 +32,8 @@
 #include "tikzbackend.h"
 #include "gnuplotbackend.h"
 
+using namespace Cirkuit;
+
 GraphicsGenerator::GraphicsGenerator(const QString& origDir, QObject* parent): QObject(parent), m_source(QString())
 {    
     m_workingDir = new QDir(KStandardDirs::locateLocal("tmp", "cirkuit/build/", true));

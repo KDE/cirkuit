@@ -28,6 +28,8 @@
 #include <QTextStream>
 #include <QProcess>
 
+using namespace Cirkuit;
+
 CircuitMacrosGenerator::CircuitMacrosGenerator(const QString& origDir, QObject* parent): GraphicsGenerator(origDir, parent)
 {
     createTempSource(".m4");

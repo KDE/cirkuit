@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2009  Matteo Agostinelli <agostinelli@gmail.com>
+    Copyright (C) 2011  Matteo Agostinelli <agostinelli@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,9 +23,14 @@
 #include <QDebug>
 #include <cstdlib>
 
-Command::Command(const QString& name, const QString& input, const QStringList& args, QObject* parent): QProcess(parent)
+#include <KProcess>
+
+using namespace Cirkuit;
+
+Command::Command(const QString& name, const QString& input, const QStringList& args, QObject* parent): KProcess(parent)
 {
     m_name = name;
+    setOutputChannelMode(SeparateChannels);
     setInput(input);
     setArgs(args);
 }
@@ -65,7 +70,8 @@ bool Command::execute(const QString& input, const QStringList& args)
         return false;
     }
     
-    start(m_name, m_args);
+    setProgram(m_name, m_args);
+    start();
     
     if (!waitForStarted()) {
         return false;

@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2009  Matteo Agostinelli <agostinelli@gmail.com>
+    Copyright (C) 2011  Matteo Agostinelli <agostinelli@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,9 +19,14 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include <QProcess>
+#include "cirkuit_export.h"
 
-class Command : public QProcess
+#include <KProcess>
+
+namespace Cirkuit
+{
+
+class CIRKUIT_EXPORT Command : public KProcess
 {
     Q_OBJECT
 public:
@@ -52,5 +57,7 @@ private:
     
     bool checkExistenceInDir(const QString& dirname) const;
 };
+
+}
 
 #endif // COMMAND_H

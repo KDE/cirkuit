@@ -26,6 +26,8 @@
 #include <QFileInfo>
 #include <QDebug>
 
+using namespace Cirkuit;
+
 TikzGenerator::TikzGenerator(const QString& origDir, QObject* parent): GraphicsGenerator(origDir, parent)
 {
     createTempSource(".tex");
