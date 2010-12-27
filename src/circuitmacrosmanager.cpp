@@ -70,8 +70,6 @@ void CircuitMacrosManager::downloadLatest()
     mainDir->copyTo(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", true), true);
 
     configureCircuitMacros();
-    
-    emit(configured());
 }
 
 void CircuitMacrosManager::configureCircuitMacros()
@@ -97,6 +95,7 @@ void CircuitMacrosManager::configureCircuitMacros()
 
     QFile::remove(KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", false));
     qDebug() << "Circuit macros configured";
+    emit(configured());
 }
 
 QString CircuitMacrosManager::installedVersion() const
