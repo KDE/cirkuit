@@ -100,7 +100,7 @@ public:
     
 public slots:
     /** 
-     * Exectues the command, waits for the end of the execution and reads the standard error and output
+     * Executes the command, waits for the end of the execution and reads the standard error and output
      * @param input optional input
      * @param args optional arguments
      * @return true if the command has executed correctly, false otherwise
