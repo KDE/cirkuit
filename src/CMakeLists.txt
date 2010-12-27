@@ -7,6 +7,7 @@ include_directories(${KDE4_INCLUDES} ${POPPLER_INCLUDE_DIR} ${CMAKE_CURRENT_BINA
 add_subdirectory( mimetypes )
 add_subdirectory( syntax )
 add_subdirectory( templates )
+#add_subdirectory( lib )
 
 set(cirkuit_SRCS 
 	main.cpp
@@ -20,11 +21,9 @@ set(cirkuit_SRCS
 	graphicsgenerator.cpp
 	command.cpp
 	documenttemplate.cpp
-	circuitmacrosbackend.cpp
-	tikzbackend.cpp	
-	gnuplotbackend.cpp
 	settingsforms.cpp
 )
+
 kde4_add_kcfg_files(cirkuit_SRCS GENERATE_MOC cirkuitsettings.kcfgc)
 kde4_add_ui_files(cirkuit_SRCS cirkuit_general_settings.ui cirkuit_backend_settings.ui)
 kde4_add_executable(cirkuit ${cirkuit_SRCS})
