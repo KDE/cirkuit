@@ -17,6 +17,11 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-
 #include "backend.h"
+
+using namespace Cirkuit;
+
+Backend::Backend(QObject* parent): QObject(parent)
+{
+}
 

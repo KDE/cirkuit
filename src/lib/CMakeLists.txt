@@ -3,23 +3,22 @@ set(GENERIC_LIB_SOVERSION "1")
 
 set ( cirkuit_LIB_SRCS
     backend.cpp
-    command.cpp
 )
 
 set( cirkuit_LIB_HDRS
     cirkuit_export.h
 )
 
-kde4_add_library( libcirkuit SHARED ${cirkuit_LIB_SRCS} )
+kde4_add_library( cirkuit SHARED ${cirkuit_LIB_SRCS} )
 
-target_link_libraries( libcirkuit
+target_link_libraries( cirkuit
   ${KDE4_KDECORE_LIBS}
 )
 
-set_target_properties( libcirkuit
+set_target_properties( cirkuit
   PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION}
 )
 
-install( TARGETS libcirkuit  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS cirkuit  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES cirkuit_backend.desktop  DESTINATION ${SERVICETYPES_INSTALL_DIR})

@@ -21,12 +21,15 @@
 #define BACKEND_H
 
 #include <QtCore/QObject>
+#include "cirkuit_export.h"
 
 namespace Cirkuit
 {
     
-class Backend : public QObject
+class CIRKUIT_EXPORT Backend : public QObject
 {
+public:
+    Backend(QObject* parent = 0);
 };
 
 }
