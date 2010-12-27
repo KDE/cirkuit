@@ -1,5 +1,9 @@
+- 0.3.2
+Switch from QProcess to KProcess
+Download of remote data the KDE way with KIO
+
 - 0.3.1.1
-INtegration with bugs.kde.org
+Integration with bugs.kde.org
 
 - 0.3.1
 Added possiblity to export to TeX source
