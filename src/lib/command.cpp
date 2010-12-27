@@ -21,9 +21,9 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QDebug>
-#include <cstdlib>
 
 #include <KProcess>
+#include <KStandardDirs>
 
 using namespace Cirkuit;
 
@@ -32,8 +32,6 @@ public:
     QString name, input;
     QString stderr, stdout;
     QStringList args;
-    
-    bool checkExistenceInDir(const QString& dirname) const;
 };
 
 Command::Command(const QString& name, const QString& input, const QStringList& args, QObject* parent): KProcess(parent), d(new CommandPrivate)
@@ -42,6 +40,12 @@ Command::Command(const QString& name, const QString& input, const QStringList& a
     setOutputChannelMode(SeparateChannels);
     setInput(input);
     setArgs(args);
+}
+
+Command::~Command()
+{
+    // destroy the d-pointer
+    delete d;
 }
 
 QStringList Command::args() const
@@ -101,23 +105,9 @@ bool Command::execute(const QString& input, const QStringList& args)
 
 bool Command::checkExistence() const
 {
-    QString pathEnv = getenv("PATH");
-    QStringList pathDirs = pathEnv.split(":");
+    QString fullPath = KStandardDirs::findExe(d->name);
     
-    bool found = false;
-    foreach (QString dir, pathDirs) {
-        if (d->checkExistenceInDir(dir)) {
-            found = true;
-        }
-    }
-        
-    return found;
-}
-
-bool CommandPrivate::checkExistenceInDir(const QString& dirname) const
-{
-    QFileInfo fileinfo(QDir(dirname),name);
-    return fileinfo.exists();
+    return fullPath != QString();
 }
 
 QString Command::stderr() const
