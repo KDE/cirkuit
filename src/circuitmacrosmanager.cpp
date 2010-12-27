@@ -22,23 +22,18 @@
 
 #include <KStandardDirs>
 #include <KTar>
-#include <KNotification>
 #include <KLocale>
 
 #include <QFile>
-#include <QUrl>
-#include <QDebug>
-#include <QMessageBox>
-#include <QProcess>
-#include <QBuffer>
 
 #include <kio/netaccess.h>
+#include <KProcess>
+
 #include <cirkuitsettings.h>
 
 CircuitMacrosManager::CircuitMacrosManager(): QObject()
 {
-    //progressNotify = new KNotification("Download progress");
-    //progressNotify->setComponentData(KComponentData("cirkuit"));
+
 }
 
 bool CircuitMacrosManager::checkExistence() const
@@ -167,6 +162,9 @@ void CircuitMacrosManager::configureIntepreter()
         args << "gpicdefault";
     }
 
-    QProcess::startDetached("make", args, KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
+    KProcess configureProcess;
+    configureProcess.setProgram("make", args);
+    configureProcess.setWorkingDirectory(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
+    configureProcess.startDetached();
 }
 
