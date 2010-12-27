@@ -4,6 +4,7 @@ set(GENERIC_LIB_SOVERSION "1")
 set ( cirkuit_LIB_SRCS
     backend.cpp
     command.cpp
+    documenttemplate.cpp
 )
 
 set( cirkuit_LIB_HDRS

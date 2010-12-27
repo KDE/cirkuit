@@ -214,11 +214,8 @@ bool GraphicsGenerator::execute(Command* c)
         success = false;
     }
 
-    QString stderr = c->readAllStandardError();
-    QString stdout = c->readAllStandardOutput();
-
-    c->setStdErr(stderr);
-    c->setStdOut(stdout);
+    QString stderr = c->stderr();
+    QString stdout = c->stdout();
 
     if (!stderr.isEmpty()) {
         emit error(c->name(), stderr);

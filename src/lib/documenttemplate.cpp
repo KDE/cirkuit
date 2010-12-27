@@ -16,21 +16,23 @@
 
 */
 
-#ifndef DOCUMENTTEMPLATE_H
-#define DOCUMENTTEMPLATE_H
+#include "documenttemplate.h"
+#include <QTextStream>
+#include <QFile>
 
-#include <QObject>
+using namespace Cirkuit;
 
-class DocumentTemplate : public QObject
+DocumentTemplate::DocumentTemplate(const QString& path, QObject* parent): QObject(parent)
 {
-    Q_OBJECT
-public:
-    DocumentTemplate(const QString& path, QObject* parent = 0);
-    
-    QString insert(const QString& code);
-    
-private:
-    QString m_path;
-};
+    m_path = path;
+}
 
-#endif // DOCUMENTTEMPLATE_H
+QString DocumentTemplate::insert(const QString& code)
+{
+    QFile file(m_path);
+    file.open(QIODevice::ReadOnly);
+    QTextStream stream(&file);
+    QString output = stream.readAll().replace("<!CODE!>", code);
+    file.close();
+    return output;
+}

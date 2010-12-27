@@ -21,7 +21,6 @@ set(cirkuit_SRCS
 	circuitmacrosmanager.cpp
 	httpdownloader.cpp
 	graphicsgenerator.cpp
-	documenttemplate.cpp
 	settingsforms.cpp
     circuitmacrosbackend.cpp
     tikzbackend.cpp
