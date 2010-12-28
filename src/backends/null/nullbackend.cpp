@@ -16,6 +16,7 @@
 
     ---
     Copyright (C) 2009 Alexander Rieder <alexanderrieder@gmail.com>
+    Copyright (C) 2011 Matteo Agostinelli <agostinelli@gmail.com>
  */
 
 #include "nullbackend.h"
