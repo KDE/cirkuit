@@ -46,7 +46,8 @@
 #include <KConfigDialog>
 #include <KStatusBar>
 #include <KRun>
-#include <QProcess>
+#include <KProcess>
+#include <kmimetypetrader.h>
 
 #include <KTextEditor/Document>
 #include <KTextEditor/View>
@@ -307,7 +308,7 @@ void MainWindow::buildPreview()
     m_generator->setup(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc, m_currentFile.directory());
     m_generator->start();
     
-    qDebug() << "Preview generation in progress...";
+    kDebug() << "Preview generation in progress...";
 }
 
 void MainWindow::openPreview()
@@ -415,22 +416,20 @@ void MainWindow::updateConfiguration()
 
 void MainWindow::showManual()
 {
-    QProcess* previewProc = new QProcess;
-
     QStringList args;
     args << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/doc/CMman.pdf");
-
-    previewProc->start("okular", args);  
+    
+    KService::Ptr service = KMimeTypeTrader::self()->preferredService("application/pdf");
+    KProcess::startDetached(service->exec().split(" ").at(0), args);  
 }
 
 void MainWindow::showExamples()
 {
-    QProcess* previewProc = new QProcess;
-
     QStringList args;
     args << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/examples/examples.ps");
 
-    previewProc->start("okular", args);  
+    KService::Ptr service = KMimeTypeTrader::self()->preferredService("application/pdf");
+    KProcess::startDetached(service->exec().split(" ").at(0), args);  
 }
 
 void MainWindow::checkCircuitMacros()
@@ -475,7 +474,7 @@ void MainWindow::showPreview(const QImage& image)
 
 void MainWindow::saveFileToDisk(const QString& path)
 {
-    qDebug() << "Copying "  << path << " to " << m_tempSavePath;
+    kDebug() << "Copying "  << path << " to " << m_tempSavePath;
     QFile::copy(path, m_tempSavePath);
     statusBar()->showMessage("Export successfully completed!", 3000);
 }
