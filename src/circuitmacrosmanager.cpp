@@ -97,7 +97,7 @@ void CircuitMacrosManager::configureCircuitMacros()
     }
 
     QFile::remove(KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", false));
-    qDebug() << "Circuit macros configured";
+    kDebug() << "Circuit macros configured";
     emit(configured());
 }
 
@@ -114,7 +114,7 @@ QString CircuitMacrosManager::installedVersion() const
 void CircuitMacrosManager::checkOnlineVersion()
 {
     KUrl origin = KUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/README");
-    KUrl dest = KStandardDirs::locateLocal("data", "cirkuit/README", true);
+    KUrl dest = KStandardDirs::locateLocal("tmp", "cirkuit/README", true);
 
     KIO::Job* getJob = KIO::file_copy(origin, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
     connect( getJob, SIGNAL( result( KJob * ) ), this, SLOT( readVersion()) );
@@ -122,10 +122,12 @@ void CircuitMacrosManager::checkOnlineVersion()
 
 void CircuitMacrosManager::readVersion()
 {     
-    QString onlineVersion = findVersion(KStandardDirs::locateLocal("data", "cirkuit/README", false));
-    qDebug() << "ONLINE version: " << onlineVersion;
+    QString onlineVersion = findVersion(KStandardDirs::locateLocal("tmp", "cirkuit/README", false));
+    QString installVersion = installedVersion();
+    kDebug() << "ONLINE version: " << onlineVersion;
+    kDebug() << "INSTALLED version: " << installVersion;
 
-    if (onlineVersion > installedVersion()) {
+    if (onlineVersion > installVersion) {
         emit newVersionAvailable(onlineVersion);
     }
 }
