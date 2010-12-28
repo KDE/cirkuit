@@ -20,8 +20,7 @@
 
 #include <QFileInfo>
 #include <QDir>
-#include <QDebug>
-#include <cstdlib>
+#include <KDebug>
 
 Command::Command(const QString& name, const QString& input, const QStringList& args, QObject* parent): QProcess(parent)
 {
@@ -61,7 +60,7 @@ bool Command::execute(const QString& input, const QStringList& args)
     if (!args.isEmpty()) setArgs(args);
     
     if (!checkExistence()) {
-        qDebug() << "Program not found!!";
+        kError() << "Program not found!!";
         return false;
     }
     
