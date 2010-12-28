@@ -105,7 +105,14 @@ public slots:
      * @param args optional arguments
      * @return true if the command has executed correctly, false otherwise
      */
-    bool execute(const QString& input = QString(), const QStringList& args = QStringList()); 
+    bool execute(const QString& input = QString(), const QStringList& args = QStringList());
+    
+    /** 
+     * Checks the existence of a certain command in the system
+     * @param name the name of the command
+     * @return true if the command is found, false otherwise
+     */
+    static bool checkExistence(const QString& name);
                
 private:
     CommandPrivate* d;
