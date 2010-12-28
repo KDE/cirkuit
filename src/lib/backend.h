@@ -100,8 +100,8 @@ public:
      */
     virtual KConfigSkeleton* config() const;
     
-    Cirkuit::DocumentSettings* documentSettings() const;
-    Cirkuit::Generator* generator() const;
+    virtual Cirkuit::DocumentSettings* documentSettings() const;
+    virtual Cirkuit::Generator* generator() const;
     
     /**
      * Returns a list of the names of all the installed and enabled backends

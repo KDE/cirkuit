@@ -167,6 +167,12 @@ Cirkuit::DocumentSettings* Cirkuit::Backend::documentSettings() const
     return 0;
 }
 
+Generator* Backend::generator() const
+{
+    return 0;
+}
+
+
 Cirkuit::Backend* Cirkuit::Backend::autoChooseBackend(Document* doc)
 {
     //TODO to be implemented
