@@ -25,12 +25,15 @@
 #include <QtCore/QObject>
 #include <QVariant>
 
+
 class KUrl;
 class KConfigSkeleton;
 
 namespace Cirkuit
 {
 class BackendPrivate;
+class Document;
+class Generator;
     
 class CIRKUIT_EXPORT Backend : public QObject
 {
@@ -94,8 +97,8 @@ public:
      */
     virtual KConfigSkeleton* config() const;
     
-    virtual QString initialText() const;    
-    virtual int initialLineNumber() const;    
+    Cirkuit::Document* document() const;
+    Cirkuit::Generator* generator() const;
     
     /**
      * Returns a list of the names of all the installed and enabled backends
@@ -112,9 +115,13 @@ public:
      * Returns the backend with the given name, or null if it isn't found
      * @return the backend with the given name, or null if it isn't found
      */
-    static Backend* createBackend(const QString& name);
-    
-    static Backend* autoChooseBackend(const QString& text);
+    static Backend* getBackend(const QString& name);
+    /**
+     * Automatically choose the best backend, based on the current document
+     * @param a Cirkuit document
+     * @return the best backend for the given document
+     */
+    static Backend* autoChooseBackend(Cirkuit::Document* doc);
     
   private:
     BackendPrivate* d;

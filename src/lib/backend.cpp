@@ -18,6 +18,7 @@
 */
 
 #include "backend.h"
+#include "document.h"
 
 #include <QStringList>
 
@@ -94,16 +95,6 @@ KConfigSkeleton* Backend::config() const
     return 0;
 }
 
-int Backend::initialLineNumber() const
-{
-    return 0;
-}
-
-QString Backend::initialText() const
-{
-    return QString();
-}
-
 static QList<Backend*> backendCache;
 
 QStringList Backend::listAvailableBackends()
@@ -159,9 +150,9 @@ QList<Backend*> Backend::availableBackends()
     return backendCache;
 }
 
-Backend* Backend::createBackend(const QString& name)
+Backend* Backend::getBackend(const QString& name)
 {
-    QList<Backend*> backends=availableBackends();
+    QList<Backend*> backends = availableBackends();
     foreach(Backend* b, backends) {
         if (QString::compare(b->name(), name, Qt::CaseInsensitive) == 0 || QString::compare(b->id(), name, Qt::CaseInsensitive) == 0) {
             if (b->checkRequirements()) return b;
@@ -171,3 +162,14 @@ Backend* Backend::createBackend(const QString& name)
     return 0;
 }
 
+Cirkuit::Document* Cirkuit::Backend::document() const
+{
+    return 0;
+}
+
+Cirkuit::Backend* Cirkuit::Backend::autoChooseBackend(Document* doc)
+{
+    //TODO to be implemented
+    Q_UNUSED(doc)
+    return 0;
+}
