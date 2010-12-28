@@ -35,6 +35,7 @@ namespace KTextEditor
 namespace Cirkuit
 {
     class Document;
+    class Backend;
 }
 
 class LivePreviewWidget;
@@ -91,6 +92,7 @@ private:
 
     KTextEditor::View *m_view;
     Cirkuit::Document *m_doc;
+    Cirkuit::Backend *m_backend;
     QTimer* m_updateTimer;
     QStringList mimeTypes;
     KUrl m_currentFile;

@@ -27,6 +27,7 @@
 #include "generatorthread.h"
 
 #include "document.h"
+#include "backend.h"
 #include "format.h"
 #include "generator.h"
 
@@ -59,6 +60,12 @@
 
 MainWindow::MainWindow(QWidget *)
 {	
+    m_backend = Cirkuit::Backend::getBackend("null");
+    if (!m_backend) {
+        KMessageBox::error(this, i18n("No working backends found."));
+        kapp->exit(1);
+    }
+    
     KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
 
     if (!editor) {
@@ -69,6 +76,7 @@ MainWindow::MainWindow(QWidget *)
 
     m_doc = (Cirkuit::Document*) (editor->createDocument(0));
     m_doc->initialize();
+    m_doc->applySettings(m_backend->documentSettings()); 
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
    
     m_livePreviewWidget = new LivePreviewWidget(i18n("Live preview"), this);
@@ -110,6 +118,7 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));
     
     checkCircuitMacros();
+    newDocument();
 }
 
 void MainWindow::setupActions()
@@ -342,7 +351,6 @@ void MainWindow::newDocument()
     }
     reset();
 
-    //TODO to complete with different doc types
     m_doc->setText(m_doc->initialText());
     KTextEditor::Cursor cursor = m_view->cursorPosition();
     cursor.setLine(m_doc->initialLineNumber());
@@ -352,18 +360,35 @@ void MainWindow::newDocument()
 
 void MainWindow::newCmDocument()
 {
-    //TODO to implement
+    m_backend = Cirkuit::Backend::getBackend("circuitmacros");
+    if (!m_backend) {
+        KMessageBox::error(this, i18n("No working backends found."));
+        kapp->exit(1);
+    }
+    m_doc->applySettings(m_backend->documentSettings());
     newDocument();
 }
 
 void MainWindow::newTikzDocument()
 {
-    //TODO to implement
+    m_backend = Cirkuit::Backend::getBackend("tikz");
+    if (!m_backend) {
+        KMessageBox::error(this, i18n("No working backends found."));
+        kapp->exit(1);
+    }
+    m_doc->applySettings(m_backend->documentSettings());
+    newDocument();
 }
 
 void MainWindow::newGnuplotDocument()
 {
-    //TODO to implement
+    m_backend = Cirkuit::Backend::getBackend("gnuplot");
+    if (!m_backend) {
+        KMessageBox::error(this, i18n("No working backends found."));
+        kapp->exit(1);
+    }
+    m_doc->applySettings(m_backend->documentSettings());
+    newDocument();
 }
 
 void MainWindow::updateTitle()
