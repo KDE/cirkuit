@@ -24,8 +24,9 @@
 
 #include "cirkuit_macros.h"
 
-NullBackend::NullBackend( QObject* parent,const QList<QVariant> args ) : Cirkuit::Backend( parent )
+NullBackend::NullBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {
+    Q_UNUSED(args)
     kDebug()<<"Creating NullBackend";
 }
 
