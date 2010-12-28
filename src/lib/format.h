@@ -48,6 +48,7 @@ public:
         Unknown
     };
     
+    Format();
     Format(const Type& type);
     Format(const Format& other);
     virtual ~Format();

@@ -25,6 +25,11 @@ public:
     Format::Type type;
 };
 
+Format::Format(): d(new FormatPrivate)
+{
+
+}
+
 Format::Format(const Type& type): QObject(), d(new FormatPrivate)
 {
     d->type = type;
