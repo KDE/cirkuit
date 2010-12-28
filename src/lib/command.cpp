@@ -20,10 +20,10 @@
 
 #include <QFileInfo>
 #include <QDir>
-#include <QDebug>
 
 #include <KProcess>
 #include <KStandardDirs>
+#include <KDebug>
 
 using namespace Cirkuit;
 
@@ -79,7 +79,7 @@ bool Command::execute(const QString& input, const QStringList& args)
     if (!args.isEmpty()) setArgs(args);
     
     if (!checkExistence()) {
-        qDebug() << "Program not found!!";
+        kError() << "Program not found!!";
         return false;
     }
     

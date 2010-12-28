@@ -137,7 +137,7 @@ bool Generator::execute(Cirkuit::Command* c)
 {
     bool success = true;
     c->setWorkingDirectory(QDir(Generator::workingDir()).absolutePath());
-    qDebug() << "Executing " << c->name() << " with arguments " << c->args();
+    kDebug() << "Executing " << c->name() << " with arguments " << c->args();
     
     if (!c->execute()) {
         emit fail();
@@ -188,7 +188,7 @@ bool Cirkuit::Generator::render()
 
 bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
-    qDebug() << "Inside the converter..." << "in: " << in.type() << " out: " << out.type();
+    kDebug() << "Inside the converter..." << "in: " << in.type() << " out: " << out.type();
     
     // this class doesn't know how to convert from source
     if (in == Format::Source || out == Format::Source || out == Format::Dvi) {
