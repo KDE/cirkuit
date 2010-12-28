@@ -20,6 +20,8 @@
  */
 
 #include "nullbackend.h"
+#include "nullgenerator.h"
+#include "nulldocumentsettings.h"
 
 #include "kdebug.h"
 
@@ -45,5 +47,16 @@ QString NullBackend::id() const
 {
     return "null";
 }
+
+Cirkuit::DocumentSettings* NullBackend::documentSettings() const
+{
+    return new NullDocumentSettings();
+}
+
+Cirkuit::Generator* NullBackend::generator() const
+{
+    return new NullGenerator();
+}
+
 
 K_EXPORT_CIRKUIT_PLUGIN(nullbackend, NullBackend)

@@ -27,6 +27,12 @@
 #include <QList>
 #include <QVariant>
 
+namespace Cirkuit 
+{
+    class DocumentSettings;
+    class Generator;
+}
+
 class NullBackend : public Cirkuit::Backend
 {
   Q_OBJECT
@@ -35,6 +41,9 @@ class NullBackend : public Cirkuit::Backend
     ~NullBackend();
     
     virtual bool checkRequirements() const;
+    
+    Cirkuit::DocumentSettings* documentSettings() const;
+    Cirkuit::Generator* generator() const;
 
     QString id() const;
 };

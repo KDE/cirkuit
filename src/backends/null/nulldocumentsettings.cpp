@@ -21,8 +21,8 @@
 
 NullDocumentSettings::NullDocumentSettings(): DocumentSettings()
 {
-    initialLineNumber = 0;
-    initialText = "";
+    initialLineNumber = 1;
+    initialText = "If you see this, something is wrong (null backend active) :)";
 }
 
 
