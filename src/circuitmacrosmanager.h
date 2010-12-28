@@ -23,6 +23,8 @@
 
 #include <QObject>
 
+class KJob;
+
 class CircuitMacrosManager : public QObject
 {
     Q_OBJECT
@@ -39,7 +41,9 @@ public:
     void configureIntepreter();
 
 private slots:
+    void unpackCircuitMacros();
     void configureCircuitMacros();
+    void readVersion();
 
     QString findVersion(const QString& filename) const;
 

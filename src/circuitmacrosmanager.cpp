@@ -26,7 +26,8 @@
 
 #include <QFile>
 
-#include <kio/netaccess.h>
+#include <KIO/Job>
+#include <KIO/NetAccess>
 #include <KProcess>
 
 #include <cirkuitsettings.h>
@@ -54,14 +55,16 @@ bool CircuitMacrosManager::checkExistence() const
 
 void CircuitMacrosManager::downloadLatest()
 {
-    QString filename = KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", true);
-      
-    if( !KIO::NetAccess::download(KUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/Circuit_macros.tar.gz"), filename, 0)) {
-        kDebug() << KIO::NetAccess::lastErrorString();
-        return;
-    }
+    KUrl origin = KUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/Circuit_macros.tar.gz");
+    KUrl dest = KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", true);
 
-    KTar tarfile(filename);
+    KIO::Job* getJob = KIO::file_copy(origin, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
+    connect( getJob, SIGNAL( result( KJob * ) ), this, SLOT( unpackCircuitMacros()) );
+}
+
+void CircuitMacrosManager::unpackCircuitMacros()
+{
+    KTar tarfile(KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", true));
     tarfile.open(QIODevice::ReadOnly);
     
     const KArchiveDirectory* root = tarfile.directory();
@@ -103,25 +106,23 @@ QString CircuitMacrosManager::installedVersion() const
     if (!checkExistence()) {
         return "";
     }
+    
     QString filename = KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/README", false);
-
-    QFile file(filename);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return "";
-    }
-    return findVersion(file.readAll());
+    return findVersion(filename);
 }
 
 void CircuitMacrosManager::checkOnlineVersion()
 {
-    QString filename = KStandardDirs::locateLocal("data", "cirkuit/README", true);
-      
-    if( !KIO::NetAccess::download(KUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/README"), filename, 0)) {
-        kDebug() << KIO::NetAccess::lastErrorString();
-        return;
-    }
-    
-    QString onlineVersion = findVersion(filename);
+    KUrl origin = KUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/README");
+    KUrl dest = KStandardDirs::locateLocal("data", "cirkuit/README", true);
+
+    KIO::Job* getJob = KIO::file_copy(origin, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
+    connect( getJob, SIGNAL( result( KJob * ) ), this, SLOT( readVersion()) );
+}
+
+void CircuitMacrosManager::readVersion()
+{     
+    QString onlineVersion = findVersion(KStandardDirs::locateLocal("data", "cirkuit/README", false));
     qDebug() << "ONLINE version: " << onlineVersion;
 
     if (onlineVersion > installedVersion()) {
@@ -132,6 +133,10 @@ void CircuitMacrosManager::checkOnlineVersion()
 QString CircuitMacrosManager::findVersion(const QString& filename) const
 {
     QFile file(filename);
+    if (!file.open(QFile::ReadOnly)) {
+        return "";
+    }
+    
     QByteArray byteArray = file.readAll();
     
     bool versionStringFound = false;
@@ -167,3 +172,4 @@ void CircuitMacrosManager::configureIntepreter()
     configureProcess.startDetached();
 }
 
+#include "circuitmacrosmanager.moc"
