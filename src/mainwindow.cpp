@@ -428,7 +428,7 @@ void MainWindow::showExamples()
     QStringList args;
     args << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/examples/examples.ps");
 
-    KService::Ptr service = KMimeTypeTrader::self()->preferredService("application/pdf");
+    KService::Ptr service = KMimeTypeTrader::self()->preferredService("application/postscript");
     KProcess::startDetached(service->exec().split(" ").at(0), args);  
 }
 
