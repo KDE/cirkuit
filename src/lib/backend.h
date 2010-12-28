@@ -38,6 +38,7 @@ class BackendPrivate;
 class Document;
 class Generator;
     
+//TODO Documentation must be completed!
 class CIRKUIT_EXPORT Backend : public QObject
 {
     Q_OBJECT
