@@ -110,12 +110,12 @@ bool Command::checkExistence() const
     return fullPath != QString();
 }
 
-QString Command::stderr() const
+QString Command::stdError() const
 {
     return d->stderr;
 }
 
-QString Command::stdout() const
+QString Command::stdOutput() const
 {
     return d->stdout;
 }

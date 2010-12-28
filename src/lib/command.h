@@ -91,12 +91,12 @@ public:
      * Return the standard error. Can be called multiple times without re-reading the standard error of the command
      * @return the standard error of the last execution of the command
      */
-    QString stderr() const;
+    QString stdError() const;
     /** 
      * Return the standard output. Can be called multiple times without re-reading the standard output of the command
      * @return the standard output of the last execution of the command
      */
-    QString stdout() const;
+    QString stdOutput() const;
     
 public slots:
     /** 
