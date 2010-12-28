@@ -24,14 +24,17 @@
 #include <KParts/MainWindow>
 #include <QtGui/QKeyEvent>
 #include <KUrl>
-#include "graphicsdocument.h"
-#include "graphicsgenerator.h"
 
 class LogViewWidget;
 namespace KTextEditor
 {
     class Document;
     class View;
+}
+
+namespace Cirkuit
+{
+    class Document;
 }
 
 class LivePreviewWidget;
@@ -64,7 +67,7 @@ private slots:
     void openPreview();
     void openPreviewFile();
 
-    void newDocument(GraphicsDocument::DocumentType);
+    void newDocument();
     void newCmDocument();
     void newGnuplotDocument();
     void newTikzDocument();
@@ -87,7 +90,7 @@ private:
     void setupActions();
 
     KTextEditor::View *m_view;
-    GraphicsDocument *m_doc;
+    Cirkuit::Document *m_doc;
     QTimer* m_updateTimer;
     QStringList mimeTypes;
     KUrl m_currentFile;

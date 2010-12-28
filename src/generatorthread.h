@@ -19,107 +19,32 @@
 #ifndef GRAPHICSGENERATOR_H
 #define GRAPHICSGENERATOR_H
 
+#include "format.h"
+
 #include <QThread>
 #include <QImage>
 
 namespace Cirkuit
 {
 class Command;
+class Generator;
 }
-
-class GraphicsDocument;
-
-class KTemporaryFile;
-class QFileInfo;
-class QDir;
-
-/*!
- * The class which is responsible of generating graphics in different formats. It can generate
- * a graphic file from source code or convert between different formats
- */
-class GraphicsGenerator : public QObject
-{
-    Q_OBJECT
-public:
-    //! Constructor
-    GraphicsGenerator(const QString& origDir = "", QObject* parent = 0);
-    virtual ~GraphicsGenerator();
-    
-    //! An enum of the supported formats
-    enum Format {
-        Source,
-        Dvi,
-        Postscript,
-        Pdf,
-        Eps,
-        QtImage,
-        Png,
-        Jpeg,
-        Svg,
-        Ppm,
-        Gif,
-        Tex,
-        Unknown
-    };
-    
-    //! Check if a format is present in the working directory
-    bool formatExists(Format format) const;
-    //! Return the full path to a file which represent a format
-    QString filePath(Format format) const;
-    
-    static QString extension(Format format);
-    static Format format(const QString& extension);
-    
-public slots:
-    //! Clear the command queue
-    void clear();
-    
-    //! Convert a format into another. Note that you need to call start() to actually do something
-    virtual bool convert(Format in, Format out);
-    //! Generates a format from source
-    virtual bool generate(const QString& source, Format format = GraphicsGenerator::Pdf);
-    //! Run the command queue
-    bool start();
-    //! Set the source
-    void setSource(const QString& source);
-    
-    //! Render the image using poppler
-    bool render();
-    
-signals:
-    void success();
-    void fail();
-    void error(const QString& appname, const QString& msg);
-    void output(const QString& appname, const QString& msg);
-    void previewReady(const QImage&);
-    
-protected:
-    QList<Cirkuit::Command*> m_commands;
-    KTemporaryFile* m_tempFile;
-    QFileInfo* m_tempFileInfo;
-    QDir* m_workingDir;
-    QDir* m_origDir;
-    QString m_source;
-    
-    void createTempSource(const QString& extension);
-    bool execute(Cirkuit::Command* c);
-};
 
 class GeneratorThread : public QThread
 {
     Q_OBJECT
 public:
-    GeneratorThread(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc = 0, QObject* parent = 0);
+    GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc = 0, QObject* parent = 0);
     ~GeneratorThread();
-    
-    void run();
-    GraphicsGenerator* builder();
+        
+    Cirkuit::Generator* generator();
     
 protected:
-    GraphicsGenerator::Format m_input, m_output;
+    Cirkuit::Format m_input, m_output;
     
 public slots:
-    void setup(GraphicsGenerator::Format in, GraphicsGenerator::Format out, GraphicsDocument* doc, const QString& origDir = QString(), bool saveToFile = false);
+    void setup(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc = 0, bool saveToFile = false);
+    void run();
     
 signals:
     void previewReady(const QImage);
@@ -130,9 +55,8 @@ signals:
     void fail();
     
 private:
-    GraphicsDocument* m_doc;
-    GraphicsGenerator* m_gen;
-    QString m_origDir;
+    Cirkuit::Document* m_doc;
+    Cirkuit::Generator* m_gen;
     bool m_saveToFile;
 };
 
