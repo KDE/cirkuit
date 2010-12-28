@@ -155,7 +155,7 @@ Backend* Backend::getBackend(const QString& name)
     QList<Backend*> backends = availableBackends();
     foreach(Backend* b, backends) {
         if (QString::compare(b->name(), name, Qt::CaseInsensitive) == 0 || QString::compare(b->id(), name, Qt::CaseInsensitive) == 0) {
-            if (b->checkRequirements()) return b;
+            return b;
         }
     }
 

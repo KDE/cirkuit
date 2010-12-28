@@ -33,7 +33,7 @@ public:
     QString directory;
 };
 
-Cirkuit::Document::Document(QObject* parent): KTextEditor::Document(parent), d(new DocumentPrivate)
+Cirkuit::Document::Document(QObject* parent): KTextEditor::Document(parent)
 {
 }
 
@@ -60,5 +60,10 @@ QString Document::directory() const
 void Document::setDirectory(const QString& directory)
 {
     d->directory = directory;
+}
+
+void Document::initialize()
+{
+    d = new DocumentPrivate;
 }
 

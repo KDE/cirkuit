@@ -25,14 +25,12 @@
 
 namespace Cirkuit
 {
-class Backend;    
 class DocumentPrivate;
 
 class CIRKUIT_EXPORT Document : public KTextEditor::Document
 {
     Q_OBJECT
 public:
-    explicit Document(QObject* parent = 0);
     virtual ~Document();
     
     QString initialText() const;
@@ -42,7 +40,11 @@ public:
 public slots:
     void setDirectory(const QString& directory);
     
+    void initialize();
+    
 protected:
+    explicit Document(QObject* parent = 0);
+    
     DocumentPrivate* d;
 };
 
