@@ -36,6 +36,11 @@ NullBackend::~NullBackend()
     kDebug()<<"Destroying NullBackend";
 }
 
+bool NullBackend::checkRequirements() const
+{
+    return true;
+}
+
 QString NullBackend::id() const
 {
     return "null";

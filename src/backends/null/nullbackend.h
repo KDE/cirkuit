@@ -33,6 +33,8 @@ class NullBackend : public Cirkuit::Backend
   public:
     explicit NullBackend( QObject* parent = 0, const QList<QVariant> args = QList<QVariant>());
     ~NullBackend();
+    
+    virtual bool checkRequirements() const;
 
     QString id() const;
 };
