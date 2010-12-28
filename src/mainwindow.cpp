@@ -68,8 +68,9 @@ MainWindow::MainWindow(QWidget *)
     }
 
     m_doc = (Cirkuit::Document*) (editor->createDocument(0));
+    m_doc->initialize();
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
-
+   
     m_livePreviewWidget = new LivePreviewWidget(i18n("Live preview"), this);
     addDockWidget(Qt::TopDockWidgetArea, m_livePreviewWidget);
     
@@ -94,7 +95,6 @@ MainWindow::MainWindow(QWidget *)
     setGeometry(100,100,CirkuitSettings::width(),CirkuitSettings::height());
 
     m_generator = new GeneratorThread(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_doc);
-    newCmDocument();
     
     m_updateTimer = 0;
     updateConfiguration();
@@ -353,6 +353,7 @@ void MainWindow::newDocument()
 void MainWindow::newCmDocument()
 {
     //TODO to implement
+    newDocument();
 }
 
 void MainWindow::newTikzDocument()
