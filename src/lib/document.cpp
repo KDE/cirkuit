@@ -24,13 +24,11 @@ using namespace Cirkuit;
 class Cirkuit::DocumentPrivate {
 public:
     DocumentPrivate() {
-        initialText = QString();
         directory = QString();
-        cursorPos = 0;
+        settings = new DocumentSettings;
     }
-    QString initialText;
-    int cursorPos;
     QString directory;
+    DocumentSettings* settings;
 };
 
 Cirkuit::Document::Document(QObject* parent): KTextEditor::Document(parent)
@@ -40,16 +38,6 @@ Cirkuit::Document::Document(QObject* parent): KTextEditor::Document(parent)
 Document::~Document()
 {
     delete d;
-}
-
-int Document::initialLineNumber() const
-{
-    return d->cursorPos;
-}
-
-QString Document::initialText() const
-{
-    return d->initialText;
 }
 
 QString Document::directory() const
@@ -62,8 +50,23 @@ void Document::setDirectory(const QString& directory)
     d->directory = directory;
 }
 
+int Document::initialLineNumber() const
+{
+    return d->settings->initialLineNumber;
+}
+
+QString Document::initialText() const
+{
+    return d->settings->initialText;
+}
+
 void Document::initialize()
 {
     d = new DocumentPrivate;
+}
+
+void Document::applySettings(DocumentSettings* settings)
+{
+    d->settings = settings;
 }
 

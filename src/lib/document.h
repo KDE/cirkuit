@@ -27,6 +27,16 @@ namespace Cirkuit
 {
 class DocumentPrivate;
 
+class DocumentSettings {
+public:
+    DocumentSettings() {
+        initialText = QString();
+        initialLineNumber = 0;
+    }
+    QString initialText;
+    int initialLineNumber;
+};
+
 class CIRKUIT_EXPORT Document : public KTextEditor::Document
 {
     Q_OBJECT
@@ -39,6 +49,7 @@ public:
     
 public slots:
     void setDirectory(const QString& directory);
+    void applySettings(DocumentSettings* settings);
     
     void initialize();
     

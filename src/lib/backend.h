@@ -31,6 +31,9 @@ class KConfigSkeleton;
 
 namespace Cirkuit
 {
+
+class DocumentSettings;
+
 class BackendPrivate;
 class Document;
 class Generator;
@@ -97,7 +100,7 @@ public:
      */
     virtual KConfigSkeleton* config() const;
     
-    Cirkuit::Document* document() const;
+    Cirkuit::DocumentSettings* documentSettings() const;
     Cirkuit::Generator* generator() const;
     
     /**

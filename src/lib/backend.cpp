@@ -162,7 +162,7 @@ Backend* Backend::getBackend(const QString& name)
     return 0;
 }
 
-Cirkuit::Document* Cirkuit::Backend::document() const
+Cirkuit::DocumentSettings* Cirkuit::Backend::documentSettings() const
 {
     return 0;
 }
