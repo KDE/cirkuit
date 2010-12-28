@@ -1,6 +1,6 @@
 set( NullBackend_SRCS 
  nullbackend.cpp  
- nulldocument.cpp
+ nulldocumentsettings.cpp
  nullgenerator.cpp
 )
 

@@ -1,6 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Copyright (C) 2011 Matteo Agostinelli <agostinelli@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,10 +17,15 @@
 */
 
 
-#include "nulldocument.h"
+#ifndef NULLDOCUMENT_H
+#define NULLDOCUMENT_H
 
-NullDocument::NullDocument(QObject* parent): Document(parent)
+#include <document.h>
+
+class NullDocumentSettings : public Cirkuit::DocumentSettings
 {
+public:
+    explicit NullDocumentSettings();
+};
 
-}
-
+#endif // NULLDOCUMENT_H
