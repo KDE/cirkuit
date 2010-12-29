@@ -30,6 +30,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QBuffer>
+#include <QProcess>
 #include "httpdownloader.h"
 #include <cirkuitsettings.h>
 
