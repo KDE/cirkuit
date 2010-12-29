@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2009  Matteo Agostinelli <agostinelli@gmail.com>
+    Copyright (C) 2011  Matteo Agostinelli <agostinelli@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -13,19 +13,22 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 */
 
-#ifndef CIRCUITMACROSBACKEND_H
-#define CIRCUITMACROSBACKEND_H
+#ifndef SETTINGSWIDGET_H
+#define SETTINGSWIDGET_H
 
-#include "graphicsgenerator.h"
+#include "ui_settings.h"
 
-class CircuitMacrosGenerator : public GraphicsGenerator
+class CircuitMacrosSettingsWidget : public QWidget, public Ui::CircuitMacrosSettingsBase
 {
-public:
-    CircuitMacrosGenerator(const QString& origDir = "", QObject* parent = 0);
-    
-    virtual bool convert(Format in, Format out);
+    Q_OBJECT
+    private slots:
+        void setVisibleTemplateChooser(int index);
+        
+    public:
+    explicit CircuitMacrosSettingsWidget(QWidget* parent = 0, Qt::WindowFlags f = 0);
 };
 
-#endif // CIRCUITMACROSBACKEND_H
+#endif 

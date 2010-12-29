@@ -1,0 +1,4 @@
+File=circuitmacrosbackend.kcfg
+ClassName=CircuitMacrosSettings
+Singleton=true
+Mutators=true
