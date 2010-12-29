@@ -56,6 +56,7 @@ void GeneratorThread::run()
     connect(m_gen, SIGNAL(fail()), this, SIGNAL(fail()));
     m_gen->setDocument(m_doc);
     m_gen->convert(m_input, m_output);   
+    m_gen->setResolution(CirkuitSettings::resolutionPpm());
     kDebug() << "STARTING";
     m_gen->start();
     
