@@ -3,7 +3,7 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-  <kcfgfile />
+  <kcfgfile name="cirkuitrc"/>
   <include>kstandarddirs.h</include>  
   <group name="general">
     <entry name="RefreshInterval" type="Int">
@@ -25,22 +25,6 @@
     <entry name="Height" type="Int">
       <label>Height of the main window.</label>
       <default>400</default>
-    </entry>
-    <entry name="PicInterpreter" type="Enum">
-        <choices>
-            <choice name="dpic_ps"/>
-            <choice name="dpic_pgf"/>
-            <choice name="gpic"/>
-        </choices>
-        <default>dpic_ps</default>
-    </entry>    
-    <entry name="cmtemplateurl" type="Url">
-      <label>The location of the Circuit Macros template.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt")</default>
-    </entry>
-    <entry name="cmtikztemplateurl" type="Url">
-      <label>The location of the Circuit Macros template with TikZ backend.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_tikz.ckt")</default>
     </entry>
     <entry name="tikztemplateurl" type="Url">
       <label>The location of the TikZ template.</label>
