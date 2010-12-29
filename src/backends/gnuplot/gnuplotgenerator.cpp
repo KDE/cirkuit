@@ -1,9 +1,9 @@
 /*
-    Copyright (C) 2009  Matteo Agostinelli <agostinelli@gmail.com>
+    Copyright (C) 2011 Matteo Agostinelli <agostinelli@gmail.com>
 
-    This program is free software: you can redistribute it and/or modify
+    This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
+    the Free Software Foundation; either version 2 of the License, or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -11,45 +11,52 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "gnuplotbackend.h"
+#include "gnuplotgenerator.h"
+
+#include "document.h"
 #include "documenttemplate.h"
 #include "command.h"
-#include "cirkuitsettings.h"
+#include "settings.h"
 
-#include <QProcess>
 #include <QDir>
-#include <QFile>
-#include <QFileInfo>
-#include <QDebug>
+
+#include <KDebug>
+#include <KProcess>
 #include <KTemporaryFile>
+#include <KStandardDirs>
 
 using namespace Cirkuit;
 
-GnuplotGenerator::GnuplotGenerator(const QString& origDir, QObject* parent): GraphicsGenerator(origDir, parent)
+GnuplotGenerator::GnuplotGenerator(Backend* backend, QObject* parent): Generator(backend, parent)
 {
-    createTempSource(".gp");
+
 }
 
-bool GnuplotGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::Format out)
+GnuplotGenerator::~GnuplotGenerator()
 {
-    // Check if the conversion can be handled by the super-class
-    bool done = GraphicsGenerator::convert(in, out);
+
+}
+
+bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
+{
+     // Check if the conversion can be handled by the super-class
+    bool done = Generator::convert(in, out);
     if (done) {
         return true;
     }
     
-    qDebug() << "Inside the Gnuplot backend...";
+    kDebug() << "Inside the Gnuplot backend...";
     
-    if (in == Source) {
-        QTextStream stream(m_tempFile);
+    if (in == Format::Source) {
+        QTextStream stream(tempFile());
     
         QStringList args;
-        args << m_tempFileInfo->fileName();
+        args << tempFileInfo()->fileName();
         Command* gnuplot = new Command("gnuplot", QString(), args);
         
         // Regexp to match filenames
@@ -58,9 +65,9 @@ bool GnuplotGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::
         QRegExp regex2("[\'\"]\\$(.+)\\$[\'\"]");
     
         QStringList origFileNames;
-        QStringList lines = m_source.split("\n");
+        QStringList lines = document()->text().split("\n");
     
-        QString gnuplotOutputFile = m_tempFileInfo->baseName() + ".tex";
+        QString gnuplotOutputFile = tempFileInfo()->baseName() + ".tex";
         stream << "set output '" + gnuplotOutputFile + "'\n";
     
         foreach (QString line, lines) {
@@ -68,10 +75,10 @@ bool GnuplotGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::
             while ((pos = regex1.indexIn(line,pos)) != -1) {
                 QString capture = regex1.cap(1);
                 
-                if (QFile::exists(m_origDir->absolutePath() + "/" + capture)) {
+                if (QFile::exists(QDir(document()->directory()).absolutePath() + "/" + capture)) {
                     if (!line.startsWith("set output")) {
                         origFileNames << capture;
-                        line = line.replace(capture, QString("%1/%2").arg(m_origDir->absolutePath()).arg(capture));
+                        line = line.replace(capture, QString("%1/%2").arg(QDir(document()->directory()).absolutePath()).arg(capture));
                     }
                 }
                 
@@ -94,33 +101,32 @@ bool GnuplotGenerator::convert(GraphicsGenerator::Format in, GraphicsGenerator::
 
             stream << line + "\n";
         }
-        m_tempFile->close();
+        tempFile()->close();
     
         execute(gnuplot);
         
-        if (out == Tex) {
+        if (out == Format::Tex) {
             return true;
         }
     
-        DocumentTemplate gpTemplate(CirkuitSettings::gptemplateurl().path());
+        DocumentTemplate gpTemplate(GnuplotSettings::gptemplateurl().path());
         QString latexDoc = gpTemplate.insert(gnuplotOutputFile);
         
         QStringList environment = QProcess::systemEnvironment();
         // the following enviroment variable is needed to find boxdims.sty in the circuit maaros distribution
-        QString dirString = QString("TEXINPUTS=.:%1:").arg(m_origDir->absolutePath());
+        QString dirString = QString("TEXINPUTS=.:%1:").arg(QDir(document()->directory()).absolutePath());
         environment << dirString;
         
         QStringList latexArgs;
-        latexArgs << QString("-jobname=%1").arg(m_tempFileInfo->baseName());
+        latexArgs << QString("-jobname=%1").arg(tempFileInfo()->baseName());
         
         Command* latexCmd = new Command("pdflatex", latexDoc, latexArgs);
-        latexCmd->setWorkingDirectory(m_workingDir->absolutePath());
+        latexCmd->setWorkingDirectory(workingDir().path());
         latexCmd->setEnvironment(environment);
         execute(latexCmd);
         
-        return convert(Pdf, out);
+        return convert(Format::Pdf, out);
     }
     
-    return convert(Pdf, out);
+    return convert(Format::Pdf, out);
 }
-

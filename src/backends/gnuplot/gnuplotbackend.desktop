@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Service
+Name=gnuplotbackend
+X-KDE-ServiceTypes=Cirkuit/Backend
+X-KDE-Library=cirkuit_gnuplotbackend
+X-KDE-PluginInfo-Name=gnuplotbackend
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Website=http://www.gnuplot.org
+Comment=Backend for Gnuplot
+
