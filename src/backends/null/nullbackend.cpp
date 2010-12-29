@@ -40,7 +40,7 @@ NullBackend::~NullBackend()
 
 bool NullBackend::checkRequirements() const
 {
-    return true;
+    return false;
 }
 
 QString NullBackend::id() const
