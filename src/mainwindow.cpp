@@ -416,20 +416,12 @@ void MainWindow::updateConfiguration()
 
 void MainWindow::showManual()
 {
-    QStringList args;
-    args << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/doc/CMman.pdf");
-    
-    KService::Ptr service = KMimeTypeTrader::self()->preferredService("application/pdf");
-    KProcess::startDetached(service->exec().split(" ").at(0), args);  
+    KRun::runUrl(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/doc/CMman.pdf"), "application/pdf", this);
 }
 
 void MainWindow::showExamples()
 {
-    QStringList args;
-    args << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/examples/examples.ps");
-
-    KService::Ptr service = KMimeTypeTrader::self()->preferredService("application/postscript");
-    KProcess::startDetached(service->exec().split(" ").at(0), args);  
+    KRun::runUrl(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/examples/examples.ps"), "application/postscript", this);
 }
 
 void MainWindow::checkCircuitMacros()
