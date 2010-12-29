@@ -35,10 +35,10 @@ namespace Cirkuit
 class CircuitMacrosBackend : public Cirkuit::Backend
 {
   Q_OBJECT
-  public:
+public:
     explicit CircuitMacrosBackend( QObject* parent = 0, const QList<QVariant> args = QList<QVariant>());
     ~CircuitMacrosBackend();
-    
+
     virtual bool checkRequirements() const;
     
     Cirkuit::DocumentSettings* documentSettings() const;
