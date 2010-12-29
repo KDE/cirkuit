@@ -38,7 +38,14 @@ class BackendPrivate;
 class Document;
 class Generator;
     
-//TODO Documentation must be completed!
+/**
+ * The Backend class provides access to information about the backend.
+ * It provides access the features supported by the backend, and most 
+ * notably a factory method to create a new Generator.
+ * It needs to be subclassed by all Backends.
+ *
+ * @author Matteo Agostinelli
+ */
 class CIRKUIT_EXPORT Backend : public QObject
 {
     Q_OBJECT
@@ -101,13 +108,21 @@ public:
      */
     virtual KConfigSkeleton* config() const;
     
+    /**
+     * Returns the Document Settings for the backend
+     * @return the Document Settings
+     */
     virtual Cirkuit::DocumentSettings* documentSettings() const;
+    
+   /**
+     * Access the generator class which is responsible for the actual generation of the graphics
+     * @return the generator
+     */
     virtual Cirkuit::Generator* generator() const;
     
     /**
      * Returns a list of the names of all the installed and enabled backends
      * @return a list of the names of all the installed and enabled backends
-     * @see isEnabled()
      */
     static QStringList listAvailableBackends();
     /**
@@ -122,7 +137,7 @@ public:
     static Backend* getBackend(const QString& name);
     /**
      * Automatically choose the best backend, based on the current document
-     * @param a Cirkuit document
+     * @param doc a Cirkuit document
      * @return the best backend for the given document
      */
     static Backend* autoChooseBackend(Cirkuit::Document* doc);
