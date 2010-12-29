@@ -23,8 +23,9 @@
 #include "logviewwidget.h"
 #include "cirkuitsettings.h"
 #include "circuitmacrosmanager.h"
-#include "settingsforms.h"
 #include "generatorthread.h"
+
+#include "ui_cirkuit_general_settings.h"
 
 #include "document.h"
 #include "backend.h"
@@ -61,11 +62,6 @@
 MainWindow::MainWindow(QWidget *)
 {	
     m_backend = Cirkuit::Backend::getBackend("null");
-    if (!m_backend) {
-        KMessageBox::error(this, i18n("No working backends found."));
-        kapp->exit(1);
-    }
-    
     KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
 
     if (!editor) {
@@ -76,7 +72,6 @@ MainWindow::MainWindow(QWidget *)
 
     m_doc = (Cirkuit::Document*) (editor->createDocument(0));
     m_doc->initialize();
-    m_doc->applySettings(m_backend->documentSettings()); 
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
    
     m_livePreviewWidget = new LivePreviewWidget(i18n("Live preview"), this);
@@ -118,7 +113,7 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));
     
     checkCircuitMacros();
-    newDocument();
+    newDocument("circuitmacros");
 }
 
 void MainWindow::setupActions()
@@ -346,10 +341,12 @@ void MainWindow::builtNotification()
 
 void MainWindow::newDocument(const QString& backendName)
 {
-    m_backend = Cirkuit::Backend::getBackend(backendName);
-    if (!m_backend) {
+    Cirkuit::Backend* newBackend = Cirkuit::Backend::getBackend(backendName);
+    if (!newBackend) {
         KMessageBox::error(this, i18n("Backend %1 not found").arg(backendName));
         return;
+    } else {
+        m_backend = newBackend;
     }
     
     m_doc->applySettings(m_backend->documentSettings());
@@ -405,12 +402,13 @@ void MainWindow::configure()
         return; 
     }
     KConfigDialog* dialog = new KConfigDialog(this, "settings", CirkuitSettings::self() );
-
-    CirkuitGeneralForm* confWdg = new CirkuitGeneralForm();
-    dialog->addPage( confWdg, i18n("General"), "configure" );
     
-    CirkuitBackendForm* backendWdg = new CirkuitBackendForm();
-    dialog->addPage( backendWdg, i18n("Backends"), "configure" ); 
+    QWidget* confWdg = new QWidget(dialog);
+    Ui::CirkuitGeneralForm s;
+    s.setupUi(confWdg);
+    dialog->addPage( confWdg, i18n("General"), "configure" );
+    Cirkuit::Backend* b =  Cirkuit::Backend::getBackend("circuitmacros");
+    dialog->addPage(b->settingsWidget(dialog), b->config(), i18n("Circuit Macros"), "configure" ); 
 
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(updateConfiguration()));
     dialog->show();
@@ -429,8 +427,6 @@ void MainWindow::updateConfiguration()
     } else {
         m_updateTimer = 0;
     }
-    
-    cmm->configureIntepreter();
 }
 
 void MainWindow::showManual()
