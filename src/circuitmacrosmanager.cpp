@@ -91,10 +91,10 @@ void CircuitMacrosManager::configureCircuitMacros()
 
     QStringList args;
     args << "homelib";
-
-    foreach (QString arg, args) {
-        QProcess::startDetached("make", QStringList(arg), KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
-    }
+    KProcess configProcess;
+    configProcess.setProgram("make", args);
+    configProcess.setWorkingDirectory(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/"));
+    configProcess.startDetached();
 
     QFile::remove(KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", false));
     kDebug() << "Circuit macros configured";
