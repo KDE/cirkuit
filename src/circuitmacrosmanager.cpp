@@ -29,7 +29,6 @@
 #include <QUrl>
 #include <QDebug>
 #include <QMessageBox>
-#include <QProcess>
 #include <QBuffer>
 #include "httpdownloader.h"
 #include <cirkuitsettings.h>
@@ -196,20 +195,5 @@ QString CircuitMacrosManager::findVersion(const QByteArray& byteArray) const
     }
 
     return version;
-}
-
-void CircuitMacrosManager::configureIntepreter()
-{
-    QStringList args;
-    
-    if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_ps) {
-        args << "psdefault";
-    } else if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_pgf) {
-        args << "pgfdefault";
-    } else if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::gpic) {
-        args << "gpicdefault";
-    }
-
-    QProcess::startDetached("make", args, KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
 }
 
