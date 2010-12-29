@@ -344,13 +344,20 @@ void MainWindow::builtNotification()
     statusBar()->showMessage("Preview built", 3000);
 }
 
-void MainWindow::newDocument()
+void MainWindow::newDocument(const QString& backendName)
 {
+    m_backend = Cirkuit::Backend::getBackend(backendName);
+    if (!m_backend) {
+        KMessageBox::error(this, i18n("Backend %1 not found").arg(backendName));
+        return;
+    }
+    
+    m_doc->applySettings(m_backend->documentSettings());
     if (!m_doc->closeUrl()) {
         return;
     }
     reset();
-
+    
     m_doc->setText(m_doc->initialText());
     KTextEditor::Cursor cursor = m_view->cursorPosition();
     cursor.setLine(m_doc->initialLineNumber());
@@ -360,35 +367,17 @@ void MainWindow::newDocument()
 
 void MainWindow::newCmDocument()
 {
-    m_backend = Cirkuit::Backend::getBackend("circuitmacros");
-    if (!m_backend) {
-        KMessageBox::error(this, i18n("No working backends found."));
-        kapp->exit(1);
-    }
-    m_doc->applySettings(m_backend->documentSettings());
-    newDocument();
+    newDocument("circuitmacros");
 }
 
 void MainWindow::newTikzDocument()
 {
-    m_backend = Cirkuit::Backend::getBackend("tikz");
-    if (!m_backend) {
-        KMessageBox::error(this, i18n("No working backends found."));
-        kapp->exit(1);
-    }
-    m_doc->applySettings(m_backend->documentSettings());
-    newDocument();
+    newDocument("tikz");
 }
 
 void MainWindow::newGnuplotDocument()
 {
-    m_backend = Cirkuit::Backend::getBackend("gnuplot");
-    if (!m_backend) {
-        KMessageBox::error(this, i18n("No working backends found."));
-        kapp->exit(1);
-    }
-    m_doc->applySettings(m_backend->documentSettings());
-    newDocument();
+    newDocument("gnuplot");
 }
 
 void MainWindow::updateTitle()

@@ -68,7 +68,7 @@ private slots:
     void openPreview();
     void openPreviewFile();
 
-    void newDocument();
+    void newDocument(const QString& backendName = "null");
     void newCmDocument();
     void newGnuplotDocument();
     void newTikzDocument();
