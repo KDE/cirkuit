@@ -28,6 +28,7 @@
 
 #include <KStandardDirs>
 #include <KTemporaryFile>
+#include <KIO/NetAccess>
 
 using namespace Cirkuit;
 
@@ -58,9 +59,9 @@ Cirkuit::Generator::~Generator()
     delete d;
 }
 
-QString Cirkuit::Generator::workingDir()
+KUrl Cirkuit::Generator::workingDir()
 {
-    return KStandardDirs::locateLocal("tmp", "cirkuit/build/", true);
+    return KUrl::fromPath(KStandardDirs::locateLocal("tmp", "cirkuit/build/", true));
 }
 
 void Cirkuit::Generator::createTempFiles(const QString& suffix)
@@ -69,8 +70,9 @@ void Cirkuit::Generator::createTempFiles(const QString& suffix)
     delete d->tempFileInfo;
     
     d->tempFile = new KTemporaryFile;
-    d->tempFile->setPrefix(QDir(Generator::workingDir()).absolutePath() + "/");
+    d->tempFile->setPrefix(workingDir().path(KUrl::AddTrailingSlash));
     d->tempFile->setSuffix(suffix);
+    d->tempFile->open();
     
     d->tempFileInfo = new QFileInfo(d->tempFile->fileName());
 }
@@ -81,16 +83,22 @@ bool Cirkuit::Generator::formatExists(const Cirkuit::Format& format) const
         return false;
     }
     
-    return QDir(Generator::workingDir()).exists(d->tempFileInfo->baseName() + format.extension());
+    KUrl formatUrl = workingDir();
+    formatUrl.addPath(d->tempFileInfo->baseName() + format.extension());
+    return KIO::NetAccess::exists(formatUrl, true, 0);
 }
 
 QString Cirkuit::Generator::formatPath(const Cirkuit::Format& format) const
 {
+    KUrl url = workingDir();
+    QString filename;
     if (format.type() == Format::Png || format.type() == Format::Jpeg || format.type() == Format::Ppm) {
-        return QString("%1/%2-1%3").arg(Generator::workingDir()).arg(d->tempFileInfo->baseName()).arg(format.extension());
+        filename = QString("%1-1%2").arg(d->tempFileInfo->baseName()).arg(format.extension());
     } else {
-        return QString("%1/%2%3").arg(Generator::workingDir()).arg(d->tempFileInfo->baseName()).arg(format.extension());
+        filename = QString("%1%2").arg(d->tempFileInfo->baseName()).arg(format.extension());
     }
+    url.addPath(filename);
+    return url.path();
 }
 
 void Generator::setDocument(Document* doc)
@@ -135,27 +143,18 @@ bool Cirkuit::Generator::start()
 
 bool Generator::execute(Cirkuit::Command* c)
 {
-    bool success = true;
-    c->setWorkingDirectory(QDir(Generator::workingDir()).absolutePath());
+    c->setWorkingDirectory(workingDir().path());
+    connect(c, SIGNAL(newStandardError(QString,QString)), this, SIGNAL(error(QString,QString)));
+    connect(c, SIGNAL(newStandardError(QString,QString)), this, SIGNAL(fail()));
+    connect(c, SIGNAL(newStandardOutput(QString,QString)), this, SIGNAL(output(QString,QString)));
     kDebug() << "Executing " << c->name() << " with arguments " << c->args();
     
     if (!c->execute()) {
         emit fail();
-        success = false;
-    }
-
-    QString stderr = c->stdError();
-    QString stdout = c->stdOutput();
-
-    if (!stderr.isEmpty()) {
-        emit error(c->name(), stderr);
-        emit fail();
-    }
-    if (!stdout.isEmpty()) {
-        emit output(c->name(), stdout);
+        return false;
     }
     
-    return success;
+    return true;
 }
 
 bool Cirkuit::Generator::render()
@@ -319,4 +318,19 @@ bool Cirkuit::Generator::generate(Document* doc, const Cirkuit::Format& format)
 {
     setDocument(doc);
     return convert(Format::Source, format);
+}
+
+Cirkuit::Backend* Cirkuit::Generator::backend() const
+{
+    return d->backend;
+}
+
+KTemporaryFile* Cirkuit::Generator::tempFile() const
+{
+    return d->tempFile;
+}
+
+QFileInfo* Cirkuit::Generator::tempFileInfo() const
+{
+    return d->tempFileInfo;
 }

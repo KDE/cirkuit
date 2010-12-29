@@ -24,6 +24,9 @@
 
 #include <QImage>
 
+class QFileInfo;
+class KTemporaryFile;
+
 namespace Cirkuit
 {
 class Document;
@@ -38,7 +41,7 @@ public:
     explicit Generator(Cirkuit::Backend* backend = 0, QObject* parent = 0);
     virtual ~Generator();
     
-    static QString workingDir();
+    static KUrl workingDir();
     
     //! Check if a format is present in the working directory
     bool formatExists(const Format& format) const;
@@ -77,6 +80,11 @@ signals:
     void error(const QString& appname, const QString& msg);
     void output(const QString& appname, const QString& msg);
     void previewReady(const QImage&);
+    
+protected:
+    KTemporaryFile* tempFile() const;
+    QFileInfo* tempFileInfo() const;
+    Cirkuit::Backend* backend() const;
     
 protected:
     GeneratorPrivate* d;

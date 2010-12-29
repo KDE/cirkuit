@@ -113,6 +113,10 @@ public slots:
      * @return true if the command is found, false otherwise
      */
     static bool checkExistence(const QString& name);
+    
+signals:
+    void newStandardError(const QString& name, const QString& msg);
+    void newStandardOutput(const QString& name, const QString& msg);
                
 private:
     CommandPrivate* d;
