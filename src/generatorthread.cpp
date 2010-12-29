@@ -16,17 +16,15 @@
 
 */
 
+#include "backend.h"
 #include "generator.h"
 #include "document.h"
 #include "command.h"
 
-#include "circuitmacrosbackend.h"
 #include "cirkuitsettings.h"
 #include "generatorthread.h"
 
-#include <QDebug>
-#include "tikzbackend.h"
-#include "gnuplotbackend.h"
+#include <KDebug>
 
 using namespace Cirkuit;
 
@@ -37,11 +35,20 @@ GeneratorThread::GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Forma
 }
 
 void GeneratorThread::run()
-{
-    delete m_gen;
+{ 
     ///TODO identification!
+    kDebug() << "Detecting backends: ";
+    kDebug() << Backend::listAvailableBackends();
     
-    m_gen = new CircuitMacrosGenerator(m_doc->directory());
+    Backend* b = Backend::getBackend("circuitmacros");
+    if (b) {
+        kDebug() << b->id();
+        kDebug() << b->name();
+        kDebug() << b->description();
+    }
+    
+    m_gen = b->generator();
+    kDebug() << "Generator OK";
     
     connect(m_gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
     connect(m_gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));
@@ -49,6 +56,7 @@ void GeneratorThread::run()
     connect(m_gen, SIGNAL(fail()), this, SIGNAL(fail()));
     m_gen->setDocument(m_doc);
     m_gen->convert(m_input, m_output);   
+    kDebug() << "STARTING";
     m_gen->start();
     
     if (m_output == Format::QtImage) {
