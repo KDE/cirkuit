@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
-Name=gnuplotbackend
+Icon=gnuplotbackend
+Name=Gnuplot
 X-KDE-ServiceTypes=Cirkuit/Backend
 X-KDE-Library=cirkuit_gnuplotbackend
 X-KDE-PluginInfo-Name=gnuplotbackend

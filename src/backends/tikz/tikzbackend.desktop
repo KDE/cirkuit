@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
-Name=tikzbackend
+Icon=tikzbackend
+Name=TikZ
 X-KDE-ServiceTypes=Cirkuit/Backend
 X-KDE-Library=cirkuit_tikzbackend
 X-KDE-PluginInfo-Name=tikzbackend

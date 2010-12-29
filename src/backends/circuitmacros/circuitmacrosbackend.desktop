@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
-Name=circuitmacrosbackend
+Icon=circuitmacrosbackend
+Name=Circuit Macros
 X-KDE-ServiceTypes=Cirkuit/Backend
 X-KDE-Library=cirkuit_circuitmacrosbackend
 X-KDE-PluginInfo-Name=circuitmacrosbackend

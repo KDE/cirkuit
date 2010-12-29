@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
-Name=nullbackend
+Icon=nullbackend
+Name=Nullbackend
 Name[ca]=DorsalNul
 Name[ca@valencia]=DorsalNul
 Name[cs]=žádná podpůrná vrstva
