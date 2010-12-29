@@ -60,8 +60,7 @@
 
 
 MainWindow::MainWindow(QWidget *)
-{	
-    m_backend = Cirkuit::Backend::getBackend("null");
+{
     KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
 
     if (!editor) {
@@ -113,7 +112,8 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));
     
     checkCircuitMacros();
-    newDocument("circuitmacros");
+    initializeBackend();
+    newDocument();
 }
 
 void MainWindow::setupActions()
@@ -341,12 +341,19 @@ void MainWindow::builtNotification()
 
 void MainWindow::newDocument(const QString& backendName)
 {
-    Cirkuit::Backend* newBackend = Cirkuit::Backend::getBackend(backendName);
-    if (!newBackend) {
-        KMessageBox::error(this, i18n("Backend %1 not found").arg(backendName));
+    if (!backendName.isEmpty()) {
+        Cirkuit::Backend* newBackend = Cirkuit::Backend::getBackend(backendName);
+        if (!newBackend) {
+            KMessageBox::error(this, i18n("Backend %1 not found").arg(backendName));
+            return;
+        } else {
+            m_backend = newBackend;
+        }
+    }
+    
+    if (!m_backend) {
+        KMessageBox::error(this, i18n("No valid backend selected!").arg(backendName));
         return;
-    } else {
-        m_backend = newBackend;
     }
     
     m_doc->applySettings(m_backend->documentSettings());
@@ -406,6 +413,7 @@ void MainWindow::configure()
     QWidget* confWdg = new QWidget(dialog);
     Ui::CirkuitGeneralForm s;
     s.setupUi(confWdg);
+    s.kcfg_DefaultBackend->addItems(Cirkuit::Backend::listAvailableBackends());
     dialog->addPage( confWdg, i18n("General"), "configure" );
     Cirkuit::Backend* b =  Cirkuit::Backend::getBackend("circuitmacros");
     dialog->addPage(b->settingsWidget(dialog), b->config(), i18n("Circuit Macros"), "configure" ); 
@@ -495,3 +503,10 @@ void MainWindow::saveFileToDisk(const QString& path)
     QFile::copy(path, m_tempSavePath);
     statusBar()->showMessage("Export successfully completed!", 3000);
 }
+
+void MainWindow::initializeBackend()
+{
+    kDebug() << Cirkuit::Backend::listAvailableBackends();
+    m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
+}
+

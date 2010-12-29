@@ -68,7 +68,7 @@ private slots:
     void openPreview();
     void openPreviewFile();
 
-    void newDocument(const QString& backendName = "null");
+    void newDocument(const QString& backendName = QString());
     void newCmDocument();
     void newGnuplotDocument();
     void newTikzDocument();
@@ -86,6 +86,8 @@ private slots:
     void circuitMacrosConfigured();
     void askIfUpgrade(const QString&);
     void reset();
+    
+    void initializeBackend();
 
 private:
     void setupActions();
