@@ -1,0 +1,4 @@
+File=tikzbackend.kcfg
+ClassName=TikzSettings
+Singleton=true
+Mutators=true
