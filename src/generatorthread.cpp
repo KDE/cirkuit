@@ -25,6 +25,7 @@
 #include "generatorthread.h"
 
 #include <KDebug>
+#include <KLocalizedString>
 
 using namespace Cirkuit;
 
@@ -36,19 +37,17 @@ GeneratorThread::GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Forma
 
 void GeneratorThread::run()
 { 
-    ///TODO identification!
-    kDebug() << "Detecting backends: ";
-    kDebug() << Backend::listAvailableBackends();
-    
     Backend* b = Backend::autoChooseBackend(m_doc);
-    if (b) {
+    if (!b) {
+        kError() << i18n("No backend could be selected!");
+        return;
+    } else {
         kDebug() << b->id();
         kDebug() << b->name();
         kDebug() << b->description();
     }
     
     m_gen = b->generator();
-    kDebug() << "Generator OK";
     
     connect(m_gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
     connect(m_gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));
@@ -57,8 +56,10 @@ void GeneratorThread::run()
     m_gen->setDocument(m_doc);
     m_gen->convert(m_input, m_output);   
     m_gen->setResolution(CirkuitSettings::resolutionPpm());
-    kDebug() << "STARTING";
-    m_gen->start();
+    
+    if (!m_gen->start()) {
+        return;
+    }
     
     if (m_output == Format::QtImage) {
         m_gen->render();

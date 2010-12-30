@@ -493,6 +493,7 @@ void MainWindow::circuitMacrosConfigured()
 
 void MainWindow::failedNotification()
 {
+    m_livePreviewWidget->setImage(QImage());
     KMessageBox::error(this, i18n("Unable to generate a preview for the current input"), i18n("Error"));
 }
 

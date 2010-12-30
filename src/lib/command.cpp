@@ -97,11 +97,14 @@ bool Command::execute(const QString& input, const QStringList& args)
         return false;   
     }
     
-    d->stderr = readAllStandardError();
     d->stdout = readAllStandardOutput();
+    d->stderr = readAllStandardError();    
     
-    if (!d->stderr.isEmpty()) emit newStandardError(d->name, d->stderr);
     if (!d->stdout.isEmpty()) emit newStandardOutput(d->name, d->stderr);
+    if (!d->stderr.isEmpty()) {
+        emit newStandardError(d->name, d->stderr);
+        return false;
+    }    
 
     return true;
 }

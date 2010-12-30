@@ -139,7 +139,10 @@ bool Cirkuit::Generator::start()
 {
     bool success = true;
     for (int i = 0; i < d->commands.count(); i++) {
-        if (!execute(d->commands[i])) success = false;
+        if (!execute(d->commands[i])) {
+            success = false;
+            break;
+        }
     }
     
     clear();
@@ -150,7 +153,6 @@ bool Generator::execute(Cirkuit::Command* c)
 {
     c->setWorkingDirectory(workingDir().path());
     connect(c, SIGNAL(newStandardError(QString,QString)), this, SIGNAL(error(QString,QString)));
-    connect(c, SIGNAL(newStandardError(QString,QString)), this, SIGNAL(fail()));
     connect(c, SIGNAL(newStandardOutput(QString,QString)), this, SIGNAL(output(QString,QString)));
     kDebug() << "Executing " << c->name() << " with arguments " << c->args();
     
@@ -316,7 +318,7 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
         }
     }
 
-    return true;
+    return false;
 }
 
 bool Cirkuit::Generator::generate(Document* doc, const Cirkuit::Format& format)
