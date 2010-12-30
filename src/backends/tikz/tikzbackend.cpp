@@ -74,4 +74,12 @@ QWidget* TikzBackend::settingsWidget(QWidget* parent) const
     return widget;
 }
 
+QStringList TikzBackend::identifyingWords() const
+{
+    QStringList words;
+    words << "\\begin" << "tikzpicture" << "\\end";
+    return words;
+}
+
+
 K_EXPORT_CIRKUIT_PLUGIN(tikzbackend, TikzBackend)

@@ -24,4 +24,3 @@ NullDocumentSettings::NullDocumentSettings(): DocumentSettings()
     initialText = "If you see this, something is wrong (null backend active) :)";
 }
 
-

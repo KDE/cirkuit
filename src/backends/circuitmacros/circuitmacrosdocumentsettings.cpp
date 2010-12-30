@@ -23,5 +23,3 @@ CircuitMacrosDocumentSettings::CircuitMacrosDocumentSettings()
     initialLineNumber = 3;
     initialText = ".PS\ncct_init\n\n\n.PE";
 }
-
-

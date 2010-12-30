@@ -71,4 +71,11 @@ QWidget* CircuitMacrosBackend::settingsWidget(QWidget* parent) const
     return new CircuitMacrosSettingsWidget(parent);
 }
 
+QStringList CircuitMacrosBackend::identifyingWords() const
+{
+    QStringList words;
+    words << ".PS" << ".PE" << "cct_init" << "resistor";
+    return words;
+}
+
 K_EXPORT_CIRKUIT_PLUGIN(circuitmacrosbackend, CircuitMacrosBackend)

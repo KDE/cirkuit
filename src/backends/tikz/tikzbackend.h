@@ -47,6 +47,9 @@ public:
     virtual QWidget* settingsWidget(QWidget* parent) const;
     
     QString id() const;
+    
+protected:
+    virtual QStringList identifyingWords() const;
 };
 
 

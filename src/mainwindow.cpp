@@ -367,6 +367,8 @@ void MainWindow::newDocument(const QString& backendName)
     cursor.setLine(m_doc->initialLineNumber());
     m_view->setCursorPosition(cursor);
     m_doc->setModified(false);
+    
+    m_backend = Cirkuit::Backend::autoChooseBackend(m_doc);
 }
 
 void MainWindow::newCmDocument()
@@ -415,8 +417,10 @@ void MainWindow::configure()
     s.setupUi(confWdg);
     s.kcfg_DefaultBackend->addItems(Cirkuit::Backend::listAvailableBackends());
     dialog->addPage( confWdg, i18n("General"), "configure" );
-    Cirkuit::Backend* b =  Cirkuit::Backend::getBackend("circuitmacros");
-    dialog->addPage(b->settingsWidget(dialog), b->config(), i18n("Circuit Macros"), "configure" ); 
+    
+    foreach (Cirkuit::Backend* b, Cirkuit::Backend::availableBackends()) {
+        dialog->addPage(b->settingsWidget(dialog), b->config(), b->name(), b->icon() ); 
+    }
 
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(updateConfiguration()));
     dialog->show();

@@ -172,10 +172,43 @@ Generator* Backend::generator() const
     return 0;
 }
 
+QStringList Backend::identifyingWords() const
+{
+    QStringList words;
+    return words;
+}
+
+
+float Backend::identifyIndex(Cirkuit::Document* doc) const
+{
+    if (identifyingWords().count() < 1) {
+        return 0.0;
+    }
+    
+    int total = 0;
+    int hits = 0;
+    
+    foreach (QString word, identifyingWords()) {
+        if (doc->text().contains(word)) ++hits;
+        ++total;
+    }
+    
+    return (1.00*hits)/total;
+}
 
 Cirkuit::Backend* Cirkuit::Backend::autoChooseBackend(Document* doc)
 {
-    //TODO to be implemented
-    Q_UNUSED(doc)
-    return 0;
+    Backend* bb = getBackend("null");
+    float best = 0.0;
+    foreach (Backend* b, availableBackends()) {
+        float index = b->identifyIndex(doc);
+        kDebug() << "Identify index for backend " << b->name() << " = " << index;
+        if (index > best) {
+            bb = b;
+            best = index;
+        }
+    }
+    
+    kDebug() << "And the winner is ... " << bb->name();
+    return bb;
 }

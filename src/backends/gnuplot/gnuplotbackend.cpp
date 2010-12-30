@@ -74,4 +74,12 @@ QWidget* GnuplotBackend::settingsWidget(QWidget* parent) const
     return widget;
 }
 
+QStringList GnuplotBackend::identifyingWords() const
+{
+    QStringList words;
+    words << "set terminal" << "plot" << "using";
+    return words;
+}
+
+
 K_EXPORT_CIRKUIT_PLUGIN(gnuplotbackend, GnuplotBackend)

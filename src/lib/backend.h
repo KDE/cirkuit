@@ -53,6 +53,9 @@ protected:
     explicit Backend(QObject* parent = 0, const QList<QVariant>& args = QList<QVariant>());
     virtual ~Backend();
     
+    virtual float identifyIndex(Cirkuit::Document* doc) const;
+    virtual QStringList identifyingWords() const;
+    
 public:
     virtual bool checkRequirements() const;
     

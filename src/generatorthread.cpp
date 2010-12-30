@@ -40,7 +40,7 @@ void GeneratorThread::run()
     kDebug() << "Detecting backends: ";
     kDebug() << Backend::listAvailableBackends();
     
-    Backend* b = Backend::getBackend("circuitmacros");
+    Backend* b = Backend::autoChooseBackend(m_doc);
     if (b) {
         kDebug() << b->id();
         kDebug() << b->name();
