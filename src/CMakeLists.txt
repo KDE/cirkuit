@@ -7,13 +7,11 @@ include_directories(${KDE4_INCLUDES} ${POPPLER_INCLUDE_DIR} ${CMAKE_CURRENT_BINA
 add_subdirectory( mimetypes )
 add_subdirectory( syntax )
 add_subdirectory( templates )
+add_subdirectory( widgets )
 
 set(cirkuit_SRCS 
 	main.cpp
 	mainwindow.cpp
-	livepreviewwidget.cpp
-	logviewwidget.cpp
-	qimagedisplay.cpp
 	graphicsdocument.cpp
 	circuitmacrosmanager.cpp
 	graphicsgenerator.cpp
@@ -28,7 +26,7 @@ kde4_add_kcfg_files(cirkuit_SRCS GENERATE_MOC cirkuitsettings.kcfgc)
 kde4_add_ui_files(cirkuit_SRCS cirkuit_general_settings.ui cirkuit_backend_settings.ui)
 kde4_add_executable(cirkuit ${cirkuit_SRCS})
 
-target_link_libraries(cirkuit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${POPPLER_LIBRARY} ${QT_QTNETWORK_LIBRARIES})
+target_link_libraries(cirkuit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${POPPLER_LIBRARY} ${QT_QTNETWORK_LIBRARIES} cirkuitwidgets)
 
 install(TARGETS cirkuit ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES cirkuitui.rc 

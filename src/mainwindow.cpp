@@ -19,13 +19,14 @@
 ***************************************************************************/
 
 #include "mainwindow.h"
-#include "livepreviewwidget.h"
-#include "logviewwidget.h"
 #include "cirkuitsettings.h"
 #include "graphicsdocument.h"
 #include "circuitmacrosmanager.h"
 #include "graphicsgenerator.h"
 #include "settingsforms.h"
+
+#include "widgets/livepreviewwidget.h"
+#include "widgets/logviewwidget.h"
 
 #include <KApplication>
 #include <KAction>
