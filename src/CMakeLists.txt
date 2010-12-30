@@ -5,7 +5,6 @@ include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${QT_QTNETWORK_
 
 add_subdirectory( mimetypes )
 add_subdirectory( syntax )
-add_subdirectory( templates )
 add_subdirectory( lib )
 include_directories( lib ${CMAKE_CURRENT_BINARY_DIR}/lib)
 add_subdirectory( backends )

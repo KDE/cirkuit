@@ -1,5 +1,7 @@
 include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
+add_subdirectory (templates)
+
 set( GnuplotBackend_SRCS 
  gnuplotbackend.cpp  
  gnuplotdocumentsettings.cpp

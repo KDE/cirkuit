@@ -1,5 +1,7 @@
 include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
+add_subdirectory (templates)
+
 set( TikzBackend_SRCS 
  tikzbackend.cpp  
  tikzdocumentsettings.cpp
