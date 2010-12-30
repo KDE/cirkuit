@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2009  Matteo Agostinelli <agostinelli@gmail.com>
+    Copyright (C) 2011  Matteo Agostinelli <agostinelli@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,22 +27,52 @@ namespace Cirkuit
 {
 class DocumentPrivate;
 
+/** 
+ * A class containing the initial settings of a document. This 
+ * class should be reimplemented by each backend to define 
+ * appropriate initial conditions.
+ * 
+ * @author Matteo Agostinelli
+ */
 class DocumentSettings {
 public:
+    /**
+     * Default constructor. Initial text is an empty string
+     */    
     DocumentSettings() {
         initialText = QString();
         initialLineNumber = 0;
     }
+    
+    //! The initial text, inserted when a new document is created
     QString initialText;
+    //! The line where the cursor will be placed when a new document is created
     int initialLineNumber;
 };
 
+/**
+ * The Document class represent a document of the text editor. 
+ * The creation of the class is managed by the Kate Part, therefore
+ * the constructor should not be called directly. For the same reason
+ * a separate DocumentSettings class has been added to personalize
+ * the initial settings of the document, depending on the selected
+ * backend.
+ *
+ * @author Matteo Agostinelli
+ */
 class CIRKUIT_EXPORT Document : public KTextEditor::Document
 {
     Q_OBJECT
 public:
+    /** 
+     * Destructor
+     */
     virtual ~Document();
     
+    /**
+     * The initial text of the document. It is set by the 
+     * DocumentSettings,
+     */
     QString initialText() const;
     int initialLineNumber() const;
     QString directory() const;

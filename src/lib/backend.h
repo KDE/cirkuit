@@ -25,18 +25,16 @@
 #include <QtCore/QObject>
 #include <QVariant>
 
-
 class KUrl;
 class KConfigSkeleton;
 
 namespace Cirkuit
 {
-
 class DocumentSettings;
-
-class BackendPrivate;
 class Document;
 class Generator;
+
+class BackendPrivate;
     
 /**
  * The Backend class provides access to information about the backend.
@@ -45,18 +43,41 @@ class Generator;
  * It needs to be subclassed by all Backends.
  *
  * @author Matteo Agostinelli
+ * @author Alexander Rieder
  */
 class CIRKUIT_EXPORT Backend : public QObject
 {
     Q_OBJECT
 protected:
+    /**
+     * Default constructor. Should not be invoked directly. Use the static member getBackend() instead
+     */
     explicit Backend(QObject* parent = 0, const QList<QVariant>& args = QList<QVariant>());
+    /**
+     * Default destructor
+     */
     virtual ~Backend();
     
+    /**
+     * Calculates the probabiliy that the document passed as argument can be processed by the backend
+     * @param doc the document
+     * @return a floating point number ranging from 0 to 1, where 0 stands for lowest probabiliy and 
+     * 1 is the maximum
+     */
     virtual float identifyIndex(Cirkuit::Document* doc) const;
+    /**
+     * A list of keywords that can be used to identify the backend (see code from existing backends).
+     * This function should be re-implemented by each backend to define its own list.
+     * @return the list of keywords
+     */
     virtual QStringList identifyingWords() const;
     
 public:
+    /**
+     * Checks if the requirements for the backend are met (e.g. check for runtime 
+     * dependencies
+     * @return true if the requirements are met, false otherwise
+     */
     virtual bool checkRequirements() const;
     
     /**

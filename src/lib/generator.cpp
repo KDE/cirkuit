@@ -130,6 +130,11 @@ void Cirkuit::Generator::clear()
     d->commands.clear();
 }
 
+void Generator::addCommand(Command* command)
+{   
+    d->commands.append(command);
+}
+
 bool Cirkuit::Generator::start()
 {
     bool success = true;

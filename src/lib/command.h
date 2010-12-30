@@ -115,7 +115,19 @@ public slots:
     static bool checkExistence(const QString& name);
     
 signals:
+    /**
+     * This signal is emitted when there is new data made available
+     * by the command through the standard error
+     * @param name the name of the command
+     * @param msg the message available through standard error
+     */
     void newStandardError(const QString& name, const QString& msg);
+    /**
+     * This signal is emitted when there is new data made available
+     * by the command through the standard output
+     * @param name the name of the command
+     * @param msg the message available through standard output
+     */
     void newStandardOutput(const QString& name, const QString& msg);
                
 private:

@@ -26,13 +26,28 @@
 namespace Cirkuit
 {
 
+/**
+ * A class for managing the templates used during the
+ * creation of the graphic object
+ */
 class CIRKUIT_EXPORT DocumentTemplate : public QObject
 {
     Q_OBJECT
 public:
+    /**
+     * Default constructor.
+     * @param path is the path of the template file
+     */
     DocumentTemplate(const QString& path, QObject* parent = 0);
     
-    QString insert(const QString& code);
+    /**
+     * Inserts the code into the template. The point of insertion
+     * should be denoted by keyword in the template itself.
+     * @param code the code to be inserted
+     * @param keyword the keyword in the template that will be substituted by the code. The default value is <!CODE!>
+     * @return the resulting text
+     */
+    QString insert(const QString& code, const QString& keyword = "<!CODE!>");
     
 private:
     QString m_path;

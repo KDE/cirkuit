@@ -27,12 +27,12 @@ DocumentTemplate::DocumentTemplate(const QString& path, QObject* parent): QObjec
     m_path = path;
 }
 
-QString DocumentTemplate::insert(const QString& code)
+QString DocumentTemplate::insert(const QString& code, const QString& keyword)
 {
     QFile file(m_path);
     file.open(QIODevice::ReadOnly);
     QTextStream stream(&file);
-    QString output = stream.readAll().replace("<!CODE!>", code);
+    QString output = stream.readAll().replace(keyword, code);
     file.close();
     return output;
 }

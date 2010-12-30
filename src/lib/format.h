@@ -28,6 +28,9 @@
 namespace Cirkuit {
 class FormatPrivate;
 
+/**
+ * A class that is used to model the different graphic/text formats used in the application
+ */
 class CIRKUIT_EXPORT Format : public QObject
 {
 public:
@@ -47,18 +50,35 @@ public:
         Tex,
         Unknown
     };
-    
+   
+    //! Default constructor
     Format();
+    /** 
+     * Constructor with initialization
+     * @param type the type
+     */
     Format(const Type& type);
     Format(const Format& other);
     virtual ~Format();
     virtual Format& operator=(const Format& other);
     virtual bool operator==(const Format& other) const;
     
+    //! The format type
     Type type() const;
+    //! The default extension
     QString extension() const;
     
+    /**
+     * Create a format based on its main extension
+     * @param extension the main extension
+     * @return the corresponding format
+     */
     static Format fromExtension(const QString& extension);
+    /**
+     * Create a format based on its mimetype
+     * @param mime the mime type
+     * @return the corresponding format
+     */
     static Format fromMimeType(KMimeType::Ptr mime);
 private:
     FormatPrivate* d;
