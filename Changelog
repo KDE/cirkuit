@@ -1,6 +1,7 @@
 - 0.3.2
 Switch from QProcess to KProcess
 Download of remote data the KDE way with KIO
+Fixed a bug when opening the Circuit Macros manual and examples
 
 - 0.3.1.1
 Integration with bugs.kde.org
