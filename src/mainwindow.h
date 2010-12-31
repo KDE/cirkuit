@@ -24,14 +24,18 @@
 #include <KParts/MainWindow>
 #include <QtGui/QKeyEvent>
 #include <KUrl>
-#include "graphicsdocument.h"
-#include "graphicsgenerator.h"
 
 class LogViewWidget;
 namespace KTextEditor
 {
     class Document;
     class View;
+}
+
+namespace Cirkuit
+{
+    class Document;
+    class Backend;
 }
 
 class LivePreviewWidget;
@@ -64,7 +68,7 @@ private slots:
     void openPreview();
     void openPreviewFile();
 
-    void newDocument(GraphicsDocument::DocumentType);
+    void newDocument(const QString& backendName = QString());
     void newCmDocument();
     void newGnuplotDocument();
     void newTikzDocument();
@@ -82,12 +86,15 @@ private slots:
     void circuitMacrosConfigured();
     void askIfUpgrade(const QString&);
     void reset();
+    
+    void initializeBackend();
 
 private:
     void setupActions();
 
     KTextEditor::View *m_view;
-    GraphicsDocument *m_doc;
+    Cirkuit::Document *m_doc;
+    Cirkuit::Backend *m_backend;
     QTimer* m_updateTimer;
     QStringList mimeTypes;
     KUrl m_currentFile;

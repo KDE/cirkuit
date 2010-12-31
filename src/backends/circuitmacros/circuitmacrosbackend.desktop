@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Service
+Icon=circuitmacrosbackend
+Name=Circuit Macros
+X-KDE-ServiceTypes=Cirkuit/Backend
+X-KDE-Library=cirkuit_circuitmacrosbackend
+X-KDE-PluginInfo-Name=circuitmacrosbackend
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Website=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros
+Comment=Backend for Circuit Macros
+

@@ -1,5 +1,5 @@
 /***************************************************************************
-*   Copyright (C) 2009 by Matteo Agostinelli                              *
+*   Copyright (C) 2011 by Matteo Agostinelli                              *
 *   agostinelli@gmail.com                                                 *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
@@ -20,12 +20,11 @@
 
 #include "circuitmacrosmanager.h"
 
+#include <QFile>
+
 #include <KStandardDirs>
 #include <KTar>
 #include <KLocale>
-
-#include <QFile>
-
 #include <KIO/Job>
 #include <KIO/NetAccess>
 #include <KProcess>
@@ -156,22 +155,3 @@ QString CircuitMacrosManager::findVersion(const QString& filename) const
     return version;
 }
 
-void CircuitMacrosManager::configureIntepreter()
-{
-    QStringList args;
-    
-    if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_ps) {
-        args << "psdefault";
-    } else if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::dpic_pgf) {
-        args << "pgfdefault";
-    } else if (CirkuitSettings::picInterpreter() == CirkuitSettings::EnumPicInterpreter::gpic) {
-        args << "gpicdefault";
-    }
-
-    KProcess configureProcess;
-    configureProcess.setProgram("make", args);
-    configureProcess.setWorkingDirectory(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
-    configureProcess.startDetached();
-}
-
-#include "circuitmacrosmanager.moc"

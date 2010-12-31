@@ -37,8 +37,6 @@ public:
 
     QString installedVersion() const;
     void checkOnlineVersion();
-    
-    void configureIntepreter();
 
 private slots:
     void unpackCircuitMacros();

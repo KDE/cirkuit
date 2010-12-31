@@ -1,0 +1,4 @@
+File=gnuplotbackend.kcfg
+ClassName=GnuplotSettings
+Singleton=true
+Mutators=true

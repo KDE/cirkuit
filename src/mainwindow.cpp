@@ -20,10 +20,15 @@
 
 #include "mainwindow.h"
 #include "cirkuitsettings.h"
-#include "graphicsdocument.h"
 #include "circuitmacrosmanager.h"
-#include "graphicsgenerator.h"
-#include "settingsforms.h"
+#include "generatorthread.h"
+
+#include "ui_cirkuit_general_settings.h"
+
+#include "document.h"
+#include "backend.h"
+#include "format.h"
+#include "generator.h"
 
 #include "widgets/livepreviewwidget.h"
 #include "widgets/logviewwidget.h"
@@ -57,7 +62,7 @@
 
 
 MainWindow::MainWindow(QWidget *)
-{	
+{
     KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
 
     if (!editor) {
@@ -66,9 +71,10 @@ MainWindow::MainWindow(QWidget *)
         kapp->exit(1);
     }
 
-    m_doc = (GraphicsDocument*) (editor->createDocument(0));
+    m_doc = (Cirkuit::Document*) (editor->createDocument(0));
+    m_doc->initialize();
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
-
+   
     m_livePreviewWidget = new LivePreviewWidget(i18n("Live preview"), this);
     addDockWidget(Qt::TopDockWidgetArea, m_livePreviewWidget);
     
@@ -92,8 +98,7 @@ MainWindow::MainWindow(QWidget *)
 
     setGeometry(100,100,CirkuitSettings::width(),CirkuitSettings::height());
 
-    m_generator = new GeneratorThread(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc);
-    newCmDocument();
+    m_generator = new GeneratorThread(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_doc);
     
     m_updateTimer = 0;
     updateConfiguration();
@@ -109,6 +114,8 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));
     
     checkCircuitMacros();
+    initializeBackend();
+    newDocument();
 }
 
 void MainWindow::setupActions()
@@ -265,8 +272,9 @@ void MainWindow::exportFile()
 
     if (!path.isEmpty()) {
         QFileInfo fileinfo(path);
-        GraphicsGenerator::Format format = GraphicsGenerator::format(saveFileDialog.currentFilterMimeType()->mainExtension());
-        m_generator->setup(GraphicsGenerator::Source, format, m_doc, m_currentFile.directory(), true);
+        Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog.currentFilterMimeType());
+        m_doc->setDirectory(m_currentFile.directory());
+        m_generator->setup(Cirkuit::Format::Source, format, m_doc, true);
         statusBar()->showMessage("Exporting image...");
         m_generator->start();
         m_tempSavePath = path;
@@ -306,7 +314,8 @@ void MainWindow::buildPreview()
     m_logViewWidget->clear();
     m_logViewWidget->hide();
     
-    m_generator->setup(GraphicsGenerator::Source, GraphicsGenerator::QtImage, m_doc, m_currentFile.directory());
+    m_doc->setDirectory(m_currentFile.directory());
+    m_generator->setup(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_doc);
     m_generator->start();
     
     kDebug() << "Preview generation in progress...";
@@ -321,7 +330,7 @@ void MainWindow::openPreview()
 
 void MainWindow::openPreviewFile()
 {
-    KUrl url = m_generator->builder()->filePath(GraphicsGenerator::Pdf);
+    KUrl url = m_generator->generator()->formatPath(Cirkuit::Format::Pdf);
     KRun::runUrl(url, "application/pdf", this);
     
     disconnect(m_generator, SIGNAL(finished()), this, SLOT(openPreviewFile()));
@@ -332,34 +341,51 @@ void MainWindow::builtNotification()
     statusBar()->showMessage("Preview built", 3000);
 }
 
-void MainWindow::newDocument(GraphicsDocument::DocumentType type)
+void MainWindow::newDocument(const QString& backendName)
 {
+    if (!backendName.isEmpty()) {
+        Cirkuit::Backend* newBackend = Cirkuit::Backend::getBackend(backendName);
+        if (!newBackend) {
+            KMessageBox::error(this, i18n("Backend %1 not found").arg(backendName));
+            return;
+        } else {
+            m_backend = newBackend;
+        }
+    }
+    
+    if (!m_backend) {
+        KMessageBox::error(this, i18n("No valid backend selected!").arg(backendName));
+        return;
+    }
+    
+    m_doc->applySettings(m_backend->documentSettings());
     if (!m_doc->closeUrl()) {
         return;
     }
     reset();
-
-    m_doc->setType(type);
+    
     m_doc->setText(m_doc->initialText());
     KTextEditor::Cursor cursor = m_view->cursorPosition();
-    cursor.setLine(m_doc->initialCursorPosition());
+    cursor.setLine(m_doc->initialLineNumber());
     m_view->setCursorPosition(cursor);
     m_doc->setModified(false);
+    
+    m_backend = Cirkuit::Backend::autoChooseBackend(m_doc);
 }
 
 void MainWindow::newCmDocument()
 {
-    newDocument(GraphicsDocument::CircuitMacros);
+    newDocument("circuitmacros");
 }
 
 void MainWindow::newTikzDocument()
 {
-    newDocument(GraphicsDocument::Tikz);
+    newDocument("tikz");
 }
 
 void MainWindow::newGnuplotDocument()
 {
-    newDocument(GraphicsDocument::Gnuplot);
+    newDocument("gnuplot");
 }
 
 void MainWindow::updateTitle()
@@ -387,12 +413,16 @@ void MainWindow::configure()
         return; 
     }
     KConfigDialog* dialog = new KConfigDialog(this, "settings", CirkuitSettings::self() );
-
-    CirkuitGeneralForm* confWdg = new CirkuitGeneralForm();
+    
+    QWidget* confWdg = new QWidget(dialog);
+    Ui::CirkuitGeneralForm s;
+    s.setupUi(confWdg);
+    s.kcfg_DefaultBackend->addItems(Cirkuit::Backend::listAvailableBackends());
     dialog->addPage( confWdg, i18n("General"), "configure" );
     
-    CirkuitBackendForm* backendWdg = new CirkuitBackendForm();
-    dialog->addPage( backendWdg, i18n("Backends"), "configure" ); 
+    foreach (Cirkuit::Backend* b, Cirkuit::Backend::availableBackends()) {
+        dialog->addPage(b->settingsWidget(dialog), b->config(), b->name(), b->icon() ); 
+    }
 
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(updateConfiguration()));
     dialog->show();
@@ -411,8 +441,6 @@ void MainWindow::updateConfiguration()
     } else {
         m_updateTimer = 0;
     }
-    
-    cmm->configureIntepreter();
 }
 
 void MainWindow::showManual()
@@ -457,6 +485,7 @@ void MainWindow::circuitMacrosConfigured()
 
 void MainWindow::failedNotification()
 {
+    m_livePreviewWidget->setImage(QImage());
     KMessageBox::error(this, i18n("Unable to generate a preview for the current input"), i18n("Error"));
 }
 
@@ -471,3 +500,10 @@ void MainWindow::saveFileToDisk(const QString& path)
     QFile::copy(path, m_tempSavePath);
     statusBar()->showMessage("Export successfully completed!", 3000);
 }
+
+void MainWindow::initializeBackend()
+{
+    kDebug() << Cirkuit::Backend::listAvailableBackends();
+    m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
+}
+

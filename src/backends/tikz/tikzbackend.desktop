@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Service
+Icon=tikzbackend
+Name=TikZ
+X-KDE-ServiceTypes=Cirkuit/Backend
+X-KDE-Library=cirkuit_tikzbackend
+X-KDE-PluginInfo-Name=tikzbackend
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Website=http://www.texample.net/tikz
+Comment=Backend for TikZ
+

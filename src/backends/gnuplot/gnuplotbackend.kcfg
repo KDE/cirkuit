@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name="cirkuitrc"/>  
+  <include>kstandarddirs.h</include>
+  <group name="GnuplotBackend">
+    <entry name="gptemplateurl" type="Url">
+      <label>The location of the Gnuplot template.</label>
+      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/gnuplot_latex.ckt")</default>
+    </entry>
+  </group>
+</kcfg>

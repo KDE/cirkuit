@@ -3,52 +3,32 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-  <kcfgfile />
-  <include>kstandarddirs.h</include>  
-  <group name="general">
-    <entry name="RefreshInterval" type="Int">
-      <label>Preview generation refresh timeout.</label>
-		<default>10000</default>
-    </entry>
-    <entry name="AutoRefresh" type="Bool">
-      <label>Enable automatic refresh.</label>
-        <default>true</default>
-    </entry>
-    <entry name="ResolutionPpm" type="Int">
-      <label>PNG and JPEG resolution.</label>
-        <default>300</default>
-    </entry>
-    <entry name="Width" type="Int">
-      <label>Width of the main window.</label>
-      <default>600</default>
-    </entry>
-    <entry name="Height" type="Int">
-      <label>Height of the main window.</label>
-      <default>400</default>
-    </entry>
-    <entry name="PicInterpreter" type="Enum">
-        <choices>
-            <choice name="dpic_ps"/>
-            <choice name="dpic_pgf"/>
-            <choice name="gpic"/>
-        </choices>
-        <default>dpic_ps</default>
-    </entry>    
-    <entry name="cmtemplateurl" type="Url">
-      <label>The location of the Circuit Macros template.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt")</default>
-    </entry>
-    <entry name="cmtikztemplateurl" type="Url">
-      <label>The location of the Circuit Macros template with TikZ backend.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_tikz.ckt")</default>
-    </entry>
-    <entry name="tikztemplateurl" type="Url">
-      <label>The location of the TikZ template.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/tikz_latex.ckt")</default>
-    </entry>
-    <entry name="gptemplateurl" type="Url">
-      <label>The location of the Gnuplot template.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/gnuplot_latex.ckt")</default>
-    </entry>
-  </group>
+    <kcfgfile name="cirkuitrc"/>
+    <include>kstandarddirs.h</include>  
+    <group name="general">
+        <entry name="DefaultBackend" type="String">
+            <label>Default backend.</label>
+            <default>Circuit Macros</default>
+        </entry>
+        <entry name="RefreshInterval" type="Int">
+            <label>Preview generation refresh timeout.</label>
+            <default>10000</default>
+        </entry>
+        <entry name="AutoRefresh" type="Bool">
+            <label>Enable automatic refresh.</label>
+            <default>true</default>
+        </entry>
+        <entry name="ResolutionPpm" type="Int">
+            <label>PNG and JPEG resolution.</label>
+            <default>300</default>
+        </entry>
+        <entry name="Width" type="Int">
+            <label>Width of the main window.</label>
+            <default>600</default>
+        </entry>
+        <entry name="Height" type="Int">
+            <label>Height of the main window.</label>
+            <default>400</default>
+        </entry>
+    </group>
 </kcfg>
