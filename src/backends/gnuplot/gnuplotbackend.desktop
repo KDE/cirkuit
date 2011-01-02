@@ -2,6 +2,11 @@
 Type=Service
 Icon=gnuplotbackend
 Name=Gnuplot
+Name[pt]=Gnuplot
+Name[pt_BR]=Gnuplot
+Name[sv]=Gnuplot
+Name[uk]=Gnuplot
+Name[x-test]=xxGnuplotxx
 X-KDE-ServiceTypes=Cirkuit/Backend
 X-KDE-Library=cirkuit_gnuplotbackend
 X-KDE-PluginInfo-Name=gnuplotbackend
@@ -9,4 +14,9 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Website=http://www.gnuplot.org
 Comment=Backend for Gnuplot
+Comment[pt]=Infra-Estrutura do Gnuplot
+Comment[pt_BR]=Infraestrutura para o Gnuplot
+Comment[sv]=Gränssnitt för Gnuplot
+Comment[uk]=Модуль для Gnuplot
+Comment[x-test]=xxBackend for Gnuplotxx
 

@@ -2,6 +2,11 @@
 Type=Service
 Icon=tikzbackend
 Name=TikZ
+Name[pt]=TikZ
+Name[pt_BR]=TikZ
+Name[sv]=TikZ
+Name[uk]=TikZ
+Name[x-test]=xxTikZxx
 X-KDE-ServiceTypes=Cirkuit/Backend
 X-KDE-Library=cirkuit_tikzbackend
 X-KDE-PluginInfo-Name=tikzbackend
@@ -9,4 +14,9 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Website=http://www.texample.net/tikz
 Comment=Backend for TikZ
+Comment[pt]=Infra-Estrutura do TikZ
+Comment[pt_BR]=Infraestrutura para o TikZ
+Comment[sv]=Gränssnitt för TikZ
+Comment[uk]=Модуль для TikZ
+Comment[x-test]=xxBackend for TikZxx
 
