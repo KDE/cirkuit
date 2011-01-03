@@ -2,3 +2,8 @@
 Type=ServiceType
 X-KDE-ServiceType=Cirkuit/Backend
 Comment=A Backend for Cirkuit
+Comment[pt]=Uma infra-estrutura para o Cirkuit
+Comment[pt_BR]=Uma infraestrutura para o Cirkuit
+Comment[sv]=Ett gränssnitt för Cirkuit
+Comment[uk]=Модуль для Cirkuit
+Comment[x-test]=xxA Backend for Cirkuitxx
