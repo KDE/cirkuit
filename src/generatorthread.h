@@ -28,6 +28,7 @@ namespace Cirkuit
 {
 class Command;
 class Generator;
+class Document;
 }
 
 class GeneratorThread : public QThread
