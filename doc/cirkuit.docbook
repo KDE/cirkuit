@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" 
+"dtd/kdex.dtd" [
+
+  <!ENTITY kappname "&cirkuit;">
+  <!ENTITY package "playground">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE"> 
+]>
+<book lang="&language;">
+
+<bookinfo>
+<title>The &cirkuit; Handbook</title>
+
+<authorgroup>
+<author>
+<personname>
+<firstname>Matteo</firstname>
+<surname>Agostinelli</surname>
+</personname>
+<email>agostinelli@gmail.com</email>
+</author>
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
+
+<copyright>
+<year>2011</year>
+<holder>Matteo Agostinelli</holder>
+</copyright>
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2011-01-05</date>
+<releaseinfo>0.1</releaseinfo>
+
+<abstract>
+<para>
+&cirkuit; is an application to produce high-quality publication-ready 
+graphics. It provides a uniform interface to various graphics description
+languages. At the moment, the supported languages are Circuit Macros, TikZ 
+and Gnuplot.
+</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>
+&cirkuit; is an application that provides a nice &kde; interface to various
+tools used for the production of publication-ready graphics.
+</para>
+</chapter>
+
+</book>
