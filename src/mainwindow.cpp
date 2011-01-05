@@ -55,11 +55,12 @@
 #include <KProcess>
 #include <kmimetypetrader.h>
 
+#include <knewstuff3/downloaddialog.h>
+
 #include <KTextEditor/Document>
 #include <KTextEditor/View>
 #include <KTextEditor/Editor>
 #include <KTextEditor/EditorChooser>
-
 
 MainWindow::MainWindow(QWidget *)
 {
@@ -164,6 +165,11 @@ void MainWindow::setupActions()
     KAction* showExamplesAction = new KAction(i18n("Show Circuit Macros examples"),0);
     actionCollection()->addAction( "showExamples", showExamplesAction );
     connect(showExamplesAction, SIGNAL(triggered()), this, SLOT(showExamples()));
+
+    KAction* downloadExamples = new KAction(i18n("Download Examples"), actionCollection());
+    downloadExamples->setIcon(KIcon("get-hot-new-stuff"));
+    actionCollection()->addAction("download_examples",  downloadExamples);
+    connect(downloadExamples, SIGNAL(triggered()), this,  SLOT(downloadExamples()));
 
     QAction* showLivePreviewAction = m_livePreviewWidget->toggleViewAction();
     actionCollection()->addAction( "show_live_preview", showLivePreviewAction );
@@ -505,5 +511,15 @@ void MainWindow::initializeBackend()
 {
     kDebug() << Cirkuit::Backend::listAvailableBackends();
     m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
+}
+
+void MainWindow::downloadExamples()
+{
+    KNS3::DownloadDialog dialog;
+    dialog.exec();
+    foreach (const KNS3::Entry& e,  dialog.changedEntries())
+    {
+        kDebug() << "Changed Entry: " << e.name();
+    }
 }
 
