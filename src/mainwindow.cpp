@@ -354,7 +354,7 @@ void MainWindow::newDocument(const QString& backendName)
     }
     
     if (!m_backend) {
-        KMessageBox::error(this, i18n("No valid backend selected!", backendName));
+        KMessageBox::error(this, i18n("No valid backend selected.", backendName));
         return;
     }
     

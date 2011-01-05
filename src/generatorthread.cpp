@@ -39,7 +39,7 @@ void GeneratorThread::run()
 { 
     Backend* b = Backend::autoChooseBackend(m_doc);
     if (!b) {
-        kError() << i18n("No backend could be selected!");
+        kError() << i18n("No backend could be selected.");
         return;
     } else {
         kDebug() << b->id();
