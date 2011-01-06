@@ -28,6 +28,7 @@ install(FILES cirkuitui.rc
 DESTINATION ${DATA_INSTALL_DIR}/cirkuit)
 install(FILES cirkuit.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 install(FILES cirkuit.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
+install(FILES cirkuit_example.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 install( FILES cirkuit.notifyrc DESTINATION ${DATA_INSTALL_DIR}/cirkuit)
 install (PROGRAMS cirkuit.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

@@ -19,6 +19,7 @@
 	 <Action name="file_save_as" />
 	 <Action name="export" />
      <Action name="download_examples" />
+     <Action name="upload_example" />
     <Separator/>
  
     <DefineGroup name="revert_merge" append="revert_merge"/>

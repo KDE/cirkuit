@@ -56,6 +56,7 @@
 #include <kmimetypetrader.h>
 
 #include <knewstuff3/downloaddialog.h>
+#include <knewstuff3/uploaddialog.h>
 
 #include <KTextEditor/Document>
 #include <KTextEditor/View>
@@ -170,6 +171,11 @@ void MainWindow::setupActions()
     downloadExamples->setIcon(KIcon("get-hot-new-stuff"));
     actionCollection()->addAction("download_examples",  downloadExamples);
     connect(downloadExamples, SIGNAL(triggered()), this,  SLOT(downloadExamples()));
+    
+    KAction* uploadExample = new KAction(i18n("Upload Example"), actionCollection());
+    uploadExample->setIcon(KIcon("get-hot-new-stuff"));
+    actionCollection()->addAction("upload_example",  uploadExample);
+    connect(uploadExample, SIGNAL(triggered()), this,  SLOT(uploadExample()));
 
     QAction* showLivePreviewAction = m_livePreviewWidget->toggleViewAction();
     actionCollection()->addAction( "show_live_preview", showLivePreviewAction );
@@ -521,5 +527,18 @@ void MainWindow::downloadExamples()
     {
         kDebug() << "Changed Entry: " << e.name();
     }
+}
+
+void MainWindow::uploadExample()
+{
+    if (!m_currentFile.isLocalFile()) {
+        return;
+    }
+    
+    KNS3::UploadDialog dialog("cirkuit_example.knsrc");
+    dialog.setUploadFile(m_currentFile);
+    dialog.setUploadName("A simple circuit schematic");
+    dialog.setDescription("This is an example of a simple circuit schematic, drawn using Circuit Macros");
+    dialog.exec();
 }
 

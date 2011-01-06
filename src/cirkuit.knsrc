@@ -1,5 +1,5 @@
 [KNewStuff3]
-Categories=Cirkuit (Circuit Macros),Cirkuit (TikZ),Cirkuit (Gnuplot)
+Categories=Cirkuit Example,Cirkuit Template
 TargetDir=cirkuit/examples
 Uncompress=archive
 CustomName=true
