@@ -46,6 +46,7 @@
 #include <KSaveFile>
 #include <KMenu>
 #include <QTextStream>
+#include <QListWidget>
 #include <QFileInfo>
 #include <QTimer>
 #include <KXMLGUIFactory>
@@ -176,6 +177,11 @@ void MainWindow::setupActions()
     uploadExample->setIcon(KIcon("get-hot-new-stuff"));
     actionCollection()->addAction("upload_example",  uploadExample);
     connect(uploadExample, SIGNAL(triggered()), this,  SLOT(uploadExample()));
+    
+    KAction* openExample =new KAction(i18n("&Open Example"), actionCollection());
+    openExample->setIcon(KIcon("document-open"));
+    actionCollection()->addAction("file_open_example", openExample);
+    connect(openExample, SIGNAL(triggered()), this, SLOT(openExample()));
 
     QAction* showLivePreviewAction = m_livePreviewWidget->toggleViewAction();
     actionCollection()->addAction( "show_live_preview", showLivePreviewAction );
@@ -540,5 +546,34 @@ void MainWindow::uploadExample()
     dialog.setUploadName("A simple circuit schematic");
     dialog.setDescription("This is an example of a simple circuit schematic> You will need the Circuit Macros backend to open this file");
     dialog.exec();
+}
+
+void MainWindow::openExample()
+{
+    QString dir = KStandardDirs::locateLocal("appdata",  "examples");
+    if (dir.isEmpty()) return;
+    KStandardDirs::makeDir(dir);
+
+    QStringList files=QDir(dir).entryList(QDir::Files);
+    QPointer<KDialog> dlg=new KDialog(this);
+    QListWidget* list=new QListWidget(dlg);
+    foreach(const QString& file, files) {
+        QString name=file;
+        name.remove(QRegExp("-.*\\.hotstuff-access$"));
+        list->addItem(name);
+    }
+
+    dlg->setMainWidget(list);
+
+    if (dlg->exec()==QDialog::Accepted&&list->currentRow()>=0) {
+        const QString& selectedFile=files[list->currentRow()];
+        KUrl url;
+        url.setDirectory(dir);
+        url.setFileName(selectedFile);
+
+        loadFile(url);
+    }
+
+    delete dlg;
 }
 

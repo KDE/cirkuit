@@ -83,6 +83,7 @@ private slots:
     void showExamples();
     void downloadExamples();
     void uploadExample();
+    void openExample();
 
     void checkCircuitMacros();
     void circuitMacrosConfigured();
