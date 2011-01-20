@@ -2,6 +2,7 @@
 Comment=Cirkuit
 Comment[cs]=Cirkuit
 Comment[de]=Cirkuit
+Comment[fr]=Cirkuit
 Comment[nds]=Cirkuit
 Comment[pt]=Cirkuit
 Comment[pt_BR]=Cirkuit
@@ -11,6 +12,7 @@ Comment[x-test]=xxCirkuitxx
 
 [Event/Preview Generated]
 Name=Preview generated
+Name[fr]=Aperçu généré
 Name[nds]=Vöransicht opstellt...
 Name[pt]=Antevisão gerada
 Name[pt_BR]=Visualização gerada
@@ -18,6 +20,7 @@ Name[sv]=Förhandsgranskning skapades
 Name[uk]=Створено зображення попереднього перегляду
 Name[x-test]=xxPreview generatedxx
 Comment=The preview has been generated
+Comment[fr]=L'aperçu a été généré
 Comment[nds]=De Vöransicht wöör opstellt...
 Comment[pt]=A antevisão foi gerada
 Comment[pt_BR]=A visualização foi gerada
@@ -28,6 +31,7 @@ Action=Popup
 
 [Event/Download progress]
 Name=Download progress
+Name[fr]=Progression du téléchargement
 Name[nds]=Daalladen-Vörankamen
 Name[pt]=Transferência em curso
 Name[pt_BR]=Progresso do download
@@ -35,6 +39,7 @@ Name[sv]=Nerladdning pågår
 Name[uk]=Поступ звантаження
 Name[x-test]=xxDownload progressxx
 Comment=Download progress
+Comment[fr]=Progression du téléchargement
 Comment[nds]=Daalladen-Vörankamen
 Comment[pt]=Transferência em curso
 Comment[pt_BR]=Progresso do download
@@ -45,6 +50,7 @@ Action=Popup
 
 [Event/Download finished]
 Name=Download finished
+Name[fr]=Téléchargement terminé
 Name[nds]=Daalladen afslaten
 Name[pt]=Transferência terminada
 Name[pt_BR]=Download concluído
@@ -52,6 +58,7 @@ Name[sv]=Nerladdning klar
 Name[uk]=Звантаження завершено
 Name[x-test]=xxDownload finishedxx
 Comment=Download finished
+Comment[fr]=Téléchargement terminé
 Comment[nds]=Daalladen afslaten
 Comment[pt]=Transferência terminada
 Comment[pt_BR]=Download concluído

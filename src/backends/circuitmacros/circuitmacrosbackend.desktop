@@ -2,6 +2,7 @@
 Type=Service
 Icon=circuitmacrosbackend
 Name=Circuit Macros
+Name[fr]=Circuit Macros
 Name[pt]=Circuit Macros
 Name[pt_BR]=Circuit Macros
 Name[sv]=Circuit Macros
@@ -14,6 +15,7 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Website=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros
 Comment=Backend for Circuit Macros
+Comment[fr]=Moteur pour Circuit Macros
 Comment[pt]=Infra-Estrutura do Circuit Macros
 Comment[pt_BR]=Infraestrutura para o Circuit Macros
 Comment[sv]=Gränssnitt för Circuit Macros
