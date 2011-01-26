@@ -23,6 +23,28 @@
 
 #include <qwidget.h>
 
+class Resizer : public QObject
+{
+    Q_OBJECT
+public:
+    Resizer( QObject *parent=0 );
+    ~Resizer();
+
+public slots:
+    void setSize( const QSize &size );
+    void setAspectRatioMode( const Qt::AspectRatioMode mode );
+   
+    void setInput( const QImage &input );
+    void start();
+
+signals:
+    void error();
+    void finished( const QImage &output );
+
+private:
+    struct ResizerPrivate *d;
+};
+
 /**
 	@author Matteo Agostinelli <agostinelli@gmail.com>
 */
@@ -31,25 +53,19 @@ class QImageDisplay : public QWidget
     Q_OBJECT
 public:
     QImageDisplay(QWidget* parent = 0);
-
     ~QImageDisplay();
 
-    QPixmap* pixmap() {
-        return &_pixmap;
-    }
-
+    QPixmap* pixmap();
 public slots:
     void setImage(const QImage&);
     void clear();
 
-    void setFastTransformation(bool fast = false);
-
 private:
-    QPixmap _pixmap;
-    bool _fastTransform;
+    QPixmap m_pixmap;
 
 protected:
     void paintEvent(QPaintEvent* event);
+    
 };
 
 #endif

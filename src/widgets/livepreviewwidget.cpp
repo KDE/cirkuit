@@ -22,46 +22,47 @@
 #include "qimagedisplay.h"
 
 #include <QImage>
-#include <QTimer>
+#include <QThread>
+#include <QKeyEvent>
 
+#include <KDebug>
 
 LivePreviewWidget::LivePreviewWidget(const QString & title, QWidget * parent, Qt::WindowFlags flags)
-  : QDockWidget(title, parent, flags)
+  : QDockWidget(title, parent, flags), m_thread(0)
 {
-  imageDisplay = new QImageDisplay(this);
-  imageDisplay->setBackgroundRole(QPalette::Base);
-  
-  timer = new QTimer;
-  timer->setSingleShot(true);
-  timer->setInterval(100);
-  
-  connect(timer, SIGNAL(timeout()), this, SLOT(setSmoothTransformation()));
-  
-  setWidget(imageDisplay);
-  setMinimumHeight(180);
-  setMinimumWidth(150);
+    m_imageDisplay = new QImageDisplay(this);
+    m_imageDisplay->setBackgroundRole(QPalette::Base);
+    
+    setWidget(m_imageDisplay);
+    setMinimumHeight(180);
+    setMinimumWidth(150);
+    
+    m_resizer = new Resizer;
 }
 
 void LivePreviewWidget::setImage(const QImage& image)
 {
-  setSmoothTransformation();
-  imageDisplay->setImage(image);
+    m_resizer->setInput(image);
+    m_imageDisplay->setImage(image);
 }
 
 void LivePreviewWidget::clear()
 {
-  imageDisplay->clear();
+    m_imageDisplay->clear();
 }
 
-void LivePreviewWidget::resizeEvent ( QResizeEvent* /*event*/ )
+void LivePreviewWidget::resizeEvent ( QResizeEvent* event )
 {
-  imageDisplay->setFastTransformation(true);
-  
-  timer->start();
-}
-
-void LivePreviewWidget::setSmoothTransformation()
-{
-  imageDisplay->setFastTransformation(false);
+    kDebug() << "Resize event";
+    m_thread = new QThread(this);
+    m_resizer->moveToThread(m_thread);
+    
+    connect( m_thread, SIGNAL(started()), m_resizer, SLOT(start()) );
+    connect( m_resizer, SIGNAL(finished(const QImage &)), m_imageDisplay, SLOT(setImage(const QImage &)) );
+    
+    m_resizer->setSize(event->size());    
+    m_thread->start();
+    
+    QWidget::resizeEvent ( event );
 }
 

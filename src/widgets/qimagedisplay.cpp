@@ -21,82 +21,114 @@
 #include "qimagedisplay.h"
 
 #include <QPainter>
+#include <KDebug>
+
+struct ResizerPrivate
+{
+    QSize size;
+    Qt::AspectRatioMode aspectMode;
+    QImage input;
+};
+
+Resizer::Resizer(QObject* parent): QObject(parent), d(new ResizerPrivate)
+{
+    d->aspectMode = Qt::KeepAspectRatio;
+}
+
+Resizer::~Resizer()
+{
+    delete d;
+}
+
+void Resizer::setAspectRatioMode(const Qt::AspectRatioMode mode)
+{
+    d->aspectMode = mode;
+}
+
+void Resizer::setSize(const QSize& size)
+{
+    d->size = size;
+}
+
+void Resizer::setInput(const QImage& input)
+{
+    d->input = input;
+}
+
+void Resizer::start()
+{
+    if ( d->input.isNull() ) {
+        emit error();
+        return;       
+    }
+    
+    if (d->input.size().height() < d->size.height() || d->input.size().width() < d->size.width()) {
+        return;
+    }
+    
+    kDebug() << "I am not resizing to " << d->size;
+
+    QImage output = d->input.scaled( d->size, d->aspectMode, Qt::FastTransformation );
+    emit finished( output );
+}
+
 
 QImageDisplay::QImageDisplay(QWidget* parent)
- : QWidget(parent)
+ : QWidget(parent), m_pixmap(QPixmap())
 {
-   setMinimumWidth(100);
-   setMinimumHeight(50);
-   
-   setFastTransformation(false);
+    setMinimumWidth(100);
+    setMinimumHeight(50);
 }
 
 QImageDisplay::~QImageDisplay()
 {
 }
 
-void QImageDisplay::setFastTransformation(bool fast)
-{
-  if(_fastTransform == fast)
-    return;
-  _fastTransform = fast;
-
-  update();
-}
-
 void QImageDisplay::setImage(const QImage& image)
 {
-   _pixmap = QPixmap::fromImage(image);
-   //setMaximumWidth(_pixmap.size().width());
-   //setMaximumHeight(_pixmap.size().height());
-   update();
+    m_pixmap = QPixmap::fromImage(image);
+
+    update();
 }
 
 void QImageDisplay::paintEvent(QPaintEvent* /*event*/)
 {
-   QPainter painter(this);
+    if (!m_pixmap) {
+        return;
+    }
+    
+    QPainter painter(this);
 
-   int width = this->size().width();
-   int height = this->size().height();
+    int width = this->size().width();
+    int height = this->size().height();
 
-   int picWidth = _pixmap.size().width();
-   int picHeight = _pixmap.size().height();
-	
-	//painter.fillRect(this->rect(), Qt::white);
-   
-   QPixmap scaledPixmap(_pixmap);
+    int picWidth = m_pixmap.size().width();
+    int picHeight = m_pixmap.size().height();
 
-   if (picWidth > width || picHeight > height)
-   {
-      // scale pixmap to fit the widget
-      if (_fastTransform)
-        scaledPixmap = _pixmap.scaled(width, height, Qt::KeepAspectRatio, Qt::FastTransformation);
-      else
-        scaledPixmap = _pixmap.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    // center the pixmap
+    int x = 0;
+    int y = 0;
 
-      picWidth = scaledPixmap.size().width();
-      picHeight = scaledPixmap.size().height();
-   }
+    if (picHeight < height) {
+        y = height / 2 - picHeight / 2;
+    }
 
-   // center the pixmap
-   int x = 0;
-   int y = 0;
-   
-   if (picHeight < height)
-      y = height / 2 - picHeight / 2;
-   
-   if (picWidth < width)
-      x = width / 2 - picWidth / 2;
+    if (picWidth < width) {
+        x = width / 2 - picWidth / 2;
+    }
 
-   painter.drawPixmap(x, y, scaledPixmap);
+    painter.drawPixmap(x, y, m_pixmap);
+}
+
+QPixmap* QImageDisplay::pixmap()
+{
+    return &m_pixmap;
 }
 
 void QImageDisplay::clear()
 {
-  _pixmap = QPixmap();
-  //setMaximumWidth(_pixmap.size().width());
-  //setMaximumHeight(_pixmap.size().height());
-  update();
+    m_pixmap = QPixmap();
+    update();
 }
 
 
