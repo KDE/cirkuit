@@ -54,13 +54,25 @@ void LivePreviewWidget::clear()
 void LivePreviewWidget::resizeEvent ( QResizeEvent* event )
 {
     kDebug() << "Resize event";
-    m_thread = new QThread(this);
+    
+    if (m_imageDisplay->pixmap() == 0) {
+        return;
+    }
+    
+    if (m_thread && m_thread->isRunning()) {
+        kDebug() << "A thread is running";
+        //return;
+    }
+    
+    delete m_thread;
+    m_thread = new QThread();
     m_resizer->moveToThread(m_thread);
     
     connect( m_thread, SIGNAL(started()), m_resizer, SLOT(start()) );
     connect( m_resizer, SIGNAL(finished(const QImage &)), m_imageDisplay, SLOT(setImage(const QImage &)) );
     
-    m_resizer->setSize(event->size());    
+    m_resizer->setSize(event->size()); 
+    kDebug() << "Resize event starting";
     m_thread->start();
     
     QWidget::resizeEvent ( event );

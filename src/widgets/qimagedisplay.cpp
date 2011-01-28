@@ -57,16 +57,12 @@ void Resizer::setInput(const QImage& input)
 
 void Resizer::start()
 {
-    if ( d->input.isNull() ) {
+    if ( d->input.isNull() || d->input.size().height() < d->size.height() || d->input.size().width() < d->size.width()) {
         emit error();
         return;       
     }
     
-    if (d->input.size().height() < d->size.height() || d->input.size().width() < d->size.width()) {
-        return;
-    }
-    
-    kDebug() << "I am not resizing to " << d->size;
+    kDebug() << "I am now resizing to " << d->size;
 
     QImage output = d->input.scaled( d->size, d->aspectMode, Qt::FastTransformation );
     emit finished( output );
