@@ -49,7 +49,7 @@ BackendChooseDialog::BackendChooseDialog(const QString& backendName, QWidget* pa
             m_ui.backendList->setCurrentItem(item);
         }
 
-        if (m_ui.backendList->currentItem()->text() == m_backend) {
+        if (*backend == m_backend) {
             m_ui.backendList->setCurrentItem(item);
         }
     }

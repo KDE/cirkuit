@@ -181,13 +181,12 @@ void MainWindow::clear()
 
 void MainWindow::newFile()
 {
-    QString backend = CirkuitSettings::defaultBackend();
-
-    BackendChooseDialog* dlg = new BackendChooseDialog(backend, this);
-    if (dlg->exec() == KDialog::Accepted) {
-        backend = dlg->backendName();
-        newDocument(backend);
-    }   
+    BackendChooseDialog* dlg = new BackendChooseDialog(CirkuitSettings::defaultBackend(), this);
+    
+    connect(dlg, SIGNAL(backendSelected(QString)), this, SLOT(newDocument(QString)));
+    
+    dlg->exec();
+    delete dlg;
 }
 
 void MainWindow::openFile()
