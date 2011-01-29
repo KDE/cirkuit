@@ -30,6 +30,7 @@ const char* BackendChooseDialog::descriptionTemplate = I18N_NOOP("<h1>%1</h1>" \
 BackendChooseDialog::BackendChooseDialog(const QString& backendName, QWidget* parent) : KDialog(parent)
 {
     setBackend(backendName);
+    setWindowTitle(i18n("Backend selection"));
     
     QWidget* w=new QWidget(this);
     m_ui.setupUi(w);

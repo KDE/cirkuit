@@ -33,7 +33,7 @@ GeneratorThread::GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Forma
 {
     m_gen = 0;
     m_backend = 0;
-    setup(in, out, m_backend, doc,false);
+    setup(in, out, m_backend, doc, false);
 }
 
 void GeneratorThread::run()
