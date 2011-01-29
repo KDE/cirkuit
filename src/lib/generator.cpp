@@ -132,6 +132,7 @@ bool Generator::execute(Cirkuit::Command* c)
         return false;
     }
     
+    emit output(c->name(), c->stdOutput());
     return true;
 }
 

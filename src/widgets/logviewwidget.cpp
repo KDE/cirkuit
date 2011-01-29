@@ -24,6 +24,9 @@ LogViewWidget::LogViewWidget ( const QString & title, QWidget* parent, Qt::Windo
 {
     m_textEdit = new KTextEdit(this);
     m_textEdit->setReadOnly(true);
+    QPalette palette;
+    palette.setColor(QPalette::Background, Qt::white);
+    m_textEdit->setPalette(palette);
     
     setWidget(m_textEdit);
 }
@@ -36,13 +39,19 @@ void LogViewWidget::clear()
 void LogViewWidget::displayError ( const QString& app, const QString& msg )
 {
     if (msg.isEmpty()) return;
-    QString message = QString("--- [ %1 ] ---\n%2\n").arg(app).arg(msg);
-    m_textEdit->append(message);
+    m_textEdit->setFontWeight(QFont::Bold);
+    m_textEdit->insertPlainText(QString("[%1]\n").arg(app));
+    m_textEdit->setFontWeight(QFont::Normal);
+    m_textEdit->insertPlainText(msg + "\n\n");
     show();
 }
 
 void LogViewWidget::displayMessage ( const QString& app, const QString& msg )
 {
-    QString message = QString("--- [ %1 ] ---\n%2\n").arg(app).arg(msg);
-    //m_textEdit->append(message);
+    if (msg.isEmpty()) return;
+    
+    m_textEdit->setFontWeight(QFont::Bold);
+    m_textEdit->insertPlainText(QString("[%1]\n").arg(app));
+    m_textEdit->setFontWeight(QFont::Normal);
+    m_textEdit->insertPlainText(msg + "\n\n");
 }
