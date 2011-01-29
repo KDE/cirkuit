@@ -33,21 +33,22 @@ GeneratorThread::GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Forma
 {
     setup(in,out,doc,false);
     m_gen = 0;
+	m_backend = 0;
 }
 
 void GeneratorThread::run()
 { 
-    Backend* b = Backend::autoChooseBackend(m_doc);
-    if (!b) {
+    m_backend = Backend::autoChooseBackend(m_doc);
+    if (!m_backend) {
         kError() << i18n("No backend could be selected!");
         return;
     } else {
-        kDebug() << b->id();
-        kDebug() << b->name();
-        kDebug() << b->description();
+        kDebug() << m_backend->id();
+        kDebug() << m_backend->name();
+        kDebug() << m_backend->description();
     }
     
-    m_gen = b->generator();
+    m_gen = m_backend->generator();
     
     connect(m_gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
     connect(m_gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));

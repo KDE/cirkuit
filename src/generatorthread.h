@@ -29,6 +29,7 @@ namespace Cirkuit
 class Command;
 class Generator;
 class Document;
+class Backend;
 }
 
 class GeneratorThread : public QThread
@@ -58,6 +59,7 @@ signals:
 private:
     Cirkuit::Document* m_doc;
     Cirkuit::Generator* m_gen;
+	Cirkuit::Backend* m_backend;
     bool m_saveToFile;
 };
 
