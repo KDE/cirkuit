@@ -32,6 +32,7 @@
 
 #include "widgets/livepreviewwidget.h"
 #include "widgets/logviewwidget.h"
+#include "widgets/backendchoosedialog.h"
 
 #include <KApplication>
 #include <KAction>
@@ -120,6 +121,7 @@ MainWindow::MainWindow(QWidget *)
 
 void MainWindow::setupActions()
 {
+	KStandardAction::openNew(this, SLOT(newFile()), actionCollection());
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
     KStandardAction::open(this, SLOT(openFile()), actionCollection());
     KStandardAction::save(this, SLOT(save()), actionCollection());
@@ -134,18 +136,6 @@ void MainWindow::setupActions()
     KAction* exportAction = new KAction(KIcon("document-export"), i18n("Export..."), 0);
     actionCollection()->addAction("export", exportAction);
     connect(exportAction, SIGNAL(triggered()), this, SLOT(exportFile()));
-
-    KAction* newCmFileAction = new KAction(i18n("Circuit Macros file"), 0);
-    actionCollection()->addAction("new_cmfile", newCmFileAction);
-    connect(newCmFileAction, SIGNAL(triggered()), this, SLOT(newCmDocument()));
-
-    KAction* newTikzFileAction = new KAction(i18n("TikZ file"), 0);
-    actionCollection()->addAction("new_tikzfile", newTikzFileAction);
-    connect(newTikzFileAction, SIGNAL(triggered()), this, SLOT(newTikzDocument()));
-
-    KAction* newGnuplotFileAction = new KAction(i18n("Gnuplot file"), 0);
-    actionCollection()->addAction("new_gnuplotfile", newGnuplotFileAction);
-    connect(newGnuplotFileAction, SIGNAL(triggered()), this, SLOT(newGnuplotDocument()));
 
     KAction* buildPreviewAction = new KAction(i18n("Build preview"), 0);
     buildPreviewAction->setShortcut(Qt::ALT + Qt::Key_1);
@@ -187,6 +177,17 @@ void MainWindow::substituteSaveAsAction()
 void MainWindow::clear()
 {
     m_doc->clear();
+}
+
+void MainWindow::newFile()
+{
+    QString backend = CirkuitSettings::defaultBackend();
+
+    BackendChooseDialog* dlg = new BackendChooseDialog(backend, this);
+    if (dlg->exec() == KDialog::Accepted) {
+        backend = dlg->backendName();
+        newDocument(backend);
+    }   
 }
 
 void MainWindow::openFile()
@@ -373,21 +374,6 @@ void MainWindow::newDocument(const QString& backendName)
     m_backend = Cirkuit::Backend::autoChooseBackend(m_doc);
 }
 
-void MainWindow::newCmDocument()
-{
-    newDocument("circuitmacros");
-}
-
-void MainWindow::newTikzDocument()
-{
-    newDocument("tikz");
-}
-
-void MainWindow::newGnuplotDocument()
-{
-    newDocument("gnuplot");
-}
-
 void MainWindow::updateTitle()
 {
     m_windowTitle = "Cirkuit";
@@ -404,6 +390,7 @@ void MainWindow::reset()
 {
     m_currentFile = "";
     m_doc->clear();
+	m_livePreviewWidget->clear();
     updateTitle();	
 }
 
@@ -473,7 +460,7 @@ void MainWindow::checkCircuitMacros()
 
 void MainWindow::askIfUpgrade(const QString& version)
 {
-	if (KMessageBox::questionYesNo(this, i18n("A new version of Circuit Macros (version %1) is available. Do you want to upgrade?", version), i18n("Upgrade")) == KMessageBox::Yes) {
+    if (KMessageBox::questionYesNo(this, i18n("A new version of Circuit Macros (version %1) is available. Do you want to upgrade?", version), i18n("Upgrade")) == KMessageBox::Yes) {
         cmm->downloadLatest();
     }
 }

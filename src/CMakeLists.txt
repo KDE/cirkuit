@@ -1,14 +1,14 @@
 project(cirkuit)
 
 find_package(KDE4 REQUIRED)
-include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${QT_QTNETWORK_INCLUDE_DIR})
+include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/widgets ${QT_QTNETWORK_INCLUDE_DIR})
 
 add_subdirectory( mimetypes )
 add_subdirectory( syntax )
-add_subdirectory( widgets )
 add_subdirectory( lib )
 include_directories( lib ${CMAKE_CURRENT_BINARY_DIR}/lib)
 add_subdirectory( backends )
+add_subdirectory( widgets )
 
 set(cirkuit_SRCS 
 	main.cpp

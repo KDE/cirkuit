@@ -55,6 +55,7 @@ public:
 private slots:
     void clear();
     void openFile();
+	void newFile();
     void saveAsFile(const KUrl& url);
     void saveAs();
     void save();
@@ -69,9 +70,6 @@ private slots:
     void openPreviewFile();
 
     void newDocument(const QString& backendName = QString());
-    void newCmDocument();
-    void newGnuplotDocument();
-    void newTikzDocument();
 
     void updateTitle();
     void updateConfiguration();
