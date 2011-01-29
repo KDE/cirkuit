@@ -10,6 +10,10 @@
             <label>Default backend.</label>
             <default>Circuit Macros</default>
         </entry>
+        <entry name="AutoSelectBackend" type="Bool">
+            <label>Automatic backend selection</label>
+            <default>true</default>
+        </entry>        
         <entry name="RefreshInterval" type="Int">
             <label>Preview generation refresh timeout.</label>
             <default>10000</default>
