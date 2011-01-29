@@ -92,25 +92,7 @@ protected slots:
      */ 
     bool execute(Cirkuit::Command* command);
     
-public slots:
-    /**
-     * Adds a command to the command queue (use start() to execute the queue)
-     * @param command the command
-     * @see start 
-     */
-    void addCommand(Cirkuit::Command* command);
-    
-    /**
-     * Clears the entire command queue
-     */
-    void clear();
-    
-    /**
-     * Run the command queue
-     * @return true if all commands are executed successfully, false otherwise
-     */
-    bool start();
-    
+public slots:    
     /**
      * Convert a format into another. Note that this function only generate the command queue. 
      * You need to call start() to actually execute the queue
