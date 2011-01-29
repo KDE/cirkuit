@@ -25,11 +25,12 @@
 
 class CircuitMacrosGenerator : public Cirkuit::Generator
 {
-
+    Q_OBJECT
 public:
     explicit CircuitMacrosGenerator(Cirkuit::Backend* backend = 0, QObject* parent = 0);
     virtual ~CircuitMacrosGenerator();
     virtual bool convert(const Cirkuit::Format& in, const Cirkuit::Format& out);
+    
 };
 
 #endif // CIRCUITMACROSGENERATOR_H
