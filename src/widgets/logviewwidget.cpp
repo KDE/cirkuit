@@ -39,10 +39,14 @@ void LogViewWidget::clear()
 void LogViewWidget::displayError ( const QString& app, const QString& msg )
 {
     if (msg.isEmpty()) return;
+    
     m_textEdit->setFontWeight(QFont::Bold);
+    m_textEdit->setTextColor(Qt::red);
     m_textEdit->insertPlainText(QString("[%1]\n").arg(app));
     m_textEdit->setFontWeight(QFont::Normal);
     m_textEdit->insertPlainText(msg + "\n\n");
+    m_textEdit->setTextColor(Qt::black);
+    
     show();
 }
 

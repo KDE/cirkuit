@@ -103,7 +103,7 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
         }
         tempFile()->close();
     
-        execute(gnuplot);
+        if (!execute(gnuplot)) return false;
         
         if (out == Format::Tex) {
             return true;
@@ -123,7 +123,7 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
         Command* latexCmd = new Command("pdflatex", latexDoc, latexArgs);
         latexCmd->setWorkingDirectory(workingDir().path());
         latexCmd->setEnvironment(environment);
-        execute(latexCmd);
+        if (!execute(latexCmd)) return false;
         
         return convert(Format::Pdf, out);
     }

@@ -55,6 +55,7 @@ signals:
     void error(const QString& appname, const QString& msg);
     void output(const QString& appname, const QString& msg);
     void fail();
+    void success();
     
 private:
     Cirkuit::Document* m_doc;

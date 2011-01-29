@@ -75,7 +75,7 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         Command* m4command = new Command("m4", "", m4args);
         m4command->setEnvironment(env);
         m4command->setWorkingDirectory(workingDir().path());
-        execute(m4command);
+        if (!execute(m4command)) return false;
         
         QString m4out = m4command->stdOutput();
         
@@ -96,7 +96,7 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
             
             picCommand = new Command("pic", m4out, picargs);
         }       
-        execute(picCommand);
+        if (!execute(picCommand)) return false;
             
         QString picout = picCommand->stdOutput();
         
@@ -131,7 +131,7 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         }              
         latexCmd->setWorkingDirectory(workingDir().path());
         latexCmd->setEnvironment(environment);
-        execute(latexCmd);
+        if (!execute(latexCmd)) return false;
     
         // Now that a DVI has been generated, convert it to the
         // desired output format

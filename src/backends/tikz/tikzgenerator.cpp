@@ -76,7 +76,7 @@ bool TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& ou
         Command* latexCmd = new Command("pdflatex", latexDoc, latexArgs);
         latexCmd->setWorkingDirectory(workingDir().path());
         latexCmd->setEnvironment(environment);
-        execute(latexCmd);
+        if (!execute(latexCmd)) return false;
         
         return convert(Format::Pdf, out);
     }

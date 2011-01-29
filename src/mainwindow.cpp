@@ -105,7 +105,7 @@ MainWindow::MainWindow(QWidget *)
     updateConfiguration();
     statusBar()->showMessage(i18n("Ready"), 3000);
     
-    connect(m_generator, SIGNAL(finished()), this, SLOT(builtNotification()));
+    connect(m_generator, SIGNAL(success()), this, SLOT(builtNotification()));
     connect(m_generator, SIGNAL(fail()), this, SLOT(failedNotification()));
     connect(m_doc, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(documentModified(KTextEditor::Document*)));
 
@@ -339,7 +339,7 @@ void MainWindow::openPreviewFile()
 
 void MainWindow::builtNotification()
 {
-    statusBar()->showMessage("Preview built", 3000);
+    statusBar()->showMessage(i18n("Preview built"), 3000);
 }
 
 void MainWindow::newDocument(const QString& backendName)
@@ -473,7 +473,7 @@ void MainWindow::circuitMacrosConfigured()
 void MainWindow::failedNotification()
 {
     m_livePreviewWidget->setImage(QImage());
-    KMessageBox::error(this, i18n("Unable to generate a preview for the current input"), i18n("Error"));
+    statusBar()->showMessage(i18n("Unable to generate a preview for the current input"), 5000);
 }
 
 void MainWindow::showPreview(const QImage& image)

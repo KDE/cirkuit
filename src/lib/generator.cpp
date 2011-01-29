@@ -124,7 +124,6 @@ bool Generator::execute(Cirkuit::Command* c)
 {
     c->setWorkingDirectory(workingDir().path());
     connect(c, SIGNAL(newStandardError(QString,QString)), this, SIGNAL(error(QString,QString)));
-    connect(c, SIGNAL(newStandardOutput(QString,QString)), this, SIGNAL(output(QString,QString)));
     kDebug() << "Executing " << c->name() << " with arguments " << c->args();
     
     if (!c->execute()) {
@@ -186,13 +185,11 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
         if (out == Format::Postscript) {
             QStringList args;
             args << formatPath(in) << "-q" << QString("-o %1").arg(formatPath(Format::Postscript));
-            execute(new Command("dvips", "", args, this));
-            return true;
+            return execute(new Command("dvips", "", args, this));
         } else if (out == Format::Eps) {
             QStringList args;
             args << "-E" << formatPath(in) << "-q" << "-o" << formatPath(Format::Eps);
-            execute(new Command("dvips", "", args, this));
-            return true;
+            return execute(new Command("dvips", "", args, this));
         } else {
             bool b = true;
             if (!convert(in,Format::Eps)) b = false;
@@ -205,13 +202,11 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
         if (out == Format::Eps) {
             QStringList args;
             args << formatPath(in) << formatPath(Format::Eps);
-            execute(new Command("ps2epsi", "", args, this));
-            return true;
+            return execute(new Command("ps2epsi", "", args, this));
         } else if (out == Format::Pdf) {
             QStringList args;
             args << formatPath(in) << formatPath(Format::Pdf);
-            execute(new Command("ps2pdf", "", args, this));
-            return true;
+            return execute(new Command("ps2pdf", "", args, this));
         } else if (out == Format::Png) {
             bool b = true;
             if (!convert(in,Format::Eps)) b = false;
@@ -226,13 +221,11 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
         if (out == Format::Postscript) {
             QStringList args;
             args << formatPath(in) << formatPath(Format::Postscript);
-            execute(new Command("ps2ps", "", args, this));
-            return true;
+            return execute(new Command("ps2ps", "", args, this));
         } else if (out == Format::Pdf) {
             QStringList args;
             args << formatPath(in);// << QString("--outfile=%1").arg(formatPath(Pdf));
-            execute(new Command("epstopdf", "", args, this));
-            return true;
+            return execute(new Command("epstopdf", "", args, this));
         } else {
             bool b = true;
             if (!convert(in,Format::Pdf)) b = false;
@@ -245,18 +238,15 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
         if (out == Format::Svg) {
             QStringList args;
             args << formatPath(in) << formatPath(Format::Svg);
-            execute(new Command("pdf2svg", "", args, this));
-            return true;
+            return execute(new Command("pdf2svg", "", args, this));
         } else if (out == Format::Png) {
             QStringList args;
             args << "-png" << "-r" << QString::number(d->resolution) << formatPath(in) << d->tempFileInfo->baseName();
-            execute(new Command("pdftoppm", "", args, this));
-            return true;
+            return execute(new Command("pdftoppm", "", args, this));
         } else if (out == Format::Jpeg) {
             QStringList args;
             args << "-jpeg" << "-r" << QString::number(d->resolution) << formatPath(in) << d->tempFileInfo->baseName();
-            execute(new Command("pdftoppm", "", args, this));
-            return true;
+            return execute(new Command("pdftoppm", "", args, this));
         } else if (out == Format::Gif) {
             bool b = true;
             if (!convert(in,Format::Ppm)) b = false;
@@ -265,18 +255,15 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
         } else if (out == Format::Ppm) {
             QStringList args;
             args << "-r" << QString::number(d->resolution) << formatPath(in) << d->tempFileInfo->baseName();
-            execute(new Command("pdftoppm", "", args, this));
-            return true;
+            return execute(new Command("pdftoppm", "", args, this));
         } else if (out == Format::Eps) {
             QStringList args;
             args << "-eps" << formatPath(in) << formatPath(out);
-            execute(new Command("pdftops", "", args, this));
-            return true;
+            return execute(new Command("pdftops", "", args, this));
         } else if (out == Format::Postscript) {
             QStringList args;
             args << formatPath(in) << formatPath(out);
-            execute(new Command("pdftops", "", args, this));
-            return true;
+            return execute(new Command("pdftops", "", args, this));
         }
     }
 
@@ -284,9 +271,7 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
         if (out == Format::Gif) {
             QStringList args;
             args << formatPath(Format::Ppm) << formatPath(Format::Gif);
-            Command *c = new Command("convert", "", args, this);
-            execute(c);
-            return true;
+            return execute(new Command("convert", "", args, this));
         }
     }
 

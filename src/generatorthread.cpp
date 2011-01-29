@@ -56,12 +56,16 @@ void GeneratorThread::run()
     
     connect(m_gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
     connect(m_gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));
+    connect(m_gen, SIGNAL(error(QString,QString)), this, SLOT(quit()));
     connect(m_gen, SIGNAL(output(QString,QString)), this, SIGNAL(output(QString,QString)));
     connect(m_gen, SIGNAL(fail()), this, SIGNAL(fail()));
     m_gen->setDocument(m_doc);
 	m_gen->setResolution(CirkuitSettings::resolutionPpm());
-    m_gen->convert(m_input, m_output);   
-        
+    if (!m_gen->convert(m_input, m_output)) {
+        emit fail();
+        return;
+    }
+    
     if (m_output == Format::QtImage) {
         m_gen->render();
     }
@@ -69,6 +73,8 @@ void GeneratorThread::run()
     if (m_saveToFile) {
         emit fileReady(m_gen->formatPath(m_output));
     }
+    
+    emit success();
 }
 
 GeneratorThread::~GeneratorThread()
