@@ -184,6 +184,7 @@ void MainWindow::newFile()
     BackendChooseDialog* dlg = new BackendChooseDialog(CirkuitSettings::defaultBackend(), this);
     
     connect(dlg, SIGNAL(backendSelected(QString)), this, SLOT(newDocument(QString)));
+    connect(dlg, SIGNAL(defaultBackendSelected(QString)), this, SLOT(setDefaultBackend(QString)));
     
     dlg->exec();
     delete dlg;
@@ -493,3 +494,7 @@ void MainWindow::initializeBackend()
     m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
 }
 
+void MainWindow::setDefaultBackend(const QString& backend)
+{
+    CirkuitSettings::setDefaultBackend(backend);
+}

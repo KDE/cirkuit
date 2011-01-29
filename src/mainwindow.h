@@ -86,6 +86,7 @@ private slots:
     void reset();
     
     void initializeBackend();
+    void setDefaultBackend(const QString& backend);
 
 private:
     void setupActions();
