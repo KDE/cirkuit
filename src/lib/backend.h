@@ -166,6 +166,14 @@ public:
      */
     static Backend* autoChooseBackend(Cirkuit::Document* doc);
     
+    /** 
+     * Overloaded operator to check if the id or the name of the backend
+     * corresponds to the given QString @p rhs
+     * @param rhs a backend id or name
+     * @return @p true if the name or id corresponds
+     */
+    bool operator==(const QString& rhs) const;
+    
   private:
     BackendPrivate* d;
 };

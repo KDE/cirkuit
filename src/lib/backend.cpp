@@ -84,6 +84,12 @@ KUrl Backend::helpUrl() const
     return KUrl();
 }
 
+bool Backend::operator==(const QString& rhs) const
+{
+    return QString::compare(id(), rhs, Qt::CaseInsensitive) == 0 || QString::compare(name(), rhs, Qt::CaseInsensitive) == 0;
+}
+
+
 QWidget* Backend::settingsWidget(QWidget* parent) const
 {
     Q_UNUSED(parent)
@@ -154,7 +160,7 @@ Backend* Backend::getBackend(const QString& name)
 {
     QList<Backend*> backends = availableBackends();
     foreach(Backend* b, backends) {
-        if (QString::compare(b->name(), name, Qt::CaseInsensitive) == 0 || QString::compare(b->id(), name, Qt::CaseInsensitive) == 0) {
+        if (*b == name) {
             return b;
         }
     }
