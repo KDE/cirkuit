@@ -31,14 +31,18 @@ using namespace Cirkuit;
 
 GeneratorThread::GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc, QObject* parent): QThread(parent)
 {
-    setup(in,out,doc,false);
     m_gen = 0;
-	m_backend = 0;
+    m_backend = 0;
+    setup(in, out, m_backend, doc,false);
 }
 
 void GeneratorThread::run()
 { 
-    m_backend = Backend::autoChooseBackend(m_doc);
+    Cirkuit::Backend* bestBackend = Backend::autoChooseBackend(m_doc);
+    if (CirkuitSettings::autoSelectBackend()) {
+        m_backend = bestBackend;
+    }
+    
     if (!m_backend) {
         kError() << i18n("No backend could be selected!");
         return;
@@ -72,12 +76,13 @@ GeneratorThread::~GeneratorThread()
     delete m_gen;
 }
 
-void GeneratorThread::setup(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc, bool saveToFile)
+void GeneratorThread::setup(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, Cirkuit::Document* doc, bool saveToFile)
 {
     m_input = in;
     m_output = out;
     m_doc = doc;
     m_saveToFile = saveToFile;
+    m_backend = backend;
 }
 
 Generator* GeneratorThread::generator()

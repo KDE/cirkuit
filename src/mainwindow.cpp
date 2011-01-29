@@ -275,7 +275,7 @@ void MainWindow::exportFile()
         QFileInfo fileinfo(path);
         Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog.currentFilterMimeType());
         m_doc->setDirectory(m_currentFile.directory());
-        m_generator->setup(Cirkuit::Format::Source, format, m_doc, true);
+        m_generator->setup(Cirkuit::Format::Source, format, m_backend, m_doc, true);
         statusBar()->showMessage("Exporting image...");
         m_generator->start();
         m_tempSavePath = path;
@@ -316,7 +316,7 @@ void MainWindow::buildPreview()
     m_logViewWidget->hide();
     
     m_doc->setDirectory(m_currentFile.directory());
-    m_generator->setup(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_doc);
+    m_generator->setup(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc);
     m_generator->start();
     
     kDebug() << "Preview generation in progress...";
@@ -370,8 +370,6 @@ void MainWindow::newDocument(const QString& backendName)
     cursor.setLine(m_doc->initialLineNumber());
     m_view->setCursorPosition(cursor);
     m_doc->setModified(false);
-    
-    m_backend = Cirkuit::Backend::autoChooseBackend(m_doc);
 }
 
 void MainWindow::updateTitle()
@@ -428,6 +426,8 @@ void MainWindow::updateConfiguration()
     } else {
         m_updateTimer = 0;
     }
+    
+    m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
 }
 
 void MainWindow::showManual()

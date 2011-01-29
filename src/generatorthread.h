@@ -45,7 +45,7 @@ protected:
     Cirkuit::Format m_input, m_output;
     
 public slots:
-    void setup(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc = 0, bool saveToFile = false);
+    void setup(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend = 0, Cirkuit::Document* doc = 0, bool saveToFile = false);
     void run();
     
 signals:
