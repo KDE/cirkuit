@@ -127,10 +127,12 @@ bool Generator::execute(Cirkuit::Command* c)
     kDebug() << "Executing " << c->name() << " with arguments " << c->args();
     
     if (!c->execute()) {
+        kDebug() << c->name() << " failed";
         emit fail();
         return false;
     }
     
+    kDebug() << c->name() << " executed correctly";
     emit output(c->name(), c->stdOutput());
     return true;
 }
@@ -165,10 +167,11 @@ bool Cirkuit::Generator::render()
 
 bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
-    kDebug() << "Inside the converter..." << "in: " << in.type() << " out: " << out.type();
+    kDebug() << "Inside the converter..." << "in: " << in.type() << " " << in.extension() << ", out: " << out.type() << " " << out.extension();
     
     // this class doesn't know how to convert from source
     if (in == Format::Source || out == Format::Source || out == Format::Dvi) {
+        kDebug() << "Cannot convert from or to source/DVI";
         return false;
     }
     

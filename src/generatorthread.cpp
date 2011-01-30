@@ -31,7 +31,6 @@ using namespace Cirkuit;
 
 GeneratorThread::GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc, QObject* parent): QThread(parent)
 {
-    m_gen = 0;
     m_backend = 0;
     setup(in, out, m_backend, doc, false);
 }
@@ -52,26 +51,26 @@ void GeneratorThread::run()
         kDebug() << m_backend->description();
     }
     
-    m_gen = m_backend->generator();
+    Cirkuit::Generator* gen = m_backend->generator();
     
-    connect(m_gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
-    connect(m_gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));
-    connect(m_gen, SIGNAL(error(QString,QString)), this, SLOT(quit()));
-    connect(m_gen, SIGNAL(output(QString,QString)), this, SIGNAL(output(QString,QString)));
-    connect(m_gen, SIGNAL(fail()), this, SIGNAL(fail()));
-    m_gen->setDocument(m_doc);
-	m_gen->setResolution(CirkuitSettings::resolutionPpm());
-    if (!m_gen->convert(m_input, m_output)) {
+    connect(gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
+    connect(gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));
+    connect(gen, SIGNAL(error(QString,QString)), this, SLOT(quit()));
+    connect(gen, SIGNAL(output(QString,QString)), this, SIGNAL(output(QString,QString)));
+    connect(gen, SIGNAL(fail()), this, SIGNAL(fail()));
+    gen->setDocument(m_doc);
+	gen->setResolution(CirkuitSettings::resolutionPpm());
+    if (!gen->convert(m_input, m_output)) {
         emit fail();
         return;
     }
     
     if (m_output == Format::QtImage) {
-        m_gen->render();
+        gen->render();
     }
     
     if (m_saveToFile) {
-        emit fileReady(m_gen->formatPath(m_output));
+        emit fileReady(gen->formatPath(m_output));
     }
     
     emit success();
@@ -79,7 +78,7 @@ void GeneratorThread::run()
 
 GeneratorThread::~GeneratorThread()
 {
-    delete m_gen;
+    
 }
 
 void GeneratorThread::setup(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, Cirkuit::Document* doc, bool saveToFile)
@@ -93,6 +92,5 @@ void GeneratorThread::setup(const Cirkuit::Format& in, const Cirkuit::Format& ou
 
 Generator* GeneratorThread::generator()
 {
-    return m_gen;
+    return 0;
 }
-

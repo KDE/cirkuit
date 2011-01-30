@@ -44,13 +44,11 @@ CircuitMacrosGenerator::~CircuitMacrosGenerator()
 
 bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
+    kDebug() << "Inside the CircuitMacros generator...";
+    
       // Check if the conversion can be handled by the super-class
     bool done = Cirkuit::Generator::convert(in, out);
-    if (done) {
-        return true;
-    }
-    
-    kDebug() << "Inside the CircuitMacros generator...";
+    if (done) return true;
     
     if (in == Format::Source) {
         tempFile()->open();
@@ -137,10 +135,12 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         // desired output format
         
         if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_pgf) {        
-            Generator::convert(Format::Pdf, out);
+            return Generator::convert(Format::Pdf, out);
         } else {
-            Generator::convert(Format::Dvi, out);
+            return Generator::convert(Format::Dvi, out);
         }
+        
+        return true;
     }
     
     return false;
