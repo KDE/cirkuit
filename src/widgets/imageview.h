@@ -24,6 +24,7 @@
 #include <QScrollArea>
 
 class QLabel;
+
 class ImageView: public QScrollArea
 {
     Q_OBJECT
@@ -35,8 +36,19 @@ public:
     
 public slots:
     void setImage(const QImage& image);
-    
     void clear();
+    
+    void zoomIn();
+    void zoomOut();
+    void normalSize();
+    
+private slots:
+    void scaleImage(double factor);
+    void adjustScrollBar(QScrollBar* scrollBar, double factor);
+    
+signals:
+    void enableZoomIn(bool);
+    void enableZoomOut(bool);
     
 private:
     QImage m_image;

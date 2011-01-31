@@ -65,3 +65,10 @@ void LivePreviewWidget::setSmoothTransformation()
     //m_imageView->setFastTransformation(false);
 }
 
+ImageView* LivePreviewWidget::view() const
+{
+    return m_imageView;
+}
+
+
+

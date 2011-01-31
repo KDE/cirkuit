@@ -31,6 +31,7 @@
 #include "generator.h"
 
 #include "widgets/livepreviewwidget.h"
+#include "widgets/imageview.h"
 #include "widgets/logviewwidget.h"
 #include "widgets/backendchoosedialog.h"
 
@@ -129,6 +130,14 @@ void MainWindow::setupActions()
     KStandardAction::clear(this, SLOT(clear()), actionCollection());
     KStandardAction::preferences(this, SLOT(configure()),
                                             actionCollection());
+    
+    ImageView* view = m_livePreviewWidget->view();
+    KAction* zoomInAction = KStandardAction::zoomIn(view, SLOT(zoomIn()), actionCollection());
+    KAction* zoomOutAction = KStandardAction::zoomOut(view, SLOT(zoomOut()), actionCollection());
+    KStandardAction::actualSize(view, SLOT(normalSize()), actionCollection());
+    
+    connect(view, SIGNAL(enableZoomIn(bool)), zoomInAction, SLOT(setEnabled(bool)));
+    connect(view, SIGNAL(enableZoomOut(bool)), zoomOutAction, SLOT(setEnabled(bool)));
                                             
     recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile( const KUrl& )),
                                                                     actionCollection());

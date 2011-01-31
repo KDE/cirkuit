@@ -26,6 +26,10 @@
         <Action name="show_live_preview" />
         <Action name="show_log_view" />
         <Separator/>
+        <Action name="view_zoom_in" />
+        <Action name="view_zoom_out" />
+        <Action name="view_actual_size" />
+        <Separator/>
     </Menu>
   
     <Menu name="help" >
@@ -56,6 +60,8 @@
     <DefineGroup name="find_operations" />
     <Separator />
     <DefineGroup name="zoom_operations" />  
+    <Action name="view_zoom_in" />
+    <Action name="view_zoom_out" />
 </ToolBar>
 
 <Menu name="ktexteditor_popup" noMerge="1">

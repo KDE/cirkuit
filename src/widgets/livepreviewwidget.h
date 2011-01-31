@@ -32,6 +32,8 @@ class LivePreviewWidget : public QDockWidget
     Q_OBJECT
 public:
     LivePreviewWidget(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0);
+    
+    ImageView* view() const;
 
 private:
     ImageView* m_imageView;
@@ -40,7 +42,7 @@ private:
 public slots:
     void setImage(const QImage&);
     void clear();
-
+    
     void setSmoothTransformation();
 
 protected:

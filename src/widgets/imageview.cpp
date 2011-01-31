@@ -20,6 +20,7 @@
 #include "imageview.h"
 
 #include <QLabel>
+#include <QScrollBar>
 
 ImageView::ImageView(QWidget* parent): QScrollArea(parent), m_image(QImage())
 {
@@ -50,13 +51,46 @@ void ImageView::setImage(const QImage& image)
     }
     
     m_imageLabel->setPixmap(QPixmap::fromImage(m_image));
-    m_scaleFactor = 1.0;
-    m_imageLabel->adjustSize();
+    normalSize();
 }
 
 void ImageView::clear()
 {
     m_image = QImage();
     m_imageLabel->setPixmap(QPixmap());
+}
+
+void ImageView::adjustScrollBar(QScrollBar* scrollBar, double factor)
+{
+    scrollBar->setValue(int(factor * scrollBar->value() + ((factor - 1) * scrollBar->pageStep()/2)));
+}
+
+void ImageView::scaleImage(double factor)
+{
+    Q_ASSERT(m_imageLabel->pixmap());
+    m_scaleFactor *= factor;
+    m_imageLabel->resize(m_scaleFactor * m_imageLabel->pixmap()->size());
+
+    adjustScrollBar(this->horizontalScrollBar(), factor);
+    adjustScrollBar(this->verticalScrollBar(), factor);
+    
+    emit enableZoomIn(m_scaleFactor < 1.5);
+    emit enableZoomOut(m_scaleFactor > 0.5);
+}
+
+void ImageView::normalSize()
+{
+    m_imageLabel->adjustSize();
+    m_scaleFactor = 1.0;
+}
+
+void ImageView::zoomIn()
+{
+    scaleImage(1.25);
+}
+
+void ImageView::zoomOut()
+{
+    scaleImage(0.8);
 }
 
