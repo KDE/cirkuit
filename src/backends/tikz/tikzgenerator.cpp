@@ -71,6 +71,9 @@ bool TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& ou
         environment << dirString;
         
         QStringList latexArgs;
+        foreach (QString arg, TikzSettings::latexargs()) {
+            latexArgs << arg;
+        }
         latexArgs << QString("-jobname=%1").arg(tempFileInfo()->baseName());
         
         Command* latexCmd = new Command("pdflatex", latexDoc, latexArgs);
