@@ -23,7 +23,7 @@
 
 #include <QDockWidget>
 
-class QImageDisplay;
+class ImageView;
 class QImage;
 class QTimer;
 
@@ -34,8 +34,8 @@ public:
     LivePreviewWidget(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0);
 
 private:
-    QImageDisplay* imageDisplay;
-    QTimer* timer;
+    ImageView* m_imageView;
+    QTimer* m_timer;
 
 public slots:
     void setImage(const QImage&);

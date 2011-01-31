@@ -19,7 +19,7 @@
 ***************************************************************************/
 
 #include "livepreviewwidget.h"
-#include "qimagedisplay.h"
+#include "imageview.h"
 
 #include <QImage>
 #include <QTimer>
@@ -28,40 +28,40 @@
 LivePreviewWidget::LivePreviewWidget(const QString & title, QWidget * parent, Qt::WindowFlags flags)
   : QDockWidget(title, parent, flags)
 {
-  imageDisplay = new QImageDisplay(this);
-  imageDisplay->setBackgroundRole(QPalette::Base);
+    m_imageView = new ImageView(this);
   
-  timer = new QTimer;
-  timer->setSingleShot(true);
-  timer->setInterval(100);
+    m_timer = new QTimer;
+    m_timer->setSingleShot(true);
+    m_timer->setInterval(100);
   
-  connect(timer, SIGNAL(timeout()), this, SLOT(setSmoothTransformation()));
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(setSmoothTransformation()));
   
-  setWidget(imageDisplay);
-  setMinimumHeight(180);
-  setMinimumWidth(150);
+    setWidget(m_imageView);
+    setMinimumHeight(180);
+    setMinimumWidth(150);
 }
 
 void LivePreviewWidget::setImage(const QImage& image)
 {
-  setSmoothTransformation();
-  imageDisplay->setImage(image);
+    setSmoothTransformation();
+    m_imageView->setImage(image);
 }
 
 void LivePreviewWidget::clear()
 {
-  imageDisplay->clear();
+    m_imageView->clear();
 }
 
-void LivePreviewWidget::resizeEvent ( QResizeEvent* /*event*/ )
+void LivePreviewWidget::resizeEvent (QResizeEvent* event)
 {
-  imageDisplay->setFastTransformation(true);
+    Q_UNUSED(event)
+    //m_imageView->setFastTransformation(true);
   
-  timer->start();
+    m_timer->start();
 }
 
 void LivePreviewWidget::setSmoothTransformation()
 {
-  imageDisplay->setFastTransformation(false);
+    //m_imageView->setFastTransformation(false);
 }
 
