@@ -37,19 +37,10 @@ public:
 
 private:
     ImageView* m_imageView;
-    QTimer* m_timer;
 
 public slots:
     void setImage(const QImage&);
     void clear();
-    
-    void setSmoothTransformation();
-
-protected:
-//     void dragEnterEvent ( QDragEnterEvent * event );
-//     void dragLeaveEvent ( QDragLeaveEvent * event );
-//     void moveEvent ( QMoveEvent * event );
-    void resizeEvent ( QResizeEvent * event );
 };
 
 #endif

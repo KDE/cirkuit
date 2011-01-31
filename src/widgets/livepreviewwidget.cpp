@@ -30,12 +30,6 @@ LivePreviewWidget::LivePreviewWidget(const QString & title, QWidget * parent, Qt
 {
     m_imageView = new ImageView(this);
   
-    m_timer = new QTimer;
-    m_timer->setSingleShot(true);
-    m_timer->setInterval(100);
-  
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(setSmoothTransformation()));
-  
     setWidget(m_imageView);
     setMinimumHeight(180);
     setMinimumWidth(150);
@@ -43,26 +37,12 @@ LivePreviewWidget::LivePreviewWidget(const QString & title, QWidget * parent, Qt
 
 void LivePreviewWidget::setImage(const QImage& image)
 {
-    setSmoothTransformation();
     m_imageView->setImage(image);
 }
 
 void LivePreviewWidget::clear()
 {
     m_imageView->clear();
-}
-
-void LivePreviewWidget::resizeEvent (QResizeEvent* event)
-{
-    Q_UNUSED(event)
-    //m_imageView->setFastTransformation(true);
-  
-    m_timer->start();
-}
-
-void LivePreviewWidget::setSmoothTransformation()
-{
-    //m_imageView->setFastTransformation(false);
 }
 
 ImageView* LivePreviewWidget::view() const
