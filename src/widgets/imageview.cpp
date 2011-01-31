@@ -21,43 +21,42 @@
 
 #include <QLabel>
 #include <QScrollBar>
+#include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 
-ImageView::ImageView(QWidget* parent): QScrollArea(parent), m_image(QImage())
+ImageView::ImageView(QWidget* parent): QGraphicsView(parent), m_image(QImage())
 {
-    m_imageLabel = new QLabel;
-    m_imageLabel->setBackgroundRole(QPalette::Base);
-    m_imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    m_imageLabel->setScaledContents(true);
-    
+    m_scene = new QGraphicsScene(this);
+    m_pixmap = m_scene->addPixmap(QPixmap::fromImage(m_image));
     setBackgroundRole(QPalette::Base);
-    setWidget(m_imageLabel);
-    setAlignment(Qt::AlignCenter);
+    setScene(m_scene);
+    setTransformationAnchor(QGraphicsView::AnchorViewCenter);
+    setRenderHints(QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
+    setDragMode(QGraphicsView::ScrollHandDrag);
     
     setMinimumWidth(100);
     setMinimumHeight(50);
+    
+    normalSize();
 }
 
 ImageView::~ImageView()
 {
-
+    delete m_imageLabel;
+    delete m_scene;
 }
 
 void ImageView::setImage(const QImage& image)
 {
-    m_image = image;
-    
-    if (image.isNull()) {
-        return;
-    }
-    
-    m_imageLabel->setPixmap(QPixmap::fromImage(m_image));
-    normalSize();
+    m_pixmap->setPixmap(QPixmap::fromImage(image));
+    m_pixmap->update();
 }
 
 void ImageView::clear()
 {
     m_image = QImage();
-    m_imageLabel->setPixmap(QPixmap());
+    m_pixmap->setPixmap(QPixmap());
+    m_pixmap->update();
 }
 
 void ImageView::adjustScrollBar(QScrollBar* scrollBar, double factor)
@@ -67,21 +66,22 @@ void ImageView::adjustScrollBar(QScrollBar* scrollBar, double factor)
 
 void ImageView::scaleImage(double factor)
 {
-    Q_ASSERT(m_imageLabel->pixmap());
     m_scaleFactor *= factor;
-    m_imageLabel->resize(m_scaleFactor * m_imageLabel->pixmap()->size());
+    m_pixmap->setScale(m_scaleFactor);
 
     adjustScrollBar(this->horizontalScrollBar(), factor);
     adjustScrollBar(this->verticalScrollBar(), factor);
     
     emit enableZoomIn(m_scaleFactor < 1.5);
-    emit enableZoomOut(m_scaleFactor > 0.5);
+    emit enableZoomOut(m_scaleFactor > 0.1);
+    
+    setSceneRect(m_scene->itemsBoundingRect());
 }
 
 void ImageView::normalSize()
 {
-    m_imageLabel->adjustSize();
     m_scaleFactor = 1.0;
+    scaleImage(1.0);
 }
 
 void ImageView::zoomIn()

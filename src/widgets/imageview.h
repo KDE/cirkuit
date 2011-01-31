@@ -21,11 +21,12 @@
 #define IMAGEVIEW_H
 
 #include <QImage>
-#include <QScrollArea>
+#include <QGraphicsView>
 
+class QGraphicsPixmapItem;
 class QLabel;
 
-class ImageView: public QScrollArea
+class ImageView: public QGraphicsView
 {
     Q_OBJECT
 public:
@@ -53,6 +54,8 @@ signals:
 private:
     QImage m_image;
     QLabel* m_imageLabel;
+    QGraphicsScene* m_scene;
+    QGraphicsPixmapItem* m_pixmap;
     
     double m_scaleFactor;
 };
