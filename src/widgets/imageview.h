@@ -36,6 +36,8 @@ public:
     ImageView(QWidget* parent = 0);
     virtual ~ImageView();
     
+    double scaleFactor() const;
+    
 public slots:
     void setImage(const QImage& image);
     void setPdfUrl(const QString& pdfUrl);

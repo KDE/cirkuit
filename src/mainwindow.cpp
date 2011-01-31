@@ -78,6 +78,7 @@ MainWindow::MainWindow(QWidget *)
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
    
     m_livePreviewWidget = new LivePreviewWidget(i18n("Live preview"), this);
+    m_imageView = m_livePreviewWidget->view();
     addDockWidget(Qt::TopDockWidgetArea, m_livePreviewWidget);
     
     m_logViewWidget = new LogViewWidget(i18n("Log"), this);
@@ -113,10 +114,8 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(previewReady(QImage)), this, SLOT(showPreview(QImage)));
     connect(m_generator, SIGNAL(fileReady(QString)), this, SLOT(saveFileToDisk(QString)));
     connect(m_generator, SIGNAL(error(QString,QString)), m_logViewWidget, SLOT(displayError(QString,QString)));
-    connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));
-    
-    ImageView* view = m_livePreviewWidget->view();
-    connect(m_generator, SIGNAL(previewUrl(QString)), view, SLOT(setPdfUrl(QString)));
+    connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));   
+    connect(m_generator, SIGNAL(previewUrl(QString)), m_imageView, SLOT(setPdfUrl(QString)));
     
     checkCircuitMacros();
     initializeBackend();
@@ -134,13 +133,12 @@ void MainWindow::setupActions()
     KStandardAction::preferences(this, SLOT(configure()),
                                             actionCollection());
     
-    ImageView* view = m_livePreviewWidget->view();
-    KAction* zoomInAction = KStandardAction::zoomIn(view, SLOT(zoomIn()), actionCollection());
-    KAction* zoomOutAction = KStandardAction::zoomOut(view, SLOT(zoomOut()), actionCollection());
-    KStandardAction::actualSize(view, SLOT(normalSize()), actionCollection());
+    KAction* zoomInAction = KStandardAction::zoomIn(m_imageView, SLOT(zoomIn()), actionCollection());
+    KAction* zoomOutAction = KStandardAction::zoomOut(m_imageView, SLOT(zoomOut()), actionCollection());
+    KStandardAction::actualSize(m_imageView, SLOT(normalSize()), actionCollection());
     
-    connect(view, SIGNAL(enableZoomIn(bool)), zoomInAction, SLOT(setEnabled(bool)));
-    connect(view, SIGNAL(enableZoomOut(bool)), zoomOutAction, SLOT(setEnabled(bool)));
+    connect(m_imageView, SIGNAL(enableZoomIn(bool)), zoomInAction, SLOT(setEnabled(bool)));
+    connect(m_imageView, SIGNAL(enableZoomOut(bool)), zoomOutAction, SLOT(setEnabled(bool)));
                                             
     recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile( const KUrl& )),
                                                                     actionCollection());
@@ -215,7 +213,7 @@ void MainWindow::openFile()
     }
 
     if (!filename.isEmpty()) {
-        m_livePreviewWidget->clear();
+        m_imageView->clear();
         recentFilesAction->addUrl(KUrl(filename));
         loadFile(filename);
     }
@@ -327,7 +325,7 @@ void MainWindow::buildPreview()
     m_logViewWidget->hide();
     
     m_doc->setDirectory(m_currentFile.directory());
-    m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc);
+    m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc, false, m_imageView->scaleFactor());
     
     kDebug() << "Preview generation in progress...";
 }
@@ -402,7 +400,7 @@ void MainWindow::reset()
 {
     m_currentFile = "";
     m_doc->clear();
-	m_livePreviewWidget->clear();
+	m_imageView->clear();
     updateTitle();	
 }
 
@@ -486,13 +484,13 @@ void MainWindow::circuitMacrosConfigured()
 
 void MainWindow::failedNotification()
 {
-    m_livePreviewWidget->setImage(QImage());
+    m_imageView->setImage(QImage());
     statusBar()->showMessage(i18n("Unable to generate a preview for the current input"), 5000);
 }
 
 void MainWindow::showPreview(const QImage& image)
 {
-    m_livePreviewWidget->setImage(image);
+    m_imageView->setImage(image);
 }
 
 void MainWindow::saveFileToDisk(const QString& path)

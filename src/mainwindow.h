@@ -25,6 +25,7 @@
 #include <QtGui/QKeyEvent>
 #include <KUrl>
 
+class ImageView;
 class LogViewWidget;
 namespace KTextEditor
 {
@@ -103,6 +104,7 @@ private:
 
     QString m_windowTitle;
     LivePreviewWidget *m_livePreviewWidget;
+    ImageView* m_imageView;
     LogViewWidget* m_logViewWidget;
     GeneratorThread* m_generator;
 

@@ -48,7 +48,8 @@ protected:
     void run();
     
 public slots:
-    void generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend = 0, Cirkuit::Document* doc = 0, bool saveToFile = false);
+    void generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend = 0, Cirkuit::Document* doc = 0, bool saveToFile = false, double scaleFactor=1.0);
+    void setScaleFactor(double scaleFactor);
     
 signals:
     void previewReady(const QImage);
@@ -65,6 +66,7 @@ private:
     Cirkuit::Backend* m_backend;
     RenderThread* m_render;
     bool m_saveToFile;
+    double m_scaleFactor;
     
     QString m_previewUrl;
 };

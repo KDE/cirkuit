@@ -103,3 +103,7 @@ void ImageView::zoomOut()
     scaleImage(0.8);
 }
 
+double ImageView::scaleFactor() const
+{
+    return m_scaleFactor;
+}

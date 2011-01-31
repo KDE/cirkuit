@@ -35,6 +35,7 @@ GeneratorThread::GeneratorThread(QObject* parent): QThread(parent)
     m_previewUrl = QString();
     m_backend = 0;
     m_doc = 0;
+    m_scaleFactor = 1.0;
     m_render = new RenderThread;
     connect(m_render, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
 }
@@ -71,7 +72,7 @@ void GeneratorThread::run()
     m_previewUrl = gen->formatPath(Format::Pdf);
     emit previewUrl(m_previewUrl);
     if (m_output == Format::QtImage) {        
-        m_render->generatePreview(gen->formatPath(Format::Pdf));
+        m_render->generatePreview(gen->formatPath(Format::Pdf), m_scaleFactor);
     }
     
     if (m_saveToFile) {
@@ -86,14 +87,19 @@ GeneratorThread::~GeneratorThread()
     
 }
 
-void GeneratorThread::generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, Cirkuit::Document* doc, bool saveToFile)
+void GeneratorThread::setScaleFactor(double scaleFactor)
+{
+    m_scaleFactor = scaleFactor;
+}
+
+void GeneratorThread::generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, Cirkuit::Document* doc, bool saveToFile, double scaleFactor)
 {
     m_input = in;
     m_output = out;
     m_doc = doc;
     m_saveToFile = saveToFile;
     m_backend = backend;
-    
+    setScaleFactor(scaleFactor);
     start(LowPriority);
 }
 
