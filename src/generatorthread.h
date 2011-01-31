@@ -24,6 +24,7 @@
 #include <QThread>
 #include <QImage>
 
+class RenderThread;
 namespace Cirkuit
 {
 class Command;
@@ -59,7 +60,9 @@ signals:
     
 private:
     Cirkuit::Document* m_doc;
-	Cirkuit::Backend* m_backend;
+    Cirkuit::Backend* m_backend;
+    
+    RenderThread* m_render;
     bool m_saveToFile;
 };
 

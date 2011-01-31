@@ -23,6 +23,7 @@
 
 #include "cirkuitsettings.h"
 #include "generatorthread.h"
+#include "renderthread.h"
 
 #include <KDebug>
 #include <KLocalizedString>
@@ -32,6 +33,8 @@ using namespace Cirkuit;
 GeneratorThread::GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc, QObject* parent): QThread(parent)
 {
     m_backend = 0;
+    m_render = new RenderThread;
+    connect(m_render, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
     setup(in, out, m_backend, doc, false);
 }
 
@@ -53,20 +56,19 @@ void GeneratorThread::run()
     
     Cirkuit::Generator* gen = m_backend->generator();
     
-    connect(gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
     connect(gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));
     connect(gen, SIGNAL(error(QString,QString)), this, SLOT(quit()));
     connect(gen, SIGNAL(output(QString,QString)), this, SIGNAL(output(QString,QString)));
     connect(gen, SIGNAL(fail()), this, SIGNAL(fail()));
     gen->setDocument(m_doc);
-	gen->setResolution(CirkuitSettings::resolutionPpm());
+    gen->setResolution(CirkuitSettings::resolutionPpm());
     if (!gen->convert(m_input, m_output)) {
         emit fail();
         return;
     }
     
-    if (m_output == Format::QtImage) {
-        gen->render();
+    if (m_output == Format::QtImage) {        
+        m_render->generatePreview(gen->formatPath(Format::Pdf));
     }
     
     if (m_saveToFile) {

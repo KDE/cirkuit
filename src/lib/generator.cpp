@@ -24,7 +24,6 @@
 
 #include <QFileInfo>
 #include <QDir>
-#include <poppler-qt4.h>
 
 #include <KStandardDirs>
 #include <KTemporaryFile>
@@ -134,42 +133,6 @@ bool Generator::execute(Cirkuit::Command* c)
     
     kDebug() << c->name() << " executed correctly";
     emit output(c->name(), c->stdOutput());
-    return true;
-}
-
-bool Cirkuit::Generator::render(float zoomFactor)
-{
-    float factor = zoomFactor;
-    
-    if (factor < 0.1) {
-        factor = 0.1;
-    } else if (factor > 10) {
-        factor = 10;
-    }
-    
-    if (!formatExists(Format::Pdf)) {
-        return false;
-    }
-
-    Poppler::Document* document = Poppler::Document::load(formatPath(Format::Pdf));
-    if (!document || document->isLocked()) {
-        delete document;
-        return false;
-    }
-
-    // Access page of the PDF file
-    Poppler::Page* pdfPage = document->page(0);  // Document starts at page 0
-    if (pdfPage == 0) {
-        return false;
-    }
-
-    // Generate a QImage of the rendered page
-    QImage image = pdfPage->renderToImage(factor*300, factor*300);
-    emit previewReady(image);
-
-    delete pdfPage;
-    delete document;
-    
     return true;
 }
 
