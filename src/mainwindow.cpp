@@ -347,7 +347,7 @@ void MainWindow::newDocument(const QString& backendName)
     if (!backendName.isEmpty()) {
         Cirkuit::Backend* newBackend = Cirkuit::Backend::getBackend(backendName);
         if (!newBackend) {
-            KMessageBox::error(this, i18n("Backend %1 not found").arg(backendName));
+            KMessageBox::error(this, i18n("Backend %1 not found", backendName));
             return;
         } else {
             m_backend = newBackend;
@@ -355,7 +355,7 @@ void MainWindow::newDocument(const QString& backendName)
     }
     
     if (!m_backend) {
-        KMessageBox::error(this, i18n("No valid backend selected!").arg(backendName));
+        KMessageBox::error(this, i18n("No valid backend selected.", backendName));
         return;
     }
     
