@@ -137,7 +137,7 @@ public slots:
      * Render the graphic and generate a QImage. This is an async call, 
      * the result will be emitted through the previewReady signal
      */
-    bool render();
+    bool render(float zoomFactor = 1.0);
     
 signals:
     /**

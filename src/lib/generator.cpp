@@ -137,8 +137,16 @@ bool Generator::execute(Cirkuit::Command* c)
     return true;
 }
 
-bool Cirkuit::Generator::render()
+bool Cirkuit::Generator::render(float zoomFactor)
 {
+    float factor = zoomFactor;
+    
+    if (factor < 0.1) {
+        factor = 0.1;
+    } else if (factor > 10) {
+        factor = 10;
+    }
+    
     if (!formatExists(Format::Pdf)) {
         return false;
     }
@@ -156,7 +164,7 @@ bool Cirkuit::Generator::render()
     }
 
     // Generate a QImage of the rendered page
-    QImage image = pdfPage->renderToImage(600,600);
+    QImage image = pdfPage->renderToImage(factor*300, factor*300);
     emit previewReady(image);
 
     delete pdfPage;
