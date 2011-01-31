@@ -18,13 +18,15 @@
 */
 
 #include "imageview.h"
+#include "renderthread.h"
 
 #include <QLabel>
 #include <QScrollBar>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <KDebug>
 
-ImageView::ImageView(QWidget* parent): QGraphicsView(parent), m_image(QImage())
+ImageView::ImageView(QWidget* parent): QGraphicsView(parent), m_image(QImage()), m_pdfUrl(QString())
 {
     m_scene = new QGraphicsScene(this);
     m_pixmap = m_scene->addPixmap(QPixmap::fromImage(m_image));
@@ -36,6 +38,9 @@ ImageView::ImageView(QWidget* parent): QGraphicsView(parent), m_image(QImage())
     
     setMinimumWidth(100);
     setMinimumHeight(50);
+    
+    m_render = new RenderThread;
+    connect(m_render, SIGNAL(previewReady(QImage)), this, SLOT(setImage(QImage)));
     
     normalSize();
 }
@@ -50,6 +55,12 @@ void ImageView::setImage(const QImage& image)
 {
     m_pixmap->setPixmap(QPixmap::fromImage(image));
     m_pixmap->update();
+    setSceneRect(m_scene->itemsBoundingRect());
+}
+
+void ImageView::setPdfUrl(const QString& pdfUrl)
+{
+    m_pdfUrl = pdfUrl;
 }
 
 void ImageView::clear()
@@ -67,15 +78,13 @@ void ImageView::adjustScrollBar(QScrollBar* scrollBar, double factor)
 void ImageView::scaleImage(double factor)
 {
     m_scaleFactor *= factor;
-    m_pixmap->setScale(m_scaleFactor);
+    m_render->generatePreview(m_pdfUrl, m_scaleFactor);
 
-    adjustScrollBar(this->horizontalScrollBar(), factor);
-    adjustScrollBar(this->verticalScrollBar(), factor);
+    //adjustScrollBar(this->horizontalScrollBar(), factor);
+    //adjustScrollBar(this->verticalScrollBar(), factor);
     
-    emit enableZoomIn(m_scaleFactor < 1.5);
-    emit enableZoomOut(m_scaleFactor > 0.1);
-    
-    setSceneRect(m_scene->itemsBoundingRect());
+    emit enableZoomIn(m_scaleFactor < 3.5);
+    emit enableZoomOut(m_scaleFactor > 0.1);    
 }
 
 void ImageView::normalSize()

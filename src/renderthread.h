@@ -21,8 +21,6 @@
 #define RENDERTHREAD_H
 
 #include <QThread>
-#include <QMutex>
-#include <QWaitCondition>
 
 class QImage;
 
@@ -43,13 +41,8 @@ protected:
     void run();
      
 private:
-    QMutex m_mutex;
-    QWaitCondition m_condition;
-    bool m_restart;
-    bool m_abort;
-
     QString m_pdfUrl;
-    qreal m_zoomFactor;
+    double m_zoomFactor;
 };
 
 #endif // RENDERTHREAD_H

@@ -30,12 +30,13 @@
 
 using namespace Cirkuit;
 
-GeneratorThread::GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc, QObject* parent): QThread(parent)
+GeneratorThread::GeneratorThread(QObject* parent): QThread(parent)
 {
+    m_previewUrl = QString();
     m_backend = 0;
+    m_doc = 0;
     m_render = new RenderThread;
     connect(m_render, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
-    setup(in, out, m_backend, doc, false);
 }
 
 void GeneratorThread::run()
@@ -67,6 +68,8 @@ void GeneratorThread::run()
         return;
     }
     
+    m_previewUrl = gen->formatPath(Format::Pdf);
+    emit previewUrl(m_previewUrl);
     if (m_output == Format::QtImage) {        
         m_render->generatePreview(gen->formatPath(Format::Pdf));
     }
@@ -83,16 +86,18 @@ GeneratorThread::~GeneratorThread()
     
 }
 
-void GeneratorThread::setup(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, Cirkuit::Document* doc, bool saveToFile)
+void GeneratorThread::generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, Cirkuit::Document* doc, bool saveToFile)
 {
     m_input = in;
     m_output = out;
     m_doc = doc;
     m_saveToFile = saveToFile;
     m_backend = backend;
+    
+    start(LowPriority);
 }
 
-Generator* GeneratorThread::generator()
+QString GeneratorThread::previewUrl() const
 {
-    return 0;
+    return m_previewUrl;
 }

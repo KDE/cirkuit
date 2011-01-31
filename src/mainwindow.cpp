@@ -100,7 +100,7 @@ MainWindow::MainWindow(QWidget *)
 
     setGeometry(100,100,CirkuitSettings::width(),CirkuitSettings::height());
 
-    m_generator = new GeneratorThread(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_doc);
+    m_generator = new GeneratorThread;
     
     m_updateTimer = 0;
     updateConfiguration();
@@ -114,6 +114,9 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(fileReady(QString)), this, SLOT(saveFileToDisk(QString)));
     connect(m_generator, SIGNAL(error(QString,QString)), m_logViewWidget, SLOT(displayError(QString,QString)));
     connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));
+    
+    ImageView* view = m_livePreviewWidget->view();
+    connect(m_generator, SIGNAL(previewUrl(QString)), view, SLOT(setPdfUrl(QString)));
     
     checkCircuitMacros();
     initializeBackend();
@@ -284,9 +287,8 @@ void MainWindow::exportFile()
         QFileInfo fileinfo(path);
         Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog.currentFilterMimeType());
         m_doc->setDirectory(m_currentFile.directory());
-        m_generator->setup(Cirkuit::Format::Source, format, m_backend, m_doc, true);
         statusBar()->showMessage("Exporting image...");
-        m_generator->start();
+        m_generator->generate(Cirkuit::Format::Source, format, m_backend, m_doc, true);
         m_tempSavePath = path;
         QFile oldFile(path);
         oldFile.remove();
@@ -325,8 +327,7 @@ void MainWindow::buildPreview()
     m_logViewWidget->hide();
     
     m_doc->setDirectory(m_currentFile.directory());
-    m_generator->setup(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc);
-    m_generator->start();
+    m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc);
     
     kDebug() << "Preview generation in progress...";
 }
@@ -340,10 +341,14 @@ void MainWindow::openPreview()
 
 void MainWindow::openPreviewFile()
 {
-    KUrl url = m_generator->generator()->formatPath(Cirkuit::Format::Pdf);
-    KRun::runUrl(url, "application/pdf", this);
-    
     disconnect(m_generator, SIGNAL(finished()), this, SLOT(openPreviewFile()));
+    
+    KUrl url = m_generator->previewUrl();
+    if (!url.isLocalFile()) {    
+        return;
+    }
+    
+    KRun::runUrl(url, "application/pdf", this);
 }
 
 void MainWindow::builtNotification()

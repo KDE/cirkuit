@@ -23,6 +23,7 @@
 #include <QImage>
 #include <QGraphicsView>
 
+class RenderThread;
 class QGraphicsPixmapItem;
 class QLabel;
 
@@ -37,6 +38,7 @@ public:
     
 public slots:
     void setImage(const QImage& image);
+    void setPdfUrl(const QString& pdfUrl);
     void clear();
     
     void zoomIn();
@@ -53,9 +55,11 @@ signals:
     
 private:
     QImage m_image;
+    QString m_pdfUrl;
     QLabel* m_imageLabel;
     QGraphicsScene* m_scene;
     QGraphicsPixmapItem* m_pixmap;
+    RenderThread* m_render;
     
     double m_scaleFactor;
 };
