@@ -135,6 +135,7 @@ void MainWindow::setupActions()
     
     KAction* zoomInAction = KStandardAction::zoomIn(m_imageView, SLOT(zoomIn()), actionCollection());
     KAction* zoomOutAction = KStandardAction::zoomOut(m_imageView, SLOT(zoomOut()), actionCollection());
+    KAction* zoomFitAction = KStandardAction::fitToPage(m_imageView, SLOT(zoomFit()), actionCollection());
     KStandardAction::actualSize(m_imageView, SLOT(normalSize()), actionCollection());
     
     connect(m_imageView, SIGNAL(enableZoomIn(bool)), zoomInAction, SLOT(setEnabled(bool)));

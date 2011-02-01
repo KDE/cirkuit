@@ -46,7 +46,7 @@ void RenderThread::generatePreview(const QString& pdfUrl, double zoomFactor)
 
 void RenderThread::run()
 {
-    double factor = qBound(0.1, m_zoomFactor, 10.0);
+    double factor = qBound(0.01, m_zoomFactor, 10.0);
             
     if (!QFile::exists(m_pdfUrl)) return;
 

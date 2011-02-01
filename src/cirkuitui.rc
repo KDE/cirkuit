@@ -29,6 +29,7 @@
         <Action name="view_zoom_in" />
         <Action name="view_zoom_out" />
         <Action name="view_actual_size" />
+        <Action name="view_fit_to_page" />
         <Separator/>
     </Menu>
   
@@ -60,8 +61,9 @@
     <DefineGroup name="find_operations" />
     <Separator />
     <DefineGroup name="zoom_operations" />  
-    <Action name="view_zoom_in" />
+    <Action name="zoom_to" />
     <Action name="view_zoom_out" />
+    <Action name="view_zoom_in" />
 </ToolBar>
 
 <Menu name="ktexteditor_popup" noMerge="1">

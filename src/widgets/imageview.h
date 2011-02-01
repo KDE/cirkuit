@@ -26,34 +26,39 @@
 class RenderThread;
 class QGraphicsPixmapItem;
 class QLabel;
+class QTimer;
 
 class ImageView: public QGraphicsView
 {
     Q_OBJECT
 public:
-    enum ZoomMode { Fixed, FitWidth, FitPage, ZoomIn, ZoomOut };
-    
     ImageView(QWidget* parent = 0);
     virtual ~ImageView();
     
     double scaleFactor() const;
+    bool fitMode() const;
     
 public slots:
     void setImage(const QImage& image);
     void setPdfUrl(const QString& pdfUrl);
+    void setFitMode(bool enabled);
+    
     void clear();
     
     void zoomIn();
     void zoomOut();
+    void zoomFit();
     void normalSize();
     
 private slots:
     void scaleImage(double factor);
-    void adjustScrollBar(QScrollBar* scrollBar, double factor);
     
 signals:
     void enableZoomIn(bool);
     void enableZoomOut(bool);
+    
+protected:
+    void resizeEvent(QResizeEvent*);
     
 private:
     QImage m_image;
@@ -62,6 +67,9 @@ private:
     QGraphicsScene* m_scene;
     QGraphicsPixmapItem* m_pixmap;
     RenderThread* m_render;
+    QTimer* m_timer;
+    double m_ratio;
+    bool m_fitMode;
     
     double m_scaleFactor;
 };
