@@ -179,7 +179,7 @@ bool ImageView::fitMode() const
 
 void ImageView::trigger()
 {
-    m_timer->start(100);
+    m_timer->start(50);
 }
 
 
