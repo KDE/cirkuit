@@ -225,6 +225,9 @@ void MainWindow::save()
     }
 
     m_doc->save();
+    if (CirkuitSettings::refreshOnSave()) {
+        buildPreview();
+    }
 }
 
 void MainWindow::saveAs()
@@ -247,6 +250,9 @@ void MainWindow::saveAs()
 
 void MainWindow::saveAsFile(const KUrl& url)
 {
+    if (CirkuitSettings::refreshOnSave()) {
+        buildPreview();
+    }
     m_doc->saveAs(url);
     recentFilesAction->addUrl(url);
     m_currentFile = url.fileName();
