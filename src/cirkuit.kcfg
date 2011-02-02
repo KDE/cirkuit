@@ -22,6 +22,14 @@
             <label>Enable automatic refresh.</label>
             <default>true</default>
         </entry>
+        <entry name="RefreshOnSave" type="Bool">
+            <label>Refresh when document is saved.</label>
+            <default>true</default>
+        </entry>
+        <entry name="ZoomToFit" type="Bool">
+            <label>Automatically zoom the preview to fit the preview widget</label>
+            <default>true</default>
+        </entry>
         <entry name="ResolutionPpm" type="Int">
             <label>PNG and JPEG resolution.</label>
             <default>300</default>

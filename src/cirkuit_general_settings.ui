@@ -132,6 +132,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QCheckBox" name="kcfg_RefreshOnSave">
+        <property name="text">
+         <string>Refresh the preview when saving the document</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

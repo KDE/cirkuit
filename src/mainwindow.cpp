@@ -126,7 +126,7 @@ MainWindow::MainWindow(QWidget *)
 void MainWindow::setupActions()
 {
 	KStandardAction::openNew(this, SLOT(newFile()), actionCollection());
-    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+    KStandardAction::quit(this, SLOT(close()), actionCollection());
     KStandardAction::open(this, SLOT(openFile()), actionCollection());
     KStandardAction::save(this, SLOT(save()), actionCollection());
     KStandardAction::saveAs(this, SLOT(saveAs()), actionCollection());			
@@ -179,6 +179,8 @@ void MainWindow::setupActions()
     connect(zoomFitPageAction, SIGNAL(triggered()), this, SLOT(updateZoomToFit()));
     connect(m_imageView, SIGNAL(fitModeChanged(bool)), zoomFitPageAction, SLOT(setChecked(bool)));
     connect(m_imageView, SIGNAL(fitModeChanged(bool)), this, SLOT(updateZoomToFit()));
+    zoomFitPageAction->setChecked(CirkuitSettings::zoomToFit());
+    updateZoomToFit();
 
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->loadEntries(config->group("recent_files"));
@@ -245,6 +247,9 @@ void MainWindow::save()
     }
 
     m_doc->save();
+    if (CirkuitSettings::refreshOnSave()) {
+        buildPreview();
+    }
 }
 
 void MainWindow::saveAs()
@@ -267,6 +272,9 @@ void MainWindow::saveAs()
 
 void MainWindow::saveAsFile(const KUrl& url)
 {
+    if (CirkuitSettings::refreshOnSave()) {
+        buildPreview();
+    }
     m_doc->saveAs(url);
     recentFilesAction->addUrl(url);
     m_currentFile = url.fileName();
@@ -315,7 +323,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->saveEntries(config->group("recent_files"));
-
+    
+    CirkuitSettings::setZoomToFit(zoomFitPageAction->isChecked());
     CirkuitSettings::self()->writeConfig();
 
     if (!m_doc->closeUrl()) {
