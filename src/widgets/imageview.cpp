@@ -132,6 +132,9 @@ void ImageView::zoomFit()
     kDebug() << "Factor: " << m_scaleFactor;
     
     if (fraction > 0.99 && fraction < 1.01) {
+        // no resize is needed but re-center the pixmap anyway
+        m_pixmap->update();
+        setSceneRect(m_scene->itemsBoundingRect());
         return;
     }
     
