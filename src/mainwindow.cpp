@@ -78,7 +78,7 @@ MainWindow::MainWindow(QWidget *)
     m_doc->initialize();
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
    
-    m_livePreviewWidget = new LivePreviewWidget(i18n("Live preview"), this);
+    m_livePreviewWidget = new LivePreviewWidget(i18n("Preview"), this);
     m_imageView = m_livePreviewWidget->view();
     addDockWidget(Qt::TopDockWidgetArea, m_livePreviewWidget);
     
@@ -129,14 +129,15 @@ void MainWindow::setupActions()
     KStandardAction::quit(this, SLOT(close()), actionCollection());
     KStandardAction::open(this, SLOT(openFile()), actionCollection());
     KStandardAction::save(this, SLOT(save()), actionCollection());
-    KStandardAction::saveAs(this, SLOT(saveAs()), actionCollection());			
+    KStandardAction::saveAs(this, SLOT(saveAs()), actionCollection());
     KStandardAction::clear(this, SLOT(clear()), actionCollection());
-    KStandardAction::preferences(this, SLOT(configure()),
-                                            actionCollection());
+    KStandardAction::preferences(this, SLOT(configure()), actionCollection());    
+    KStandardAction::keyBindings(this, SLOT(configureKeyBindings()), actionCollection());
     
     KAction* zoomInAction = KStandardAction::zoomIn(m_imageView, SLOT(zoomIn()), actionCollection());
     KAction* zoomOutAction = KStandardAction::zoomOut(m_imageView, SLOT(zoomOut()), actionCollection());
     zoomFitAction = KStandardAction::fitToPage(m_imageView, SLOT(zoomFit()), actionCollection());
+    zoomFitAction->setIcon(KIcon("zoom-fit-best"));
     KStandardAction::actualSize(m_imageView, SLOT(normalSize()), actionCollection());
     
     connect(m_imageView, SIGNAL(enableZoomIn(bool)), zoomInAction, SLOT(setEnabled(bool)));
@@ -168,13 +169,16 @@ void MainWindow::setupActions()
     connect(showExamplesAction, SIGNAL(triggered()), this, SLOT(showExamples()));
 
     QAction* showLivePreviewAction = m_livePreviewWidget->toggleViewAction();
+    showLivePreviewAction->setIcon(KIcon("document-preview"));
     actionCollection()->addAction( "show_live_preview", showLivePreviewAction );
     
     QAction* showLogViewAction = m_logViewWidget->toggleViewAction();
     actionCollection()->addAction( "show_log_view", showLogViewAction );
+    showLogViewAction->setIcon(KIcon("documentation"));
     
     zoomFitPageAction = new KToggleAction(i18n("Zoom to fit"), 0);
     zoomFitPageAction->setShortcut(Qt::ALT + Qt::Key_9);
+    zoomFitPageAction->setIcon(KIcon("zoom-fit-best"));
     actionCollection()->addAction( "view_zoom_to_fit", zoomFitPageAction);
     connect(zoomFitPageAction, SIGNAL(triggered()), this, SLOT(updateZoomToFit()));
     connect(m_imageView, SIGNAL(fitModeChanged(bool)), zoomFitPageAction, SLOT(setChecked(bool)));
@@ -538,5 +542,10 @@ void MainWindow::updateZoomToFit()
 {
     zoomFitAction->setEnabled(!zoomFitPageAction->isChecked());
     m_imageView->setFitMode(zoomFitPageAction->isChecked());
+}
+
+void MainWindow::configureKeyBindings()
+{
+    
 }
 
