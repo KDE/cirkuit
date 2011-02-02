@@ -154,11 +154,13 @@ void MainWindow::setupActions()
 
     KAction* buildPreviewAction = new KAction(i18n("Build preview"), 0);
     buildPreviewAction->setShortcut(Qt::ALT + Qt::Key_1);
+    buildPreviewAction->setIcon(KIcon("run-build"));
     actionCollection()->addAction("build_preview", buildPreviewAction);
     connect(buildPreviewAction, SIGNAL(triggered()), this, SLOT(buildPreview()));
 
     KAction* openPreviewAction = new KAction(i18n("Open preview"), 0);
     openPreviewAction->setShortcut(Qt::ALT + Qt::Key_2);
+    openPreviewAction->setIcon(KIcon("document-preview"));
     actionCollection()->addAction("open_preview", openPreviewAction);
     connect(openPreviewAction, SIGNAL(triggered()), this, SLOT(openPreview()));
 
