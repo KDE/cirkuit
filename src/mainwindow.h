@@ -90,6 +90,7 @@ private slots:
     void circuitMacrosConfigured();
     void askIfUpgrade(const QString&);
     void reset();
+    void openHelpUrl(const KUrl& url);
     
     void initializeBackend();
     void setDefaultBackend(const QString& backend);

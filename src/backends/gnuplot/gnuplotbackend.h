@@ -45,6 +45,8 @@ public:
     Cirkuit::Generator* generator() const;
     virtual KConfigSkeleton* config() const;
     virtual QWidget* settingsWidget(QWidget* parent) const;
+    virtual KUrl helpUrl() const;
+    virtual KUrl examplesUrl() const;
     
     QString id() const;
     

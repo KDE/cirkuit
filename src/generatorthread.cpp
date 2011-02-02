@@ -107,3 +107,9 @@ QString GeneratorThread::previewUrl() const
 {
     return m_previewUrl;
 }
+
+Backend* GeneratorThread::backend() const
+{
+    return m_backend;
+}
+

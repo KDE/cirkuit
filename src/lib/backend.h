@@ -115,6 +115,13 @@ public:
     virtual KUrl helpUrl() const;
     
     /**
+     * Returns an Url pointing to the Examples of the Backend
+     * The method should be overwritten by all Backends(who have an online help)
+     * @return Url of the examples
+     */
+    virtual KUrl examplesUrl() const;
+    
+    /**
      * Returns a longer description of the Backend, e.g. purpose, strengths etc.
      * It should help the user to decide between the different Backends
      * @return a description of the backend. It can contain html

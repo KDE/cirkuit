@@ -78,4 +78,15 @@ QStringList CircuitMacrosBackend::identifyingWords() const
     return words;
 }
 
+KUrl CircuitMacrosBackend::examplesUrl() const
+{
+    return KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/examples/examples.ps");
+}
+
+KUrl CircuitMacrosBackend::helpUrl() const
+{
+    return KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/doc/CMman.pdf");
+}
+
+
 K_EXPORT_CIRKUIT_PLUGIN(circuitmacrosbackend, CircuitMacrosBackend)

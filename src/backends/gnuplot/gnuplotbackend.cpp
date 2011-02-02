@@ -81,5 +81,16 @@ QStringList GnuplotBackend::identifyingWords() const
     return words;
 }
 
+KUrl GnuplotBackend::helpUrl() const
+{
+    return KUrl("http://www.gnuplot.info/documentation.html");
+}
+
+KUrl GnuplotBackend::examplesUrl() const
+{
+    return KUrl("http://gnuplot.sourceforge.net/demo/");
+}
+
+
 
 K_EXPORT_CIRKUIT_PLUGIN(gnuplotbackend, GnuplotBackend)

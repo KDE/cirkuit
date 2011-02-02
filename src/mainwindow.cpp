@@ -164,11 +164,11 @@ void MainWindow::setupActions()
     actionCollection()->addAction("open_preview", openPreviewAction);
     connect(openPreviewAction, SIGNAL(triggered()), this, SLOT(openPreview()));
 
-    KAction* showManualAction = new KAction(KIcon("help-contents"), i18n("Show Circuit Macros manual"),0);
+    KAction* showManualAction = new KAction(KIcon("help-contents"), i18n("Show backend manual"),0);
     actionCollection()->addAction( "showManual", showManualAction );
     connect(showManualAction, SIGNAL(triggered()), this, SLOT(showManual()));
 
-    KAction* showExamplesAction = new KAction(i18n("Show Circuit Macros examples"),0);
+    KAction* showExamplesAction = new KAction(i18n("Show backend examples"),0);
     actionCollection()->addAction( "showExamples", showExamplesAction );
     connect(showExamplesAction, SIGNAL(triggered()), this, SLOT(showExamples()));
 
@@ -379,6 +379,7 @@ void MainWindow::openPreviewFile()
 void MainWindow::builtNotification()
 {
     statusBar()->showMessage(i18n("Preview built"), 3000);
+    m_backend = m_generator->backend();
 }
 
 void MainWindow::newDocument(const QString& backendName)
@@ -471,12 +472,23 @@ void MainWindow::updateConfiguration()
 
 void MainWindow::showManual()
 {
-    KRun::runUrl(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/doc/CMman.pdf"), "application/pdf", this);
+    openHelpUrl(m_backend->helpUrl());
 }
 
 void MainWindow::showExamples()
 {
-    KRun::runUrl(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/examples/examples.ps"), "application/postscript", this);
+    openHelpUrl(m_backend->examplesUrl());
+}
+
+void MainWindow::openHelpUrl(const KUrl& url)
+{
+    QString type;
+    if (url.isLocalFile()) {
+        type = KMimeType::findByUrl(url).constData()->name();
+    } else {
+        type = KIO::NetAccess::mimetype(url, this);
+    }
+    KRun::runUrl(url, type, this);
 }
 
 void MainWindow::checkCircuitMacros()

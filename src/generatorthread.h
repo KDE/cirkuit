@@ -41,6 +41,7 @@ public:
     ~GeneratorThread();
     
     QString previewUrl() const;
+    Cirkuit::Backend* backend() const;
     
 protected:
     Cirkuit::Format m_input, m_output;

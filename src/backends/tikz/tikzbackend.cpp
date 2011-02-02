@@ -81,5 +81,16 @@ QStringList TikzBackend::identifyingWords() const
     return words;
 }
 
+KUrl TikzBackend::examplesUrl() const
+{
+    return KUrl("http://www.texample.net/tikz/");
+}
+
+KUrl TikzBackend::helpUrl() const
+{
+    return KUrl("http://tug.org/svn/texlive/trunk/Master/texmf-dist/doc/generic/pgf/pgfmanual.pdf");
+}
+
+
 
 K_EXPORT_CIRKUIT_PLUGIN(tikzbackend, TikzBackend)

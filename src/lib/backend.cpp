@@ -84,6 +84,11 @@ KUrl Backend::helpUrl() const
     return KUrl();
 }
 
+KUrl Backend::examplesUrl() const
+{
+    return KUrl();
+}
+
 bool Backend::operator==(const QString& rhs) const
 {
     return QString::compare(id(), rhs, Qt::CaseInsensitive) == 0 || QString::compare(name(), rhs, Qt::CaseInsensitive) == 0;
