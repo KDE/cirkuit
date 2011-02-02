@@ -529,11 +529,11 @@ void MainWindow::failedNotification()
 }
 
 void MainWindow::showPreview(const QImage& image)
-{
-    m_imageView->setImage(image);
-    
+{    
     if (m_imageView->fitMode()) {
-        m_imageView->zoomFit();
+        m_imageView->setImage(image, true);
+    } else {
+        m_imageView->setImage(image);
     }
 }
 

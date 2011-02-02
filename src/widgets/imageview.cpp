@@ -59,15 +59,17 @@ ImageView::~ImageView()
     delete m_pixmap;
 }
 
-void ImageView::setImage(const QImage& image)
+void ImageView::setImage(const QImage& image, bool firstTime)
 {
-    m_pixmap->setPixmap(QPixmap::fromImage(image));
-    /*
-    if (fitMode() && !(m_pixmap->pixmap().height() == viewport()->height() || m_pixmap->pixmap().width() == viewport()->width())) {
-        return;
-    }*/
-    m_pixmap->update();
-    setSceneRect(m_scene->itemsBoundingRect());
+    if (fitMode() && firstTime) {
+        // if the image should fit to page then the first time resize it
+        // and then display it
+        zoomFit(QPixmap::fromImage(image));
+    } else {
+        m_pixmap->setPixmap(QPixmap::fromImage(image));
+        m_pixmap->update();
+        setSceneRect(m_scene->itemsBoundingRect());
+    }
 }
 
 void ImageView::setPdfUrl(const QString& pdfUrl)
@@ -117,24 +119,28 @@ void ImageView::zoomOut()
 
 void ImageView::zoomFit()
 {
-    if (m_pixmap->pixmap().height() == 0 || viewport()->height() == 0) {
+    zoomFit(m_pixmap->pixmap());
+}
+
+void ImageView::zoomFit(const QPixmap& pixmap)
+{
+    if (pixmap.height() == 0 || viewport()->height() == 0) {
         return;
     }
     
-    double hRatio = 1.00 * viewport()->width() / m_pixmap->pixmap().width();
-    double vRatio = 1.00 * viewport()->height() / m_pixmap->pixmap().height();
+    double hRatio = 1.00 * viewport()->width() / pixmap.width();
+    double vRatio = 1.00 * viewport()->height() / pixmap.height();
     double ratio = qMin(hRatio, vRatio);
     double fraction = 1.0 * ratio / m_ratio;
     m_ratio = ratio;
     
     kDebug() << "Viewport: " << viewport()->size();
-    kDebug() << "Pixmap: " << m_pixmap->pixmap().size();
+    kDebug() << "Pixmap: " << pixmap.size();
     kDebug() << "New ratio: " << ratio;
     kDebug() << "Factor: " << m_scaleFactor;
     
     if (fraction > 0.99 && fraction < 1.01) {
         // no resize is needed but re-center the pixmap anyway
-        m_pixmap->update();
         setSceneRect(m_scene->itemsBoundingRect());
         return;
     }

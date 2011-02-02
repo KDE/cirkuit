@@ -39,7 +39,7 @@ public:
     bool fitMode() const;
     
 public slots:
-    void setImage(const QImage& image);
+    void setImage(const QImage& image, bool firstTime = false);
     void setPdfUrl(const QString& pdfUrl);
     void setFitMode(bool enabled);
     
@@ -48,6 +48,7 @@ public slots:
     void zoomIn();
     void zoomOut();
     void zoomFit();
+    void zoomFit(const QPixmap& pixmap);
     void normalSize();
     
 private slots:
