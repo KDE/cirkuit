@@ -65,7 +65,7 @@ protected:
 private:
     QImage m_image;
     QString m_pdfUrl;
-    QLabel* m_imageLabel;
+
     QGraphicsScene* m_scene;
     QGraphicsPixmapItem* m_pixmap;
     RenderThread* m_render;

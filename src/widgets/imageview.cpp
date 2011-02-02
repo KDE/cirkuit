@@ -54,8 +54,9 @@ ImageView::ImageView(QWidget* parent): QGraphicsView(parent), m_image(QImage()),
 
 ImageView::~ImageView()
 {
-    delete m_imageLabel;
-    delete m_scene;
+    delete m_render;
+    delete m_timer;
+    delete m_pixmap;
 }
 
 void ImageView::setImage(const QImage& image)
