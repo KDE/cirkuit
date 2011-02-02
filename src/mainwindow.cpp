@@ -44,6 +44,7 @@
 #include <KStandardDirs>
 #include <KRecentFilesAction>
 #include <KFileDialog>
+#include <KShortcutsDialog>
 #include <KMessageBox>
 #include <KIO/NetAccess>
 #include <KSaveFile>
@@ -177,7 +178,7 @@ void MainWindow::setupActions()
     showLogViewAction->setIcon(KIcon("documentation"));
     
     zoomFitPageAction = new KToggleAction(i18n("Zoom to fit"), 0);
-    zoomFitPageAction->setShortcut(Qt::ALT + Qt::Key_9);
+    zoomFitPageAction->setShortcut(Qt::CTRL + Qt::Key_0);
     zoomFitPageAction->setIcon(KIcon("zoom-fit-best"));
     actionCollection()->addAction( "view_zoom_to_fit", zoomFitPageAction);
     connect(zoomFitPageAction, SIGNAL(triggered()), this, SLOT(updateZoomToFit()));
@@ -546,6 +547,6 @@ void MainWindow::updateZoomToFit()
 
 void MainWindow::configureKeyBindings()
 {
-    
+    KShortcutsDialog::configure(actionCollection());
 }
 
