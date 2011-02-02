@@ -61,6 +61,10 @@ ImageView::~ImageView()
 void ImageView::setImage(const QImage& image)
 {
     m_pixmap->setPixmap(QPixmap::fromImage(image));
+    /*
+    if (fitMode() && !(m_pixmap->pixmap().height() == viewport()->height() || m_pixmap->pixmap().width() == viewport()->width())) {
+        return;
+    }*/
     m_pixmap->update();
     setSceneRect(m_scene->itemsBoundingRect());
 }
@@ -75,6 +79,8 @@ void ImageView::clear()
     m_image = QImage();
     m_pixmap->setPixmap(QPixmap());
     m_pixmap->update();
+    m_scaleFactor = 1.0;
+    m_ratio = 1.0;
 }
 
 void ImageView::scaleImage(double factor)
@@ -90,6 +96,7 @@ void ImageView::scaleImage(double factor)
 
 void ImageView::normalSize()
 {
+    setFitMode(false);
     m_scaleFactor = 1.0;
     m_ratio = 1.0;
     scaleImage(1.0);
@@ -97,16 +104,22 @@ void ImageView::normalSize()
 
 void ImageView::zoomIn()
 {
+    setFitMode(false);
     scaleImage(1.25);
 }
 
 void ImageView::zoomOut()
 {
+    setFitMode(false);
     scaleImage(0.8);
 }
 
 void ImageView::zoomFit()
 {
+    if (m_pixmap->pixmap().height() == 0 || viewport()->height() == 0) {
+        return;
+    }
+    
     double hRatio = 1.00 * viewport()->width() / m_pixmap->pixmap().width();
     double vRatio = 1.00 * viewport()->height() / m_pixmap->pixmap().height();
     double ratio = qMin(hRatio, vRatio);
@@ -133,7 +146,7 @@ double ImageView::scaleFactor() const
 void ImageView::resizeEvent(QResizeEvent* event)
 {    
     if (event->oldSize().height() > 0 && !m_render->isRunning() && m_fitMode) {
-        m_timer->start(100);
+        trigger();
         return;
     }
      
@@ -142,12 +155,21 @@ void ImageView::resizeEvent(QResizeEvent* event)
 
 void ImageView::setFitMode(bool enabled)
 {
-    m_fitMode = enabled;
+    if (m_fitMode != enabled) {
+        m_fitMode = enabled;
+        if (m_fitMode) zoomFit();
+        emit fitModeChanged(enabled);
+    }    
 }
 
 bool ImageView::fitMode() const
 {
     return m_fitMode;
+}
+
+void ImageView::trigger()
+{
+    m_timer->start(100);
 }
 
 

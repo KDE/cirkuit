@@ -71,7 +71,7 @@ void GeneratorThread::run()
     
     m_previewUrl = gen->formatPath(Format::Pdf);
     emit previewUrl(m_previewUrl);
-    if (m_output == Format::QtImage) {        
+    if (m_output == Format::QtImage) {   
         m_render->generatePreview(gen->formatPath(Format::Pdf), m_scaleFactor);
     }
     

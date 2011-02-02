@@ -52,10 +52,12 @@ public slots:
     
 private slots:
     void scaleImage(double factor);
+    void trigger();
     
 signals:
     void enableZoomIn(bool);
     void enableZoomOut(bool);
+    void fitModeChanged(bool);
     
 protected:
     void resizeEvent(QResizeEvent*);

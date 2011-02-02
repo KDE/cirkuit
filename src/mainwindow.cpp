@@ -37,6 +37,7 @@
 
 #include <KApplication>
 #include <KAction>
+#include <KToggleAction>
 #include <KLocale>
 #include <KActionCollection>
 #include <KStandardAction>
@@ -135,7 +136,7 @@ void MainWindow::setupActions()
     
     KAction* zoomInAction = KStandardAction::zoomIn(m_imageView, SLOT(zoomIn()), actionCollection());
     KAction* zoomOutAction = KStandardAction::zoomOut(m_imageView, SLOT(zoomOut()), actionCollection());
-    KAction* zoomFitAction = KStandardAction::fitToPage(m_imageView, SLOT(zoomFit()), actionCollection());
+    zoomFitAction = KStandardAction::fitToPage(m_imageView, SLOT(zoomFit()), actionCollection());
     KStandardAction::actualSize(m_imageView, SLOT(normalSize()), actionCollection());
     
     connect(m_imageView, SIGNAL(enableZoomIn(bool)), zoomInAction, SLOT(setEnabled(bool)));
@@ -171,6 +172,13 @@ void MainWindow::setupActions()
     
     QAction* showLogViewAction = m_logViewWidget->toggleViewAction();
     actionCollection()->addAction( "show_log_view", showLogViewAction );
+    
+    zoomFitPageAction = new KToggleAction(i18n("Zoom to fit"), 0);
+    zoomFitPageAction->setShortcut(Qt::ALT + Qt::Key_9);
+    actionCollection()->addAction( "view_zoom_to_fit", zoomFitPageAction);
+    connect(zoomFitPageAction, SIGNAL(triggered()), this, SLOT(updateZoomToFit()));
+    connect(m_imageView, SIGNAL(fitModeChanged(bool)), zoomFitPageAction, SLOT(setChecked(bool)));
+    connect(m_imageView, SIGNAL(fitModeChanged(bool)), this, SLOT(updateZoomToFit()));
 
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->loadEntries(config->group("recent_files"));
@@ -224,6 +232,7 @@ void MainWindow::loadFile(const KUrl& url)
 {
     m_currentFile = url;
     m_view->document()->openUrl(url);
+    m_imageView->clear();
     buildPreview();
     updateTitle();
 }
@@ -492,6 +501,10 @@ void MainWindow::failedNotification()
 void MainWindow::showPreview(const QImage& image)
 {
     m_imageView->setImage(image);
+    
+    if (m_imageView->fitMode()) {
+        m_imageView->zoomFit();
+    }
 }
 
 void MainWindow::saveFileToDisk(const QString& path)
@@ -511,3 +524,10 @@ void MainWindow::setDefaultBackend(const QString& backend)
 {
     CirkuitSettings::setDefaultBackend(backend);
 }
+
+void MainWindow::updateZoomToFit()
+{
+    zoomFitAction->setEnabled(!zoomFitPageAction->isChecked());
+    m_imageView->setFitMode(zoomFitPageAction->isChecked());
+}
+

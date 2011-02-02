@@ -65,7 +65,7 @@ void RenderThread::run()
     }
 
     // Generate a QImage of the rendered page
-    QImage image = pdfPage->renderToImage(factor*300.0, factor*300.0);
+    QImage image = pdfPage->renderToImage(factor*200.0, factor*200.0);
     emit previewReady(image);
     
     delete pdfPage;
