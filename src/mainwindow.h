@@ -25,6 +25,7 @@
 #include <QtGui/QKeyEvent>
 #include <KUrl>
 
+class ImageView;
 class LogViewWidget;
 namespace KTextEditor
 {
@@ -42,6 +43,8 @@ class LivePreviewWidget;
 class GeneratorThread;
 class QTimer;
 class KRecentFilesAction;
+class KToggleAction;
+class KAction;
 class GraphicsDocument;
 class CircuitMacrosManager;
 
@@ -73,6 +76,7 @@ private slots:
 
     void updateTitle();
     void updateConfiguration();
+    void updateZoomToFit();
     void configure();
     void builtNotification();
     void failedNotification();
@@ -97,12 +101,17 @@ private:
     QTimer* m_updateTimer;
     QStringList mimeTypes;
     KUrl m_currentFile;
+    
     KRecentFilesAction* recentFilesAction;
+    KToggleAction* zoomFitPageAction;
+    KAction* zoomFitAction;
+    
     CircuitMacrosManager* cmm;
     QString m_tempSavePath;
 
     QString m_windowTitle;
     LivePreviewWidget *m_livePreviewWidget;
+    ImageView* m_imageView;
     LogViewWidget* m_logViewWidget;
     GeneratorThread* m_generator;
 

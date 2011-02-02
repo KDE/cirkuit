@@ -1,8 +1,6 @@
 set(GENERIC_LIB_VERSION "0.0.1")
 set(GENERIC_LIB_SOVERSION "1")
 
-find_package(Poppler REQUIRED)
-include_directories(${POPPLER_INCLUDE_DIR})
 set ( cirkuit_LIB_SRCS
     backend.cpp
     command.cpp
@@ -19,7 +17,7 @@ set( cirkuit_LIB_HDRS
 kde4_add_library( cirkuitlibs SHARED ${cirkuit_LIB_SRCS} )
 
 target_link_libraries( cirkuitlibs
-  ${KDE4_KDECORE_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${POPPLER_LIBRARY}
+  ${KDE4_KDECORE_LIBS} ${KDE4_KTEXTEDITOR_LIBS}
 )
 
 set_target_properties( cirkuitlibs

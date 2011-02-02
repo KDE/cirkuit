@@ -23,16 +23,21 @@
 
 #include "cirkuitsettings.h"
 #include "generatorthread.h"
+#include "renderthread.h"
 
 #include <KDebug>
 #include <KLocalizedString>
 
 using namespace Cirkuit;
 
-GeneratorThread::GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc, QObject* parent): QThread(parent)
+GeneratorThread::GeneratorThread(QObject* parent): QThread(parent)
 {
+    m_previewUrl = QString();
     m_backend = 0;
-    setup(in, out, m_backend, doc, false);
+    m_doc = 0;
+    m_scaleFactor = 1.0;
+    m_render = new RenderThread;
+    connect(m_render, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
 }
 
 void GeneratorThread::run()
@@ -53,20 +58,21 @@ void GeneratorThread::run()
     
     Cirkuit::Generator* gen = m_backend->generator();
     
-    connect(gen, SIGNAL(previewReady(QImage)), this, SIGNAL(previewReady(QImage)));
     connect(gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));
     connect(gen, SIGNAL(error(QString,QString)), this, SLOT(quit()));
     connect(gen, SIGNAL(output(QString,QString)), this, SIGNAL(output(QString,QString)));
     connect(gen, SIGNAL(fail()), this, SIGNAL(fail()));
     gen->setDocument(m_doc);
-	gen->setResolution(CirkuitSettings::resolutionPpm());
+    gen->setResolution(CirkuitSettings::resolutionPpm());
     if (!gen->convert(m_input, m_output)) {
         emit fail();
         return;
     }
     
-    if (m_output == Format::QtImage) {
-        gen->render();
+    m_previewUrl = gen->formatPath(Format::Pdf);
+    emit previewUrl(m_previewUrl);
+    if (m_output == Format::QtImage) {   
+        m_render->generatePreview(gen->formatPath(Format::Pdf), m_scaleFactor);
     }
     
     if (m_saveToFile) {
@@ -81,16 +87,23 @@ GeneratorThread::~GeneratorThread()
     
 }
 
-void GeneratorThread::setup(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, Cirkuit::Document* doc, bool saveToFile)
+void GeneratorThread::setScaleFactor(double scaleFactor)
+{
+    m_scaleFactor = scaleFactor;
+}
+
+void GeneratorThread::generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, Cirkuit::Document* doc, bool saveToFile, double scaleFactor)
 {
     m_input = in;
     m_output = out;
     m_doc = doc;
     m_saveToFile = saveToFile;
     m_backend = backend;
+    setScaleFactor(scaleFactor);
+    start(LowPriority);
 }
 
-Generator* GeneratorThread::generator()
+QString GeneratorThread::previewUrl() const
 {
-    return 0;
+    return m_previewUrl;
 }

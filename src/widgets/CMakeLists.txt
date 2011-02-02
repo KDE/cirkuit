@@ -1,8 +1,8 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ..)
-set (cirkuitwidgets_SRCS
+set (cirkuitwidgets_SRCS 
+    imageview.cpp
     livepreviewwidget.cpp
     logviewwidget.cpp
-    qimagedisplay.cpp
     backendchoosedialog.cpp
 )
 

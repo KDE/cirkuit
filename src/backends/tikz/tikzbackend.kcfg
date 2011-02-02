@@ -10,5 +10,9 @@
       <label>The location of the TikZ template.</label>
       <default code="true">KStandardDirs::locate("data", "cirkuit/templates/tikz_latex.ckt")</default>
     </entry>
+    <entry name="latexargs" type="StringList">
+        <label>The default arguments called in the latex executable</label>
+        <default>-file-line-error,-halt-on-error</default>
+    </entry>
   </group>
 </kcfg>

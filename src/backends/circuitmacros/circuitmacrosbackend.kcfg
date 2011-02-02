@@ -15,12 +15,16 @@
         <default>dpic_ps</default>
     </entry>    
     <entry name="cmtemplateurl" type="Url">
-      <label>The location of the Circuit Macros template.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt")</default>
+        <label>The location of the Circuit Macros template.</label>
+        <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt")</default>
     </entry>
     <entry name="cmtikztemplateurl" type="Url">
-      <label>The location of the Circuit Macros template with TikZ backend.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_tikz.ckt")</default>
+        <label>The location of the Circuit Macros template with TikZ backend.</label>
+        <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_tikz.ckt")</default>
+    </entry>
+    <entry name="latexargs" type="StringList">
+        <label>The default arguments called in the latex executable</label>
+        <default>-file-line-error,-halt-on-error</default>
     </entry>
   </group>
 </kcfg>

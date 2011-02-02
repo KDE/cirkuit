@@ -19,7 +19,7 @@
 ***************************************************************************/
 
 #include "livepreviewwidget.h"
-#include "qimagedisplay.h"
+#include "imageview.h"
 
 #include <QImage>
 #include <QTimer>
@@ -28,40 +28,27 @@
 LivePreviewWidget::LivePreviewWidget(const QString & title, QWidget * parent, Qt::WindowFlags flags)
   : QDockWidget(title, parent, flags)
 {
-  imageDisplay = new QImageDisplay(this);
-  imageDisplay->setBackgroundRole(QPalette::Base);
+    m_imageView = new ImageView(this);
   
-  timer = new QTimer;
-  timer->setSingleShot(true);
-  timer->setInterval(100);
-  
-  connect(timer, SIGNAL(timeout()), this, SLOT(setSmoothTransformation()));
-  
-  setWidget(imageDisplay);
-  setMinimumHeight(180);
-  setMinimumWidth(150);
+    setWidget(m_imageView);
+    setMinimumHeight(180);
+    setMinimumWidth(150);
 }
 
 void LivePreviewWidget::setImage(const QImage& image)
 {
-  setSmoothTransformation();
-  imageDisplay->setImage(image);
+    m_imageView->setImage(image);
 }
 
 void LivePreviewWidget::clear()
 {
-  imageDisplay->clear();
+    m_imageView->clear();
 }
 
-void LivePreviewWidget::resizeEvent ( QResizeEvent* /*event*/ )
+ImageView* LivePreviewWidget::view() const
 {
-  imageDisplay->setFastTransformation(true);
-  
-  timer->start();
+    return m_imageView;
 }
 
-void LivePreviewWidget::setSmoothTransformation()
-{
-  imageDisplay->setFastTransformation(false);
-}
+
 

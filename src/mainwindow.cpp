@@ -31,11 +31,13 @@
 #include "generator.h"
 
 #include "widgets/livepreviewwidget.h"
+#include "widgets/imageview.h"
 #include "widgets/logviewwidget.h"
 #include "widgets/backendchoosedialog.h"
 
 #include <KApplication>
 #include <KAction>
+#include <KToggleAction>
 #include <KLocale>
 #include <KActionCollection>
 #include <KStandardAction>
@@ -77,6 +79,7 @@ MainWindow::MainWindow(QWidget *)
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
    
     m_livePreviewWidget = new LivePreviewWidget(i18n("Live preview"), this);
+    m_imageView = m_livePreviewWidget->view();
     addDockWidget(Qt::TopDockWidgetArea, m_livePreviewWidget);
     
     m_logViewWidget = new LogViewWidget(i18n("Log"), this);
@@ -99,7 +102,7 @@ MainWindow::MainWindow(QWidget *)
 
     setGeometry(100,100,CirkuitSettings::width(),CirkuitSettings::height());
 
-    m_generator = new GeneratorThread(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_doc);
+    m_generator = new GeneratorThread;
     
     m_updateTimer = 0;
     updateConfiguration();
@@ -112,7 +115,8 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(previewReady(QImage)), this, SLOT(showPreview(QImage)));
     connect(m_generator, SIGNAL(fileReady(QString)), this, SLOT(saveFileToDisk(QString)));
     connect(m_generator, SIGNAL(error(QString,QString)), m_logViewWidget, SLOT(displayError(QString,QString)));
-    connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));
+    connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));   
+    connect(m_generator, SIGNAL(previewUrl(QString)), m_imageView, SLOT(setPdfUrl(QString)));
     
     checkCircuitMacros();
     initializeBackend();
@@ -122,13 +126,21 @@ MainWindow::MainWindow(QWidget *)
 void MainWindow::setupActions()
 {
 	KStandardAction::openNew(this, SLOT(newFile()), actionCollection());
-    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+    KStandardAction::quit(this, SLOT(close()), actionCollection());
     KStandardAction::open(this, SLOT(openFile()), actionCollection());
     KStandardAction::save(this, SLOT(save()), actionCollection());
     KStandardAction::saveAs(this, SLOT(saveAs()), actionCollection());			
     KStandardAction::clear(this, SLOT(clear()), actionCollection());
     KStandardAction::preferences(this, SLOT(configure()),
                                             actionCollection());
+    
+    KAction* zoomInAction = KStandardAction::zoomIn(m_imageView, SLOT(zoomIn()), actionCollection());
+    KAction* zoomOutAction = KStandardAction::zoomOut(m_imageView, SLOT(zoomOut()), actionCollection());
+    zoomFitAction = KStandardAction::fitToPage(m_imageView, SLOT(zoomFit()), actionCollection());
+    KStandardAction::actualSize(m_imageView, SLOT(normalSize()), actionCollection());
+    
+    connect(m_imageView, SIGNAL(enableZoomIn(bool)), zoomInAction, SLOT(setEnabled(bool)));
+    connect(m_imageView, SIGNAL(enableZoomOut(bool)), zoomOutAction, SLOT(setEnabled(bool)));
                                             
     recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile( const KUrl& )),
                                                                     actionCollection());
@@ -160,6 +172,15 @@ void MainWindow::setupActions()
     
     QAction* showLogViewAction = m_logViewWidget->toggleViewAction();
     actionCollection()->addAction( "show_log_view", showLogViewAction );
+    
+    zoomFitPageAction = new KToggleAction(i18n("Zoom to fit"), 0);
+    zoomFitPageAction->setShortcut(Qt::ALT + Qt::Key_9);
+    actionCollection()->addAction( "view_zoom_to_fit", zoomFitPageAction);
+    connect(zoomFitPageAction, SIGNAL(triggered()), this, SLOT(updateZoomToFit()));
+    connect(m_imageView, SIGNAL(fitModeChanged(bool)), zoomFitPageAction, SLOT(setChecked(bool)));
+    connect(m_imageView, SIGNAL(fitModeChanged(bool)), this, SLOT(updateZoomToFit()));
+    zoomFitPageAction->setChecked(CirkuitSettings::zoomToFit());
+    updateZoomToFit();
 
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->loadEntries(config->group("recent_files"));
@@ -203,7 +224,7 @@ void MainWindow::openFile()
     }
 
     if (!filename.isEmpty()) {
-        m_livePreviewWidget->clear();
+        m_imageView->clear();
         recentFilesAction->addUrl(KUrl(filename));
         loadFile(filename);
     }
@@ -213,6 +234,7 @@ void MainWindow::loadFile(const KUrl& url)
 {
     m_currentFile = url;
     m_view->document()->openUrl(url);
+    m_imageView->clear();
     buildPreview();
     updateTitle();
 }
@@ -281,9 +303,8 @@ void MainWindow::exportFile()
         QFileInfo fileinfo(path);
         Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog.currentFilterMimeType());
         m_doc->setDirectory(m_currentFile.directory());
-        m_generator->setup(Cirkuit::Format::Source, format, m_backend, m_doc, true);
         statusBar()->showMessage("Exporting image...");
-        m_generator->start();
+        m_generator->generate(Cirkuit::Format::Source, format, m_backend, m_doc, true);
         m_tempSavePath = path;
         QFile oldFile(path);
         oldFile.remove();
@@ -302,7 +323,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->saveEntries(config->group("recent_files"));
-
+    
+    CirkuitSettings::setZoomToFit(zoomFitPageAction->isChecked());
     CirkuitSettings::self()->writeConfig();
 
     if (!m_doc->closeUrl()) {
@@ -322,8 +344,7 @@ void MainWindow::buildPreview()
     m_logViewWidget->hide();
     
     m_doc->setDirectory(m_currentFile.directory());
-    m_generator->setup(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc);
-    m_generator->start();
+    m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc, false, m_imageView->scaleFactor());
     
     kDebug() << "Preview generation in progress...";
 }
@@ -337,10 +358,14 @@ void MainWindow::openPreview()
 
 void MainWindow::openPreviewFile()
 {
-    KUrl url = m_generator->generator()->formatPath(Cirkuit::Format::Pdf);
-    KRun::runUrl(url, "application/pdf", this);
-    
     disconnect(m_generator, SIGNAL(finished()), this, SLOT(openPreviewFile()));
+    
+    KUrl url = m_generator->previewUrl();
+    if (!url.isLocalFile()) {    
+        return;
+    }
+    
+    KRun::runUrl(url, "application/pdf", this);
 }
 
 void MainWindow::builtNotification()
@@ -394,7 +419,7 @@ void MainWindow::reset()
 {
     m_currentFile = "";
     m_doc->clear();
-	m_livePreviewWidget->clear();
+	m_imageView->clear();
     updateTitle();	
 }
 
@@ -478,13 +503,17 @@ void MainWindow::circuitMacrosConfigured()
 
 void MainWindow::failedNotification()
 {
-    m_livePreviewWidget->setImage(QImage());
+    m_imageView->setImage(QImage());
     statusBar()->showMessage(i18n("Unable to generate a preview for the current input"), 5000);
 }
 
 void MainWindow::showPreview(const QImage& image)
 {
-    m_livePreviewWidget->setImage(image);
+    m_imageView->setImage(image);
+    
+    if (m_imageView->fitMode()) {
+        m_imageView->zoomFit();
+    }
 }
 
 void MainWindow::saveFileToDisk(const QString& path)
@@ -504,3 +533,10 @@ void MainWindow::setDefaultBackend(const QString& backend)
 {
     CirkuitSettings::setDefaultBackend(backend);
 }
+
+void MainWindow::updateZoomToFit()
+{
+    zoomFitAction->setEnabled(!zoomFitPageAction->isChecked());
+    m_imageView->setFitMode(zoomFitPageAction->isChecked());
+}
+

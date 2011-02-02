@@ -24,6 +24,7 @@
 #include <QThread>
 #include <QImage>
 
+class RenderThread;
 namespace Cirkuit
 {
 class Command;
@@ -36,20 +37,23 @@ class GeneratorThread : public QThread
 {
     Q_OBJECT
 public:
-    GeneratorThread(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Document* doc = 0, QObject* parent = 0);
+    GeneratorThread(QObject* parent = 0);
     ~GeneratorThread();
-        
-    Cirkuit::Generator* generator();
+    
+    QString previewUrl() const;
     
 protected:
     Cirkuit::Format m_input, m_output;
     
-public slots:
-    void setup(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend = 0, Cirkuit::Document* doc = 0, bool saveToFile = false);
     void run();
+    
+public slots:
+    void generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend = 0, Cirkuit::Document* doc = 0, bool saveToFile = false, double scaleFactor=1.0);
+    void setScaleFactor(double scaleFactor);
     
 signals:
     void previewReady(const QImage);
+    void previewUrl(const QString);
     void fileReady(const QString);
     
     void error(const QString& appname, const QString& msg);
@@ -59,8 +63,12 @@ signals:
     
 private:
     Cirkuit::Document* m_doc;
-	Cirkuit::Backend* m_backend;
+    Cirkuit::Backend* m_backend;
+    RenderThread* m_render;
     bool m_saveToFile;
+    double m_scaleFactor;
+    
+    QString m_previewUrl;
 };
 
 #endif // GRAPHICSGENERATOR_H
