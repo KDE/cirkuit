@@ -79,6 +79,7 @@ private slots:
     void updateZoomToFit();
     void configure();
     void configureKeyBindings();
+    void configureToolbars();
     void builtNotification();
     void failedNotification();
 

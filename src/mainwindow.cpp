@@ -134,6 +134,7 @@ void MainWindow::setupActions()
     KStandardAction::clear(this, SLOT(clear()), actionCollection());
     KStandardAction::preferences(this, SLOT(configure()), actionCollection());    
     KStandardAction::keyBindings(this, SLOT(configureKeyBindings()), actionCollection());
+    KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
     
     KAction* zoomInAction = KStandardAction::zoomIn(m_imageView, SLOT(zoomIn()), actionCollection());
     KAction* zoomOutAction = KStandardAction::zoomOut(m_imageView, SLOT(zoomOut()), actionCollection());
@@ -550,3 +551,7 @@ void MainWindow::configureKeyBindings()
     KShortcutsDialog::configure(actionCollection());
 }
 
+void MainWindow::configureToolbars()
+{
+    KParts::MainWindow::configureToolbars();
+}

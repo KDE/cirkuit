@@ -51,18 +51,15 @@
     <Action name="file_save_as" />
     <Separator />
     <DefineGroup name="print_merge" />
-    <Separator />
     <Action name="file_close" />
-    <Separator />
     <Action name="show_live_preview" />
     <Action name="show_log_view" />
     <Separator />
     <DefineGroup name="edit_operations" />
-    <Separator />
     <DefineGroup name="find_operations" />
     <Separator />
-    <DefineGroup name="zoom_operations" />  
-    <Action name="zoom_to" />
+    <DefineGroup name="zoom_operations" />
+    <Action name="view_zoom_to_fit" />
     <Action name="view_zoom_out" />
     <Action name="view_zoom_in" />
 </ToolBar>
