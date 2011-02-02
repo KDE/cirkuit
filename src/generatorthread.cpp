@@ -44,7 +44,10 @@ void GeneratorThread::run()
 { 
     Cirkuit::Backend* bestBackend = Backend::autoChooseBackend(m_doc);
     if (CirkuitSettings::autoSelectBackend()) {
-        m_backend = bestBackend;
+        if (bestBackend->id() != m_backend->id()) {
+            m_backend = bestBackend;
+            emit backendChanged(m_backend->name());
+        }
     }
     
     if (!m_backend) {
@@ -106,10 +109,5 @@ void GeneratorThread::generate(const Cirkuit::Format& in, const Cirkuit::Format&
 QString GeneratorThread::previewUrl() const
 {
     return m_previewUrl;
-}
-
-Backend* GeneratorThread::backend() const
-{
-    return m_backend;
 }
 

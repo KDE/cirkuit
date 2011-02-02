@@ -118,6 +118,7 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(error(QString,QString)), m_logViewWidget, SLOT(displayError(QString,QString)));
     connect(m_generator, SIGNAL(output(QString,QString)), m_logViewWidget, SLOT(displayMessage(QString,QString)));   
     connect(m_generator, SIGNAL(previewUrl(QString)), m_imageView, SLOT(setPdfUrl(QString)));
+    connect(m_generator, SIGNAL(backendChanged(QString)), this, SLOT(backendChanged(QString)));
     
     checkCircuitMacros();
     initializeBackend();
@@ -164,11 +165,11 @@ void MainWindow::setupActions()
     actionCollection()->addAction("open_preview", openPreviewAction);
     connect(openPreviewAction, SIGNAL(triggered()), this, SLOT(openPreview()));
 
-    KAction* showManualAction = new KAction(KIcon("help-contents"), i18n("Show backend manual"),0);
+    KAction* showManualAction = new KAction(KIcon("help-contents"), i18n("Show manual"),0);
     actionCollection()->addAction( "showManual", showManualAction );
     connect(showManualAction, SIGNAL(triggered()), this, SLOT(showManual()));
 
-    KAction* showExamplesAction = new KAction(i18n("Show backend examples"),0);
+    KAction* showExamplesAction = new KAction(i18n("Show examples"),0);
     actionCollection()->addAction( "showExamples", showExamplesAction );
     connect(showExamplesAction, SIGNAL(triggered()), this, SLOT(showExamples()));
 
@@ -379,7 +380,6 @@ void MainWindow::openPreviewFile()
 void MainWindow::builtNotification()
 {
     statusBar()->showMessage(i18n("Preview built"), 3000);
-    m_backend = m_generator->backend();
 }
 
 void MainWindow::newDocument(const QString& backendName)
@@ -391,6 +391,7 @@ void MainWindow::newDocument(const QString& backendName)
             return;
         } else {
             m_backend = newBackend;
+            backendChanged(m_backend->name());
         }
     }
     
@@ -547,6 +548,7 @@ void MainWindow::initializeBackend()
 {
     kDebug() << Cirkuit::Backend::listAvailableBackends();
     m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
+    backendChanged(m_backend->name());
 }
 
 void MainWindow::setDefaultBackend(const QString& backend)
@@ -569,3 +571,10 @@ void MainWindow::configureToolbars()
 {
     KParts::MainWindow::configureToolbars();
 }
+
+void MainWindow::backendChanged(const QString& backendName)
+{
+    actionCollection()->action("showManual")->setText(i18n("%1 manual").arg(backendName));
+    actionCollection()->action("showExamples")->setText(i18n("%1 examples").arg(backendName));
+}
+

@@ -41,7 +41,6 @@ public:
     ~GeneratorThread();
     
     QString previewUrl() const;
-    Cirkuit::Backend* backend() const;
     
 protected:
     Cirkuit::Format m_input, m_output;
@@ -61,6 +60,8 @@ signals:
     void output(const QString& appname, const QString& msg);
     void fail();
     void success();
+    
+    void backendChanged(QString);
     
 private:
     Cirkuit::Document* m_doc;

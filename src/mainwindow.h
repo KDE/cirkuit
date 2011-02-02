@@ -94,6 +94,8 @@ private slots:
     
     void initializeBackend();
     void setDefaultBackend(const QString& backend);
+    
+    void backendChanged(const QString& backendName);
 
 private:
     void setupActions();
