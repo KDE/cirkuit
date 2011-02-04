@@ -39,7 +39,7 @@ namespace Cirkuit
     class Backend;
 }
 
-class LivePreviewWidget;
+class PreviewWidget;
 class GeneratorThread;
 class QTimer;
 class KRecentFilesAction;
@@ -115,7 +115,7 @@ private:
     QString m_tempSavePath;
 
     QString m_windowTitle;
-    LivePreviewWidget *m_livePreviewWidget;
+    PreviewWidget *m_previewWidget;
     ImageView* m_imageView;
     LogViewWidget* m_logViewWidget;
     GeneratorThread* m_generator;

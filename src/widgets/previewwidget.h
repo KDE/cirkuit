@@ -1,5 +1,5 @@
 /***************************************************************************
-*   Copyright (C) 2009 by Matteo Agostinelli                              *
+*   Copyright (C) 2011 by Matteo Agostinelli                              *
 *   agostinelli@gmail.com                                                 *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
@@ -18,37 +18,29 @@
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
 
-#include "livepreviewwidget.h"
-#include "imageview.h"
+#ifndef PREVIEWWIDGET_H
+#define PREVIEWWIDGET_H
 
-#include <QImage>
-#include <QTimer>
+#include <QDockWidget>
 
+class ImageView;
+class QImage;
+class QTimer;
 
-LivePreviewWidget::LivePreviewWidget(const QString & title, QWidget * parent, Qt::WindowFlags flags)
-  : QDockWidget(title, parent, flags)
+class PreviewWidget : public QDockWidget
 {
-    m_imageView = new ImageView(this);
-  
-    setWidget(m_imageView);
-    setMinimumHeight(180);
-    setMinimumWidth(150);
-}
+    Q_OBJECT
+public:
+    PreviewWidget(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0);
+    
+    ImageView* view() const;
 
-void LivePreviewWidget::setImage(const QImage& image)
-{
-    m_imageView->setImage(image);
-}
+private:
+    ImageView* m_imageView;
 
-void LivePreviewWidget::clear()
-{
-    m_imageView->clear();
-}
+public slots:
+    void setImage(const QImage&);
+    void clear();
+};
 
-ImageView* LivePreviewWidget::view() const
-{
-    return m_imageView;
-}
-
-
-
+#endif

@@ -18,29 +18,37 @@
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
 
-#ifndef LIVEPREVIEWWIDGET_H
-#define LIVEPREVIEWWIDGET_H
+#include "previewwidget.h"
+#include "imageview.h"
 
-#include <QDockWidget>
+#include <QImage>
+#include <QTimer>
 
-class ImageView;
-class QImage;
-class QTimer;
 
-class LivePreviewWidget : public QDockWidget
+PreviewWidget::PreviewWidget(const QString & title, QWidget * parent, Qt::WindowFlags flags)
+  : QDockWidget(title, parent, flags)
 {
-    Q_OBJECT
-public:
-    LivePreviewWidget(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0);
-    
-    ImageView* view() const;
+    m_imageView = new ImageView(this);
+  
+    setWidget(m_imageView);
+    setMinimumHeight(180);
+    setMinimumWidth(150);
+}
 
-private:
-    ImageView* m_imageView;
+void PreviewWidget::setImage(const QImage& image)
+{
+    m_imageView->setImage(image);
+}
 
-public slots:
-    void setImage(const QImage&);
-    void clear();
-};
+void PreviewWidget::clear()
+{
+    m_imageView->clear();
+}
 
-#endif
+ImageView* PreviewWidget::view() const
+{
+    return m_imageView;
+}
+
+
+

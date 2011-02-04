@@ -30,7 +30,7 @@
 #include "format.h"
 #include "generator.h"
 
-#include "widgets/livepreviewwidget.h"
+#include "widgets/previewwidget.h"
 #include "widgets/imageview.h"
 #include "widgets/logviewwidget.h"
 #include "widgets/backendchoosedialog.h"
@@ -79,11 +79,13 @@ MainWindow::MainWindow(QWidget *)
     m_doc->initialize();
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
    
-    m_livePreviewWidget = new LivePreviewWidget(i18n("Preview"), this);
-    m_imageView = m_livePreviewWidget->view();
-    addDockWidget(Qt::TopDockWidgetArea, m_livePreviewWidget);
+    m_previewWidget = new PreviewWidget(i18n("Preview"), this);
+    m_previewWidget->setObjectName("preview-dock");
+    m_imageView = m_previewWidget->view();
+    addDockWidget(Qt::TopDockWidgetArea, m_previewWidget);
     
     m_logViewWidget = new LogViewWidget(i18n("Log"), this);
+    m_logViewWidget->setObjectName("log-dock");
     addDockWidget(Qt::BottomDockWidgetArea, m_logViewWidget);
     m_logViewWidget->hide();
 
@@ -92,6 +94,7 @@ MainWindow::MainWindow(QWidget *)
     updateTitle();
 
     setCentralWidget(m_view);
+    setAutoSaveSettings();
     setupActions();
 
     setXMLFile("cirkuitui.rc");
@@ -100,8 +103,6 @@ MainWindow::MainWindow(QWidget *)
 
     guiFactory()->addClient(m_view);
     m_view->setContextMenu(qobject_cast<KMenu *> (factory()->container("ktexteditor_popup", this)));
-
-    setGeometry(100,100,CirkuitSettings::width(),CirkuitSettings::height());
 
     m_generator = new GeneratorThread;
     
@@ -173,7 +174,7 @@ void MainWindow::setupActions()
     actionCollection()->addAction( "showExamples", showExamplesAction );
     connect(showExamplesAction, SIGNAL(triggered()), this, SLOT(showExamples()));
 
-    QAction* showLivePreviewAction = m_livePreviewWidget->toggleViewAction();
+    QAction* showLivePreviewAction = m_previewWidget->toggleViewAction();
     showLivePreviewAction->setIcon(KIcon("document-preview"));
     actionCollection()->addAction( "show_live_preview", showLivePreviewAction );
     
@@ -328,9 +329,6 @@ void MainWindow::documentModified(KTextEditor::Document* doc)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    CirkuitSettings::setHeight(height());
-    CirkuitSettings::setWidth(width());
-
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->saveEntries(config->group("recent_files"));
     
