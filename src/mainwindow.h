@@ -119,6 +119,8 @@ private:
     ImageView* m_imageView;
     LogViewWidget* m_logViewWidget;
     GeneratorThread* m_generator;
+    
+    bool m_firstRun;
 
 public slots:
     void loadFile(const KUrl& url);

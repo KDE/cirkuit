@@ -244,6 +244,7 @@ void MainWindow::loadFile(const KUrl& url)
     m_currentFile = url;
     m_view->document()->openUrl(url);
     m_imageView->clear();
+    m_firstRun = true;
     buildPreview();
     updateTitle();
 }
@@ -430,6 +431,7 @@ void MainWindow::reset()
     m_currentFile = "";
     m_doc->clear();
 	m_imageView->clear();
+    m_firstRun = true;
     updateTitle();	
 }
 
@@ -530,11 +532,9 @@ void MainWindow::failedNotification()
 
 void MainWindow::showPreview(const QImage& image)
 {    
-    if (m_imageView->fitMode()) {
-        m_imageView->setImage(image, true);
-    } else {
-        m_imageView->setImage(image);
-    }
+    m_imageView->setImage(image, m_firstRun);
+    
+    m_firstRun = false;
 }
 
 void MainWindow::saveFileToDisk(const QString& path)
@@ -549,6 +549,7 @@ void MainWindow::initializeBackend()
     kDebug() << Cirkuit::Backend::listAvailableBackends();
     m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
     backendChanged(m_backend->name());
+    m_firstRun = true;
 }
 
 void MainWindow::setDefaultBackend(const QString& backend)
