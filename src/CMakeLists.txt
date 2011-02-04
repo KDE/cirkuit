@@ -23,12 +23,14 @@ kde4_add_kcfg_files(cirkuit_SRCS GENERATE_MOC cirkuitsettings.kcfgc)
 kde4_add_ui_files(cirkuit_SRCS cirkuit_general_settings.ui)
 kde4_add_executable(cirkuit ${cirkuit_SRCS})
 
-target_link_libraries(cirkuit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${QT_QTNETWORK_LIBRARIES} ${POPPLER_LIBRARY} cirkuitlibs cirkuitwidgets)
+target_link_libraries(cirkuit ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KTEXTEDITOR_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${POPPLER_LIBRARY} cirkuitlibs cirkuitwidgets)
 
 install(TARGETS cirkuit ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES cirkuitui.rc 
 DESTINATION ${DATA_INSTALL_DIR}/cirkuit)
 install(FILES cirkuit.kcfg DESTINATION ${KCFG_INSTALL_DIR})
+install(FILES cirkuit.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
+install(FILES cirkuit_example.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 install( FILES cirkuit.notifyrc DESTINATION ${DATA_INSTALL_DIR}/cirkuit)
 install (PROGRAMS cirkuit.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

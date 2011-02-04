@@ -50,6 +50,7 @@
 #include <KSaveFile>
 #include <KMenu>
 #include <QTextStream>
+#include <QListWidget>
 #include <QFileInfo>
 #include <QTimer>
 #include <KXMLGUIFactory>
@@ -59,11 +60,13 @@
 #include <KProcess>
 #include <kmimetypetrader.h>
 
+#include <knewstuff3/downloaddialog.h>
+#include <knewstuff3/uploaddialog.h>
+
 #include <KTextEditor/Document>
 #include <KTextEditor/View>
 #include <KTextEditor/Editor>
 #include <KTextEditor/EditorChooser>
-
 
 MainWindow::MainWindow(QWidget *)
 {
@@ -177,6 +180,21 @@ void MainWindow::setupActions()
     QAction* showLivePreviewAction = m_previewWidget->toggleViewAction();
     showLivePreviewAction->setIcon(KIcon("document-preview"));
     actionCollection()->addAction( "show_live_preview", showLivePreviewAction );
+
+    KAction* downloadExamples = new KAction(i18n("Download Examples"), actionCollection());
+    downloadExamples->setIcon(KIcon("get-hot-new-stuff"));
+    actionCollection()->addAction("download_examples",  downloadExamples);
+    connect(downloadExamples, SIGNAL(triggered()), this,  SLOT(downloadExamples()));
+    
+    KAction* uploadExample = new KAction(i18n("Upload Example"), actionCollection());
+    uploadExample->setIcon(KIcon("get-hot-new-stuff"));
+    actionCollection()->addAction("upload_example",  uploadExample);
+    connect(uploadExample, SIGNAL(triggered()), this,  SLOT(uploadExample()));
+    
+    KAction* openExample =new KAction(i18n("&Open Example"), actionCollection());
+    openExample->setIcon(KIcon("document-open"));
+    actionCollection()->addAction("file_open_example", openExample);
+    connect(openExample, SIGNAL(triggered()), this, SLOT(openExample()));    
     
     QAction* showLogViewAction = m_logViewWidget->toggleViewAction();
     actionCollection()->addAction( "show_log_view", showLogViewAction );
@@ -575,5 +593,57 @@ void MainWindow::backendChanged(const QString& backendName)
 {
     actionCollection()->action("showManual")->setText(i18n("%1 manual").arg(backendName));
     actionCollection()->action("showExamples")->setText(i18n("%1 examples").arg(backendName));
+}
+
+void MainWindow::downloadExamples()
+{
+    KNS3::DownloadDialog dialog;
+    dialog.exec();
+    foreach (const KNS3::Entry& e,  dialog.changedEntries())
+    {
+        kDebug() << "Changed Entry: " << e.name();
+    }
+}
+
+void MainWindow::uploadExample()
+{
+    if (!m_currentFile.isLocalFile()) {
+        return;
+    }
+    
+    KNS3::UploadDialog dialog("cirkuit_example.knsrc");
+    dialog.setUploadFile(m_currentFile);
+    dialog.setUploadName("A simple circuit schematic");
+    dialog.setDescription("This is an example of a simple circuit schematic> You will need the Circuit Macros backend to open this file");
+    dialog.exec();
+}
+
+void MainWindow::openExample()
+{
+    QString dir = KStandardDirs::locateLocal("appdata",  "examples");
+    if (dir.isEmpty()) return;
+    KStandardDirs::makeDir(dir);
+
+    QStringList files=QDir(dir).entryList(QDir::Files);
+    QPointer<KDialog> dlg=new KDialog(this);
+    QListWidget* list=new QListWidget(dlg);
+    foreach(const QString& file, files) {
+        QString name=file;
+        name.remove(QRegExp("-.*\\.hotstuff-access$"));
+        list->addItem(name);
+    }
+
+    dlg->setMainWidget(list);
+
+    if (dlg->exec()==QDialog::Accepted&&list->currentRow()>=0) {
+        const QString& selectedFile=files[list->currentRow()];
+        KUrl url;
+        url.setDirectory(dir);
+        url.setFileName(selectedFile);
+
+        loadFile(url);
+    }
+
+    delete dlg;
 }
 

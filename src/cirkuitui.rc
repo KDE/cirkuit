@@ -5,15 +5,20 @@
     <Menu name="file" noMerge="1"><text>&amp;File</text>
         <Action name="file_new" />
         <Action name="file_open" />
-        <Action name="file_open_recent" />
+        <Action name="file_open_recent" />   
+        <Separator/>
+        <Action name="file_open_example" />
+        <Action name="download_examples" />
+        <Action name="upload_example" />
+        <Separator/>
         <DefineGroup name="save_merge"/>
         <Action name="file_save" />
         <Action name="file_save_as" />
         <Action name="export" />
-        <Separator/>    
+        <Separator/>
         <DefineGroup name="revert_merge" append="revert_merge"/>
         <DefineGroup name="print_merge" append="print_merge"/>
-        <Separator/>    
+        <Separator/>
         <Action name="file_quit"/>
     </Menu>
     
@@ -67,5 +72,4 @@
 <Menu name="ktexteditor_popup" noMerge="1">
     <DefineGroup name="popup_operations" />
 </Menu>
-
 </kpartgui>
