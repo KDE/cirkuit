@@ -114,6 +114,9 @@ public slots:
      */
     static bool checkExistence(const QString& name);
     
+protected slots:
+    void parseStandardOutput();
+    
 signals:
     /**
      * This signal is emitted when there is new data made available
