@@ -34,6 +34,7 @@ public:
     PreviewWidget(const QString & title, QWidget * parent = 0, Qt::WindowFlags flags = 0);
     
     ImageView* view() const;
+    virtual QSize sizeHint() const;
 
 private:
     ImageView* m_imageView;

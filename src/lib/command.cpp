@@ -152,9 +152,7 @@ void Command::parseStandardOutput()
         QString logLine;
         while (i < logLines.count()) {
             logLine = logLines[i++];
-            kDebug() << logLine;
             if (keywordPatterns.at(0).indexIn(logLine) > -1) {
-                kDebug() << "Parsing LaTeX log --- MATCH!";
                 // show error message and correct line number
     //          QString lineNum = QString::number(keywordPatterns[0].cap(2).toInt() - m_templateStartLineNumber);
                 QString lineNum = QString::number(keywordPatterns[0].cap(2).toInt());

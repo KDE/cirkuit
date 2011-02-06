@@ -12,7 +12,7 @@
     </entry>
     <entry name="latexargs" type="StringList">
         <label>The default arguments called in the latex executable</label>
-        <default>-file-line-error,-halt-on-error</default>
+        <default>-halt-on-error,-file-line-error</default>
     </entry>
   </group>
 </kcfg>

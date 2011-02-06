@@ -36,6 +36,12 @@ void LogViewWidget::clear()
     m_textEdit->clear();
 }
 
+QSize LogViewWidget::sizeHint() const
+{
+    return QSize(300, 50);;
+}
+
+
 void LogViewWidget::displayError ( const QString& app, const QString& msg )
 {
     if (msg.isEmpty()) return;

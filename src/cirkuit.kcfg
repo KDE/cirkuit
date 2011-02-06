@@ -34,5 +34,9 @@
             <label>PNG and JPEG resolution.</label>
             <default>300</default>
         </entry>
+        <entry name="LatexArgs" type="StringList">
+            <label>The default arguments called in the latex executable</label>
+            <default>-file-line-error,-halt-on-error</default>
+        </entry>        
     </group>
 </kcfg>

@@ -31,13 +31,18 @@ PreviewWidget::PreviewWidget(const QString & title, QWidget * parent, Qt::Window
     m_imageView = new ImageView(this);
   
     setWidget(m_imageView);
-    setMinimumHeight(180);
+    setMinimumHeight(100);
     setMinimumWidth(150);
 }
 
 void PreviewWidget::setImage(const QImage& image)
 {
     m_imageView->setImage(image);
+}
+
+QSize PreviewWidget::sizeHint() const
+{
+    return QSize(300,150);
 }
 
 void PreviewWidget::clear()
