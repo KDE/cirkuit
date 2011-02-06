@@ -22,6 +22,7 @@
 #include "documenttemplate.h"
 #include "command.h"
 #include "settings.h"
+#include "logparser.h"
 
 #include <QDir>
 
@@ -79,6 +80,7 @@ bool TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& ou
         Command* latexCmd = new Command("pdflatex", latexDoc, latexArgs);
         latexCmd->setWorkingDirectory(workingDir().path());
         latexCmd->setEnvironment(environment);
+        latexCmd->setLogParser(new LatexLogParser);
         if (!execute(latexCmd)) return false;
         
         return convert(Format::Pdf, out);

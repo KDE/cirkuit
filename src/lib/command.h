@@ -29,6 +29,7 @@
 namespace Cirkuit
 {    
 class CommandPrivate;
+class LogParser;
 
 /**
  * The Command class is a wrapper around KProcess with additional
@@ -87,6 +88,12 @@ public:
      */
     void setArgs(const QStringList& args);
     
+    /**
+     * Sets the log parser
+     * @param parser the log parser
+     */
+    void setLogParser(LogParser* parser);
+    
     /** 
      * Return the standard error. Can be called multiple times without re-reading the standard error of the command
      * @return the standard error of the last execution of the command
@@ -115,7 +122,10 @@ public slots:
     static bool checkExistence(const QString& name);
     
 protected slots:
-    void parseStandardOutput();
+    bool parseLog();
+    
+    void newMessage(const QString& msg);
+    void newError(const QString& msg);
     
 signals:
     /**

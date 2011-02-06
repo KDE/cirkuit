@@ -13,10 +13,10 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 
 #include "command.h"
+#include "logparser.h"
 
 #include <QFileInfo>
 #include <QDir>
@@ -33,11 +33,17 @@ public:
     QString name, input;
     QString stderr, stdout;
     QStringList args;
+    LogParser* logParser;
+    
+    CommandPrivate() {
+        logParser = 0;
+    }
 };
 
 Command::Command(const QString& name, const QString& input, const QStringList& args, QObject* parent): KProcess(parent), d(new CommandPrivate)
 {
     d->name = name;
+    setLogParser(new LogParser);
     setOutputChannelMode(SeparateChannels);
     setInput(input);
     setArgs(args);
@@ -74,6 +80,15 @@ void Command::setInput(const QString& input)
     d->input = input;
 }
 
+void Command::setLogParser(LogParser* parser)
+{
+    delete d->logParser;
+    
+    d->logParser = parser;
+    connect(d->logParser, SIGNAL(message(QString)), this, SLOT(newMessage(QString)));
+    connect(d->logParser, SIGNAL(error(QString)), this, SLOT(newError(QString)));
+}
+
 bool Command::execute(const QString& input, const QStringList& args)
 {   
     if (!input.isEmpty()) setInput(input);
@@ -98,7 +113,7 @@ bool Command::execute(const QString& input, const QStringList& args)
         return false;   
     }
         
-    parseStandardOutput();
+    if (!parseLog()) return false;
     
     if (!d->stdout.isEmpty()) emit newStandardOutput(d->name, d->stderr);
     if (!d->stderr.isEmpty()) {
@@ -129,64 +144,20 @@ bool Command::checkExistence(const QString& name)
     return KStandardDirs::findExe(name) != QString();
 }
 
-void Command::parseStandardOutput()
+bool Command::parseLog()
 {
-    QString stdout = readAllStandardOutput();
-    QString stderr = readAllStandardError();
-    
-    d->stdout = stdout;
-    d->stderr = stderr;
-    
-    if (d->name.contains("latex", Qt::CaseInsensitive)) {
-        kDebug() << "Parsing LaTeX log";
-        QList<QRegExp> keywordPatterns;
-        keywordPatterns << QRegExp("(\\S*):(\\d+): (.*$)")
-            << QRegExp("Undefined control sequence")
-            << QRegExp("LaTeX Warning:") << QRegExp("LaTeX Error:")
-            << QRegExp("Runaway argument?")
-            << QRegExp("Missing character: .*!") << QRegExp("Error:");
-            
-        QStringList logLines = stdout.split(QChar('\n'));
-        int i = 0;
-                
-        QString logLine;
-        while (i < logLines.count()) {
-            logLine = logLines[i++];
-            if (keywordPatterns.at(0).indexIn(logLine) > -1) {
-                // show error message and correct line number
-    //          QString lineNum = QString::number(keywordPatterns[0].cap(2).toInt() - m_templateStartLineNumber);
-                QString lineNum = QString::number(keywordPatterns[0].cap(2).toInt());
-                const QString errorMsg = keywordPatterns[0].cap(3);
-                d->stderr += "[LaTeX] Line " + lineNum + ": " + errorMsg;
+    d->stdout = readAllStandardOutput();
+    d->stderr = readAllStandardError();
 
-                // while we don't get a line starting with "l.<number> ...", we have to add the line to the first error message
-                QRegExp rx("^l\\.(\\d+)(.*)");
-                logLine = logLines[++i];
-                while (rx.indexIn(logLine) < 0 && i < logLines.count()) {
-                    if (logLine.isEmpty())
-                        d->stderr += "\n[LaTeX] Line " + lineNum + ": ";
-                    if (!logLine.startsWith(QLatin1String("Type"))) // don't add lines that invite the user to type a command, since we are not in the console
-                        d->stderr += logLine;
-                    logLine = logLines[++i];
-                }
-                d->stderr += '\n';
-                if (i >- logLines.count()) break;
+    return d->logParser->parse(d->stdout, d->stderr);
+}
 
-                // add the line starting with "l.<number> ..." and the next line
-                lineNum = QString::number(rx.cap(1).toInt() - 7);
-                logLine = "l." + lineNum + rx.cap(2);
-                d->stderr += logLine + '\n';
-                d->stderr += logLines[++i] + '\n';
-            } else {
-                for (int j = 1; j < keywordPatterns.size(); ++j) {
-                    if (logLine.contains(keywordPatterns.at(j))) {
-                        d->stderr += logLine + '\n';
-                        d->stderr += logLines[++i] + '\n';
-                        d->stderr += logLines[++i] + '\n';
-                        break;
-                    }
-                }
-            }
-        }
-    }
+void Command::newError(const QString& msg)
+{
+    emit newStandardError(d->name, msg);
+}
+
+void Command::newMessage(const QString& msg)
+{
+    emit newStandardOutput(d->name, msg);
 }

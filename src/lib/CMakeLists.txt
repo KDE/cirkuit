@@ -1,13 +1,14 @@
 set(GENERIC_LIB_VERSION "0.0.1")
 set(GENERIC_LIB_SOVERSION "1")
 
-set ( cirkuit_LIB_SRCS
+set ( cirkuit_LIB_SRCS 
     backend.cpp
     command.cpp
     document.cpp
     generator.cpp
     format.cpp
     documenttemplate.cpp
+    logparser.cpp
 )
 
 set( cirkuit_LIB_HDRS

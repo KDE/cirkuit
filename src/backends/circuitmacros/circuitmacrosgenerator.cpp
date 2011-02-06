@@ -29,6 +29,7 @@
 #include <KProcess>
 #include <KTemporaryFile>
 #include <KStandardDirs>
+#include <logparser.h>
 
 using namespace Cirkuit;
 
@@ -83,11 +84,13 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
             picargs << "-p";
             
             picCommand = new Command("dpic", m4out, picargs);
+            picCommand->setLogParser(new DpicLogParser);
         } else if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_pgf) {
             QStringList picargs;
             picargs << "-g";
             
             picCommand = new Command("dpic", m4out, picargs);
+            picCommand->setLogParser(new DpicLogParser);
         } else {
             QStringList picargs;
             picargs << "-t";
