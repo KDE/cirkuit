@@ -49,7 +49,7 @@ public slots:
      * @param c the command
      * @returns true if there are no errors
      */
-    virtual bool parse(Command* c);
+    bool parse(Command* c);
     /**
      * Overloaded function that takes the standard output and errors as inputs
      * @param stdout the standard output of a command
@@ -57,6 +57,12 @@ public slots:
      * @returns true if there are no errors
      */
     virtual bool parse(const QString& stdout, const QString& stderr = QString());
+    
+    void appendError(const QString& msg);
+    void appendMessage(const QString& msg);
+    
+    QString stdError() const;
+    QString stdOutput() const;
     
 signals:
     /**
@@ -82,21 +88,6 @@ public:
     explicit LatexLogParser(QObject* parent = 0);
     
 public slots:
-    bool parse(Command* c);
-    bool parse(const QString& stdout, const QString& stderr = QString());
-};
-
-/**
- * The default dpic parser
- */
-class CIRKUIT_EXPORT DpicLogParser: public LogParser
-{
-    Q_OBJECT
-public:
-    explicit DpicLogParser(QObject* parent = 0);
-    
-public slots:
-    bool parse(Command* c);
     bool parse(const QString& stdout, const QString& stderr = QString());
 };
 

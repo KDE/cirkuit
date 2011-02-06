@@ -55,11 +55,6 @@ LatexLogParser::LatexLogParser(QObject* parent): LogParser(parent)
 
 }
 
-bool LatexLogParser::parse(Command* c)
-{
-    return parse(c->stdOutput(), c->stdError());
-}
-
 bool LatexLogParser::parse(const QString& stdout, const QString& stderr)
 {
     kDebug() << "Parsing LaTeX log";
@@ -119,38 +114,22 @@ bool LatexLogParser::parse(const QString& stdout, const QString& stderr)
     return d->stderr.isEmpty();
 }
 
-DpicLogParser::DpicLogParser(QObject* parent): LogParser(parent)
+void LogParser::appendError(const QString& msg)
 {
-
+    d->stderr.append(msg);
 }
 
-bool DpicLogParser::parse(Command* c)
+void LogParser::appendMessage(const QString& msg)
 {
-    return Cirkuit::LogParser::parse(c);
+    d->stdout.append(msg);
 }
 
-bool DpicLogParser::parse(const QString& stdout, const QString& stderr)
+QString LogParser::stdError() const
 {
-    kDebug() << "Parsing dpic log";
-    QRegExp pattern = QRegExp("dpic:.+ERROR.+");
-    
-    QStringList logLines = stdout.split(QChar('\n'));
-    int i = 0;
-            
-    QString logLine;
-    
-    while (i < logLines.count()) {
-        logLine = logLines[i++];
-        if (logLine.contains(pattern)) {
-            d->stderr += logLine + '\n';
-            d->stderr += logLines[i-3] + '\n';
-            break;
-        }
-    }
-    if (!d->stderr.isEmpty()) {
-        emit error(d->stderr);
-        return false;
-    }
-    
-    return true;
+    return d->stderr;
+}
+
+QString LogParser::stdOutput() const
+{
+    return d->stdout;
 }

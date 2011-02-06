@@ -22,6 +22,8 @@
 #include "documenttemplate.h"
 #include "command.h"
 #include "settings.h"
+#include "logparser.h"
+#include "dpiclogparser.h"
 
 #include <QDir>
 
@@ -29,7 +31,7 @@
 #include <KProcess>
 #include <KTemporaryFile>
 #include <KStandardDirs>
-#include <logparser.h>
+
 
 using namespace Cirkuit;
 

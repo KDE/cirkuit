@@ -2,7 +2,7 @@ include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory (templates)
 
-set( CircuitMacrosBackend_SRCS 
+set( CircuitMacrosBackend_SRCS dpiclogparser.cpp 
  circuitmacrosbackend.cpp  
  circuitmacrosdocumentsettings.cpp
  circuitmacrosgenerator.cpp
