@@ -136,6 +136,7 @@ void MainWindow::setupActions()
     KStandardAction::open(this, SLOT(openFile()), actionCollection());
     KStandardAction::save(this, SLOT(save()), actionCollection());
     KStandardAction::saveAs(this, SLOT(saveAs()), actionCollection());
+    KStandardAction::close(this, SLOT(newDocument()), actionCollection());
     KStandardAction::clear(this, SLOT(clear()), actionCollection());
     KStandardAction::preferences(this, SLOT(configure()), actionCollection());    
     KStandardAction::keyBindings(this, SLOT(configureKeyBindings()), actionCollection());
@@ -264,6 +265,7 @@ void MainWindow::loadFile(const KUrl& url)
     m_view->document()->openUrl(url);
     m_imageView->clear();
     m_firstRun = true;
+    m_backend = Cirkuit::Backend::autoChooseBackend(m_doc);
     buildPreview();
     updateTitle();
 }
