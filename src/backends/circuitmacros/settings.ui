@@ -10,77 +10,52 @@
     <height>231</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="lbl_cmtemplate">
-       <property name="text">
-        <string>Template path:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KUrlRequester" name="kcfg_cmtemplateurl"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="lbl_cmtikztemplate">
-       <property name="text">
-        <string>Template path:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KUrlRequester" name="kcfg_cmtikztemplateurl"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Pic interpreter</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KComboBox" name="kcfg_PicInterpreter">
-       <item>
-        <property name="text">
-         <string>dpic + PSTricks</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>dpic + TikZ</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>gpic</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="lbl_cmtemplate">
+     <property name="text">
+      <string>Template path:</string>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="KUrlRequester" name="kcfg_cmtemplateurl"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="lbl_cmtikztemplate">
+     <property name="text">
+      <string>Template path:</string>
      </property>
-    </spacer>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="KUrlRequester" name="kcfg_cmtikztemplateurl"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Pic interpreter</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="KComboBox" name="kcfg_PicInterpreter">
+     <item>
+      <property name="text">
+       <string>dpic + PSTricks</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>dpic + TikZ</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>gpic</string>
+      </property>
+     </item>
+    </widget>
    </item>
   </layout>
  </widget>
