@@ -58,10 +58,24 @@ public slots:
      */
     virtual bool parse(const QString& stdout, const QString& stderr = QString());
     
+    /**
+     * Appends a new message to the error log
+     * @param msg the message
+     */
     void appendError(const QString& msg);
+    /**
+     * Appends a new message to the output log
+     * @param msg the message
+     */
     void appendMessage(const QString& msg);
     
+    /**
+     * Returns the current error log
+     */
     QString stdError() const;
+    /**
+     * Returns the current output log
+     */
     QString stdOutput() const;
     
 signals:
