@@ -93,8 +93,8 @@ TemplateManager::TemplateManager(QObject* parent): QObject(parent)
 
 QList< DocumentTemplate* > TemplateManager::availableTemplates(const QString& backend, bool forceRescan)
 {
-    //if we already have all backends Cached, just return the cache.
-    //otherwise create the available backends
+    //if we already have all templates cached, just return the cache.
+    //otherwise create the available templates
     if (!templateCache.isEmpty() && !forceRescan) {
         return backendFilter(templateCache, backend);
     }
