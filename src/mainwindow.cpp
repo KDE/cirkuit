@@ -25,10 +25,10 @@
 
 #include "ui_cirkuit_general_settings.h"
 
-#include "document.h"
-#include "backend.h"
-#include "format.h"
-#include "generator.h"
+#include "lib/document.h"
+#include "lib/backend.h"
+#include "lib/format.h"
+#include "lib/generator.h"
 
 #include "widgets/previewwidget.h"
 #include "widgets/imageview.h"
