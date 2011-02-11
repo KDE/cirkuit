@@ -1,3 +1,4 @@
+%%backend=gnuplot%%
 \documentclass{article}
 \usepackage{tikz,amsmath,siunitx}
 \usepackage{gnuplot-lua-tikz}
@@ -12,5 +13,5 @@
 
 \begin{document}
 \thispagestyle{empty}
-\input <!CODE!>
+\input %%SOURCE%%
 \end{document}

@@ -1,3 +1,4 @@
+%%backend=circuitmacros%%
 \documentclass{article}
 
 \usepackage{pstricks,pst-eps,graphicx,ifpdf,pst-grad,amsmath}
@@ -7,7 +8,7 @@
 \begin{document}
 \newbox\graph
 \begin{TeXtoEPS}
-<!CODE!>
+%%SOURCE%%
 \box
 \graph
 \end{TeXtoEPS}

@@ -19,20 +19,136 @@
 #include "documenttemplate.h"
 #include <QTextStream>
 #include <QFile>
+#include <QRegExp>
+
+#include <KDebug>
+#include <KGlobal>
+#include <KStandardDirs>
+#include <QDir>
 
 using namespace Cirkuit;
 
-DocumentTemplate::DocumentTemplate(const QString& path, QObject* parent): QObject(parent)
+class Cirkuit::DocumentTemplatePrivate
 {
-    m_path = path;
+public:
+    KUrl path;
+    QString backend;
+};
+
+DocumentTemplate::DocumentTemplate(const KUrl& path, QObject* parent): QObject(parent), d(new DocumentTemplatePrivate)
+{
+    d->path = path;
+    readBackend();
+}
+
+KUrl DocumentTemplate::path() const
+{
+    return d->path;
+}
+
+void DocumentTemplate::readBackend() const
+{
+    d->backend = QString();
+    
+    QFile file(d->path.path());
+    file.open(QIODevice::ReadOnly);
+    QTextStream stream(&file);
+    
+    QString line = stream.readLine().toLower();
+    QRegExp regExp("%%backend=(\\w+)%%");
+    while (line != QString()) {
+        if (regExp.indexIn(line) > -1) {
+            d->backend = regExp.cap(1);
+        }
+        line = stream.readLine().toLower();
+    }
+}
+
+QString DocumentTemplate::backend() const
+{
+    return d->backend;
 }
 
 QString DocumentTemplate::insert(const QString& code, const QString& keyword)
 {
-    QFile file(m_path);
+    QFile file(d->path.path());
     file.open(QIODevice::ReadOnly);
     QTextStream stream(&file);
-    QString output = stream.readAll().replace(keyword, code);
+    QString output = stream.readAll().replace(keyword, code, Qt::CaseInsensitive);
     file.close();
     return output;
+}
+
+bool DocumentTemplate::operator==(const Cirkuit::DocumentTemplate& rhs) const
+{
+    return this->path().fileName() == rhs.path().fileName();
+}
+
+static QList<DocumentTemplate*> templateCache;
+
+TemplateManager::TemplateManager(QObject* parent): QObject(parent)
+{
+
+}
+
+QList< DocumentTemplate* > TemplateManager::availableTemplates(const QString& backend, bool forceRescan)
+{
+    //if we already have all backends Cached, just return the cache.
+    //otherwise create the available backends
+    if (!templateCache.isEmpty() && !forceRescan) {
+        return backendFilter(templateCache, backend);
+    }
+    
+    templateCache.clear();
+    QDir templates;
+    DocumentTemplate* t;
+    QStringList dirs = KGlobal::dirs()->findDirs("appdata", "templates");
+    
+    for(QStringList::iterator i = dirs.begin(); i != dirs.end(); ++i) {
+        templates = QDir(*i);
+        
+        for (uint j = 0; j < templates.count(); ++j) {
+            KUrl fileUrl(templates.path() + '/' + templates[j]);
+            t = new DocumentTemplate(fileUrl);
+            
+            if (t->backend().isEmpty() || checkDuplicate(t)) {
+                delete t;
+                continue;
+            }
+            
+            if (backend.isEmpty() || t->backend() == backend) {
+                kDebug() << "Template found: " << t->path() << " backend: " << t->backend();
+                templateCache.append(t);
+            }
+        }
+    }
+    
+    return backendFilter(templateCache, backend);
+}
+
+bool TemplateManager::checkDuplicate(DocumentTemplate* t)
+{
+    bool duplicate = false;
+    foreach(DocumentTemplate* item, templateCache) {
+        if (*item == *t) {
+            duplicate = true;
+        }
+    }
+    return duplicate;
+}
+
+QList< DocumentTemplate* > TemplateManager::backendFilter(const QList<DocumentTemplate*>& list, const QString& backend)
+{
+    if (backend.isEmpty()) {
+        return list;
+    }
+    
+    QList<DocumentTemplate*> filtered;
+    foreach(DocumentTemplate* item, list) {
+        if (QString::compare(item->backend(), backend, Qt::CaseInsensitive) == 0) {
+           filtered << item; 
+        }
+    }
+    
+    return filtered;
 }

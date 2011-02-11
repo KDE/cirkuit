@@ -1,3 +1,4 @@
+%%backend=tikz%%
 \documentclass{article}
 \usepackage{tikz,amsmath,siunitx}
 \usepackage[siunitx]{circuitikz}
@@ -13,5 +14,5 @@
 
 \begin{document}
 \thispagestyle{empty}
-<!CODE!>
+%%SOURCE%%
 \end{document}

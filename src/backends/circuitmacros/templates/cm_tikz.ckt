@@ -1,6 +1,6 @@
+%%backend=circuitmacros%%
 \documentclass{article}
 \usepackage{tikz,amsmath,siunitx}
-\usepackage[siunitx]{circuitikz}
 
 \usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
 \usepackage[graphics,tightpage,active]{preview}
@@ -13,5 +13,5 @@
 
 \begin{document}
 \thispagestyle{empty}
-<!CODE!>
+%%SOURCE%%
 \end{document}

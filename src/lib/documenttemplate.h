@@ -23,8 +23,11 @@
 
 #include <QObject>
 
+#include <KUrl>
+
 namespace Cirkuit
 {
+class DocumentTemplatePrivate;
 
 /**
  * A class for managing the templates used during the
@@ -38,7 +41,7 @@ public:
      * Default constructor.
      * @param path is the path of the template file
      */
-    DocumentTemplate(const QString& path, QObject* parent = 0);
+    DocumentTemplate(const KUrl& path, QObject* parent = 0);
     
     /**
      * Inserts the code into the template. The point of insertion
@@ -47,10 +50,33 @@ public:
      * @param keyword the keyword in the template that will be substituted by the code. The default value is <!CODE!>
      * @return the resulting text
      */
-    QString insert(const QString& code, const QString& keyword = "<!CODE!>");
+    QString insert(const QString& code, const QString& keyword = "%%source%%");
+    
+    KUrl path() const;
+    
+    bool operator==(const DocumentTemplate& rhs) const;
+    
+public:
+    QString backend() const;
+    
+protected slots:
+    void readBackend() const;
     
 private:
-    QString m_path;
+    DocumentTemplatePrivate* d;
+};
+
+class CIRKUIT_EXPORT TemplateManager : public QObject
+{
+    Q_OBJECT
+protected:
+    explicit TemplateManager(QObject* parent = 0);
+    
+    static QList<DocumentTemplate*> backendFilter(const QList<DocumentTemplate*>& list, const QString& backend = QString());
+    static bool checkDuplicate(DocumentTemplate* t);
+    
+public:
+    static QList<DocumentTemplate*> availableTemplates(const QString& backend = QString(), bool forceRescan = false);
 };
 
 }
