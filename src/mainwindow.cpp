@@ -52,6 +52,7 @@
 #include <QTextStream>
 #include <QListWidget>
 #include <QFileInfo>
+#include <QFileSystemModel>
 #include <QTimer>
 #include <KXMLGUIFactory>
 #include <KConfigDialog>
@@ -625,27 +626,21 @@ void MainWindow::openExample()
     QString dir = KStandardDirs::locateLocal("appdata",  "examples");
     if (dir.isEmpty()) return;
     KStandardDirs::makeDir(dir);
-
-    QStringList files=QDir(dir).entryList(QDir::Files);
+    
     QPointer<KDialog> dlg=new KDialog(this);
-    QListWidget* list=new QListWidget(dlg);
-    foreach(const QString& file, files) {
-        QString name=file;
-        name.remove(QRegExp("-.*\\.hotstuff-access$"));
-        list->addItem(name);
-    }
-
+    
+    QFileSystemModel* model = new QFileSystemModel;
+    model->setRootPath(dir);
+    
+    QListView *list = new QListView(dlg);
+    list->setModel(model);
+    list->setRootIndex(model->index(dir));
     dlg->setMainWidget(list);
 
-    if (dlg->exec()==QDialog::Accepted&&list->currentRow()>=0) {
-        const QString& selectedFile=files[list->currentRow()];
-        KUrl url;
-        url.setDirectory(dir);
-        url.setFileName(selectedFile);
-
-        loadFile(url);
+    if (dlg->exec() == QDialog::Accepted && list->currentIndex().isValid()) {
+        loadFile(model->filePath(list->currentIndex()));
     }
 
+    delete list;
     delete dlg;
 }
-
