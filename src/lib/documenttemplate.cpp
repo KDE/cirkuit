@@ -69,6 +69,11 @@ QString DocumentTemplate::backend() const
     return d->backend;
 }
 
+QString DocumentTemplate::name() const
+{
+    return d->path.fileName();
+}
+
 QString DocumentTemplate::insert(const QString& code, const QString& keyword)
 {
     QFile file(d->path.path());
@@ -99,30 +104,7 @@ QList< DocumentTemplate* > TemplateManager::availableTemplates(const QString& ba
         return backendFilter(templateCache, backend);
     }
     
-    templateCache.clear();
-    QDir templates;
-    DocumentTemplate* t;
-    QStringList dirs = KGlobal::dirs()->findDirs("appdata", "templates");
-    
-    for(QStringList::iterator i = dirs.begin(); i != dirs.end(); ++i) {
-        templates = QDir(*i);
-        
-        for (uint j = 0; j < templates.count(); ++j) {
-            KUrl fileUrl(templates.path() + '/' + templates[j]);
-            t = new DocumentTemplate(fileUrl);
-            
-            if (t->backend().isEmpty() || checkDuplicate(t)) {
-                delete t;
-                continue;
-            }
-            
-            if (backend.isEmpty() || t->backend() == backend) {
-                kDebug() << "Template found: " << t->path() << " backend: " << t->backend();
-                templateCache.append(t);
-            }
-        }
-    }
-    
+    scanTemplates();    
     return backendFilter(templateCache, backend);
 }
 
@@ -152,3 +134,28 @@ QList< DocumentTemplate* > TemplateManager::backendFilter(const QList<DocumentTe
     
     return filtered;
 }
+
+void TemplateManager::scanTemplates()
+{
+    templateCache.clear();
+    QDir templates;
+    DocumentTemplate* t;
+    QStringList dirs = KGlobal::dirs()->findDirs("appdata", "templates");
+    
+    for(QStringList::iterator i = dirs.begin(); i != dirs.end(); ++i) {
+        templates = QDir(*i);
+        
+        for (uint j = 0; j < templates.count(); ++j) {
+            KUrl fileUrl(templates.path() + '/' + templates[j]);
+            t = new DocumentTemplate(fileUrl);
+            
+            if (t->backend().isEmpty() || checkDuplicate(t)) {
+                delete t;
+                continue;
+            }
+            
+            templateCache.append(t);
+        }
+    }
+}
+

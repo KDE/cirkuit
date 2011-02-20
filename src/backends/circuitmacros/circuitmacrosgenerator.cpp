@@ -127,11 +127,11 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         QString latexDoc;        
         Command* latexCmd;
         if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_pgf) {
-            DocumentTemplate latexTemplate(CircuitMacrosSettings::cmtikztemplateurl().path());
+            DocumentTemplate latexTemplate(CircuitMacrosSettings::tikztemplateurl().path());
             latexDoc = latexTemplate.insert(picout);
             latexCmd = new Command("pdflatex", latexDoc, latexArgs);
         } else {
-            DocumentTemplate latexTemplate(CircuitMacrosSettings::cmtemplateurl().path());
+            DocumentTemplate latexTemplate(CircuitMacrosSettings::templateurl().path());
             latexDoc = latexTemplate.insert(picout);
             latexCmd = new Command("latex", latexDoc, latexArgs);
         }              

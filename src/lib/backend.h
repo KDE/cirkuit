@@ -25,6 +25,7 @@
 #include <QtCore/QObject>
 #include <QVariant>
 
+class KConfigSkeletonItem;
 class KUrl;
 class KConfigSkeleton;
 
@@ -138,6 +139,15 @@ public:
      * @return a KConfigSkeleton object, for configuring this backend
      */
     virtual KConfigSkeleton* config() const;
+    
+    /**
+     * Returns a KConfigItem object, containing the url of the
+     * the template used by the backend. You need to override
+     * this method only if the template url item is not named "templateurl"
+     * or if there are multiple templates for a single backend.
+     * @return a KConfigSkeletonItem object, for configuring the template URL
+     */
+    virtual KConfigSkeletonItem* configTemplateUrl() const;
     
     /**
      * Returns the Document Settings for the backend

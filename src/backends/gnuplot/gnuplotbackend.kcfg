@@ -6,7 +6,7 @@
   <kcfgfile name="cirkuitrc"/>  
   <include>kstandarddirs.h</include>
   <group name="GnuplotBackend">
-    <entry name="gptemplateurl" type="Url">
+    <entry name="templateurl" type="Url">
       <label>The location of the Gnuplot template.</label>
       <default code="true">KStandardDirs::locate("data", "cirkuit/templates/gnuplot_latex.ckt")</default>
     </entry>

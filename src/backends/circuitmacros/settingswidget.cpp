@@ -17,20 +17,25 @@
 */
 
 #include "settingswidget.h"
+#include "settings.h"
 
 CircuitMacrosSettingsWidget::CircuitMacrosSettingsWidget(QWidget* parent, Qt::WindowFlags f): QWidget(parent, f)
 {
     setupUi(this);
+    
+    CircuitMacrosSettings::self()->readConfig();
+    kcfg_templateurl->setUrl(CircuitMacrosSettings::templateurl());
+    kcfg_tikztemplateurl->setUrl(CircuitMacrosSettings::tikztemplateurl());
     setVisibleTemplateChooser(kcfg_PicInterpreter->currentIndex());
     connect(kcfg_PicInterpreter, SIGNAL(currentIndexChanged(int)), this, SLOT(setVisibleTemplateChooser(int)));
 }
 
 void CircuitMacrosSettingsWidget::setVisibleTemplateChooser(int index)
 {
-    kcfg_cmtemplateurl->setVisible(index != 1);
-    lbl_cmtemplate->setVisible(index != 1);
+    kcfg_templateurl->setVisible(index != 1);
+    lbl_template->setVisible(index != 1);
       
-    kcfg_cmtikztemplateurl->setVisible(index == 1);
-    lbl_cmtikztemplate->setVisible(index == 1);
+    kcfg_tikztemplateurl->setVisible(index == 1);
+    lbl_tikztemplate->setVisible(index == 1);
 }
 

@@ -26,6 +26,8 @@
     <Menu name="build"><text>&amp;Preview</text>
         <Action name="build_preview"/>
         <Action name="open_preview"/>
+        <Separator/>
+        <Action name="template_manager"/>
     </Menu>
     
     <Menu name="view" noMerge="1"><text>&amp;View</text>

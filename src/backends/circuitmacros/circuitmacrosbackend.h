@@ -44,6 +44,7 @@ public:
     Cirkuit::DocumentSettings* documentSettings() const;
     Cirkuit::Generator* generator() const;
     virtual KConfigSkeleton* config() const;
+    virtual KConfigSkeletonItem* configTemplateUrl() const;
     virtual QWidget* settingsWidget(QWidget* parent) const;
     
     virtual KUrl helpUrl() const;

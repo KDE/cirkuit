@@ -54,9 +54,10 @@ public:
     
     KUrl path() const;
     
+    QString name() const;
+    
     bool operator==(const DocumentTemplate& rhs) const;
     
-public:
     QString backend() const;
     
 protected slots:
@@ -74,6 +75,8 @@ protected:
     
     static QList<DocumentTemplate*> backendFilter(const QList<DocumentTemplate*>& list, const QString& backend = QString());
     static bool checkDuplicate(DocumentTemplate* t);
+    
+    static void scanTemplates();
     
 public:
     static QList<DocumentTemplate*> availableTemplates(const QString& backend = QString(), bool forceRescan = false);

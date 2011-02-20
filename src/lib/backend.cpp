@@ -26,6 +26,7 @@
 #include <KDebug>
 #include <KServiceTypeTrader>
 #include <KService>
+#include <KConfigSkeleton>
 #include <KPluginInfo>
 
 class Cirkuit::BackendPrivate {
@@ -104,6 +105,13 @@ QWidget* Backend::settingsWidget(QWidget* parent) const
 KConfigSkeleton* Backend::config() const
 {
     return 0;
+}
+
+KConfigSkeletonItem* Backend::configTemplateUrl() const
+{
+    if (!config()) return 0;
+    
+    return config()->findItem("templateurl");
 }
 
 static QList<Backend*> backendCache;

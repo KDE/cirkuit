@@ -1,5 +1,5 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ..)
-set (cirkuitwidgets_SRCS 
+set (cirkuitwidgets_SRCS templatechoosedialog.cpp 
     imageview.cpp
     previewwidget.cpp
     logviewwidget.cpp

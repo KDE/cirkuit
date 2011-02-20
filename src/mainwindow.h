@@ -71,6 +71,7 @@ private slots:
     void saveFileToDisk(const QString& path);
     void openPreview();
     void openPreviewFile();
+    void openTemplateManager();
 
     void newDocument(const QString& backendName = QString());
 

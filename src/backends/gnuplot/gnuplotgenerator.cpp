@@ -109,7 +109,7 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
             return true;
         }
     
-        DocumentTemplate gpTemplate(GnuplotSettings::gptemplateurl().path());
+        DocumentTemplate gpTemplate(GnuplotSettings::templateurl().path());
         QString latexDoc = gpTemplate.insert(gnuplotOutputFile);
         
         QStringList environment = QProcess::systemEnvironment();

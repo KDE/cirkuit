@@ -54,7 +54,7 @@ bool TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& ou
     kDebug() << "Inside the TikZ backend...";
     
     if (in == Format::Source) {
-        DocumentTemplate tikzTemplate(TikzSettings::tikztemplateurl().path());
+        DocumentTemplate tikzTemplate(TikzSettings::templateurl().path());
         QString latexDoc = tikzTemplate.insert(document()->text());
         
         if (out == Format::Tex) {

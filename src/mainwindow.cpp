@@ -29,11 +29,13 @@
 #include "lib/backend.h"
 #include "lib/format.h"
 #include "lib/generator.h"
+#include "lib/documenttemplate.h"
 
 #include "widgets/previewwidget.h"
 #include "widgets/imageview.h"
 #include "widgets/logviewwidget.h"
 #include "widgets/backendchoosedialog.h"
+#include "widgets/templatechoosedialog.h"
 
 #include <KApplication>
 #include <KAction>
@@ -60,6 +62,7 @@
 #include <KRun>
 #include <KProcess>
 #include <kmimetypetrader.h>
+#include <KConfigSkeletonItem>
 
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/uploaddialog.h>
@@ -170,6 +173,10 @@ void MainWindow::setupActions()
     openPreviewAction->setIcon(KIcon("document-preview"));
     actionCollection()->addAction("open_preview", openPreviewAction);
     connect(openPreviewAction, SIGNAL(triggered()), this, SLOT(openPreview()));
+    
+    KAction* templateManagerAction = new KAction(i18n("Template manager"), 0);
+    actionCollection()->addAction("template_manager", templateManagerAction);
+    connect(templateManagerAction, SIGNAL(triggered()), this, SLOT(openTemplateManager()));
 
     KAction* showManualAction = new KAction(KIcon("help-contents"), i18n("Show manual"),0);
     actionCollection()->addAction( "showManual", showManualAction );
@@ -459,20 +466,20 @@ void MainWindow::configure()
     if ( KConfigDialog::showDialog( "settings" ) ) {
         return; 
     }
-    KConfigDialog* dialog = new KConfigDialog(this, "settings", CirkuitSettings::self() );
+    KConfigDialog dialog(this, "settings", CirkuitSettings::self() );
     
-    QWidget* confWdg = new QWidget(dialog);
+    QWidget* confWdg = new QWidget(&dialog);
     Ui::CirkuitGeneralForm s;
     s.setupUi(confWdg);
     s.kcfg_DefaultBackend->addItems(Cirkuit::Backend::listAvailableBackends());
-    dialog->addPage( confWdg, i18n("General"), "configure" );
+    dialog.addPage( confWdg, i18n("General"), "configure" );
     
     foreach (Cirkuit::Backend* b, Cirkuit::Backend::availableBackends()) {
-        dialog->addPage(b->settingsWidget(dialog), b->config(), b->name(), b->icon() ); 
+        dialog.addPage(b->settingsWidget(&dialog), b->config(), b->name(), b->icon() ); 
     }
 
-    connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(updateConfiguration()));
-    dialog->show();
+    connect(&dialog, SIGNAL(settingsChanged(QString)), this, SLOT(updateConfiguration()));
+    dialog.exec();
 }
 
 void MainWindow::updateConfiguration()
@@ -635,6 +642,7 @@ void MainWindow::openExample()
     QListView *list = new QListView(dlg);
     list->setModel(model);
     list->setRootIndex(model->index(dir));
+    list->setSelectionMode(QAbstractItemView::SingleSelection);
     dlg->setMainWidget(list);
 
     if (dlg->exec() == QDialog::Accepted && list->currentIndex().isValid()) {
@@ -644,3 +652,17 @@ void MainWindow::openExample()
     delete list;
     delete dlg;
 }
+
+void MainWindow::openTemplateManager()
+{
+    KConfigSkeletonItem* urlItem = m_backend->configTemplateUrl();
+    if (!urlItem) return;
+    
+    TemplateChooseDialog dlg(m_backend->id());
+    
+    if (dlg.exec() == QDialog::Accepted && !dlg.selectedFile().isEmpty()) {
+        urlItem->setProperty(dlg.selectedFile());
+        m_backend->config()->writeConfig();
+    }
+}
+

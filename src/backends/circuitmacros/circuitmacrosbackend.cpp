@@ -88,5 +88,15 @@ KUrl CircuitMacrosBackend::helpUrl() const
     return KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/doc/CMman.pdf");
 }
 
+KConfigSkeletonItem* CircuitMacrosBackend::configTemplateUrl() const
+{
+    if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_pgf) {
+        return config()->findItem("tikztemplateurl");
+    }
+    
+    return Backend::configTemplateUrl();
+}
+
+
 
 K_EXPORT_CIRKUIT_PLUGIN(circuitmacrosbackend, CircuitMacrosBackend)
