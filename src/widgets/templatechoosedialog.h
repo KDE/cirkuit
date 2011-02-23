@@ -1,6 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2011  Matteo Agostinelli <matteo.agostinelli@uni-klu.ac.at>
+    Copyright (C) 2011  Matteo Agostinelli <agostinelli@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +19,8 @@
 
 #ifndef TEMPLATECHOOSEDIALOG_H
 #define TEMPLATECHOOSEDIALOG_H
+
+#include "ui_templatechooser.h"
 
 #include <QAbstractListModel>
 
@@ -54,14 +55,17 @@ public:
     KUrl selectedFile() const;
     
 protected:
-    QListView* m_view;
     TemplateModel* m_model;
+    Ui::TemplateChooseBase m_ui;
     
     QString m_backend;
     KUrl m_selected;
     
 protected slots:
     void changeCurrent(const QModelIndex& index);
+    
+    void downloadTemplate();
+    void uploadTemplate();
 };
 
 #endif // TEMPLATECHOOSEDIALOG_H

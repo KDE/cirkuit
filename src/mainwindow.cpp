@@ -607,7 +607,7 @@ void MainWindow::backendChanged(const QString& backendName)
 
 void MainWindow::downloadExamples()
 {
-    KNS3::DownloadDialog dialog;
+    KNS3::DownloadDialog dialog("cirkuit_example.knsrc");
     dialog.exec();
     foreach (const KNS3::Entry& e,  dialog.changedEntries())
     {
@@ -618,6 +618,7 @@ void MainWindow::downloadExamples()
 void MainWindow::uploadExample()
 {
     if (!m_currentFile.isLocalFile()) {
+        KMessageBox::error(this, i18n("Save the current document before uploading it"));
         return;
     }
     

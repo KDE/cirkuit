@@ -1,6 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2011  Matteo Agostinelli <matteo.agostinelli@uni-klu.ac.at>
+    Copyright (C) 2011  Matteo Agostinelli <agostinelli@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +21,8 @@
 #include <QListView>
 
 #include <KDebug>
+#include <knewstuff3/downloaddialog.h>
+#include <knewstuff3/uploaddialog.h>
 
 #include "lib/documenttemplate.h"
 using namespace Cirkuit;
@@ -66,21 +67,60 @@ TemplateChooseDialog::TemplateChooseDialog(const QString& backendName, QWidget* 
     kDebug() << "FILTERING " << backendName;
     m_model = new TemplateModel(this);
     m_model->applyBackendFilter(backendName);
-    m_view = new QListView(this);
-    m_view->setModel(m_model);
-    setMainWidget(m_view);
     
-    connect(m_view, SIGNAL(clicked(QModelIndex)), this, SLOT(changeCurrent(QModelIndex)));
+    QWidget* w=new QWidget(this);
+    m_ui.setupUi(w);
+    m_ui.listView->setModel(m_model);
+    
+    m_ui.btnAdd->setIcon(KIcon("list-add"));
+    m_ui.btnEdit->setIcon(KIcon("document-edit"));
+    m_ui.btnDownload->setIcon(KIcon("get-hot-new-stuff"));
+    m_ui.btnUpload->setIcon(KIcon("get-hot-new-stuff"));
+  
+    m_ui.btnEdit->setEnabled(false);
+    m_ui.btnUpload->setEnabled(false);
+    m_ui.comboBackend->setCurrentItem(backendName, true);
+    setMainWidget(w);
+    
+    setWindowTitle(i18n("Template manager"));
+    
+    connect(m_ui.listView, SIGNAL(clicked(QModelIndex)), this, SLOT(changeCurrent(QModelIndex)));
+    connect(m_ui.btnDownload, SIGNAL(clicked(bool)), this, SLOT(downloadTemplate()));
+    connect(m_ui.btnUpload, SIGNAL(clicked(bool)), this, SLOT(uploadTemplate()));
 }
 
 void TemplateChooseDialog::changeCurrent(const QModelIndex& index)
 {    
+    if (!index.isValid()) return;
+    
+    m_ui.btnEdit->setEnabled(true);
+    m_ui.btnUpload->setEnabled(true);
     m_selected = m_model->data(index, Qt::UserRole).value<KUrl>();
-    kDebug() << "New selection: " << m_selected;
 }
 
 KUrl TemplateChooseDialog::selectedFile() const
 {
     return m_selected;
 }
+
+void TemplateChooseDialog::downloadTemplate()
+{
+    KNS3::DownloadDialog dialog("cirkuit_template.knsrc");
+    dialog.exec();
+    foreach (const KNS3::Entry& e,  dialog.changedEntries()) {
+        kDebug() << "Changed Entry: " << e.name();
+    }
+}
+
+void TemplateChooseDialog::uploadTemplate()
+{
+    if (!m_ui.listView->currentIndex().isValid()) return;
+    
+    KNS3::UploadDialog dialog("cirkuit_template.knsrc");
+    dialog.setUploadFile(m_selected);
+    dialog.setUploadName("A template for Cirkuit");
+    dialog.setDescription("This is an example of a template for Cirkuit");
+    dialog.exec();
+}
+
 

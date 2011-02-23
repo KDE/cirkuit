@@ -6,5 +6,5 @@ set (cirkuitwidgets_SRCS templatechoosedialog.cpp
     backendchoosedialog.cpp
 )
 
-kde4_add_ui_files( cirkuitwidgets_SRCS backendchooser.ui)
+kde4_add_ui_files( cirkuitwidgets_SRCS backendchooser.ui templatechooser.ui)
 kde4_add_library( cirkuitwidgets STATIC ${cirkuitwidgets_SRCS} )
