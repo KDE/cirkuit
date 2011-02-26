@@ -25,6 +25,13 @@
 #include <knewstuff3/uploaddialog.h>
 
 #include "lib/documenttemplate.h"
+#include <KTemporaryFile>
+#include <KStandardDirs>
+#include <KIO/NetAccess>
+#include <QFileInfo>
+#include <KRun>
+#include <KDirWatch>
+#include <KMessageBox>
 using namespace Cirkuit;
 
 TemplateModel::TemplateModel(QObject* parent): QAbstractListModel(parent)
@@ -87,6 +94,7 @@ TemplateChooseDialog::TemplateChooseDialog(const QString& backendName, QWidget* 
     connect(m_ui.listView, SIGNAL(clicked(QModelIndex)), this, SLOT(changeCurrent(QModelIndex)));
     connect(m_ui.btnDownload, SIGNAL(clicked(bool)), this, SLOT(downloadTemplate()));
     connect(m_ui.btnUpload, SIGNAL(clicked(bool)), this, SLOT(uploadTemplate()));
+    connect(m_ui.btnEdit, SIGNAL(clicked(bool)), this, SLOT(editTemplate()));
 }
 
 void TemplateChooseDialog::changeCurrent(const QModelIndex& index)
@@ -123,4 +131,32 @@ void TemplateChooseDialog::uploadTemplate()
     dialog.exec();
 }
 
+void TemplateChooseDialog::editTemplate()
+{
+    if (!m_selected.isValid()) return;
+    
+    KTemporaryFile* tempFile = new KTemporaryFile;
+    tempFile->setPrefix(KStandardDirs::locateLocal("tmp", "cirkuit/templates/", true));
+    tempFile->open();
+    QFileInfo tempFileInfo(tempFile->fileName());
+    tempFile->close();
+    tempFile->remove();
+    delete tempFile;
+    
+    if (KIO::NetAccess::file_copy(m_selected, tempFileInfo.absoluteFilePath())) {
+        KDirWatch* dirWatch = new KDirWatch;
+        dirWatch->addFile(tempFileInfo.absoluteFilePath());
+        connect(dirWatch, SIGNAL(dirty(QString)), this, SLOT(copyTempFile(QString)));
+        KRun::runUrl(tempFileInfo.absoluteFilePath(), "text/plain", 0);
+    }
+}
 
+void TemplateChooseDialog::copyTempFile(const QString& fileName)
+{
+    KUrl dest = KStandardDirs::locateLocal("appdata", QString("templates/%1").arg(m_selected.fileName()));
+    
+    if (KIO::NetAccess::exists(dest, false, 0)) {
+        KIO::NetAccess::del(dest, 0);
+    }
+    KIO::NetAccess::file_copy(fileName, dest, 0);
+}

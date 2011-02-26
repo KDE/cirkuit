@@ -63,9 +63,11 @@ protected:
     
 protected slots:
     void changeCurrent(const QModelIndex& index);
+    void copyTempFile(const QString& fileName);
     
     void downloadTemplate();
     void uploadTemplate();
+    void editTemplate();
 };
 
 #endif // TEMPLATECHOOSEDIALOG_H
