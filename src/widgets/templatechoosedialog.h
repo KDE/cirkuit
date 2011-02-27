@@ -16,7 +16,6 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-
 #ifndef TEMPLATECHOOSEDIALOG_H
 #define TEMPLATECHOOSEDIALOG_H
 
@@ -41,6 +40,7 @@ public:
     virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
     
     void applyBackendFilter(const QString& backendName = QString());
+    void refresh();
     
 private:
     QString m_backendFilter;
@@ -64,10 +64,14 @@ protected:
 protected slots:
     void changeCurrent(const QModelIndex& index);
     void copyTempFile(const QString& fileName);
+    void update();
+    void readUrlSelected(const QModelIndex& index);
     
     void downloadTemplate();
     void uploadTemplate();
     void editTemplate();
+    void addTemplate();
+    void removeTemplate();
 };
 
 #endif // TEMPLATECHOOSEDIALOG_H

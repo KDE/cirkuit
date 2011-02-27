@@ -31,7 +31,9 @@
 #include <QFileInfo>
 #include <KRun>
 #include <KDirWatch>
+#include <KInputDialog>
 #include <KMessageBox>
+
 using namespace Cirkuit;
 
 TemplateModel::TemplateModel(QObject* parent): QAbstractListModel(parent)
@@ -41,6 +43,7 @@ TemplateModel::TemplateModel(QObject* parent): QAbstractListModel(parent)
 
 int TemplateModel::rowCount(const QModelIndex& parent) const
 {
+    Q_UNUSED(parent)
     return TemplateManager::availableTemplates(m_backendFilter).count();
 }
 
@@ -69,6 +72,12 @@ void TemplateModel::applyBackendFilter(const QString& backendName)
     reset();
 }
 
+void TemplateModel::refresh()
+{
+    TemplateManager::scanTemplates();
+    reset();
+}
+
 TemplateChooseDialog::TemplateChooseDialog(const QString& backendName, QWidget* parent, Qt::WFlags flags): KDialog(parent, flags)
 {
     kDebug() << "FILTERING " << backendName;
@@ -80,12 +89,14 @@ TemplateChooseDialog::TemplateChooseDialog(const QString& backendName, QWidget* 
     m_ui.listView->setModel(m_model);
     
     m_ui.btnAdd->setIcon(KIcon("list-add"));
+    m_ui.btnRemove->setIcon(KIcon("list-remove"));
     m_ui.btnEdit->setIcon(KIcon("document-edit"));
     m_ui.btnDownload->setIcon(KIcon("get-hot-new-stuff"));
     m_ui.btnUpload->setIcon(KIcon("get-hot-new-stuff"));
   
     m_ui.btnEdit->setEnabled(false);
     m_ui.btnUpload->setEnabled(false);
+    m_ui.btnRemove->setEnabled(false);
     m_ui.comboBackend->setCurrentItem(backendName, true);
     setMainWidget(w);
     
@@ -95,20 +106,35 @@ TemplateChooseDialog::TemplateChooseDialog(const QString& backendName, QWidget* 
     connect(m_ui.btnDownload, SIGNAL(clicked(bool)), this, SLOT(downloadTemplate()));
     connect(m_ui.btnUpload, SIGNAL(clicked(bool)), this, SLOT(uploadTemplate()));
     connect(m_ui.btnEdit, SIGNAL(clicked(bool)), this, SLOT(editTemplate()));
+    connect(m_ui.btnAdd, SIGNAL(clicked(bool)), this, SLOT(addTemplate()));
+    connect(m_ui.btnRemove, SIGNAL(clicked(bool)), this, SLOT(removeTemplate()));
 }
 
 void TemplateChooseDialog::changeCurrent(const QModelIndex& index)
-{    
-    if (!index.isValid()) return;
+{        
+    m_ui.btnEdit->setEnabled(index.isValid());
+    m_ui.btnUpload->setEnabled(index.isValid());
+    m_ui.btnRemove->setEnabled(index.isValid());
     
-    m_ui.btnEdit->setEnabled(true);
-    m_ui.btnUpload->setEnabled(true);
-    m_selected = m_model->data(index, Qt::UserRole).value<KUrl>();
+    if (index.isValid()) {
+        readUrlSelected(index);
+    } else {
+        m_selected = KUrl();
+    }
 }
 
 KUrl TemplateChooseDialog::selectedFile() const
 {
     return m_selected;
+}
+
+void TemplateChooseDialog::readUrlSelected(const QModelIndex& index)
+{
+    if (!index.isValid()) {
+        return;
+    }
+    
+    m_selected = m_model->data(index, Qt::UserRole).value<KUrl>();
 }
 
 void TemplateChooseDialog::downloadTemplate()
@@ -143,7 +169,7 @@ void TemplateChooseDialog::editTemplate()
     tempFile->remove();
     delete tempFile;
     
-    if (KIO::NetAccess::file_copy(m_selected, tempFileInfo.absoluteFilePath())) {
+    if (KIO::NetAccess::file_copy(m_selected, tempFileInfo.absoluteFilePath(), this)) {
         KDirWatch* dirWatch = new KDirWatch;
         dirWatch->addFile(tempFileInfo.absoluteFilePath());
         connect(dirWatch, SIGNAL(dirty(QString)), this, SLOT(copyTempFile(QString)));
@@ -155,8 +181,51 @@ void TemplateChooseDialog::copyTempFile(const QString& fileName)
 {
     KUrl dest = KStandardDirs::locateLocal("appdata", QString("templates/%1").arg(m_selected.fileName()));
     
-    if (KIO::NetAccess::exists(dest, false, 0)) {
-        KIO::NetAccess::del(dest, 0);
+    if (KIO::NetAccess::exists(dest, false, this)) {
+        KIO::NetAccess::del(dest, this);
     }
-    KIO::NetAccess::file_copy(fileName, dest, 0);
+    KIO::NetAccess::file_copy(fileName, dest, this);
+    update();
+}
+
+void TemplateChooseDialog::addTemplate()
+{
+    bool ok = false;
+    QString name = KInputDialog::getText(i18n("Template name"), i18n("Insert the template name"), "template.ckt", &ok);
+    
+    if (!ok || name.isEmpty()) return;
+    
+    KUrl newUrl = KStandardDirs::locateLocal("appdata", QString("templates/%1").arg(name));
+    
+    QFile newTemplate(newUrl.path());
+    if (!newTemplate.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return;
+    }
+    
+    QTextStream out(&newTemplate);
+    out << "%%backend=<INSERT_BACKEND>%%\n"; 
+    
+    newTemplate.close();
+    m_selected = newUrl;
+    editTemplate();
+    update();
+}
+
+void TemplateChooseDialog::removeTemplate()
+{
+    readUrlSelected(m_ui.listView->currentIndex());
+    
+    if (KMessageBox::warningContinueCancel(this, i18n("Do you really want to delete the selected template?"), 
+            i18n("Confirm deletion"), 
+            KStandardGuiItem::remove()) != KMessageBox::Continue) {
+        return;
+    }
+    
+    KIO::NetAccess::del(m_selected, this);
+    update();
+}
+
+void TemplateChooseDialog::update()
+{
+    m_model->refresh();
 }
