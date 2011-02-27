@@ -134,11 +134,6 @@ void ImageView::zoomFit(const QPixmap& pixmap)
     double fraction = 1.0 * ratio / m_ratio;
     m_ratio = ratio;
     
-    kDebug() << "Viewport: " << viewport()->size();
-    kDebug() << "Pixmap: " << pixmap.size();
-    kDebug() << "New ratio: " << ratio;
-    kDebug() << "Factor: " << m_scaleFactor;
-    
     if (fraction > 0.99 && fraction < 1.01) {
         // no resize is needed but re-center the pixmap anyway
         setSceneRect(m_scene->itemsBoundingRect());
