@@ -26,8 +26,13 @@
 #include <QGraphicsPixmapItem>
 #include <QTimer>
 #include <QKeyEvent>
+#include <QMenu>
 
 #include <KDebug>
+#include <KAction>
+#include <KToggleAction>
+#include <KActionCollection>
+#include <KLocale>
 
 ImageView::ImageView(QWidget* parent): QGraphicsView(parent), m_image(QImage()), m_pdfUrl(QString())
 {
@@ -50,6 +55,9 @@ ImageView::ImageView(QWidget* parent): QGraphicsView(parent), m_image(QImage()),
  
     setFitMode(false);
     normalSize();
+    
+    m_scaleMin = 0.1;
+    m_scaleMax = 5.0;
 }
 
 ImageView::~ImageView()
@@ -57,6 +65,65 @@ ImageView::~ImageView()
     delete m_render;
     delete m_timer;
     delete m_pixmap;
+}
+
+void ImageView::setupActions(KActionCollection* actionCollection)
+{    
+    m_zoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()), actionCollection);
+    m_zoomOutAction = KStandardAction::zoomOut(this, SLOT(zoomOut()), actionCollection);
+    m_zoomFitAction = KStandardAction::fitToPage(this, SLOT(zoomFit()), actionCollection);
+    m_zoomFitAction->setIcon(KIcon("zoom-fit-best"));
+    m_actualSizeAction = KStandardAction::actualSize(this, SLOT(normalSize()), actionCollection);
+    
+    connect(this, SIGNAL(enableZoomIn(bool)), m_zoomInAction, SLOT(setEnabled(bool)));
+    connect(this, SIGNAL(enableZoomOut(bool)), m_zoomOutAction, SLOT(setEnabled(bool)));
+    
+    m_zoomFitPageAction = new KToggleAction(i18n("Zoom to fit"), 0);
+    m_zoomFitPageAction->setShortcut(Qt::CTRL + Qt::Key_0);
+    m_zoomFitPageAction->setIcon(KIcon("zoom-fit-best"));
+    actionCollection->addAction( "view_zoom_to_fit", m_zoomFitPageAction);
+    connect(m_zoomFitPageAction, SIGNAL(triggered()), this, SLOT(updateZoomToFit()));
+    connect(this, SIGNAL(fitModeChanged(bool)), m_zoomFitPageAction, SLOT(setChecked(bool)));
+    connect(this, SIGNAL(fitModeChanged(bool)), this, SLOT(updateZoomToFit()));
+    updateZoomToFit();
+    
+    // add actions to the widget's list for the popup menu
+    addAction(m_zoomInAction);
+    addAction(m_zoomOutAction);
+    addAction(m_actualSizeAction);
+    addAction(m_zoomFitAction);
+    addAction(m_zoomFitPageAction);
+}
+
+KAction* ImageView::zoomFitAction() const
+{
+    return m_zoomFitAction;
+}
+
+KAction* ImageView::zoomFitPageAction() const
+{
+    return m_zoomFitPageAction;
+}
+
+KAction* ImageView::zoomInAction() const
+{
+    return m_zoomInAction;
+}
+
+KAction* ImageView::zoomOutAction() const
+{
+    return m_zoomOutAction;
+}
+
+KAction* ImageView::actualSizeAction() const
+{
+    return m_actualSizeAction;
+}
+
+void ImageView::updateZoomToFit()
+{
+    m_zoomFitAction->setEnabled(!m_zoomFitPageAction->isChecked());
+    setFitMode(m_zoomFitPageAction->isChecked());
 }
 
 void ImageView::setImage(const QImage& image, bool firstTime)
@@ -91,10 +158,11 @@ void ImageView::scaleImage(double factor)
     m_timer->stop();
     
     m_scaleFactor *= factor;
+    qBound<double>(m_scaleMin, m_scaleFactor, m_scaleMax);
     m_render->generatePreview(m_pdfUrl, m_scaleFactor);
     
-    emit enableZoomIn(m_scaleFactor < 3.5);
-    emit enableZoomOut(m_scaleFactor > 0.1);    
+    emit enableZoomIn(m_scaleFactor <= m_scaleMax);
+    emit enableZoomOut(m_scaleFactor >= m_scaleMin);    
 }
 
 void ImageView::normalSize()
@@ -107,12 +175,20 @@ void ImageView::normalSize()
 
 void ImageView::zoomIn()
 {
+    if (m_scaleFactor >= m_scaleMax) {
+        return;
+    }
+    
     setFitMode(false);
     scaleImage(1.25);
 }
 
 void ImageView::zoomOut()
 {
+    if (m_scaleFactor <= m_scaleMin) {
+        return;
+    }
+    
     setFitMode(false);
     scaleImage(0.8);
 }
@@ -177,4 +253,21 @@ void ImageView::trigger()
     m_timer->start(50);
 }
 
+void ImageView::wheelEvent(QWheelEvent* event)
+{
+    if (event->modifiers() == Qt::ControlModifier) {
+        if (event->delta() > 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    }
+}
 
+void ImageView::contextMenuEvent(QContextMenuEvent* event)
+{
+    QMenu *menu = new QMenu(this);
+    menu->addActions(actions());
+    menu->exec(event->globalPos());
+    menu->deleteLater();
+}

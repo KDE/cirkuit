@@ -77,7 +77,6 @@ private slots:
 
     void updateTitle();
     void updateConfiguration();
-    void updateZoomToFit();
     void configure();
     void configureKeyBindings();
     void configureToolbars();
@@ -112,8 +111,6 @@ private:
     KUrl m_currentFile;
     
     KRecentFilesAction* recentFilesAction;
-    KToggleAction* zoomFitPageAction;
-    KAction* zoomFitAction;
     
     CircuitMacrosManager* cmm;
     QString m_tempSavePath;

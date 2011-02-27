@@ -23,10 +23,14 @@
 #include <QImage>
 #include <QGraphicsView>
 
+class KActionCollection;
 class RenderThread;
 class QGraphicsPixmapItem;
 class QLabel;
 class QTimer;
+
+class KAction;
+class KToggleAction;
 
 class ImageView: public QGraphicsView
 {
@@ -51,9 +55,18 @@ public slots:
     void zoomFit(const QPixmap& pixmap);
     void normalSize();
     
+    KAction* zoomFitPageAction() const;
+    KAction* zoomFitAction() const;
+    KAction* zoomInAction() const;
+    KAction* zoomOutAction() const;
+    KAction* actualSizeAction() const;
+        
+    void setupActions(KActionCollection* actionCollection);
+    void updateZoomToFit();
+    
 private slots:
     void scaleImage(double factor);
-    void trigger();
+    void trigger();    
     
 signals:
     void enableZoomIn(bool);
@@ -61,7 +74,9 @@ signals:
     void fitModeChanged(bool);
     
 protected:
-    void resizeEvent(QResizeEvent*);
+    virtual void contextMenuEvent(QContextMenuEvent* event);
+    virtual void resizeEvent(QResizeEvent*);
+    virtual void wheelEvent(QWheelEvent* event);
     
 private:
     QImage m_image;
@@ -74,7 +89,10 @@ private:
     double m_ratio;
     bool m_fitMode;
     
-    double m_scaleFactor;
+    double m_scaleFactor, m_scaleMin, m_scaleMax;
+    
+    KToggleAction* m_zoomFitPageAction;
+    KAction* m_zoomFitAction, *m_zoomInAction, *m_zoomOutAction, *m_actualSizeAction;
 };
 
 #endif // IMAGEVIEW_H

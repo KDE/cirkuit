@@ -146,14 +146,7 @@ void MainWindow::setupActions()
     KStandardAction::keyBindings(this, SLOT(configureKeyBindings()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
     
-    KAction* zoomInAction = KStandardAction::zoomIn(m_imageView, SLOT(zoomIn()), actionCollection());
-    KAction* zoomOutAction = KStandardAction::zoomOut(m_imageView, SLOT(zoomOut()), actionCollection());
-    zoomFitAction = KStandardAction::fitToPage(m_imageView, SLOT(zoomFit()), actionCollection());
-    zoomFitAction->setIcon(KIcon("zoom-fit-best"));
-    KStandardAction::actualSize(m_imageView, SLOT(normalSize()), actionCollection());
     
-    connect(m_imageView, SIGNAL(enableZoomIn(bool)), zoomInAction, SLOT(setEnabled(bool)));
-    connect(m_imageView, SIGNAL(enableZoomOut(bool)), zoomOutAction, SLOT(setEnabled(bool)));
                                             
     recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile( const KUrl& )),
                                                                     actionCollection());
@@ -208,19 +201,13 @@ void MainWindow::setupActions()
     QAction* showLogViewAction = m_logViewWidget->toggleViewAction();
     actionCollection()->addAction( "show_log_view", showLogViewAction );
     showLogViewAction->setIcon(KIcon("documentation"));
-    
-    zoomFitPageAction = new KToggleAction(i18n("Zoom to fit"), 0);
-    zoomFitPageAction->setShortcut(Qt::CTRL + Qt::Key_0);
-    zoomFitPageAction->setIcon(KIcon("zoom-fit-best"));
-    actionCollection()->addAction( "view_zoom_to_fit", zoomFitPageAction);
-    connect(zoomFitPageAction, SIGNAL(triggered()), this, SLOT(updateZoomToFit()));
-    connect(m_imageView, SIGNAL(fitModeChanged(bool)), zoomFitPageAction, SLOT(setChecked(bool)));
-    connect(m_imageView, SIGNAL(fitModeChanged(bool)), this, SLOT(updateZoomToFit()));
-    zoomFitPageAction->setChecked(CirkuitSettings::zoomToFit());
-    updateZoomToFit();
 
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->loadEntries(config->group("recent_files"));
+
+    m_imageView->setupActions(actionCollection());
+    m_imageView->zoomFitPageAction()->setChecked(CirkuitSettings::zoomToFit());
+    m_imageView->updateZoomToFit();
 }
 
 void MainWindow::substituteSaveAsAction()
@@ -360,7 +347,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->saveEntries(config->group("recent_files"));
     
-    CirkuitSettings::setZoomToFit(zoomFitPageAction->isChecked());
+    CirkuitSettings::setZoomToFit(m_imageView->zoomFitPageAction()->isChecked());
     CirkuitSettings::self()->writeConfig();
 
     if (!m_doc->closeUrl()) {
@@ -583,11 +570,7 @@ void MainWindow::setDefaultBackend(const QString& backend)
     CirkuitSettings::setDefaultBackend(backend);
 }
 
-void MainWindow::updateZoomToFit()
-{
-    zoomFitAction->setEnabled(!zoomFitPageAction->isChecked());
-    m_imageView->setFitMode(zoomFitPageAction->isChecked());
-}
+
 
 void MainWindow::configureKeyBindings()
 {
