@@ -2,6 +2,7 @@
 Comment=Cirkuit
 Comment[cs]=Cirkuit
 Comment[de]=Cirkuit
+Comment[et]=Cirkuit
 Comment[fr]=Cirkuit
 Comment[nds]=Cirkuit
 Comment[nl]=Cirkuit
@@ -13,6 +14,7 @@ Comment[x-test]=xxCirkuitxx
 
 [Event/Preview Generated]
 Name=Preview generated
+Name[et]=Eelvaatlus on loodud
 Name[fr]=Aperçu généré
 Name[nds]=Vöransicht opstellt...
 Name[nl]=Voorbeeld aangemaakt
@@ -22,6 +24,7 @@ Name[sv]=Förhandsgranskning skapades
 Name[uk]=Створено зображення попереднього перегляду
 Name[x-test]=xxPreview generatedxx
 Comment=The preview has been generated
+Comment[et]=Eelvaatlus on loodud
 Comment[fr]=L'aperçu a été généré
 Comment[nds]=De Vöransicht wöör opstellt...
 Comment[nl]=Het voorbeeld is aangemaakt
@@ -34,6 +37,7 @@ Action=Popup
 
 [Event/Download progress]
 Name=Download progress
+Name[et]=Allalaadimise edenemine
 Name[fr]=Progression du téléchargement
 Name[nds]=Daalladen-Vörankamen
 Name[nl]=Downloadvoortgang
@@ -43,6 +47,7 @@ Name[sv]=Nerladdning pågår
 Name[uk]=Поступ звантаження
 Name[x-test]=xxDownload progressxx
 Comment=Download progress
+Comment[et]=Allalaadimise edenemine
 Comment[fr]=Progression du téléchargement
 Comment[nds]=Daalladen-Vörankamen
 Comment[nl]=Downloadvoortgang
@@ -55,6 +60,7 @@ Action=Popup
 
 [Event/Download finished]
 Name=Download finished
+Name[et]=Allalaadimine lõpetatud
 Name[fr]=Téléchargement terminé
 Name[nds]=Daalladen afslaten
 Name[nl]=Download voltooid
@@ -64,6 +70,7 @@ Name[sv]=Nerladdning klar
 Name[uk]=Звантаження завершено
 Name[x-test]=xxDownload finishedxx
 Comment=Download finished
+Comment[et]=Allalaadimine lõpetatud
 Comment[fr]=Téléchargement terminé
 Comment[nds]=Daalladen afslaten
 Comment[nl]=Download voltooid
