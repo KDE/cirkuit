@@ -78,7 +78,6 @@ public:
     QString directory() const;
     
 public slots:
-    void setDirectory(const QString& directory);
     void applySettings(DocumentSettings* settings);
     
     void initialize();

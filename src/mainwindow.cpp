@@ -328,7 +328,6 @@ void MainWindow::exportFile()
     if (!path.isEmpty()) {
         QFileInfo fileinfo(path);
         Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog.currentFilterMimeType());
-        m_doc->setDirectory(m_currentFile.directory());
         statusBar()->showMessage("Exporting image...");
         m_generator->generate(Cirkuit::Format::Source, format, m_backend, m_doc, true);
         m_tempSavePath = path;
@@ -366,7 +365,6 @@ void MainWindow::buildPreview()
     m_logViewWidget->clear();
     m_logViewWidget->hide();
     
-    m_doc->setDirectory(m_currentFile.directory());
     m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc, false, m_imageView->scaleFactor());
     
     kDebug() << "Preview generation in progress...";

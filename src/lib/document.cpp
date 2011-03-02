@@ -42,12 +42,7 @@ Document::~Document()
 
 QString Document::directory() const
 {
-    return d->directory;
-}
-
-void Document::setDirectory(const QString& directory)
-{
-    d->directory = directory;
+    return url().directory();
 }
 
 int Document::initialLineNumber() const
