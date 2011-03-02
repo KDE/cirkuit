@@ -2,6 +2,7 @@
 Type=Service
 Icon=gnuplotbackend
 Name=Gnuplot
+Name[et]=Gnuplot
 Name[fr]=Gnuplot
 Name[nl]=Gnuplot
 Name[pt]=Gnuplot
@@ -16,6 +17,7 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Website=http://www.gnuplot.org
 Comment=Backend for Gnuplot
+Comment[et]=Gnuploti taustaprogramm
 Comment[fr]=Moteur pour Gnuplot
 Comment[nl]=Backend voor Gnuplot
 Comment[pt]=Infra-Estrutura do Gnuplot

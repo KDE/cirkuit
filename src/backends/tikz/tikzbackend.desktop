@@ -2,6 +2,7 @@
 Type=Service
 Icon=tikzbackend
 Name=TikZ
+Name[et]=TikZ
 Name[fr]=TikZ
 Name[nl]=TikZ
 Name[pt]=TikZ
@@ -16,6 +17,7 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Website=http://www.texample.net/tikz
 Comment=Backend for TikZ
+Comment[et]=TikZi taustaprogramm
 Comment[fr]=Moteur pour TikZ
 Comment[nl]=Backend voor TikZ
 Comment[pt]=Infra-Estrutura do TikZ
