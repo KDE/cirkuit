@@ -153,7 +153,6 @@ void TemplateChooseDialog::uploadTemplate()
     KNS3::UploadDialog dialog("cirkuit_template.knsrc");
     dialog.setUploadFile(m_selected);
     dialog.setUploadName("A template for Cirkuit");
-    dialog.setDescription("This is an example of a template for Cirkuit");
     dialog.exec();
 }
 
