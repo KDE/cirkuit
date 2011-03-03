@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Service
+Icon=pstricks
+Name=PSTricks
+X-KDE-ServiceTypes=Cirkuit/Backend
+X-KDE-Library=cirkuit_pstricksbackend
+X-KDE-PluginInfo-Name=pstricksbackend
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Website=http://tug.org/PSTricks/main.cgi
+Comment=Backend for PSTricks
+
