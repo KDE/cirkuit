@@ -48,7 +48,7 @@ bool TikzBackend::checkRequirements() const
 
 QString TikzBackend::id() const
 {
-    return "tikz";
+    return QString("tikz");
 }
 
 Cirkuit::DocumentSettings* TikzBackend::documentSettings() const
@@ -77,7 +77,7 @@ QWidget* TikzBackend::settingsWidget(QWidget* parent) const
 QStringList TikzBackend::identifyingWords() const
 {
     QStringList words;
-    words << "\\begin" << "tikzpicture" << "\\end";
+    words << "\\path" << "tikzpicture" << "\\draw" << "node";
     return words;
 }
 
