@@ -1,0 +1,4 @@
+File=pstricksbackend.kcfg
+ClassName=PstricksSettings
+Singleton=true
+Mutators=true
