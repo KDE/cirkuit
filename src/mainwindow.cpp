@@ -1,5 +1,5 @@
 /**************************************************************************
-*   Copyright (C) 2010 by Matteo Agostinelli                              *
+*   Copyright (C) 2011 by Matteo Agostinelli                              *
 *   agostinelli@gmail.com                                                 *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
@@ -145,8 +145,6 @@ void MainWindow::setupActions()
     KStandardAction::preferences(this, SLOT(configure()), actionCollection());    
     KStandardAction::keyBindings(this, SLOT(configureKeyBindings()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
-    
-    
                                             
     recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile( const KUrl& )),
                                                                     actionCollection());
@@ -559,6 +557,15 @@ void MainWindow::initializeBackend()
 {
     kDebug() << Cirkuit::Backend::listAvailableBackends();
     m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
+    
+    if (!m_backend) {
+        kDebug() << "The default backend has not been found";
+        if (Cirkuit::Backend::listAvailableBackends().count() < 1) {
+            kDebug() << "No backends available...";
+            KMessageBox::error(this, i18n("No working backend has been found. Cirkuit is unable to generate any figure."), i18n("No backends found"));
+        }
+    }
+    
     backendChanged(m_backend->name());
     m_firstRun = true;
 }
@@ -567,8 +574,6 @@ void MainWindow::setDefaultBackend(const QString& backend)
 {
     CirkuitSettings::setDefaultBackend(backend);
 }
-
-
 
 void MainWindow::configureKeyBindings()
 {
