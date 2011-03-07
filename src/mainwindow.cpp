@@ -611,7 +611,6 @@ void MainWindow::uploadExample()
     KNS3::UploadDialog dialog("cirkuit_example.knsrc");
     dialog.setUploadFile(m_currentFile);
     dialog.setUploadName("A simple circuit schematic");
-    dialog.setDescription("This is an example of a simple circuit schematic> You will need the Circuit Macros backend to open this file");
     dialog.exec();
 }
 
