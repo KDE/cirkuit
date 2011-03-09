@@ -2,6 +2,10 @@
 Type=Service
 Icon=pstricks
 Name=PSTricks
+Name[pt]=PSTricks
+Name[pt_BR]=PSTricks
+Name[uk]=PSTricks
+Name[x-test]=xxPSTricksxx
 X-KDE-ServiceTypes=Cirkuit/Backend
 X-KDE-Library=cirkuit_pstricksbackend
 X-KDE-PluginInfo-Name=pstricksbackend
@@ -9,4 +13,8 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Website=http://tug.org/PSTricks/main.cgi
 Comment=Backend for PSTricks
+Comment[pt]=Infra-Estrutura do PSTricks
+Comment[pt_BR]=Infraestrutura para o PSTricks
+Comment[uk]=Модуль для PSTricks
+Comment[x-test]=xxBackend for PSTricksxx
 
