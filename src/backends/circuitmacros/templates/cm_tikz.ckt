@@ -1,6 +1,7 @@
 %%backend=circuitmacros%%
 \documentclass{article}
-\usepackage{tikz,amsmath,siunitx}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz,amsmath}
 
 \usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
 \usepackage[graphics,tightpage,active]{preview}

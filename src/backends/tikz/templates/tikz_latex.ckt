@@ -1,6 +1,7 @@
 %%backend=tikz%%
 \documentclass{article}
-\usepackage{tikz,amsmath,siunitx}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz,amsmath}
 \usepackage[siunitx]{circuitikz}
 
 \usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
