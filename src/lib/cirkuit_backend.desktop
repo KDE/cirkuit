@@ -4,6 +4,7 @@ X-KDE-ServiceType=Cirkuit/Backend
 Comment=A Backend for Cirkuit
 Comment[et]=Cirkuiti taustaprogramm
 Comment[fr]=Un moteur pour Cirkuit
+Comment[km]=កម្មវិធី​ខាងក្រោយ​របស់ Cirkuit
 Comment[nl]=Een backend voor Cirkuit
 Comment[pt]=Uma infra-estrutura para o Cirkuit
 Comment[pt_BR]=Uma infraestrutura para o Cirkuit
