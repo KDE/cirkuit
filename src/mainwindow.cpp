@@ -406,7 +406,7 @@ void MainWindow::newDocument(const QString& backendName)
     }
     
     if (!m_backend) {
-        KMessageBox::error(this, i18n("No valid backend selected.", backendName));
+        KMessageBox::error(this, i18n("No valid backend selected."));
         return;
     }
     
@@ -587,8 +587,8 @@ void MainWindow::configureToolbars()
 
 void MainWindow::backendChanged(const QString& backendName)
 {
-    actionCollection()->action("showManual")->setText(i18n("%1 manual").arg(backendName));
-    actionCollection()->action("showExamples")->setText(i18n("%1 examples").arg(backendName));
+    actionCollection()->action("showManual")->setText(i18n("%1 manual", backendName));
+    actionCollection()->action("showExamples")->setText(i18n("%1 examples", backendName));
 }
 
 void MainWindow::downloadExamples()
