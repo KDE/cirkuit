@@ -31,4 +31,4 @@ class CircuitMacrosSettingsWidget : public QWidget, public Ui::CircuitMacrosSett
     explicit CircuitMacrosSettingsWidget(QWidget* parent = 0, Qt::WindowFlags f = 0);
 };
 
-#endif 
+#endif
