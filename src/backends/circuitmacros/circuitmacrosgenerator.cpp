@@ -114,7 +114,7 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         }
         
         QStringList environment = QProcess::systemEnvironment();
-        // the following enviroment variable is needed to find boxdims.sty in the circuit maaros distribution
+        // the following environment variable is needed to find boxdims.sty in the circuit maaros distribution
         QString dirString = QString("TEXINPUTS=.:%1:%2:").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(QDir(document()->directory()).absolutePath());
         environment << dirString;
         

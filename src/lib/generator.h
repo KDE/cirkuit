@@ -169,7 +169,7 @@ protected:
      */
     KTemporaryFile* tempFile() const;
     /**
-     * Informations about the temporary file
+     * Information about the temporary file
      */
     QFileInfo* tempFileInfo() const;
     /**

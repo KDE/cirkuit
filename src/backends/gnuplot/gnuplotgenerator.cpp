@@ -113,7 +113,7 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
         QString latexDoc = gpTemplate.insert(gnuplotOutputFile);
         
         QStringList environment = QProcess::systemEnvironment();
-        // the following enviroment variable is needed to find boxdims.sty in the circuit maaros distribution
+        // the following environment variable is needed to find boxdims.sty in the circuit maaros distribution
         QString dirString = QString("TEXINPUTS=.:%1:").arg(QDir(document()->directory()).absolutePath());
         environment << dirString;
         
