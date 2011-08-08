@@ -26,7 +26,7 @@ class LogViewWidget : public QDockWidget
 {
     Q_OBJECT
 public:
-    LogViewWidget ( const QString & title, QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+    explicit LogViewWidget ( const QString & title, QWidget* parent = 0, Qt::WindowFlags flags = 0 );
     
     virtual QSize sizeHint() const;
     

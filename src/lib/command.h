@@ -49,7 +49,7 @@ public:
      * @param args optional arguments
      * @param parent optional parent
      */
-    Command(const QString& name, const QString& input = "", const QStringList& args = QStringList(), QObject* parent = 0);
+    explicit Command(const QString& name, const QString& input = "", const QStringList& args = QStringList(), QObject* parent = 0);
     /**
      * Destructor
      */

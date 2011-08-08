@@ -30,7 +30,7 @@ class BackendChooseDialog : public KDialog
 {
 Q_OBJECT
 public:
-    BackendChooseDialog(const QString& backendName = QString(), QWidget* parent = 0);
+    explicit BackendChooseDialog(const QString& backendName = QString(), QWidget* parent = 0);
     ~BackendChooseDialog();
 
     QString backendName();

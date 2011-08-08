@@ -41,7 +41,7 @@ public:
      * Default constructor.
      * @param path is the path of the template file
      */
-    DocumentTemplate(const KUrl& path, QObject* parent = 0);
+    explicit DocumentTemplate(const KUrl& path, QObject* parent = 0);
     
     /**
      * Inserts the code into the template. The point of insertion
