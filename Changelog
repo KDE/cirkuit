@@ -1,3 +1,17 @@
+- 0.4
+New backend system (heavily inspired by Cantor) 
+New template system with GHNS (Get Hot New Stuff) support
+Added Get Hot New Stuff support 
+Configurable keyboard shortcuts and toolbars
+Much improved preview widget with variable zoom levels
+Manuals and examples of each backend can be accessed in the main interface
+Improved multi-threading -> Cirkuit generates the previews faster
+Improved parsing of log files and error handling
+Increased usage of K* instead of Q* classes for a better
+Improved integration with the KDE environment
+Redesigned configuration dialog
+Other bug fixes / improvements
+
 - 0.3.2
 Switch from QProcess to KProcess
 Download of remote data the KDE way with KIO
