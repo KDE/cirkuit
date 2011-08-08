@@ -91,7 +91,7 @@ bool DocumentTemplate::operator==(const Cirkuit::DocumentTemplate& rhs) const
     return this->path().fileName() == rhs.path().fileName();
 }
 
-static QList<DocumentTemplate*> templateCache;
+static QList<DocumentTemplate*> templateCache = QList<DocumentTemplate*>();
 
 TemplateManager::TemplateManager(QObject* parent): QObject(parent)
 {

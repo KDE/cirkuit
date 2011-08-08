@@ -114,7 +114,7 @@ KConfigSkeletonItem* Backend::configTemplateUrl() const
     return config()->findItem("templateurl");
 }
 
-static QList<Backend*> backendCache;
+static QList<Backend*> backendCache = QList<Backend*>();
 
 QStringList Backend::listAvailableBackends()
 {
