@@ -43,7 +43,7 @@ bool CircuitMacrosManager::checkExistence() const
           << KStandardDirs::locate("data", "cirkuit/circuit_macros/libcct.m4");
     
     
-    foreach(QString cm_path, paths) {
+    foreach(const QString& cm_path, paths) {
         if (QFile::exists(cm_path)) {
             return true;
         }

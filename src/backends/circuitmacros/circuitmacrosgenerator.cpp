@@ -119,7 +119,7 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         environment << dirString;
         
         QStringList latexArgs;
-        foreach (QString arg, CircuitMacrosSettings::latexargs()) {
+        foreach (const QString& arg, CircuitMacrosSettings::latexargs()) {
             latexArgs << arg;
         }
         latexArgs << QString("-jobname=%1").arg(tempFileInfo()->baseName());

@@ -207,7 +207,7 @@ float Backend::identifyIndex(Cirkuit::Document* doc) const
     int total = 0;
     int hits = 0;
     
-    foreach (QString word, identifyingWords()) {
+    foreach (const QString& word, identifyingWords()) {
         if (doc->text().contains(word, Qt::CaseInsensitive)) ++hits;
         ++total;
     }

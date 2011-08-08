@@ -72,7 +72,7 @@ bool PstricksGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format
         environment << dirString;
         
         QStringList latexArgs;
-        foreach (QString arg, PstricksSettings::latexargs()) {
+        foreach (const QString& arg, PstricksSettings::latexargs()) {
             latexArgs << arg;
         }
         latexArgs << QString("-jobname=%1").arg(tempFileInfo()->baseName());
