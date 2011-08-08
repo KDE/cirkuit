@@ -140,15 +140,12 @@ QString CircuitMacrosManager::findVersion(const QString& filename) const
     
     QByteArray byteArray = file.readAll();
     
-    bool versionStringFound = false;
-
     QRegExp rx("Version (\\d\\.\\d+)");
     QString version = "";
 
     QString content(byteArray);
 
     if (content.contains(rx)) {
-        versionStringFound = true;
         version = rx.cap(1);
     }
 
