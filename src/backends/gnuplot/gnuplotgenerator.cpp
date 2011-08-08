@@ -76,13 +76,13 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
                 QString capture = regex1.cap(1);
                 
                 if (QFile::exists(QDir(document()->directory()).absolutePath() + '/' + capture)) {
-                    if (!line.startsWith("set output")) {
+                    if (!line.startsWith(QLatin1String("set output"))) {
                         origFileNames << capture;
                         line = line.replace(capture, QString("%1/%2").arg(QDir(document()->directory()).absolutePath()).arg(capture));
                     }
                 }
                 
-                if (line.simplified().startsWith("set output")) {
+                if (line.simplified().startsWith(QLatin1String("set output"))) {
                     line = QString("");
                 }
                 
