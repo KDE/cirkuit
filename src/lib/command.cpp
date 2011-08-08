@@ -128,7 +128,7 @@ bool Command::execute(const QString& input, const QStringList& args)
 
 bool Command::checkExistence() const
 {
-    return KStandardDirs::findExe(d->name) != QString();
+    return !KStandardDirs::findExe(d->name).isEmpty();
 }
 
 QString Command::stdError() const
@@ -143,7 +143,7 @@ QString Command::stdOutput() const
 
 bool Command::checkExistence(const QString& name)
 {
-    return KStandardDirs::findExe(name) != QString();
+    return !KStandardDirs::findExe(name).isEmpty();
 }
 
 bool Command::parseLog()

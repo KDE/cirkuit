@@ -58,7 +58,7 @@ void DocumentTemplate::readBackend() const
     
     QString line = stream.readLine().toLower();
     QRegExp regExp("%%backend=(\\w+)%%");
-    while (line != QString()) {
+    while (!line.isEmpty()) {
         if (regExp.indexIn(line) > -1) {
             d->backend = regExp.cap(1);
         }
