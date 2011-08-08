@@ -65,7 +65,7 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
         QRegExp regex2("[\'\"]\\$(.+)\\$[\'\"]");
     
         QStringList origFileNames;
-        QStringList lines = document()->text().split("\n");
+        QStringList lines = document()->text().split('\n');
     
         QString gnuplotOutputFile = tempFileInfo()->baseName() + ".tex";
         stream << "set output '" + gnuplotOutputFile + "'\n";
@@ -75,7 +75,7 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
             while ((pos = regex1.indexIn(line,pos)) != -1) {
                 QString capture = regex1.cap(1);
                 
-                if (QFile::exists(QDir(document()->directory()).absolutePath() + "/" + capture)) {
+                if (QFile::exists(QDir(document()->directory()).absolutePath() + '/' + capture)) {
                     if (!line.startsWith("set output")) {
                         origFileNames << capture;
                         line = line.replace(capture, QString("%1/%2").arg(QDir(document()->directory()).absolutePath()).arg(capture));
@@ -99,7 +99,7 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
                 pos += regex2.matchedLength();
             }
 
-            stream << line + "\n";
+            stream << line + '\n';
         }
         tempFile()->close();
     
