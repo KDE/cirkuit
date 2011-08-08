@@ -42,7 +42,7 @@ public:
      * Default constructor. Initial text is an empty string
      */    
     DocumentSettings() {
-        initialText = QString();
+        initialText.clear();
         initialLineNumber = 0;
     }
     

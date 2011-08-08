@@ -50,7 +50,7 @@ KUrl DocumentTemplate::path() const
 
 void DocumentTemplate::readBackend() const
 {
-    d->backend = QString();
+    d->backend.clear();
     
     QFile file(d->path.path());
     file.open(QIODevice::ReadOnly);

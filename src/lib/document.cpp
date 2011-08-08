@@ -26,7 +26,7 @@ using namespace Cirkuit;
 class Cirkuit::DocumentPrivate {
 public:
     DocumentPrivate() {
-        directory = QString();
+        directory.clear();
         settings = new DocumentSettings;
     }
     QString directory;

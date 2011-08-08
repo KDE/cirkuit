@@ -33,7 +33,7 @@ using namespace Cirkuit;
 
 GeneratorThread::GeneratorThread(QObject* parent): QThread(parent)
 {
-    m_previewUrl = QString();
+    m_previewUrl.clear();
     m_backend = 0;
     m_doc = 0;
     m_scaleFactor = 1.0;

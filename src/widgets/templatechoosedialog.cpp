@@ -38,7 +38,7 @@ using namespace Cirkuit;
 
 TemplateModel::TemplateModel(QObject* parent): QAbstractListModel(parent)
 {
-    m_backendFilter = QString();
+    m_backendFilter.clear();
 }
 
 int TemplateModel::rowCount(const QModelIndex& parent) const
