@@ -224,7 +224,7 @@ void MainWindow::clear()
 
 void MainWindow::newFile()
 {
-    BackendChooseDialog* dlg = new BackendChooseDialog(CirkuitSettings::defaultBackend(), this);
+    QPointer<BackendChooseDialog> dlg = new BackendChooseDialog(CirkuitSettings::defaultBackend(), this);
     
     connect(dlg, SIGNAL(backendSelected(QString)), this, SLOT(newDocument(QString)));
     connect(dlg, SIGNAL(defaultBackendSelected(QString)), this, SLOT(setDefaultBackend(QString)));
@@ -237,12 +237,12 @@ void MainWindow::openFile()
 {
     QString filename;
 
-    KFileDialog openFileDialog(KUrl(), "", this);
-    openFileDialog.setWindowTitle(i18n("Open file - Cirkuit"));
-    openFileDialog.setOperationMode(KFileDialog::Opening);
-    openFileDialog.setMimeFilter(mimeTypes);
-    if (openFileDialog.exec() == QDialog::Accepted) {
-        filename = openFileDialog.selectedFile();
+    QPointer<KFileDialog> openFileDialog = new KFileDialog(KUrl(), "", this);
+    openFileDialog->setWindowTitle(i18n("Open file - Cirkuit"));
+    openFileDialog->setOperationMode(KFileDialog::Opening);
+    openFileDialog->setMimeFilter(mimeTypes);
+    if (openFileDialog->exec() == QDialog::Accepted) {
+        filename = openFileDialog->selectedFile();
     }
 
     if (!filename.isEmpty()) {
@@ -280,13 +280,13 @@ void MainWindow::saveAs()
 {
     QString filename;
 
-    KFileDialog saveFileDialog(KUrl(), "", this);
-    saveFileDialog.setWindowTitle(i18n("Save file - Cirkuit"));
-    saveFileDialog.setOperationMode(KFileDialog::Saving);
-    saveFileDialog.setMimeFilter(mimeTypes, "application/x-cirkuit");
-    saveFileDialog.setConfirmOverwrite(true);
-    if (saveFileDialog.exec() == QDialog::Accepted) {
-        filename = saveFileDialog.selectedFile();
+    QPointer<KFileDialog> saveFileDialog = new KFileDialog(KUrl(), "", this);
+    saveFileDialog->setWindowTitle(i18n("Save file - Cirkuit"));
+    saveFileDialog->setOperationMode(KFileDialog::Saving);
+    saveFileDialog->setMimeFilter(mimeTypes, "application/x-cirkuit");
+    saveFileDialog->setConfirmOverwrite(true);
+    if (saveFileDialog->exec() == QDialog::Accepted) {
+        filename = saveFileDialog->selectedFile();
     }
 
     if (!filename.isEmpty()) {
@@ -312,20 +312,20 @@ void MainWindow::exportFile()
     QStringList exportTypes;
     exportTypes << "application/pdf" << "image/x-eps" << "image/png" << "image/jpeg" << "image/svg+xml" << "image/gif" << "text/x-tex";
 
-    KFileDialog saveFileDialog(KUrl(), "", this);
-    saveFileDialog.setWindowTitle(i18n("Export image - Cirkuit"));
-    saveFileDialog.setStartDir(m_currentFile.directory());
-    saveFileDialog.setOperationMode(KFileDialog::Saving);
-    saveFileDialog.setMimeFilter(exportTypes, "application/pdf");
-    saveFileDialog.setInlinePreviewShown(true);
-    saveFileDialog.setConfirmOverwrite(true);
-    if (saveFileDialog.exec() == QDialog::Accepted) {
-        path = saveFileDialog.selectedFile();
+    QPointer<KFileDialog> saveFileDialog = new KFileDialog(KUrl(), "", this);
+    saveFileDialog->setWindowTitle(i18n("Export image - Cirkuit"));
+    saveFileDialog->setStartDir(m_currentFile.directory());
+    saveFileDialog->setOperationMode(KFileDialog::Saving);
+    saveFileDialog->setMimeFilter(exportTypes, "application/pdf");
+    saveFileDialog->setInlinePreviewShown(true);
+    saveFileDialog->setConfirmOverwrite(true);
+    if (saveFileDialog->exec() == QDialog::Accepted) {
+        path = saveFileDialog->selectedFile();
     }
 
     if (!path.isEmpty()) {
         QFileInfo fileinfo(path);
-        Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog.currentFilterMimeType());
+        Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog->currentFilterMimeType());
         statusBar()->showMessage("Exporting image...");
         m_generator->generate(Cirkuit::Format::Source, format, m_backend, m_doc, true);
         m_tempSavePath = path;
@@ -593,9 +593,9 @@ void MainWindow::backendChanged(const QString& backendName)
 
 void MainWindow::downloadExamples()
 {
-    KNS3::DownloadDialog dialog("cirkuit_example.knsrc");
-    dialog.exec();
-    foreach (const KNS3::Entry& e,  dialog.changedEntries())
+    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog("cirkuit_example.knsrc");
+    dialog->exec();
+    foreach (const KNS3::Entry& e,  dialog->changedEntries())
     {
         kDebug() << "Changed Entry: " << e.name();
     }

@@ -139,9 +139,9 @@ void TemplateChooseDialog::readUrlSelected(const QModelIndex& index)
 
 void TemplateChooseDialog::downloadTemplate()
 {
-    KNS3::DownloadDialog dialog("cirkuit_template.knsrc");
-    dialog.exec();
-    foreach (const KNS3::Entry& e,  dialog.changedEntries()) {
+    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog("cirkuit_template.knsrc");
+    dialog->exec();
+    foreach (const KNS3::Entry& e,  dialog->changedEntries()) {
         kDebug() << "Changed Entry: " << e.name();
     }
 }
