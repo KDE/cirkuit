@@ -15,14 +15,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
+#include "generatorthread.h"
 
 #include "backend.h"
 #include "generator.h"
 #include "document.h"
 #include "command.h"
-
 #include "cirkuitsettings.h"
-#include "generatorthread.h"
 #include "renderthread.h"
 
 #include <KDebug>

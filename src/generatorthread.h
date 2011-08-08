@@ -16,8 +16,8 @@
 
 */
 
-#ifndef GRAPHICSGENERATOR_H
-#define GRAPHICSGENERATOR_H
+#ifndef GENERATORTHREAD_H
+#define GENERATORTHREAD_H
 
 #include "format.h"
 
@@ -73,4 +73,4 @@ private:
     QString m_previewUrl;
 };
 
-#endif // GRAPHICSGENERATOR_H
+#endif // GENERATORTHREAD_H

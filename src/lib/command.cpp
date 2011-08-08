@@ -24,7 +24,6 @@
 #include <KDebug>
 #include <KProcess>
 #include <KStandardDirs>
-#include <KDebug>
 
 using namespace Cirkuit;
 
