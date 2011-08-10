@@ -39,6 +39,8 @@ public:
 
 using namespace Cirkuit;
 
+static QList<Backend*> backendCache = QList<Backend*>();
+
 Backend::Backend(QObject* parent, const QList<QVariant>& args): QObject(parent), d(new BackendPrivate)
 {
     Q_UNUSED(args);
@@ -113,8 +115,6 @@ KConfigSkeletonItem* Backend::configTemplateUrl() const
     
     return config()->findItem("templateurl");
 }
-
-static QList<Backend*> backendCache = QList<Backend*>();
 
 QStringList Backend::listAvailableBackends()
 {
