@@ -35,8 +35,8 @@ BackendChooseDialog::BackendChooseDialog(const QString& backendName, QWidget* pa
     QWidget* w=new QWidget(this);
     m_ui.setupUi(w);
     m_ui.backendList->setIconSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
-    connect(m_ui.backendList, SIGNAL(currentItemChanged ( QListWidgetItem *,  QListWidgetItem *)), this, SLOT(updateDescription()));
-    connect(m_ui.backendList, SIGNAL(itemDoubleClicked( QListWidgetItem *)), this, SLOT(accept()));
+    connect(m_ui.backendList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(updateDescription()));
+    connect(m_ui.backendList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(accept()));
 
     foreach(Cirkuit::Backend* backend, Cirkuit::Backend::availableBackends()) {
         if (!backend->checkRequirements()) {

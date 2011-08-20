@@ -146,7 +146,7 @@ void MainWindow::setupActions()
     KStandardAction::keyBindings(this, SLOT(configureKeyBindings()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
                                             
-    recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile( const KUrl& )),
+    recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile(KUrl)),
                                                                     actionCollection());
                                                                     
     KAction* exportAction = new KAction(KIcon("document-export"), i18n("Export..."), 0);
@@ -506,7 +506,7 @@ void MainWindow::openHelpUrl(const KUrl& url)
 void MainWindow::checkCircuitMacros()
 {
     cmm = new CircuitMacrosManager;
-    connect(cmm, SIGNAL(newVersionAvailable(const QString&)), this, SLOT(askIfUpgrade(const QString&)));
+    connect(cmm, SIGNAL(newVersionAvailable(QString)), this, SLOT(askIfUpgrade(QString)));
     connect(cmm, SIGNAL(configured()), this, SLOT(circuitMacrosConfigured()));
     if (cmm->checkExistence()) {
         kDebug() << "Circuit macros found!";
