@@ -43,6 +43,11 @@ DocumentTemplate::DocumentTemplate(const KUrl& path, QObject* parent): QObject(p
     readBackend();
 }
 
+DocumentTemplate::~DocumentTemplate()
+{
+    delete d;
+}
+
 KUrl DocumentTemplate::path() const
 {
     return d->path;

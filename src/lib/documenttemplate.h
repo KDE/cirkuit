@@ -44,7 +44,7 @@ public:
      * @param path is the path of the template file
      */
     explicit DocumentTemplate(const KUrl& path, QObject* parent = 0);
-    
+    ~DocumentTemplate(); 
     /**
      * Inserts the code into the template. The point of insertion
      * should be denoted by keyword in the template itself.
