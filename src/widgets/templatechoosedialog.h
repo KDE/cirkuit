@@ -25,9 +25,7 @@
 
 #include <KDialog>
 
-class QListView;
 namespace Cirkuit {
-class TemplateManager;
 }
 
 class TemplateModel : public QAbstractListModel

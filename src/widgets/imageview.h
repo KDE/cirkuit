@@ -26,7 +26,6 @@
 class KActionCollection;
 class RenderThread;
 class QGraphicsPixmapItem;
-class QLabel;
 class QTimer;
 
 class KAction;
