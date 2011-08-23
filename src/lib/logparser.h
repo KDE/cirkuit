@@ -42,7 +42,9 @@ public:
      * Default constructor
      */
     explicit LogParser(QObject* parent = 0);
-    
+
+    ~LogParser();
+
 public slots:
     /**
      * Parse a command (which is already executed)

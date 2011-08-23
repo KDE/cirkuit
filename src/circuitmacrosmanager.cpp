@@ -58,7 +58,7 @@ void CircuitMacrosManager::downloadLatest()
     KUrl dest = KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", true);
 
     KIO::Job* getJob = KIO::file_copy(origin, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
-    connect( getJob, SIGNAL( result( KJob * ) ), this, SLOT( unpackCircuitMacros()) );
+    connect( getJob, SIGNAL(result(KJob*)), this, SLOT(unpackCircuitMacros()) );
 }
 
 void CircuitMacrosManager::unpackCircuitMacros()
@@ -116,7 +116,7 @@ void CircuitMacrosManager::checkOnlineVersion()
     KUrl dest = KStandardDirs::locateLocal("tmp", "cirkuit/README", true);
 
     KIO::Job* getJob = KIO::file_copy(origin, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
-    connect( getJob, SIGNAL( result( KJob * ) ), this, SLOT( readVersion()) );
+    connect( getJob, SIGNAL(result(KJob*)), this, SLOT(readVersion()) );
 }
 
 void CircuitMacrosManager::readVersion()

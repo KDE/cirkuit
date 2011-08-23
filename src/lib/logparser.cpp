@@ -34,6 +34,11 @@ LogParser::LogParser(QObject* parent): QObject(parent), d(new LogParserPrivate)
 {
 }
 
+LogParser::~LogParser()
+{
+    delete d;
+}
+
 bool LogParser::parse(Command* c)
 {
     return parse(c->stdOutput(), c->stdError());

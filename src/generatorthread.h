@@ -29,7 +29,6 @@
 class RenderThread;
 namespace Cirkuit
 {
-class Command;
 class Generator;
 class Document;
 class Backend;

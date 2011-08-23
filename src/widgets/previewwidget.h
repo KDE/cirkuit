@@ -25,7 +25,6 @@
 
 class ImageView;
 class QImage;
-class QTimer;
 
 class PreviewWidget : public QDockWidget
 {

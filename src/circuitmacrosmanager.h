@@ -23,7 +23,6 @@
 
 #include <QObject>
 
-class KJob;
 
 class CircuitMacrosManager : public QObject
 {

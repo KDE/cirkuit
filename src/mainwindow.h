@@ -43,9 +43,6 @@ class PreviewWidget;
 class GeneratorThread;
 class QTimer;
 class KRecentFilesAction;
-class KToggleAction;
-class KAction;
-class GraphicsDocument;
 class CircuitMacrosManager;
 
 class MainWindow : public KParts::MainWindow
