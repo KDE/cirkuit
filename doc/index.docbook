@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" 
 "dtd/kdex.dtd" [
-
-  <!ENTITY kappname "&cirkuit;">
-  <!ENTITY package "playground">
-  <!ENTITY % addindex "IGNORE">
-  <!ENTITY % English "INCLUDE"> 
+    <!ENTITY cirkuit "<application>Cirkuit</application>">
+    <!ENTITY kappname "&cirkuit;">
+    <!ENTITY package "playground">
+    <!ENTITY % addindex "IGNORE">
+    <!ENTITY % English "INCLUDE"> 
 ]>
 <book lang="&language;">
 
@@ -29,20 +29,24 @@
 </copyright>
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2011-01-05</date>
+<date>2011-09-12</date>
 <releaseinfo>0.1</releaseinfo>
 
 <abstract>
 <para>
 &cirkuit; is an application to produce high-quality publication-ready 
 graphics. It provides a uniform interface to various graphics description
-languages. At the moment, the supported languages are Circuit Macros, TikZ 
+languages. As of today, the supported languages are Circuit Macros, TikZ, PSTricks
 and Gnuplot.
 </para>
 </abstract>
 
 <keywordset>
 <keyword>KDE</keyword>
+<keyword>graphics</keyword>
+<keyword>TikZ</keyword>
+<keyword>plot</keyword>
+<keyword>publication</keyword>
 </keywordset>
 
 </bookinfo>
@@ -51,9 +55,208 @@ and Gnuplot.
 <title>Introduction</title>
 
 <para>
-&cirkuit; is an application that provides a nice &kde; interface to various
-tools used for the production of publication-ready graphics.
+&cirkuit; is an application that provides a &kde; interface to various tools
+used for the production of publication-ready graphics. The main feature of
+&cirkuit; is to provide a live preview of the code the user enters to produce a
+plot. It is probably worth noting that &cirkuit; is not a point-and-click editor
+(like xfig for example), but instead the user is required to provide code to
+produce an output.
 </para>
 </chapter>
+
+<chapter id="using-kapp">
+<title>Using &cirkuit;</title>
+
+<para>
+Screenshot:
+<screenshot>
+<screeninfo>Here is a screenshot of &cirkuit;, showing a typical
+use-case scenario.</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="screenshot.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase>Screenshot</phrase>
+      </textobject>
+    </mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="kapp-features">
+<title>&cirkuit; features</title>
+<itemizedlist>
+  <listitem><para>Quick preview of the code to speed up the
+production of your graphics.</para></listitem>
+  <listitem><para>Optional automatic generation of the
+preview when the code has changed.</para></listitem>
+  <listitem><para>Zoomable preview to allow fine-tuning in
+specific areas.</para></listitem>
+  <listitem><para>Output is exportable to many popular
+graphics formats (PDF, EPS, SVG, PNG, JPG).</para></listitem>
+  <listitem><para>Full LaTeX support for the labels.</para></listitem>
+  <listitem><para>Powerful text editor (using Kate part),
+which allows line numbering, VI mode, and much more.</para></listitem>
+  <listitem><para>Inspectable log to debug the code
+describing the graphics.</para></listitem>
+  <listitem><para>Editable tempates to customize the build
+process.</para></listitem>
+  <listitem><para>Easy plugin-based structure to allow different backends to be
+added. This means that several description languages can be
+supported, but with a unified interface.</para></listitem>
+  <listitem><para>GetHotNewStuff integration to allow example graphics to be
+downloaded (or uploaded.)</para></listitem>
+  <listitem><para>Syntax highlighting.</para></listitem>
+</itemizedlist>
+</sect1>
+<sect1 id="backends">
+<title>The &cirkuit; backends</title>
+<para>
+  &cirkuit; offers you several choices for the backends you wish to use with
+it, providing a unified interface to produce graphics. In general, each backend
+supports a different graphics description language, allowing the user to employ
+his favourite tools.
+</para>
+<para>
+  Currently the following backends are available:
+  <variablelist>
+    <varlistentry>
+      <term>Circuit Macros:</term>
+      <listitem>
+    <para>
+      Circuit Macros is a set of macros for drawing high-quality line diagrams. 
+      
+      Fundamental electric circuit elements and basic logic gates are included
+with several tools and examples of other types of diagrams. Elements can be
+scaled or drawn in any orientation and are easy to modify. The advantages and
+disadvantages of such a system are similar to those of TeX itself, which is
+macro-based and non-wysiwyg, with ordinary character input.
+    </para>
+    <para>
+      &cirkuit; automatically downloads the macros from the internet (if a
+working connection is detected) and configures it properly. The macros are
+installed in the user's home directory, typically
+<filename>$HOME/.kde/share/apps/cirkuit</filename>. Please check the <link
+linkend="requirements">requirements</link> before using the backend.
+    </para>
+
+    <para> See the project <ulink
+url="https://ece.uwaterloo.ca/~aplevich/Circuit_macros/">homepage</ulink> for
+more information. </para>
+    </listitem>
+    </varlistentry>
+  </variablelist>
+</para>
+</sect1>
+</chapter>
+
+<!--
+The preview can be automatically generated by &cirkuit;, with a refresh rate
+set by the user in the configuration. Otherwise, the automatic generation of
+    the preview can be disabled. -->
+
+<chapter id="credits">
+
+<title>Credits and License</title>
+
+<para>
+&cirkuit;
+</para>
+<para>
+Program copyright 2011 Matteo Agostinelli
+<email>matteo@agostinelli.me</email>
+</para>
+
+<para>
+Documentation Copyright &copy; 2011 Matteo Agostinelli
+<email>matteo@agostinelli.me</email>
+</para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;               <!-- FDL: do not remove -->
+&underGPL;           <!-- GPL License -->
+</chapter>
+
+<appendix id="installation">
+<title>Installation</title>
+
+<sect1 id="getting-kapp">
+<title>How to obtain &cirkuit;</title>
+
+&install.intro.documentation;
+
+</sect1>
+
+<sect1 id="requirements">
+<title>Requirements</title>
+
+<para>
+In order to successfully use &cirkuit;, you need &kde; 4 and a working LaTeX
+distribution. The individual backends might have additional requirements. Here
+is a (partial) list of the default backends' requirements:
+</para>
+
+<variablelist>
+    <varlistentry>
+        <term>Circuit Macros:</term>
+        <listitem>
+<para>
+To use the Circuit Macros backend, a PIC interpreter must be installed. At the
+moment, two interpreters are supported:
+<itemizedlist>
+    <listitem><para>
+        <ulink url="https://ece.uwaterloo.ca/~aplevich/dpic/">Dpic</ulink>
+(recommended)
+    </para></listitem>
+    <listitem><para>
+        <ulink url="http://gputils.sourceforge.net/">GNU pic</ulink>, also known
+        as <command>gpic</command> or simply <command>pic</command>
+    </para></listitem>
+</itemizedlist>
+Additionally, <command>m4</command> and a working LaTeX distribution are
+required.
+</para>
+        </listitem>
+    </varlistentry>
+</variablelist>
+<!--
+<para>
+All required libraries as well as &cantor; itself can be found
+on <ulink url="ftp://ftp.kapp.org">The &cantor; home page</ulink>.
+</para>
+-->
+
+
+<!-- For a list of updates, you may refer to the application web site
+or the ChangeLog file, or ... -->
+<!--
+<para>
+You can find a list of changes at <ulink
+url="http://apps.kde.org/kapp">http://apps.kde.org/kapp</ulink>.
+</para>
+-->
+</sect1>
+
+<sect1 id="compilation">
+<title>Compilation and Installation</title>
+
+&install.compile.documentation;
+
+</sect1>
+
+<sect1 id="configuration">
+<title>Configuration</title>
+
+<para>
+  Depending on your system, you may need to adjust the paths to the
+  different applications used by &cirkuit;.
+</para>
+
+</sect1>
+
+</appendix>
+
+&documentation.index;
 
 </book>
