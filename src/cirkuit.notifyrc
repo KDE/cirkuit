@@ -2,6 +2,7 @@
 Comment=Cirkuit
 Comment[cs]=Cirkuit
 Comment[de]=Cirkuit
+Comment[es]=Cirkuit
 Comment[et]=Cirkuit
 Comment[fr]=Cirkuit
 Comment[km]=Cirkuit
@@ -16,6 +17,7 @@ Comment[x-test]=xxCirkuitxx
 
 [Event/Preview Generated]
 Name=Preview generated
+Name[es]=Vista previa generada
 Name[et]=Eelvaatlus on loodud
 Name[fr]=Aperçu généré
 Name[km]=​បាន​បង្កើត​​ការ​មើល​ជាមុន
@@ -28,6 +30,7 @@ Name[sv]=Förhandsgranskning skapades
 Name[uk]=Створено зображення попереднього перегляду
 Name[x-test]=xxPreview generatedxx
 Comment=The preview has been generated
+Comment[es]=Se ha generado la vista previa
 Comment[et]=Eelvaatlus on loodud
 Comment[fr]=L'aperçu a été généré
 Comment[km]=​បាន​បង្កើត​​ការ​មើល​ជាមុន
@@ -43,6 +46,7 @@ Action=Popup
 
 [Event/Download progress]
 Name=Download progress
+Name[es]=Progreso de la descarga
 Name[et]=Allalaadimise edenemine
 Name[fr]=Progression du téléchargement
 Name[km]=វឌ្ឍនភាព​ទាញ​យក
@@ -55,6 +59,7 @@ Name[sv]=Nerladdning pågår
 Name[uk]=Поступ звантаження
 Name[x-test]=xxDownload progressxx
 Comment=Download progress
+Comment[es]=Progreso de la descarga
 Comment[et]=Allalaadimise edenemine
 Comment[fr]=Progression du téléchargement
 Comment[km]=វឌ្ឍនភាព​ទាញ​យក
@@ -70,6 +75,7 @@ Action=Popup
 
 [Event/Download finished]
 Name=Download finished
+Name[es]=Descarga terminada
 Name[et]=Allalaadimine lõpetatud
 Name[fr]=Téléchargement terminé
 Name[km]=បាន​បញ្ចប់​ការ​ទាញ​យក
@@ -83,6 +89,7 @@ Name[ug]=چۈشۈرۈش تاماملاندى
 Name[uk]=Звантаження завершено
 Name[x-test]=xxDownload finishedxx
 Comment=Download finished
+Comment[es]=La descarga ha terminado
 Comment[et]=Allalaadimine lõpetatud
 Comment[fr]=Téléchargement terminé
 Comment[km]=បាន​បញ្ចប់​ការ​ទាញ​យក

@@ -2,6 +2,7 @@
 Type=ServiceType
 X-KDE-ServiceType=Cirkuit/Backend
 Comment=A Backend for Cirkuit
+Comment[es]=Un motor para Cirkuit
 Comment[et]=Cirkuiti taustaprogramm
 Comment[fr]=Un moteur pour Cirkuit
 Comment[km]=កម្មវិធី​ខាងក្រោយ​របស់ Cirkuit
