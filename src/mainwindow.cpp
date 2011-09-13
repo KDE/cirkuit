@@ -566,7 +566,7 @@ void MainWindow::initializeBackend()
             return;
         } else {
             // try falling back to the first available backend
-            m_backend = Cirkuit::Backend::listAvailableBackends().at(0);
+            m_backend = Cirkuit::Backend::getBackend(Cirkuit::Backend::listAvailableBackends().at(0));
             if (!m_backend) {
                 // this shouldn't happen
                 return;
