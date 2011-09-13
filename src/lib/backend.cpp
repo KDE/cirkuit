@@ -51,7 +51,6 @@ Backend::~Backend()
     delete d;
 }
 
-
 bool Backend::checkRequirements() const
 {
     return false;

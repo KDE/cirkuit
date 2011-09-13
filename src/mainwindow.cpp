@@ -563,6 +563,14 @@ void MainWindow::initializeBackend()
         if (Cirkuit::Backend::listAvailableBackends().count() < 1) {
             kDebug() << "No backends available...";
             KMessageBox::error(this, i18n("No working backend has been found. Cirkuit is unable to generate any figure."), i18n("No backends found"));
+            return;
+        } else {
+            // try falling back to the first available backend
+            m_backend = Cirkuit::Backend::listAvailableBackends().at(0);
+            if (!m_backend) {
+                // this shouldn't happen
+                return;
+            }
         }
     }
     
