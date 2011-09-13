@@ -145,6 +145,19 @@ url="https://ece.uwaterloo.ca/~aplevich/Circuit_macros/">homepage</ulink> for
 more information. </para>
     </listitem>
     </varlistentry>
+    
+     <varlistentry>
+      <term>TikZ:</term>
+      <listitem>
+          <para>
+              PGF/TikZ is a tandem of languages for producing vector graphics
+from a geometric/algebraic description. PGF is a lower-level language, while
+TikZ is a set of higher-level macros that use PGF. The top-level PGF and TikZ
+commands are invoked as TeX macros, but in contrast with PSTricks, the PGF/TikZ
+graphics themselves are described in a language that resembles MetaPost.
+          </para>
+    </listitem>
+    </varlistentry>
   </variablelist>
 </para>
 </sect1>
