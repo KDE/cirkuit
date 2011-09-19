@@ -1,5 +1,8 @@
 - 0.4.1
-
+Include translations in the release
+Fixed a crash that could occur on startup
+Bugfixes by Laurent Montel (mainly memory leaks)
+Other bugfixes
 
 - 0.4
 New backend system (heavily inspired by Cantor) 
