@@ -53,6 +53,7 @@ Command::Command(const QString& name, const QString& input, const QStringList& a
 
 Command::~Command()
 {
+    delete d->logParser;
     // destroy the d-pointer
     delete d;
 }
