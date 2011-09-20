@@ -137,6 +137,7 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         }              
         latexCmd->setWorkingDirectory(workingDir().path());
         latexCmd->setEnvironment(environment);
+        latexCmd->setLogParser(new LatexLogParser);
         if (!execute(latexCmd)) return false;
     
         // Now that a DVI has been generated, convert it to the
