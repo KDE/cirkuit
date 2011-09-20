@@ -81,24 +81,19 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         QString m4out = m4command->stdOutput();
         
         Command* picCommand;
+        QStringList picArgs;
         if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_ps) {
-            QStringList picargs;
-            picargs << "-p";
-            
-            picCommand = new Command("dpic", m4out, picargs);
+            picArgs << "-p";        
+            picCommand = new Command("dpic", m4out, picArgs);
             picCommand->setLogParser(new DpicLogParser);
         } else if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_pgf) {
-            QStringList picargs;
-            picargs << "-g";
-            
-            picCommand = new Command("dpic", m4out, picargs);
+            picArgs << "-g";       
+            picCommand = new Command("dpic", m4out, picArgs);
             picCommand->setLogParser(new DpicLogParser);
         } else {
-            QStringList picargs;
-            picargs << "-t";
-            
-            picCommand = new Command("pic", m4out, picargs);
-        }       
+            picArgs << "-t";       
+            picCommand = new Command("pic", m4out, picArgs);
+        }
         if (!execute(picCommand)) return false;
             
         QString picout = picCommand->stdOutput();
