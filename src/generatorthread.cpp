@@ -88,7 +88,7 @@ void GeneratorThread::run()
 
 GeneratorThread::~GeneratorThread()
 {
-    
+    delete m_render;
 }
 
 void GeneratorThread::setScaleFactor(double scaleFactor)
