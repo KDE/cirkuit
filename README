@@ -23,9 +23,9 @@ On Debian-based systems (e.g. Ubuntu/Kubuntu) type the following command to inst
 
 sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-pstricks texlive-base-bin texlive-extra-utils preview-latex-style m4 ghostscript pdf2svg
 
-To build Cirkuit you need the KDE4 and Qt4 dev packages. To install them on Debian-based systems, type
+To build Cirkuit you need CMake and the KDE4 and Qt4 dev packages. To install them on Debian-based systems, type
 
-sudo apt-get install kdelibs5-dev libqt4-dev libpoppler-qt4
+sudo apt-get install cmake kdelibs5-dev libqt4-dev libpoppler-qt4
 
 Packages are also available for Arch Linux (in AUR).
 
