@@ -510,7 +510,7 @@ void MainWindow::checkCircuitMacros()
     connect(cmm, SIGNAL(configured()), this, SLOT(circuitMacrosConfigured()));
     if (cmm->checkExistence()) {
         kDebug() << "Circuit macros found!";
-        kDebug() << QString("version %1").arg(cmm->installedVersion()).toStdString().c_str();
+        kDebug() << QString("version %1").arg(cmm->installedVersion());
         cmm->checkOnlineVersion();
     } else {
         kDebug() << "Circuit macros NOT found!!!!";
