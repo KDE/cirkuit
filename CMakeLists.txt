@@ -4,8 +4,12 @@ cmake_minimum_required(VERSION 2.6)
 
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
+include(MacroLibrary)
 
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
+MESSAGE(STATUS "     KDE4 support enabled : ${KDE4_DATA_DIR}")
+add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake_modules)
 
 SET(CIRKUIT_VERSION "0.4.1")
 
