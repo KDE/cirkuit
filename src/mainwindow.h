@@ -43,6 +43,7 @@ class PreviewWidget;
 class GeneratorThread;
 class QTimer;
 class KRecentFilesAction;
+class KMessageWidget;
 class CircuitMacrosManager;
 
 class MainWindow : public KParts::MainWindow
@@ -106,6 +107,7 @@ private:
     QTimer* m_updateTimer;
     QStringList mimeTypes;
     KUrl m_currentFile;
+    KMessageWidget* m_messageWidget;
     
     KRecentFilesAction* recentFilesAction;
     
