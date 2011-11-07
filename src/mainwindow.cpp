@@ -301,7 +301,7 @@ void MainWindow::saveAsFile(const KUrl& url)
     }
     m_doc->saveAs(url);
     recentFilesAction->addUrl(url);
-    m_currentFile = url.fileName();
+    m_currentFile = url;
     updateTitle();
 }
 
