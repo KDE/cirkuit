@@ -611,7 +611,10 @@ void MainWindow::downloadExamples()
 
 void MainWindow::uploadExample()
 {
+    kDebug() << "Uploading to GHNS: " << m_currentFile;
+    
     if (!m_currentFile.isLocalFile()) {
+        kDebug() << "Trying to save the file first ...";
         KMessageBox::error(this, i18n("Save the current document before uploading it"));
         return;
     }
