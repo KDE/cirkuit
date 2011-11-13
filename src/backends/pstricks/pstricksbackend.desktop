@@ -2,6 +2,7 @@
 Type=Service
 Icon=pstricks
 Name=PSTricks
+Name[de]=PSTricks
 Name[es]=PSTricks
 Name[et]=PSTricks
 Name[fr]=PSTricks
