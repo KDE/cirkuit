@@ -59,7 +59,6 @@ private slots:
     void saveAsFile(const KUrl& url);
     void saveAs();
     void save();
-    void substituteSaveAsAction();
     void exportFile();
 
     void documentModified(KTextEditor::Document*);

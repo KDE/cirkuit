@@ -106,7 +106,6 @@ MainWindow::MainWindow(QWidget *)
 
     setXMLFile("cirkuitui.rc");
     createShellGUI(true);
-    substituteSaveAsAction();
 
     guiFactory()->addClient(m_view);
     m_view->setContextMenu(qobject_cast<KMenu *> (factory()->container("ktexteditor_popup", this)));
@@ -135,11 +134,17 @@ MainWindow::MainWindow(QWidget *)
 
 void MainWindow::setupActions()
 {
-	KStandardAction::openNew(this, SLOT(newFile()), actionCollection());
+    // re-connect save and save as
+    QAction* action = m_view->actionCollection()->action(KStandardAction::name(KStandardAction::Save));
+    action->disconnect(SIGNAL(triggered(bool)));
+    connect(action, SIGNAL(triggered()), this, SLOT(save()));
+    action = m_view->actionCollection()->action(KStandardAction::name(KStandardAction::SaveAs));
+    action->disconnect(SIGNAL(triggered(bool)));
+    connect(action, SIGNAL(triggered()), this, SLOT(saveAs()));
+    
+    KStandardAction::openNew(this, SLOT(newFile()), actionCollection());
     KStandardAction::quit(this, SLOT(close()), actionCollection());
     KStandardAction::open(this, SLOT(openFile()), actionCollection());
-    KStandardAction::save(this, SLOT(save()), actionCollection());
-    KStandardAction::saveAs(this, SLOT(saveAs()), actionCollection());
     KStandardAction::close(this, SLOT(newDocument()), actionCollection());
     KStandardAction::clear(this, SLOT(clear()), actionCollection());
     KStandardAction::preferences(this, SLOT(configure()), actionCollection());    
@@ -206,15 +211,6 @@ void MainWindow::setupActions()
     m_imageView->setupActions(actionCollection());
     m_imageView->zoomFitPageAction()->setChecked(CirkuitSettings::zoomToFit());
     m_imageView->updateZoomToFit();
-}
-
-void MainWindow::substituteSaveAsAction()
-{
-    foreach (QAction* action, m_view->actionCollection()->actions()) {
-        if (action->text().contains("Save")) {
-            m_view->actionCollection()->removeAction(action);
-        }
-    }
 }
 
 void MainWindow::clear()
