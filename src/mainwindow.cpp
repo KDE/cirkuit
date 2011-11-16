@@ -48,6 +48,7 @@
 #include <KFileDialog>
 #include <KShortcutsDialog>
 #include <KMessageBox>
+#include <KMessageWidget>
 #include <KIO/NetAccess>
 #include <KSaveFile>
 #include <KMenu>
@@ -58,7 +59,6 @@
 #include <QTimer>
 #include <KXMLGUIFactory>
 #include <KConfigDialog>
-#include <KStatusBar>
 #include <KRun>
 #include <KProcess>
 #include <kmimetypetrader.h>
@@ -90,6 +90,7 @@ MainWindow::MainWindow(QWidget *)
     m_previewWidget->setObjectName("preview-dock");
     m_imageView = m_previewWidget->view();
     addDockWidget(Qt::TopDockWidgetArea, m_previewWidget);
+    m_messageWidget = 0;
     
     m_logViewWidget = new LogViewWidget(i18n("Log"), this);
     m_logViewWidget->setObjectName("log-dock");
@@ -114,7 +115,6 @@ MainWindow::MainWindow(QWidget *)
     
     m_updateTimer = 0;
     updateConfiguration();
-    statusBar()->showMessage(i18n("Ready"), 3000);
     
     connect(m_generator, SIGNAL(success()), this, SLOT(builtNotification()));
     connect(m_generator, SIGNAL(fail()), this, SLOT(failedNotification()));
@@ -322,7 +322,6 @@ void MainWindow::exportFile()
     if (!path.isEmpty()) {
         QFileInfo fileinfo(path);
         Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog->currentFilterMimeType());
-        statusBar()->showMessage("Exporting image...");
         m_generator->generate(Cirkuit::Format::Source, format, m_backend, m_doc, true);
         m_tempSavePath = path;
         QFile oldFile(path);
@@ -355,7 +354,13 @@ void MainWindow::buildPreview()
     if (m_updateTimer) {
         m_updateTimer->stop();
     }
-    statusBar()->showMessage("Building preview...");
+    
+    delete m_messageWidget;
+    m_messageWidget = new KMessageWidget(m_imageView);
+    m_messageWidget->setMessageType(KMessageWidget::Information);
+    m_messageWidget->setText("Generating preview");
+    m_messageWidget->animatedShow();
+    
     m_logViewWidget->clear();
     m_logViewWidget->hide();
     
@@ -385,7 +390,7 @@ void MainWindow::openPreviewFile()
 
 void MainWindow::builtNotification()
 {
-    statusBar()->showMessage(i18n("Preview built"), 3000);
+    m_messageWidget->animatedHide();
 }
 
 void MainWindow::newDocument(const QString& backendName)
@@ -512,7 +517,11 @@ void MainWindow::checkCircuitMacros()
         kDebug() << "Circuit macros NOT found!!!!";
         if (KMessageBox::questionYesNo(this, i18n("Circuit Macros could not be found on your system. The application will not work if the macros are not installed. Do you want to proceed with the installation?"), i18n("Installation needed")) == KMessageBox::Yes) {
             cmm->downloadLatest();
-            statusBar()->showMessage(i18n("Download Circuit Macros. Please wait..."));
+            delete m_messageWidget;
+            m_messageWidget = new KMessageWidget(m_imageView);
+            m_messageWidget->setMessageType(KMessageWidget::Information);
+            m_messageWidget->setText(i18n("Downloading Circuit Macros. Please wait..."));
+            m_messageWidget->animatedShow();
         }
     }
 }
@@ -526,13 +535,19 @@ void MainWindow::askIfUpgrade(const QString& version)
 
 void MainWindow::circuitMacrosConfigured()
 {
-    statusBar()->showMessage(i18n("Ready"), 5000);
+    if (m_messageWidget) {
+        m_messageWidget->animatedHide();
+    }
 }
 
 void MainWindow::failedNotification()
 {
     m_imageView->setImage(QImage());
-    statusBar()->showMessage(i18n("Unable to generate a preview for the current input"), 5000);
+    delete m_messageWidget;
+    m_messageWidget = new KMessageWidget(m_imageView);
+    m_messageWidget->setMessageType(KMessageWidget::Error);
+    m_messageWidget->setText(i18n("Unable to generate a preview for the current input"));
+    m_messageWidget->animatedShow();
 }
 
 void MainWindow::showPreview(const QImage& image)
@@ -546,7 +561,7 @@ void MainWindow::saveFileToDisk(const QString& path)
 {
     kDebug() << "Copying "  << path << " to " << m_tempSavePath;
     QFile::copy(path, m_tempSavePath);
-    statusBar()->showMessage("Export successfully completed!", 3000);
+    kDebug() << "File successfully exported";
 }
 
 void MainWindow::initializeBackend()
