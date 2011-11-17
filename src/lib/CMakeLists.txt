@@ -1,4 +1,4 @@
-set(GENERIC_LIB_VERSION "0.0.1")
+set(GENERIC_LIB_VERSION "1.0.0")
 set(GENERIC_LIB_SOVERSION "1")
 
 set ( cirkuit_LIB_SRCS 
