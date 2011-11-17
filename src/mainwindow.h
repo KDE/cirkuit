@@ -96,6 +96,7 @@ private slots:
     void setDefaultBackend(const QString& backend);
     
     void backendChanged(const QString& backendName);
+    void showMessage(KMessageWidget*);
 
 private:
     void setupActions();

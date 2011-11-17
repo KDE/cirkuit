@@ -4,6 +4,7 @@ set (cirkuitwidgets_SRCS templatechoosedialog.cpp
     previewwidget.cpp
     logviewwidget.cpp
     backendchoosedialog.cpp
+    widgetfloater.cpp
 )
 
 kde4_add_ui_files( cirkuitwidgets_SRCS backendchooser.ui templatechooser.ui)

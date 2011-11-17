@@ -36,6 +36,7 @@
 #include "widgets/logviewwidget.h"
 #include "widgets/backendchoosedialog.h"
 #include "widgets/templatechoosedialog.h"
+#include "widgets/widgetfloater.h"
 
 #include <KApplication>
 #include <KAction>
@@ -129,7 +130,7 @@ MainWindow::MainWindow(QWidget *)
     
     checkCircuitMacros();
     initializeBackend();
-    newDocument();
+    newDocument(); 
 }
 
 void MainWindow::setupActions()
@@ -356,10 +357,10 @@ void MainWindow::buildPreview()
     }
     
     delete m_messageWidget;
-    m_messageWidget = new KMessageWidget(m_imageView);
+    m_messageWidget = new KMessageWidget;
     m_messageWidget->setMessageType(KMessageWidget::Information);
     m_messageWidget->setText("Generating preview");
-    m_messageWidget->animatedShow();
+    showMessage(m_messageWidget);
     
     m_logViewWidget->clear();
     m_logViewWidget->hide();
@@ -521,7 +522,7 @@ void MainWindow::checkCircuitMacros()
             m_messageWidget = new KMessageWidget(m_imageView);
             m_messageWidget->setMessageType(KMessageWidget::Information);
             m_messageWidget->setText(i18n("Downloading Circuit Macros. Please wait..."));
-            m_messageWidget->animatedShow();
+            showMessage(m_messageWidget);
         }
     }
 }
@@ -547,7 +548,7 @@ void MainWindow::failedNotification()
     m_messageWidget = new KMessageWidget(m_imageView);
     m_messageWidget->setMessageType(KMessageWidget::Error);
     m_messageWidget->setText(i18n("Unable to generate a preview for the current input"));
-    m_messageWidget->animatedShow();
+    showMessage(m_messageWidget);
 }
 
 void MainWindow::showPreview(const QImage& image)
@@ -673,4 +674,13 @@ void MainWindow::openTemplateManager()
         m_backend->config()->writeConfig();
     }
 }
+
+void MainWindow::showMessage(KMessageWidget* messageWidget)
+{
+    WidgetFloater* floater = new WidgetFloater(m_imageView);
+    floater->setChildWidget(messageWidget);
+    floater->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    messageWidget->animatedShow();
+}
+
 
