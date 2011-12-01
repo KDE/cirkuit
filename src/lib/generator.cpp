@@ -85,7 +85,7 @@ bool Cirkuit::Generator::formatExists(const Cirkuit::Format& format) const
     
     KUrl formatUrl = workingDir();
     formatUrl.addPath(d->tempFileInfo->baseName() + format.extension());
-    return KIO::NetAccess::exists(formatUrl, true, 0);
+    return KIO::NetAccess::exists(formatUrl, KIO::NetAccess::SourceSide, 0);
 }
 
 QString Cirkuit::Generator::formatPath(const Cirkuit::Format& format) const
