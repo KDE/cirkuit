@@ -180,7 +180,7 @@ void TemplateChooseDialog::copyTempFile(const QString& fileName)
 {
     KUrl dest = KStandardDirs::locateLocal("appdata", QString("templates/%1").arg(m_selected.fileName()));
     
-    if (KIO::NetAccess::exists(dest, false, this)) {
+    if (KIO::NetAccess::exists(dest, KIO::NetAccess::DestinationSide, this)) {
         KIO::NetAccess::del(dest, this);
     }
     KIO::NetAccess::file_copy(fileName, dest, this);
