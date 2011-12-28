@@ -36,7 +36,6 @@
 #include "widgets/logviewwidget.h"
 #include "widgets/backendchoosedialog.h"
 #include "widgets/templatechoosedialog.h"
-#include "widgets/widgetfloater.h"
 
 #include <KApplication>
 #include <KAction>
@@ -49,7 +48,6 @@
 #include <KFileDialog>
 #include <KShortcutsDialog>
 #include <KMessageBox>
-#include <KMessageWidget>
 #include <KIO/NetAccess>
 #include <KSaveFile>
 #include <KMenu>
@@ -64,6 +62,14 @@
 #include <KProcess>
 #include <kmimetypetrader.h>
 #include <KConfigSkeletonItem>
+
+#ifdef ENABLE_KMESSAGEWIDGET
+  #include "widgets/widgetfloater.h"
+  #include <KMessageWidget>
+#else
+  #include <KStatusBar>
+#endif
+
 
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/uploaddialog.h>
@@ -91,7 +97,11 @@ MainWindow::MainWindow(QWidget *)
     m_previewWidget->setObjectName("preview-dock");
     m_imageView = m_previewWidget->view();
     addDockWidget(Qt::TopDockWidgetArea, m_previewWidget);
+#ifdef ENABLE_KMESSAGEWIDGET
     m_messageWidget = 0;
+#else
+    statusBar()->showMessage(i18n("Ready"), 3000);
+#endif
     
     m_logViewWidget = new LogViewWidget(i18n("Log"), this);
     m_logViewWidget->setObjectName("log-dock");
@@ -356,12 +366,16 @@ void MainWindow::buildPreview()
         m_updateTimer->stop();
     }
     
+    QString msg = i18n("Generating preview");
+#ifdef ENABLE_KMESSAGEWIDGET
     delete m_messageWidget;
     m_messageWidget = new KMessageWidget;
     m_messageWidget->setMessageType(KMessageWidget::Information);
-    m_messageWidget->setText("Generating preview");
+    m_messageWidget->setText(msg);
     showMessage(m_messageWidget);
-    
+#else
+    statusBar()->showMessage(msg);
+#endif
     m_logViewWidget->clear();
     m_logViewWidget->hide();
     
@@ -391,7 +405,11 @@ void MainWindow::openPreviewFile()
 
 void MainWindow::builtNotification()
 {
+#ifdef ENABLE_KMESSAGEWIDGET
     m_messageWidget->animatedHide();
+#else
+    statusBar()->showMessage(i18n("Preview built"), 3000);;
+#endif
 }
 
 void MainWindow::newDocument(const QString& backendName)
@@ -518,11 +536,13 @@ void MainWindow::checkCircuitMacros()
         kDebug() << "Circuit macros NOT found!!!!";
         if (KMessageBox::questionYesNo(this, i18n("Circuit Macros could not be found on your system. The application will not work if the macros are not installed. Do you want to proceed with the installation?"), i18n("Installation needed")) == KMessageBox::Yes) {
             cmm->downloadLatest();
+#ifdef ENABLE_KMESSAGEWIDGET
             delete m_messageWidget;
             m_messageWidget = new KMessageWidget(m_imageView);
             m_messageWidget->setMessageType(KMessageWidget::Information);
             m_messageWidget->setText(i18n("Downloading Circuit Macros. Please wait..."));
             showMessage(m_messageWidget);
+#endif
         }
     }
 }
@@ -536,19 +556,26 @@ void MainWindow::askIfUpgrade(const QString& version)
 
 void MainWindow::circuitMacrosConfigured()
 {
+#ifdef ENABLE_KMESSAGEWIDGET
     if (m_messageWidget) {
         m_messageWidget->animatedHide();
     }
+#endif
 }
 
 void MainWindow::failedNotification()
 {
     m_imageView->setImage(QImage());
+    QString msg = i18n("Unable to generate a preview for the current input");
+#ifdef ENABLE_KMESSAGEWIDGET
     delete m_messageWidget;
     m_messageWidget = new KMessageWidget(m_imageView);
     m_messageWidget->setMessageType(KMessageWidget::Error);
-    m_messageWidget->setText(i18n("Unable to generate a preview for the current input"));
+    m_messageWidget->setText(msg);
     showMessage(m_messageWidget);
+#else
+    statusBar()->showMessage(msg, 5000);
+#endif
 }
 
 void MainWindow::showPreview(const QImage& image)
@@ -675,6 +702,7 @@ void MainWindow::openTemplateManager()
     }
 }
 
+#ifdef ENABLE_KMESSAGEWIDGET
 void MainWindow::showMessage(KMessageWidget* messageWidget)
 {
     WidgetFloater* floater = new WidgetFloater(m_imageView);
@@ -682,5 +710,5 @@ void MainWindow::showMessage(KMessageWidget* messageWidget)
     floater->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     messageWidget->animatedShow();
 }
-
+#endif
 

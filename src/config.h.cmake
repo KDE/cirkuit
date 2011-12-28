@@ -1,0 +1,8 @@
+#cmakedefine ENABLE_KMESSAGEWIDGET
+
+#ifdef ENABLE_KMESSAGEWIDGET
+    #define ENABLE_KMESSAGEWIDGET
+#else
+    #undef ENABLE_KMESSAGEWIDGET
+#endif
+

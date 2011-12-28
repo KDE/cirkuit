@@ -43,7 +43,9 @@ class PreviewWidget;
 class GeneratorThread;
 class QTimer;
 class KRecentFilesAction;
+#ifdef ENABLE_KMESSAGEWIDGET
 class KMessageWidget;
+#endif
 class CircuitMacrosManager;
 
 class MainWindow : public KParts::MainWindow
@@ -96,7 +98,9 @@ private slots:
     void setDefaultBackend(const QString& backend);
     
     void backendChanged(const QString& backendName);
-    void showMessage(KMessageWidget*);
+    #ifdef ENABLE_KMESSAGEWIDGET
+       void showMessage(KMessageWidget*);
+    #endif
 
 private:
     void setupActions();
@@ -107,8 +111,9 @@ private:
     QTimer* m_updateTimer;
     QStringList mimeTypes;
     KUrl m_currentFile;
+#ifdef ENABLE_KMESSAGEWIDGET
     KMessageWidget* m_messageWidget;
-    
+#endif
     KRecentFilesAction* recentFilesAction;
     
     CircuitMacrosManager* cmm;
