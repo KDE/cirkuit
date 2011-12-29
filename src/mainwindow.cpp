@@ -459,7 +459,7 @@ void MainWindow::reset()
 {
     m_currentFile = "";
     m_doc->clear();
-	m_imageView->clear();
+    m_imageView->clear();
     m_firstRun = true;
     updateTitle();	
 }
