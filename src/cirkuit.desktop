@@ -28,6 +28,7 @@ GenericName[sv]=Kretsritare
 GenericName[uk]=Малювання ланцюгів
 GenericName[x-test]=xxCircuit drawerxx
 Comment=A program to draw circuits and diagrams
+Comment[de]=Programm für Schaltkreise und Diagramme
 Comment[es]=Un programa para dibujar circuitos y diagramas
 Comment[et]=Programm vooluringide ja skeemide joonistamiseks
 Comment[fr]=Un programme pour tracer des circuits et des diagrammes

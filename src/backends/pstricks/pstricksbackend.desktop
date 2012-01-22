@@ -22,6 +22,7 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Website=http://tug.org/PSTricks/main.cgi
 Comment=Backend for PSTricks
+Comment[de]=Modul für PSTricks
 Comment[es]=Motor para PSTricks
 Comment[et]=PSTricksi taustaprogramm
 Comment[fr]=Moteur pour PSTricks

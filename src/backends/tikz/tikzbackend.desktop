@@ -22,6 +22,7 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Website=http://www.texample.net/tikz
 Comment=Backend for TikZ
+Comment[de]=Modul für TikZ
 Comment[es]=Motor para TikZ
 Comment[et]=TikZi taustaprogramm
 Comment[fr]=Moteur pour TikZ

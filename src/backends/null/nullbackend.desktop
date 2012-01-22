@@ -2,6 +2,7 @@
 Type=Service
 Icon=nullbackend
 Name=Nullbackend
+Name[de]=Null-Modul
 Name[es]=Nullbackend
 Name[et]=Nullbackend
 Name[fr]=Nullbackend
