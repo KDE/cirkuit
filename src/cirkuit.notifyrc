@@ -17,6 +17,7 @@ Comment[x-test]=xxCirkuitxx
 
 [Event/Preview Generated]
 Name=Preview generated
+Name[de]=Vorschau generiert
 Name[es]=Vista previa generada
 Name[et]=Eelvaatlus on loodud
 Name[fr]=Aperçu généré
@@ -30,6 +31,7 @@ Name[sv]=Förhandsgranskning skapades
 Name[uk]=Створено зображення попереднього перегляду
 Name[x-test]=xxPreview generatedxx
 Comment=The preview has been generated
+Comment[de]=Die Vorschau wurde generiert
 Comment[es]=Se ha generado la vista previa
 Comment[et]=Eelvaatlus on loodud
 Comment[fr]=L'aperçu a été généré

@@ -21,6 +21,7 @@ X-KDE-PluginInfo-Name=nullbackend
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 Comment=Backend for Cirkuit for testing purposes
+Comment[de]=Modul für Cirkuit zum Testen
 Comment[es]=Motor para Cirkuit con propósito de pruebas
 Comment[et]=Cirkuiti taustaprogramm testimiseks
 Comment[fr]=Moteur pour Cirkuit à des fins de tests
