@@ -99,7 +99,7 @@ graphics formats (PDF, EPS, SVG, PNG, JPG).</para></listitem>
 which allows line numbering, VI mode, and much more.</para></listitem>
   <listitem><para>Inspectable log to debug the code
 describing the graphics.</para></listitem>
-  <listitem><para>Editable tempates to customize the build
+  <listitem><para>Editable templates to customize the build
 process.</para></listitem>
   <listitem><para>Easy plugin-based structure to allow different backends to be
 added. This means that several description languages can be
