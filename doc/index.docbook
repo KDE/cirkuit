@@ -217,6 +217,7 @@ is a (partial) list of the default backends' requirements:
 <para>
 To use the Circuit Macros backend, a PIC interpreter must be installed. At the
 moment, two interpreters are supported:
+</para>
 <itemizedlist>
     <listitem><para>
         <ulink url="https://ece.uwaterloo.ca/~aplevich/dpic/">Dpic</ulink>
@@ -227,6 +228,7 @@ moment, two interpreters are supported:
         as <command>gpic</command> or simply <command>pic</command>
     </para></listitem>
 </itemizedlist>
+<para>
 Additionally, <command>m4</command> and a working LaTeX distribution are
 required.
 </para>
