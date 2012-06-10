@@ -80,7 +80,7 @@ Action=Popup
 
 [Event/Download finished]
 Name=Download finished
-Name[de]=Herunterladen abgeschlossen
+Name[de]=Download abgeschlossen
 Name[es]=Descarga terminada
 Name[et]=Allalaadimine lõpetatud
 Name[fr]=Téléchargement terminé
