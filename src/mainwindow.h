@@ -35,8 +35,8 @@ namespace KTextEditor
 
 namespace Cirkuit
 {
-    class Document;
     class Backend;
+    class EditorDocument;
 }
 
 class PreviewWidget;
@@ -106,7 +106,7 @@ private:
     void setupActions();
 
     KTextEditor::View *m_view;
-    Cirkuit::Document *m_doc;
+    Cirkuit::EditorDocument *m_doc;
     Cirkuit::Backend *m_backend;
     QTimer* m_updateTimer;
     QStringList mimeTypes;

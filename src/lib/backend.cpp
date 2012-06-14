@@ -196,8 +196,12 @@ QStringList Backend::identifyingWords() const
     return words;
 }
 
-
 float Backend::identifyIndex(Cirkuit::Document* doc) const
+{
+    return identifyIndex(doc->text());
+}
+
+float Backend::identifyIndex(const QString& text) const
 {
     if (identifyingWords().count() < 1) {
         return 0.0;
@@ -207,7 +211,7 @@ float Backend::identifyIndex(Cirkuit::Document* doc) const
     int hits = 0;
     
     foreach (const QString& word, identifyingWords()) {
-        if (doc->text().contains(word, Qt::CaseInsensitive)) ++hits;
+        if (text.contains(word, Qt::CaseInsensitive)) ++hits;
         ++total;
     }
     
@@ -216,10 +220,15 @@ float Backend::identifyIndex(Cirkuit::Document* doc) const
 
 Cirkuit::Backend* Cirkuit::Backend::autoChooseBackend(Document* doc)
 {
+    return autoChooseBackend(doc->text());
+}
+
+Cirkuit::Backend* Backend::autoChooseBackend(const QString& content)
+{
     Backend* bb = getBackend("null");
     float best = 0.0;
     foreach (Backend* b, availableBackends()) {
-        float index = b->identifyIndex(doc);
+        float index = b->identifyIndex(content);
         kDebug() << "Identify index for backend " << b->name() << " = " << index;
         if (index > best) {
             bb = b;
@@ -230,3 +239,4 @@ Cirkuit::Backend* Cirkuit::Backend::autoChooseBackend(Document* doc)
     kDebug() << "And the winner is ... " << bb->name();
     return bb;
 }
+

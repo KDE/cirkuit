@@ -89,7 +89,7 @@ MainWindow::MainWindow(QWidget *)
         kapp->exit(1);
     }
 
-    m_doc = (Cirkuit::Document*) (editor->createDocument(0));
+    m_doc = (Cirkuit::EditorDocument*) (editor->createDocument(0));
     m_doc->initialize();
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
    
@@ -265,7 +265,7 @@ void MainWindow::loadFile(const KUrl& url)
     m_view->document()->openUrl(url);
     m_imageView->clear();
     m_firstRun = true;
-    m_backend = Cirkuit::Backend::autoChooseBackend(m_doc);
+    m_backend = Cirkuit::Backend::autoChooseBackend(m_doc->document());
     buildPreview();
     updateTitle();
 }
@@ -333,7 +333,7 @@ void MainWindow::exportFile()
     if (!path.isEmpty()) {
         QFileInfo fileinfo(path);
         Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog->currentFilterMimeType());
-        m_generator->generate(Cirkuit::Format::Source, format, m_backend, m_doc, true);
+        m_generator->generate(Cirkuit::Format::Source, format, m_backend, m_doc->document(), true);
         m_tempSavePath = path;
         QFile oldFile(path);
         oldFile.remove();
@@ -379,7 +379,7 @@ void MainWindow::buildPreview()
     m_logViewWidget->clear();
     m_logViewWidget->hide();
     
-    m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc, false, m_imageView->scaleFactor());
+    m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc->document(), false, m_imageView->scaleFactor());
     
     kDebug() << "Preview generation in progress...";
 }

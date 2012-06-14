@@ -33,37 +33,61 @@ public:
     DocumentSettings* settings;
 };
 
-Cirkuit::Document::Document(QObject* parent): KTextEditor::Document(parent)
+Cirkuit::EditorDocument::EditorDocument(QObject* parent): KTextEditor::Document(parent)
 {
 }
 
-Document::~Document()
+EditorDocument::~EditorDocument()
 {
     delete d;
 }
 
-QString Document::directory() const
+QString EditorDocument::directory() const
 {
     return url().directory();
 }
 
-int Document::initialLineNumber() const
+int EditorDocument::initialLineNumber() const
 {
     return d->settings->initialLineNumber;
 }
 
-QString Document::initialText() const
+QString EditorDocument::initialText() const
 {
     return d->settings->initialText;
 }
 
-void Document::initialize()
+void EditorDocument::initialize()
 {
     d = new DocumentPrivate;
 }
 
-void Document::applySettings(DocumentSettings* settings)
+void EditorDocument::applySettings(DocumentSettings* settings)
 {
     d->settings = settings;
 }
 
+Cirkuit::Document* EditorDocument::document() const
+{
+    return new Cirkuit::Document(text(), directory());
+}
+
+Document::Document(const QString& text, const QString& directory): m_text(text), m_directory(directory), QObject()
+{
+    
+}
+
+Document::Document(EditorDocument* doc): m_text(doc->text()), m_directory(doc->directory()), QObject()
+{
+
+}
+
+QString Document::text() const
+{
+    return m_text;
+}
+
+QString Document::directory() const
+{
+    return m_directory;
+}

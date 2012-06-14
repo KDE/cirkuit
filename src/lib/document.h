@@ -28,6 +28,7 @@
 namespace Cirkuit
 {
 class DocumentPrivate;
+class CIRKUIT_EXPORT Document;
 
 /** 
  * A class containing the initial settings of a document. This 
@@ -62,14 +63,14 @@ public:
  *
  * @author Matteo Agostinelli
  */
-class CIRKUIT_EXPORT Document : public KTextEditor::Document
+class CIRKUIT_EXPORT EditorDocument : public KTextEditor::Document
 {
     Q_OBJECT
 public:
     /** 
      * Destructor
      */
-    virtual ~Document();
+    virtual ~EditorDocument();
     
     /**
      * The initial text of the document. It is set by the 
@@ -79,15 +80,32 @@ public:
     int initialLineNumber() const;
     QString directory() const;
     
+    Cirkuit::Document* document() const;
+    
 public slots:
     void applySettings(DocumentSettings* settings);
     
     void initialize();
     
 protected:
-    explicit Document(QObject* parent = 0);
+    explicit EditorDocument(QObject* parent = 0);
     
     DocumentPrivate* d;
+};
+
+class CIRKUIT_EXPORT Document : public QObject
+{
+    Q_OBJECT
+    
+public:
+    Document(const QString& text, const QString& directory);
+    Document(Cirkuit::EditorDocument* doc);
+    
+    QString directory() const;
+    QString text() const;
+    
+protected:
+    QString m_text, m_directory;
 };
 
 }

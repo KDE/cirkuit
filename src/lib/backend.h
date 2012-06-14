@@ -66,6 +66,7 @@ protected:
      * 1 is the maximum
      */
     virtual float identifyIndex(Cirkuit::Document* doc) const;
+    virtual float identifyIndex(const QString& text) const;
     /**
      * A list of keywords that can be used to identify the backend (see code from existing backends).
      * This function should be re-implemented by each backend to define its own list.
@@ -182,6 +183,7 @@ public:
      * @return the best backend for the given document
      */
     static Backend* autoChooseBackend(Cirkuit::Document* doc);
+    static Backend* autoChooseBackend(const QString& content);
     
     /** 
      * Overloaded operator to check if the id or the name of the backend
