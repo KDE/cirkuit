@@ -62,6 +62,8 @@ LatexLogParser::LatexLogParser(QObject* parent): LogParser(parent)
 
 bool LatexLogParser::parse(const QString& stdout, const QString& stderr)
 {
+    Q_UNUSED(stderr);
+    
     kDebug() << "Parsing LaTeX log";
     QList<QRegExp> keywordPatterns;
     keywordPatterns << QRegExp("(\\S*):(\\d+): (.*$)")
