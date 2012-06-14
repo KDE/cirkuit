@@ -21,9 +21,15 @@
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
+#include <KDebug>
+
+#include <QString>
+
+#include <iostream>
 
 #include "cirkuitconfig.h"
 #include "mainwindow.h"
+#include "batchrun.h"
 
 int main (int argc, char *argv[])
 {
@@ -34,17 +40,30 @@ int main (int argc, char *argv[])
 
     KCmdLineOptions options;
     options.add("+[file]", ki18n("Document to open"));
+    options.add("batch", ki18n("Batch mode"));
     KCmdLineArgs::addCmdLineOptions( options );
 
     KApplication app;
-    MainWindow* window = new MainWindow();
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-    if (args->count()) {
+    
+    if (args->isSet("batch")) {
+      kDebug() << "Batch mode";
+      
+      if (args->count() < 1) {
+        std::cerr << qPrintable(ki18n("You must specify the input file").toString()) << std::endl;
+        return 1;
+      }
+      
+      BatchRun* run = new BatchRun(args->url(0).url());
+      run->go();
+    } else {
+      MainWindow* window = new MainWindow();
+      if (args->count()) {
         window->loadFile(args->url(0).url());
+      }
+      window->show();
     }
-
-    window->show();
 
     return app.exec();
 }

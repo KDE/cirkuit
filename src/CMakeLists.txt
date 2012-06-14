@@ -22,6 +22,7 @@ add_subdirectory( widgets )
 set(cirkuit_SRCS 
 	main.cpp
 	mainwindow.cpp
+	batchrun.cpp
 	circuitmacrosmanager.cpp
 	generatorthread.cpp
 	renderthread.cpp
