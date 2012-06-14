@@ -11,7 +11,7 @@ add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake_modules)
 
-SET(CIRKUIT_VERSION "0.4.3")
+SET(CIRKUIT_VERSION "0.5")
 
 # configure a header file to pass some of the CMake settings
 # to the source code
