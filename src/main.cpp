@@ -40,7 +40,9 @@ int main (int argc, char *argv[])
 
     KCmdLineOptions options;
     options.add("+[file]", ki18n("Document to open"));
-    options.add("batch", ki18n("Batch mode"));
+    options.add("b").add("batch", ki18n("Batch mode (no GUI)"));
+    options.add("o <file>", ki18n("Output file"));
+    options.add("f <format>", ki18n("Output format"));
     KCmdLineArgs::addCmdLineOptions( options );
 
     KApplication app;
@@ -55,8 +57,7 @@ int main (int argc, char *argv[])
         return 1;
       }
       
-      BatchRun* run = new BatchRun(args);
-      run->go();
+      BatchRun run(args);
       return 0;
     } else {
       MainWindow* window = new MainWindow();

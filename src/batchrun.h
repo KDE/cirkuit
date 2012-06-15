@@ -19,6 +19,7 @@
 ***************************************************************************/
 #include <QString>
 #include <QObject>
+#include "format.h"
 
 class KCmdLineArgs;
 
@@ -40,6 +41,7 @@ public:
     void initializeBackends();
     
 private:
-    QString m_inputFile;
+    QString m_inputFile, m_outputFile, m_inputDir;
     Cirkuit::Backend* m_backend;
+    Cirkuit::Format m_outputFormat;
 };
