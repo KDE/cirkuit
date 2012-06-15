@@ -65,7 +65,6 @@ protected:
      * @return a floating point number ranging from 0 to 1, where 0 stands for lowest probabiliy and 
      * 1 is the maximum
      */
-    virtual float identifyIndex(Cirkuit::Document* doc) const;
     virtual float identifyIndex(const QString& text) const;
     /**
      * A list of keywords that can be used to identify the backend (see code from existing backends).

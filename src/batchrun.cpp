@@ -19,24 +19,62 @@
 ***************************************************************************/
 #include "batchrun.h"
 #include "backend.h"
+#include "document.h"
+#include "cirkuitsettings.h"
+#include <generator.h>
 
 #include <QStringList>
 #include <KDebug>
+#include <KApplication>
+#include <KCmdLineArgs>
 #include <QFile>
+#include <QDir>
 
 using namespace Cirkuit;
 
-BatchRun::BatchRun(const QString& inputFile):
-    m_inputFile(inputFile)
+BatchRun::BatchRun(KCmdLineArgs* args):
+    m_inputFile(args->url(0).toLocalFile())
 {
 
+}
+
+void BatchRun::initializeBackends()
+{
+    kDebug() << Cirkuit::Backend::listAvailableBackends();
+    m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
+    
+    if (!m_backend) {
+        kDebug() << "The default backend has not been found";
+        if (Cirkuit::Backend::listAvailableBackends().count() < 1) {
+            kDebug() << "No backends available...";
+            return;
+        } else {
+            // try falling back to the first available backend
+            m_backend = Cirkuit::Backend::getBackend(Cirkuit::Backend::listAvailableBackends().at(0));
+            if (!m_backend) {
+                // this shouldn't happen
+                return;
+            }
+        }
+    }
 }
 
 void BatchRun::go()
 {
-    kDebug() << Cirkuit::Backend::listAvailableBackends();
+    initializeBackends();
+ 
+    kDebug() << "INPUT: " << m_inputFile;
     QFile input(m_inputFile);
-    Cirkuit::Backend* backend = Backend::autoChooseBackend(input.readAll());
+    if (!input.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    Cirkuit::Document* doc = new Cirkuit::Document(input.readAll(), m_inputFile);
     
+    Cirkuit::Backend* backend = Backend::autoChooseBackend(doc);
     Cirkuit::Generator* gen = backend->generator();
+    gen->generate(doc, Format::Pdf);
+    
+    QFileInfo inputFileInfo(m_inputFile);
+    
+    QFile::copy(gen->formatPath(Format::Pdf), QDir::currentPath() + "/" + inputFileInfo.baseName() + ".pdf");
 }
+

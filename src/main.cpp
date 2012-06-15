@@ -55,8 +55,9 @@ int main (int argc, char *argv[])
         return 1;
       }
       
-      BatchRun* run = new BatchRun(args->url(0).url());
+      BatchRun* run = new BatchRun(args);
       run->go();
+      return 0;
     } else {
       MainWindow* window = new MainWindow();
       if (args->count()) {

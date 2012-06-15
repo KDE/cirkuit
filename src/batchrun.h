@@ -20,6 +20,8 @@
 #include <QString>
 #include <QObject>
 
+class KCmdLineArgs;
+
 namespace Cirkuit
 {
     class Generator;
@@ -32,11 +34,12 @@ class BatchRun: public QObject
     Q_OBJECT
     
 public:
-    BatchRun(const QString& inputFile);
+    BatchRun(KCmdLineArgs* args);
     
     void go();
+    void initializeBackends();
     
 private:
     QString m_inputFile;
-    
+    Cirkuit::Backend* m_backend;
 };

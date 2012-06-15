@@ -265,7 +265,7 @@ void MainWindow::loadFile(const KUrl& url)
     m_view->document()->openUrl(url);
     m_imageView->clear();
     m_firstRun = true;
-    m_backend = Cirkuit::Backend::autoChooseBackend(m_doc->document());
+    m_backend = Cirkuit::Backend::autoChooseBackend(m_doc->document()->text());
     buildPreview();
     updateTitle();
 }

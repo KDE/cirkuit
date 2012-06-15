@@ -172,7 +172,7 @@ Backend* Backend::getBackend(const QString& name)
 {
     QList<Backend*> backends = availableBackends();
     foreach(Backend* b, backends) {
-        if (*b == name) {
+        if (b && b->name() == name) {
             return b;
         }
     }
@@ -194,11 +194,6 @@ QStringList Backend::identifyingWords() const
 {
     QStringList words;
     return words;
-}
-
-float Backend::identifyIndex(Cirkuit::Document* doc) const
-{
-    return identifyIndex(doc->text());
 }
 
 float Backend::identifyIndex(const QString& text) const
@@ -228,6 +223,7 @@ Cirkuit::Backend* Backend::autoChooseBackend(const QString& content)
     Backend* bb = getBackend("null");
     float best = 0.0;
     foreach (Backend* b, availableBackends()) {
+        if (!b) continue;
         float index = b->identifyIndex(content);
         kDebug() << "Identify index for backend " << b->name() << " = " << index;
         if (index > best) {
