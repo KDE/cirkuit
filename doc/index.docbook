@@ -95,11 +95,11 @@ specific areas.</para></listitem>
   <listitem><para>Output is exportable to many popular
 graphics formats (PDF, EPS, SVG, PNG, JPG).</para></listitem>
   <listitem><para>Full LaTeX support for the labels.</para></listitem>
-  <listitem><para>Powerful text editor (using Kate part),
+  <listitem><para>Powerful text editor (using &kate; part),
 which allows line numbering, VI mode, and much more.</para></listitem>
   <listitem><para>Inspectable log to debug the code
 describing the graphics.</para></listitem>
-  <listitem><para>Editable tempates to customize the build
+  <listitem><para>Editable templates to customize the build
 process.</para></listitem>
   <listitem><para>Easy plugin-based structure to allow different backends to be
 added. This means that several description languages can be
@@ -133,7 +133,7 @@ disadvantages of such a system are similar to those of TeX itself, which is
 macro-based and non-wysiwyg, with ordinary character input.
     </para>
     <para>
-      &cirkuit; automatically downloads the macros from the internet (if a
+      &cirkuit; automatically downloads the macros from the Internet (if a
 working connection is detected) and configures it properly. The macros are
 installed in the user's home directory, typically
 <filename>$HOME/.kde/share/apps/cirkuit</filename>. Please check the <link
@@ -217,16 +217,18 @@ is a (partial) list of the default backends' requirements:
 <para>
 To use the Circuit Macros backend, a PIC interpreter must be installed. At the
 moment, two interpreters are supported:
+</para>
 <itemizedlist>
     <listitem><para>
         <ulink url="https://ece.uwaterloo.ca/~aplevich/dpic/">Dpic</ulink>
 (recommended)
     </para></listitem>
     <listitem><para>
-        <ulink url="http://gputils.sourceforge.net/">GNU pic</ulink>, also known
+        <ulink url="http://gputils.sourceforge.net/">&GNU; pic</ulink>, also known
         as <command>gpic</command> or simply <command>pic</command>
     </para></listitem>
 </itemizedlist>
+<para>
 Additionally, <command>m4</command> and a working LaTeX distribution are
 required.
 </para>
