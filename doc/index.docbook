@@ -7,9 +7,9 @@
     <!ENTITY % addindex "IGNORE">
     <!ENTITY % English "INCLUDE"> 
 ]>
-<book lang="&language;">
+<book id="cirkuit" lang="&language;">
 
-<bookinfo>
+<book id="cirkuit"info>
 <title>The &cirkuit; Handbook</title>
 
 <authorgroup>
