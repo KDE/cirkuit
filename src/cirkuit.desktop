@@ -1,6 +1,7 @@
 # KDE Config File
 [Desktop Entry]
 Name=Cirkuit
+Name[bs]=Cirkuit
 Name[cs]=Cirkuit
 Name[de]=Cirkuit
 Name[es]=Cirkuit
@@ -21,6 +22,7 @@ Name[sv]=Cirkuit
 Name[uk]=Cirkuit
 Name[x-test]=xxCirkuitxx
 GenericName=Circuit drawer
+GenericName[bs]=Crtač kola
 GenericName[de]=Circuit-Zeichenprogramm
 GenericName[es]=Dibujar circuitos
 GenericName[et]=Vooluringide joonistaja
@@ -38,6 +40,7 @@ GenericName[sv]=Kretsritare
 GenericName[uk]=Малювання ланцюгів
 GenericName[x-test]=xxCircuit drawerxx
 Comment=A program to draw circuits and diagrams
+Comment[bs]=Program za crtanje kola i dijagrama
 Comment[de]=Programm für Schaltkreise und Diagramme
 Comment[es]=Un programa para dibujar circuitos y diagramas
 Comment[et]=Programm vooluringide ja skeemide joonistamiseks

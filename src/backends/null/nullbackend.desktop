@@ -2,6 +2,7 @@
 Type=Service
 Icon=nullbackend
 Name=Nullbackend
+Name[bs]=Bez pozadine
 Name[de]=Null-Modul
 Name[es]=Nullbackend
 Name[et]=Nullbackend
@@ -24,6 +25,7 @@ X-KDE-PluginInfo-Name=nullbackend
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 Comment=Backend for Cirkuit for testing purposes
+Comment[bs]=Pozadina za Cirkuit za testne namjene
 Comment[de]=Modul für Cirkuit zum Testen
 Comment[es]=Motor para Cirkuit con propósito de pruebas
 Comment[et]=Cirkuiti taustaprogramm testimiseks

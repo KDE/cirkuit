@@ -1,6 +1,7 @@
 [Global]
 IconName=cirkuit
 Comment=Cirkuit
+Comment[bs]=Cirkuit
 Comment[cs]=Cirkuit
 Comment[de]=Cirkuit
 Comment[es]=Cirkuit
@@ -23,6 +24,7 @@ Comment[x-test]=xxCirkuitxx
 
 [Event/Preview Generated]
 Name=Preview generated
+Name[bs]=Pregled generisan
 Name[de]=Vorschau generiert
 Name[es]=Vista previa generada
 Name[et]=Eelvaatlus on loodud
@@ -41,6 +43,7 @@ Name[sv]=Förhandsgranskning skapades
 Name[uk]=Створено зображення попереднього перегляду
 Name[x-test]=xxPreview generatedxx
 Comment=The preview has been generated
+Comment[bs]=Pregled je upravo generisan
 Comment[de]=Die Vorschau wurde generiert
 Comment[es]=Se ha generado la vista previa
 Comment[et]=Eelvaatlus on loodud
@@ -62,6 +65,7 @@ Action=Popup
 
 [Event/Download progress]
 Name=Download progress
+Name[bs]=Napredak preuzimanja
 Name[de]=Fortschritt des Herunterladens
 Name[es]=Progreso de la descarga
 Name[et]=Allalaadimise edenemine
@@ -81,6 +85,7 @@ Name[sv]=Nerladdning pågår
 Name[uk]=Поступ звантаження
 Name[x-test]=xxDownload progressxx
 Comment=Download progress
+Comment[bs]=Napredak preuzimanja
 Comment[de]=Fortschritt des Herunterladens
 Comment[es]=Progreso de la descarga
 Comment[et]=Allalaadimise edenemine
@@ -103,6 +108,7 @@ Action=Popup
 
 [Event/Download finished]
 Name=Download finished
+Name[bs]=Preuzimanje završeno
 Name[de]=Download abgeschlossen
 Name[es]=Descarga terminada
 Name[et]=Allalaadimine lõpetatud
@@ -123,6 +129,7 @@ Name[ug]=چۈشۈرۈش تاماملاندى
 Name[uk]=Звантаження завершено
 Name[x-test]=xxDownload finishedxx
 Comment=Download finished
+Comment[bs]=Preuzimanje završeno
 Comment[de]=Herunterladen abgeschlossen
 Comment[es]=La descarga ha terminado
 Comment[et]=Allalaadimine lõpetatud
