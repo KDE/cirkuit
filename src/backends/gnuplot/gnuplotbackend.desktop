@@ -2,6 +2,7 @@
 Type=Service
 Icon=gnuplotbackend
 Name=Gnuplot
+Name[ast]=Gnuplot
 Name[bs]=Gnuplot
 Name[de]=Gnuplot
 Name[es]=Gnuplot
