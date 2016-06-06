@@ -1,106 +1,200 @@
-# - Try to find the poppler PDF library
-# Once done this will define
+# - Try to find Poppler and specified components: {cpp, Qt4, Qt5}
+# Once done this will define:
 #
-#  POPPLER_FOUND - system has poppler
-#  POPPLER_INCLUDE_DIR - the poppler include directory
-#  POPPLER_LIBRARY - Link this to use poppler
+#  POPPLER_FOUND - system has Poppler and specified components
+#  POPPLER_INCLUDE_DIRS - The include directories for Poppler headers
+#  POPPLER_LIBRARIES - Link these to use Poppler
+#  POPPLER_NEEDS_FONTCONFIG - A boolean indicating if libpoppler depends on libfontconfig
+#  POPPLER_HAS_XPDF - A boolean indicating if libpoppler headers are available
+#  POPPLER_INCLUDE_DIR - the include directory for libpoppler XPDF headers
 #
+# Copyright (c) Eyescale Software GmbH
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+# - Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+# - Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# - Neither the name of Eyescale Software GmbH nor the names of its
+#   contributors may be used to endorse or promote products derived from this
+#   software without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
 
-# Copyright (c) 2006-2009, Pino Toscano, <pino@kde.org>
-#
-# Redistribution and use is allowed according to the terms of the BSD license.
-# For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+if( POPPLER_LIBRARIES )
+   # in cache already
+   set( Poppler_FIND_QUIETLY TRUE )
+endif( POPPLER_LIBRARIES )
 
-if(POPPLER_INCLUDE_DIR AND POPPLER_LIBRARY)
+# Check which components we need to find
+list(FIND Poppler_FIND_COMPONENTS "cpp" FIND_POS)
+if(${FIND_POS} EQUAL -1)
+  set(FIND_CPP FALSE)
+else()
+  set(FIND_CPP TRUE)
+endif()
 
-  # in cache already
-  set(POPPLER_FOUND TRUE)
+list(FIND Poppler_FIND_COMPONENTS "Qt4" FIND_POS)
+if(${FIND_POS} EQUAL -1)
+  set(FIND_QT4 FALSE)
+else()
+  set(FIND_QT4 TRUE)
+endif()
 
-else(POPPLER_INCLUDE_DIR AND POPPLER_LIBRARY)
+list(FIND Poppler_FIND_COMPONENTS "Qt5" FIND_POS)
+if(${FIND_POS} EQUAL -1)
+  set(FIND_QT5 FALSE)
+else()
+  set(FIND_QT5 TRUE)
+endif()
+
+# Default values
+set(POPPLER_FOUND FALSE)
+set(POPPLER_INCLUDE_DIRS)
+set(POPPLER_LIBRARIES)
+set(POPPLER_REQUIRED "POPPLER_LIBRARY")
 
 # use pkg-config to get the directories and then use these values
-# in the FIND_PATH() and FIND_LIBRARY() calls
-INCLUDE(FindPkgConfig)
+# in the find_path() and find_library() calls
+if( NOT WIN32 )
+  find_package(PkgConfig QUIET)
 
-pkg_search_module(poppler-qt4 _PopplerIncDir _PopplerLinkDir _PopplerLinkFlags _PopplerCflags)
+  pkg_check_modules(POPPLER_PKG QUIET poppler)
+  if( FIND_CPP )
+    pkg_check_modules(POPPLER_CPP_PKG QUIET poppler-cpp)
+  endif()
+  if( FIND_QT4 )
+    pkg_check_modules(POPPLER_QT4_PKG QUIET poppler-qt4)
+  endif()
+  if( FIND_QT5 )
+    pkg_check_modules(POPPLER_QT5_PKG QUIET poppler-qt5)
+  endif()
+endif( NOT WIN32 )
 
-if(_PopplerLinkFlags)
+# Check for Poppler headers (optional)
+find_path( POPPLER_INCLUDE_DIR NAMES poppler-config.h PATH_SUFFIXES poppler )
+if( NOT( POPPLER_INCLUDE_DIR ) )
+  if( NOT Poppler_FIND_QUIETLY )
+    message( STATUS "Could not find poppler-config.h, recompile Poppler with "
+                    "ENABLE_XPDF_HEADERS to link against libpoppler directly." )
+  endif()
+  set( POPPLER_HAS_XPDF FALSE )
+else()
+  set( POPPLER_HAS_XPDF TRUE )
+  list(APPEND POPPLER_INCLUDE_DIRS ${POPPLER_INCLUDE_DIR})
+endif()
 
-  # query pkg-config asking for a poppler-qt4 >= 0.5.4
-  EXEC_PROGRAM(${PKGCONFIG_EXECUTABLE} ARGS --atleast-version=0.5.4 poppler-qt4 RETURN_VALUE _return_VALUE OUTPUT_VARIABLE _pkgconfigDevNull )
-  if(_return_VALUE STREQUAL "0")
-    set(POPPLER_FOUND TRUE)
-  endif(_return_VALUE STREQUAL "0")
-else(_PopplerLinkFlags)
-  # try to find poppler without pkgconfig
-  find_library( LIBPOPPLER poppler )
-  find_library( LIBPOPPLER_QT4 poppler-qt4 )
-  find_path( INCLUDEPOPPLER_QT4 poppler/qt4/poppler-qt4.h )
-  find_path( INCLUDEPOPPLER poppler-qt4.h PATHS ${INCLUDEPOPPLER_QT4}/poppler/qt4 )
-  if( LIBPOPPLER_QT4 AND LIBPOPPLER AND INCLUDEPOPPLER )
-    set( POPPLER_FOUND TRUE )
-    set(_PopplerLinkFlags ${LIBPOPPLER} ${LIBPOPPLER_QT4})
-    set(POPPLER_INCLUDE_DIR ${INCLUDEPOPPLER})
-  endif( LIBPOPPLER_QT4 AND LIBPOPPLER AND INCLUDEPOPPLER )
-endif(_PopplerLinkFlags)
+# Find libpoppler (Required)
+find_library( POPPLER_LIBRARY NAMES poppler ${POPPLER_CPP_PKG_LIBRARIES}
+              HINTS ${POPPLER_PKG_LIBDIR} ${POPPLER_CPP_PKG_LIBDIR} )
+if( NOT(POPPLER_LIBRARY) )
+  if( NOT Poppler_FIND_QUIETLY )
+    message(STATUS "Could not find libpoppler." )
+  endif( NOT Poppler_FIND_QUIETLY )
+else( NOT(POPPLER_LIBRARY) )
+  list(APPEND POPPLER_LIBRARIES ${POPPLER_LIBRARY})
 
-if (POPPLER_FOUND)
-  set(POPPLER_LIBRARY ${_PopplerLinkFlags})
+  # Scan poppler libraries for dependencies on Fontconfig
+  include(GetPrerequisites)
+  mark_as_advanced(gp_cmd)
+  GET_PREREQUISITES("${POPPLER_LIBRARY}" POPPLER_PREREQS 1 0 "" "")
+  if("${POPPLER_PREREQS}" MATCHES "fontconfig")
+    set(POPPLER_NEEDS_FONTCONFIG TRUE)
+  else()
+    set(POPPLER_NEEDS_FONTCONFIG FALSE)
+  endif()
 
-  # the cflags for poppler-qt4 can contain more than one include path
-  separate_arguments(_PopplerCflags)
-  foreach(_includedir ${_PopplerCflags})
-    string(REGEX REPLACE "-I(.+)" "\\1" _includedir "${_includedir}")
-    set(POPPLER_INCLUDE_DIR ${POPPLER_INCLUDE_DIR} ${_includedir})
-  endforeach(_includedir)
+  # cpp Component
+  if( FIND_CPP )
+    list(APPEND POPPLER_REQUIRED POPPLER_CPP_INCLUDE_DIR POPPLER_CPP_LIBRARY)
+    find_path( POPPLER_CPP_INCLUDE_DIR NAMES poppler-version.h
+               HINTS ${POPPLER_PKG_INCLUDEDIR} ${POPPLER_CPP_PKG_INCLUDEDIR}
+               PATH_SUFFIXES cpp poppler/cpp )
+    if( NOT(POPPLER_CPP_INCLUDE_DIR) )
+      if( NOT Poppler_FIND_QUIETLY )
+        message(STATUS "Could not find Poppler cpp wrapper headers." )
+      endif( NOT Poppler_FIND_QUIETLY )
+    else()
+      list(APPEND POPPLER_INCLUDE_DIRS ${POPPLER_CPP_INCLUDE_DIR})
+    endif()
+    find_library(
+      POPPLER_CPP_LIBRARY NAMES poppler-cpp ${POPPLER_CPP_PKG_LIBRARIES}
+      HINTS ${POPPLER_PKG_LIBDIR} ${POPPLER_CPP_PKG_LIBDIR} )
+    if( NOT(POPPLER_CPP_LIBRARY) )
+      if( NOT Poppler_FIND_QUIETLY )
+        message(STATUS "Could not find libpoppler-cpp." )
+      endif( NOT Poppler_FIND_QUIETLY )
+    else()
+      list(APPEND POPPLER_LIBRARIES ${POPPLER_CPP_LIBRARY})
+    endif()
+  endif()
 
-  # check whether we're using poppler 0.6
-  set(CMAKE_REQUIRED_INCLUDES ${POPPLER_INCLUDE_DIR} ${QT_INCLUDE_DIR})
-  set(CMAKE_REQUIRED_LIBRARIES ${POPPLER_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY})
-check_cxx_source_compiles("
-#include <poppler-qt4.h>
+  # Qt4 Component
+  if( FIND_QT4 )
+    list(APPEND POPPLER_REQUIRED POPPLER_QT4_INCLUDE_DIR POPPLER_QT4_LIBRARY)
+    find_path(POPPLER_QT4_INCLUDE_DIR NAMES poppler-qt4.h poppler-link.h
+              HINTS ${POPPLER_PKG_INCLUDEDIR} ${POPPLER_CPP_QT4_INCLUDEDIR}
+              PATH_SUFFIXES qt4 poppler/qt4 )
+    if( NOT(POPPLER_QT4_INCLUDE_DIR) )
+      if( NOT Poppler_FIND_QUIETLY )
+        message(STATUS "Could not find Poppler-Qt4 headers." )
+      endif( NOT Poppler_FIND_QUIETLY )
+    else()
+      list(APPEND POPPLER_INCLUDE_DIRS ${POPPLER_QT4_INCLUDE_DIR})
+    endif()
+    find_library(
+      POPPLER_QT4_LIBRARY NAMES poppler-qt4 ${POPPLER_QT4_PKG_LIBRARIES}
+      HINTS ${POPPLER_PKG_LIBDIR} ${POPPLER_QT4_PKG_LIBDIR} )
+    if( NOT(POPPLER_QT4_LIBRARY) )
+      if( NOT Poppler_FIND_QUIETLY )
+        message(STATUS "Could not find libpoppler-qt4." )
+      endif( NOT Poppler_FIND_QUIETLY )
+    else()
+      list(APPEND POPPLER_LIBRARIES ${POPPLER_QT4_LIBRARY})
+    endif()
+  endif()
 
-int main()
-{
-  Poppler::SoundObject * so = 0;
-  (void)so;
+  # Qt5 Component
+  if( FIND_QT5 )
+    list(APPEND POPPLER_REQUIRED POPPLER_QT5_INCLUDE_DIR POPPLER_QT5_LIBRARY)
+    find_path(POPPLER_QT5_INCLUDE_DIR NAMES poppler-qt5.h poppler-link.h
+              HINTS ${POPPLER_QT5_INCLUDEDIR} ${POPPLER_QT5_PKG_INCLUDEDIR}
+              PATH_SUFFIXES qt5 poppler/qt5 )
+    if( NOT(POPPLER_QT5_INCLUDE_DIR) )
+      if( NOT Poppler_FIND_QUIETLY )
+        message( STATUS "Could not find Poppler-Qt5 headers." )
+      endif( NOT Poppler_FIND_QUIETLY )
+    else()
+      list(APPEND POPPLER_INCLUDE_DIRS ${POPPLER_QT5_INCLUDE_DIR})
+    endif()
+    find_library(
+      POPPLER_QT5_LIBRARY NAMES poppler-qt5 ${POPPLER_QT5_PKG_LIBRARIES}
+      HINTS ${POPPLER_PKG_LIBDIR} ${POPPLER_QT5_PKG_LIBDIR} )
+    if( NOT(POPPLER_QT5_LIBRARY) )
+      if( NOT Poppler_FIND_QUIETLY )
+        message(STATUS "Could not find libpoppler-qt5." )
+      endif( NOT Poppler_FIND_QUIETLY )
+    else()
+      list(APPEND POPPLER_LIBRARIES ${POPPLER_QT5_LIBRARY})
+    endif()
+  endif()
+endif( NOT(POPPLER_LIBRARY) )
 
-  return 0;
-}
-" HAVE_POPPLER_0_6 )
-check_cxx_source_compiles("
-#include <poppler-qt4.h>
-#include <poppler-form.h>
-int main()
-{
-  Poppler::FormFieldButton * button = 0;
-  button->buttonType();
-  return 0;
-}
-" HAVE_POPPLER_0_8)
-  set(CMAKE_REQUIRED_INCLUDES)
-  set(CMAKE_REQUIRED_LIBRARIES)
-  if (HAVE_POPPLER_0_8)
-    set(popplerVersionMessage "0.8")
-  elseif (HAVE_POPPLER_0_6)
-    set(popplerVersionMessage "0.6")
-  else (HAVE_POPPLER_0_8)
-    set(popplerVersionMessage "0.5.4")
-  endif (HAVE_POPPLER_0_8)
-  if (NOT Poppler_FIND_QUIETLY)
-    message(STATUS "Found Poppler-Qt4: ${POPPLER_LIBRARY}, (>= ${popplerVersionMessage})")
-  endif (NOT Poppler_FIND_QUIETLY)
-else (POPPLER_FOUND)
-  if (Poppler_FIND_REQUIRED)
-    message(FATAL_ERROR "Could NOT find Poppler-Qt4")
-  endif (Poppler_FIND_REQUIRED)
-  message(STATUS "Could not find OPTIONAL package Poppler-Qt4")
-endif (POPPLER_FOUND)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(Poppler DEFAULT_MSG ${POPPLER_REQUIRED})
 
-# ensure that they are cached
-set(POPPLER_INCLUDE_DIR ${POPPLER_INCLUDE_DIR} CACHE INTERNAL "The Poppler-Qt4 include path")
-set(POPPLER_LIBRARY ${POPPLER_LIBRARY} CACHE INTERNAL "The Poppler-Qt4 library")
-set(HAVE_POPPLER_0_6 ${HAVE_POPPLER_0_6} CACHE INTERNAL "Whether the version of Poppler-Qt4 is >= 0.6")
-set(HAVE_POPPLER_0_8 ${HAVE_POPPLER_0_8} CACHE INTERNAL "Whether the version of Poppler-Qt4 is >= 0.8")
-
-endif(POPPLER_INCLUDE_DIR AND POPPLER_LIBRARY)
+mark_as_advanced(POPPLER_CPP_INCLUDE_DIR POPPLER_QT4_INCLUDE_DIR
+                 POPPLER_QT5_INCLUDE_DIR POPPLER_LIBRARIES POPPLER_CPP_LIBRARY
+                 POPPLER_QT4_LIBRARY POPPLER_QT5_LIBRARY)
