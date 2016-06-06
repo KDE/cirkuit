@@ -26,7 +26,7 @@
 
 #include <QDir>
 
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <KProcess>
 #include <KTemporaryFile>
 #include <KStandardDirs>
@@ -51,7 +51,7 @@ bool TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& ou
         return true;
     }
     
-    kDebug() << "Inside the TikZ backend...";
+    qCDebug(CIRKUIT_DEBUG) << "Inside the TikZ backend...";
     
     if (in == Format::Source) {
         DocumentTemplate tikzTemplate(TikzSettings::templateurl().path());

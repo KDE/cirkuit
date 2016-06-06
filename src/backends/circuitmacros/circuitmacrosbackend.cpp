@@ -33,12 +33,12 @@
 CircuitMacrosBackend::CircuitMacrosBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {
     Q_UNUSED(args)
-    kDebug()<<"Creating CircuitMacrosBackend";
+    qCDebug(CIRKUIT_DEBUG)<<"Creating CircuitMacrosBackend";
 }
 
 CircuitMacrosBackend::~CircuitMacrosBackend()
 {
-    kDebug()<<"Destroying CircuitMacrosBackend";
+    qCDebug(CIRKUIT_DEBUG)<<"Destroying CircuitMacrosBackend";
 }
 
 bool CircuitMacrosBackend::checkRequirements() const

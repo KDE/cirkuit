@@ -33,12 +33,12 @@
 TikzBackend::TikzBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {
     Q_UNUSED(args)
-    kDebug()<<"Creating TikzBackend";
+    qCDebug(CIRKUIT_DEBUG)<<"Creating TikzBackend";
 }
 
 TikzBackend::~TikzBackend()
 {
-    kDebug()<<"Destroying TikzBackend";
+    qCDebug(CIRKUIT_DEBUG)<<"Destroying TikzBackend";
 }
 
 bool TikzBackend::checkRequirements() const

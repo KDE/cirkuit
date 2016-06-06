@@ -381,7 +381,7 @@ void MainWindow::buildPreview()
     
     m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc, false, m_imageView->scaleFactor());
     
-    kDebug() << "Preview generation in progress...";
+    qCDebug(CIRKUIT_DEBUG) << "Preview generation in progress...";
 }
 
 void MainWindow::openPreview()
@@ -529,11 +529,11 @@ void MainWindow::checkCircuitMacros()
     connect(cmm, SIGNAL(newVersionAvailable(QString)), this, SLOT(askIfUpgrade(QString)));
     connect(cmm, SIGNAL(configured()), this, SLOT(circuitMacrosConfigured()));
     if (cmm->checkExistence()) {
-        kDebug() << "Circuit macros found!";
-        kDebug() << QString("version %1").arg(cmm->installedVersion());
+        qCDebug(CIRKUIT_DEBUG) << "Circuit macros found!";
+        qCDebug(CIRKUIT_DEBUG) << QString("version %1").arg(cmm->installedVersion());
         cmm->checkOnlineVersion();
     } else {
-        kDebug() << "Circuit macros NOT found!!!!";
+        qCDebug(CIRKUIT_DEBUG) << "Circuit macros NOT found!!!!";
         if (KMessageBox::questionYesNo(this, i18n("Circuit Macros could not be found on your system. The application will not work if the macros are not installed. Do you want to proceed with the installation?"), i18n("Installation needed")) == KMessageBox::Yes) {
             cmm->downloadLatest();
 #ifdef ENABLE_KMESSAGEWIDGET
@@ -587,20 +587,20 @@ void MainWindow::showPreview(const QImage& image)
 
 void MainWindow::saveFileToDisk(const QString& path)
 {
-    kDebug() << "Copying "  << path << " to " << m_tempSavePath;
+    qCDebug(CIRKUIT_DEBUG) << "Copying "  << path << " to " << m_tempSavePath;
     QFile::copy(path, m_tempSavePath);
-    kDebug() << "File successfully exported";
+    qCDebug(CIRKUIT_DEBUG) << "File successfully exported";
 }
 
 void MainWindow::initializeBackend()
 {
-    kDebug() << Cirkuit::Backend::listAvailableBackends();
+    qCDebug(CIRKUIT_DEBUG) << Cirkuit::Backend::listAvailableBackends();
     m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
     
     if (!m_backend) {
-        kDebug() << "The default backend has not been found";
+        qCDebug(CIRKUIT_DEBUG) << "The default backend has not been found";
         if (Cirkuit::Backend::listAvailableBackends().count() < 1) {
-            kDebug() << "No backends available...";
+            qCDebug(CIRKUIT_DEBUG) << "No backends available...";
             KMessageBox::error(this, i18n("No working backend has been found. Cirkuit is unable to generate any figure."), i18n("No backends found"));
             return;
         } else {
@@ -644,16 +644,16 @@ void MainWindow::downloadExamples()
     dialog->exec();
     foreach (const KNS3::Entry& e,  dialog->changedEntries())
     {
-        kDebug() << "Changed Entry: " << e.name();
+        qCDebug(CIRKUIT_DEBUG) << "Changed Entry: " << e.name();
     }
 }
 
 void MainWindow::uploadExample()
 {
-    kDebug() << "Uploading to GHNS: " << m_currentFile;
+    qCDebug(CIRKUIT_DEBUG) << "Uploading to GHNS: " << m_currentFile;
     
     if (!m_currentFile.isLocalFile()) {
-        kDebug() << "Trying to save the file first ...";
+        qCDebug(CIRKUIT_DEBUG) << "Trying to save the file first ...";
         KMessageBox::error(this, i18n("Save the current document before uploading it"));
         return;
     }

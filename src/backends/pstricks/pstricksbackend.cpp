@@ -24,19 +24,19 @@
 #include "settings.h"
 #include "ui_settings.h"
 
-#include <KDebug>
+#include "cirkuit_debug.h"
 
 #include "cirkuit_macros.h"
 
 PstricksBackend::PstricksBackend(QObject* parent, const QList< QVariant > args): Backend(parent, args)
 {
     Q_UNUSED(args)
-    kDebug() << "Creating PstricksBackend";
+    qCDebug(CIRKUIT_DEBUG) << "Creating PstricksBackend";
 }
 
 PstricksBackend::~PstricksBackend()
 {
-    kDebug() << "Destroying Pstricksbackend";
+    qCDebug(CIRKUIT_DEBUG) << "Destroying Pstricksbackend";
 }
 
 QString PstricksBackend::id() const

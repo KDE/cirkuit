@@ -28,7 +28,7 @@ class RenderThread;
 class QGraphicsPixmapItem;
 class QTimer;
 
-class KAction;
+class QAction;
 class KToggleAction;
 
 class ImageView: public QGraphicsView
@@ -54,11 +54,11 @@ public slots:
     void zoomFit(const QPixmap& pixmap);
     void normalSize();
     
-    KAction* zoomFitPageAction() const;
-    KAction* zoomFitAction() const;
-    KAction* zoomInAction() const;
-    KAction* zoomOutAction() const;
-    KAction* actualSizeAction() const;
+    QAction* zoomFitPageAction() const;
+    QAction* zoomFitAction() const;
+    QAction* zoomInAction() const;
+    QAction* zoomOutAction() const;
+    QAction* actualSizeAction() const;
         
     void setupActions(KActionCollection* actionCollection);
     void updateZoomToFit();
@@ -91,7 +91,7 @@ private:
     double m_scaleFactor, m_scaleMin, m_scaleMax;
     
     KToggleAction* m_zoomFitPageAction;
-    KAction* m_zoomFitAction, *m_zoomInAction, *m_zoomOutAction, *m_actualSizeAction;
+    QAction* m_zoomFitAction, *m_zoomInAction, *m_zoomOutAction, *m_actualSizeAction;
 };
 
 #endif // IMAGEVIEW_H

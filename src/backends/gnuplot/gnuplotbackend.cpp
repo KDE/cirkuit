@@ -33,12 +33,12 @@
 GnuplotBackend::GnuplotBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {
     Q_UNUSED(args)
-    kDebug()<<"Creating GnuplotBackend";
+    qCDebug(CIRKUIT_DEBUG)<<"Creating GnuplotBackend";
 }
 
 GnuplotBackend::~GnuplotBackend()
 {
-    kDebug()<<"Destroying GnuplotBackend";
+    qCDebug(CIRKUIT_DEBUG)<<"Destroying GnuplotBackend";
 }
 
 bool GnuplotBackend::checkRequirements() const

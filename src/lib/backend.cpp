@@ -23,7 +23,7 @@
 #include <QStringList>
 
 #include <KUrl>
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <KServiceTypeTrader>
 #include <KService>
 #include <KConfigSkeleton>
@@ -148,13 +148,13 @@ QList<Backend*> Backend::availableBackends()
         
         KPluginFactory *factory = KPluginLoader(service->library()).factory();
         if (!factory) {
-            kError(5001) << "error: " << error;
+            qCWarning(CIRKUIT_DEBUG) << "error: " << error;
             continue;    
         }
         
         Backend* backend = factory->create<Backend>(0);
         if (!backend) {
-            kDebug() << "error: " << error;
+            qCWarning(CIRKUIT_DEBUG) << "error: " << error;
             continue;
         }        
    
@@ -220,13 +220,13 @@ Cirkuit::Backend* Cirkuit::Backend::autoChooseBackend(Document* doc)
     float best = 0.0;
     foreach (Backend* b, availableBackends()) {
         float index = b->identifyIndex(doc);
-        kDebug() << "Identify index for backend " << b->name() << " = " << index;
+        qCDebug(CIRKUIT_DEBUG) << "Identify index for backend " << b->name() << " = " << index;
         if (index > best) {
             bb = b;
             best = index;
         }
     }
     
-    kDebug() << "And the winner is ... " << bb->name();
+    qCDebug(CIRKUIT_DEBUG) << "And the winner is ... " << bb->name();
     return bb;
 }

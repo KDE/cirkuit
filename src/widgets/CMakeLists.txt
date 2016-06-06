@@ -1,11 +1,11 @@
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ..)
-set (cirkuitwidgets_SRCS templatechoosedialog.cpp 
+ki18n_wrap_ui( cirkuitwidgets_SRCS backendchooser.ui templatechooser.ui)
+add_library(cirkuitwidgets STATIC
+    templatechoosedialog.cpp
     imageview.cpp
     previewwidget.cpp
     logviewwidget.cpp
     backendchoosedialog.cpp
     widgetfloater.cpp
+    ${cirkuitwidgets_SRCS}
 )
-
-kde4_add_ui_files( cirkuitwidgets_SRCS backendchooser.ui templatechooser.ui)
-kde4_add_library( cirkuitwidgets STATIC ${cirkuitwidgets_SRCS} )
+target_link_libraries(cirkuitwidgets Qt5::Widgets KF5::I18n KF5::TextWidgets KF5::NewStuff KF5::KDELibs4Support)

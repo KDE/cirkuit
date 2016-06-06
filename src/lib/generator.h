@@ -24,6 +24,7 @@
 #include "cirkuit_export.h"
 #include "format.h"
 
+#include <KUrl>
 #include <QImage>
 
 class QFileInfo;

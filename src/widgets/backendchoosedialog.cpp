@@ -20,8 +20,10 @@
  */
 
 #include "backendchoosedialog.h"
-
 #include "lib/backend.h"
+#include <KIcon>
+#include <KIconLoader>
+#include <KUrl>
 
 const char* BackendChooseDialog::descriptionTemplate = I18N_NOOP("<h1>%1</h1>" \
                                                                  "<div>%2</div><br/>" \

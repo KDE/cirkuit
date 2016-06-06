@@ -23,6 +23,7 @@
 #include "format.h"
 #include "document.h"
 #include "command.h"
+#include "cirkuit_debug.h"
 
 #include <QFileInfo>
 #include <QDir>
@@ -125,26 +126,26 @@ bool Generator::execute(Cirkuit::Command* c)
 {
     c->setWorkingDirectory(workingDir().path());
     connect(c, SIGNAL(newStandardError(QString,QString)), this, SIGNAL(error(QString,QString)));
-    kDebug() << "Executing " << c->name() << " with arguments " << c->args();
+    qCDebug(CIRKUIT_DEBUG) << "Executing " << c->name() << " with arguments " << c->args();
     
     if (!c->execute()) {
-        kDebug() << c->name() << " failed";
+        qCDebug(CIRKUIT_DEBUG) << c->name() << " failed";
         emit fail();
         return false;
     }
     
-    kDebug() << c->name() << " executed correctly";
+    qCDebug(CIRKUIT_DEBUG) << c->name() << " executed correctly";
     emit output(c->name(), c->stdOutput());
     return true;
 }
 
 bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
-    kDebug() << "Inside the converter..." << "in: " << in.type() << " " << in.extension() << ", out: " << out.type() << " " << out.extension();
+    qCDebug(CIRKUIT_DEBUG) << "Inside the converter..." << "in: " << in.type() << " " << in.extension() << ", out: " << out.type() << " " << out.extension();
     
     // this class doesn't know how to convert from source
     if (in == Format::Source || out == Format::Source || out == Format::Dvi) {
-        kDebug() << "Cannot convert from or to source/DVI";
+        qCDebug(CIRKUIT_DEBUG) << "Cannot convert from or to source/DVI";
         return false;
     }
     

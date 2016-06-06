@@ -22,7 +22,7 @@
 
 #include <QFile>
 #include <QImage>
-#include <KDebug>
+#include "cirkuit_debug.h"
 
 RenderThread::RenderThread(QObject* parent): QThread(parent)
 {

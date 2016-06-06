@@ -26,7 +26,7 @@
 
 #include <QDir>
 
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <KProcess>
 #include <KTemporaryFile>
 #include <KStandardDirs>
@@ -51,7 +51,7 @@ bool PstricksGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format
         return true;
     }
     
-    kDebug() << "Inside the PsTricks backend...";
+    qCDebug(CIRKUIT_DEBUG) << "Inside the PsTricks backend...";
     
     if (in == Format::Source) {
         DocumentTemplate pstTemplate(PstricksSettings::templateurl().path());

@@ -26,7 +26,7 @@
 #include "cirkuitsettings.h"
 #include "renderthread.h"
 
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <KLocalizedString>
 
 using namespace Cirkuit;
@@ -52,12 +52,12 @@ void GeneratorThread::run()
     }
     
     if (!m_backend) {
-        kError() << i18n("No backend could be selected!");
+        qCCritical(CIRKUIT_DEBUG) << i18n("No backend could be selected!");
         return;
     } else {
-        kDebug() << m_backend->id();
-        kDebug() << m_backend->name();
-        kDebug() << m_backend->description();
+        qCDebug(CIRKUIT_DEBUG) << m_backend->id();
+        qCDebug(CIRKUIT_DEBUG) << m_backend->name();
+        qCDebug(CIRKUIT_DEBUG) << m_backend->description();
     }
     
     Cirkuit::Generator* gen = m_backend->generator();

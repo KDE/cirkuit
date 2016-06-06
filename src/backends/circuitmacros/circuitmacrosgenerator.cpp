@@ -27,7 +27,7 @@
 
 #include <QDir>
 
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <KProcess>
 #include <KTemporaryFile>
 #include <KStandardDirs>
@@ -47,7 +47,7 @@ CircuitMacrosGenerator::~CircuitMacrosGenerator()
 
 bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
-    kDebug() << "Inside the CircuitMacros generator...";
+    qCDebug(CIRKUIT_DEBUG) << "Inside the CircuitMacros generator...";
     
       // Check if the conversion can be handled by the super-class
     bool done = Cirkuit::Generator::convert(in, out);

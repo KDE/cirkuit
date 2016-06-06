@@ -28,10 +28,11 @@
 #include <QKeyEvent>
 #include <QMenu>
 
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <KAction>
 #include <KToggleAction>
 #include <KActionCollection>
+#include <KIcon>
 #include <KLocale>
 
 ImageView::ImageView(QWidget* parent): QGraphicsView(parent), m_image(QImage()), m_pdfUrl(QString())
@@ -95,27 +96,27 @@ void ImageView::setupActions(KActionCollection* actionCollection)
     addAction(m_zoomFitPageAction);
 }
 
-KAction* ImageView::zoomFitAction() const
+QAction* ImageView::zoomFitAction() const
 {
     return m_zoomFitAction;
 }
 
-KAction* ImageView::zoomFitPageAction() const
+QAction* ImageView::zoomFitPageAction() const
 {
     return m_zoomFitPageAction;
 }
 
-KAction* ImageView::zoomInAction() const
+QAction* ImageView::zoomInAction() const
 {
     return m_zoomInAction;
 }
 
-KAction* ImageView::zoomOutAction() const
+QAction* ImageView::zoomOutAction() const
 {
     return m_zoomOutAction;
 }
 
-KAction* ImageView::actualSizeAction() const
+QAction* ImageView::actualSizeAction() const
 {
     return m_actualSizeAction;
 }

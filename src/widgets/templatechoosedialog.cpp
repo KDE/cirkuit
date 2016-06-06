@@ -20,7 +20,7 @@
 
 #include <QListView>
 
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/uploaddialog.h>
 
@@ -33,6 +33,7 @@
 #include <KDirWatch>
 #include <KInputDialog>
 #include <KMessageBox>
+#include <KIcon>
 
 using namespace Cirkuit;
 
@@ -80,7 +81,7 @@ void TemplateModel::refresh()
 
 TemplateChooseDialog::TemplateChooseDialog(const QString& backendName, QWidget* parent, Qt::WFlags flags): KDialog(parent, flags)
 {
-    kDebug() << "FILTERING " << backendName;
+    qCDebug(CIRKUIT_DEBUG) << "FILTERING " << backendName;
     m_model = new TemplateModel(this);
     m_model->applyBackendFilter(backendName);
     
@@ -142,7 +143,7 @@ void TemplateChooseDialog::downloadTemplate()
     QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog("cirkuit_template.knsrc");
     dialog->exec();
     foreach (const KNS3::Entry& e,  dialog->changedEntries()) {
-        kDebug() << "Changed Entry: " << e.name();
+        qCDebug(CIRKUIT_DEBUG) << "Changed Entry: " << e.name();
     }
 }
 

@@ -23,7 +23,7 @@
 #include <QFile>
 #include <QRegExp>
 
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <KGlobal>
 #include <KStandardDirs>
 #include <QDir>

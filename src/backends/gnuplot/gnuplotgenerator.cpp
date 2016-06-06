@@ -25,7 +25,7 @@
 
 #include <QDir>
 
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <KProcess>
 #include <KTemporaryFile>
 #include <KStandardDirs>
@@ -50,7 +50,7 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
         return true;
     }
     
-    kDebug() << "Inside the Gnuplot backend...";
+    qCDebug(CIRKUIT_DEBUG) << "Inside the Gnuplot backend...";
     
     if (in == Format::Source) {
         QTextStream stream(tempFile());

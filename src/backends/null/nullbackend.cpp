@@ -30,12 +30,12 @@
 NullBackend::NullBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {
     Q_UNUSED(args)
-    kDebug()<<"Creating NullBackend";
+    qCDebug(CIRKUIT_DEBUG)<<"Creating NullBackend";
 }
 
 NullBackend::~NullBackend()
 {
-    kDebug()<<"Destroying NullBackend";
+    qCDebug(CIRKUIT_DEBUG)<<"Destroying NullBackend";
 }
 
 bool NullBackend::checkRequirements() const

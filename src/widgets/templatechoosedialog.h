@@ -24,6 +24,7 @@
 #include <QAbstractListModel>
 
 #include <KDialog>
+#include <KUrl>
 
 namespace Cirkuit {
 }

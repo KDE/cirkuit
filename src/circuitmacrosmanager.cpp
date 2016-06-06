@@ -96,7 +96,7 @@ void CircuitMacrosManager::configureCircuitMacros()
     configProcess.startDetached();
 
     QFile::remove(KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", false));
-    kDebug() << "Circuit macros configured";
+    qCDebug(CIRKUIT_DEBUG) << "Circuit macros configured";
     emit(configured());
 }
 
@@ -123,8 +123,8 @@ void CircuitMacrosManager::readVersion()
 {     
     QString onlineVersion = findVersion(KStandardDirs::locateLocal("tmp", "cirkuit/README", false));
     QString installVersion = installedVersion();
-    kDebug() << "ONLINE version: " << onlineVersion;
-    kDebug() << "INSTALLED version: " << installVersion;
+    qCDebug(CIRKUIT_DEBUG) << "ONLINE version: " << onlineVersion;
+    qCDebug(CIRKUIT_DEBUG) << "INSTALLED version: " << installVersion;
 
     if (onlineVersion > installVersion) {
         emit newVersionAvailable(onlineVersion);

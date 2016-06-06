@@ -24,7 +24,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QStringListIterator>
-#include <KDebug>
+#include "cirkuit_debug.h"
 #include <KProcess>
 #include <KStandardDirs>
 
@@ -98,7 +98,7 @@ bool Command::execute(const QString& input, const QStringList& args)
     if (!args.isEmpty()) setArgs(args);
     
     if (!checkExistence()) {
-        kError() << "Program not found!!";
+        qCCritical(CIRKUIT_DEBUG) << "Program not found!!";
         return false;
     }
     
