@@ -127,7 +127,7 @@ private:
     bool m_firstRun;
 
 public slots:
-    void loadFile(const KUrl& url);
+    void loadFile(const QUrl& url);
 
 protected:
     void closeEvent(QCloseEvent *event);

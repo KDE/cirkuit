@@ -155,7 +155,7 @@ void MainWindow::setupActions()
     KStandardAction::keyBindings(this, SLOT(configureKeyBindings()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
                                             
-    recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile(KUrl)),
+    recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile(QUrl)),
                                                                     actionCollection());
                                                                     
     KAction* exportAction = new KAction(KIcon("document-export"), i18n("Export..."), 0);
@@ -252,7 +252,7 @@ void MainWindow::openFile()
     }
 }
 
-void MainWindow::loadFile(const KUrl& url)
+void MainWindow::loadFile(const QUrl& url)
 {
     m_currentFile = url;
     m_view->document()->openUrl(url);
