@@ -30,9 +30,13 @@
 class QFileInfo;
 class KTemporaryFile;
 
+namespace KTextEditor
+{
+    class Document;
+}
+
 namespace Cirkuit
 {
-class Document;
 class Command;
 class Backend;
 class GeneratorPrivate;
@@ -110,19 +114,19 @@ public slots:
      * @param output the output format
      * @return true if the operation is successful
      */
-    virtual bool generate(Document* doc, const Format& output = Format::Pdf);
+    virtual bool generate(KTextEditor::Document* doc, const Format& output = Format::Pdf);
     
     /**
      * Sets the current document
      * @param doc the document
      */
-    void setDocument(Document* doc);
+    void setDocument(KTextEditor::Document* doc);
     
     /**
      * Gets the current document
      * @return the current document
      */
-    Document* document() const;
+    KTextEditor::Document* document() const;
     
     /**
      * Sets the resolution of the graphic (when applicable)

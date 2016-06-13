@@ -29,10 +29,14 @@ class KConfigSkeletonItem;
 class KUrl;
 class KConfigSkeleton;
 
+namespace KTextEditor
+{
+    class Document;
+}
+
 namespace Cirkuit
 {
 class DocumentSettings;
-class Document;
 class Generator;
 
 class BackendPrivate;
@@ -65,7 +69,7 @@ protected:
      * @return a floating point number ranging from 0 to 1, where 0 stands for lowest probabiliy and 
      * 1 is the maximum
      */
-    virtual float identifyIndex(Cirkuit::Document* doc) const;
+    virtual float identifyIndex(KTextEditor::Document* doc) const;
     /**
      * A list of keywords that can be used to identify the backend (see code from existing backends).
      * This function should be re-implemented by each backend to define its own list.
@@ -181,7 +185,7 @@ public:
      * @param doc a Cirkuit document
      * @return the best backend for the given document
      */
-    static Backend* autoChooseBackend(Cirkuit::Document* doc);
+    static Backend* autoChooseBackend(KTextEditor::Document* doc);
     
     /** 
      * Overloaded operator to check if the id or the name of the backend

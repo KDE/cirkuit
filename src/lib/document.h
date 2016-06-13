@@ -29,6 +29,8 @@ namespace Cirkuit
 {
 class DocumentPrivate;
 
+// TODO Rename file
+
 /** 
  * A class containing the initial settings of a document. This 
  * class should be reimplemented by each backend to define 
@@ -50,44 +52,6 @@ public:
     QString initialText;
     //! The line where the cursor will be placed when a new document is created
     int initialLineNumber;
-};
-
-/**
- * The Document class represent a document of the text editor. 
- * The creation of the class is managed by the Kate Part, therefore
- * the constructor should not be called directly. For the same reason
- * a separate DocumentSettings class has been added to personalize
- * the initial settings of the document, depending on the selected
- * backend.
- *
- * @author Matteo Agostinelli
- */
-class CIRKUIT_EXPORT Document : public KTextEditor::Document
-{
-    Q_OBJECT
-public:
-    /** 
-     * Destructor
-     */
-    virtual ~Document();
-    
-    /**
-     * The initial text of the document. It is set by the 
-     * DocumentSettings,
-     */
-    QString initialText() const;
-    int initialLineNumber() const;
-    QString directory() const;
-    
-public slots:
-    void applySettings(DocumentSettings* settings);
-    
-    void initialize();
-    
-protected:
-    explicit Document(QObject* parent = 0);
-    
-    DocumentPrivate* d;
 };
 
 }

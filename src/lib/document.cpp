@@ -19,51 +19,5 @@
 ***************************************************************************/
 
 #include "document.h"
-#include "backend.h"
 
-using namespace Cirkuit;
-
-class Cirkuit::DocumentPrivate {
-public:
-    DocumentPrivate() {
-        directory.clear();
-        settings = new DocumentSettings;
-    }
-    QString directory;
-    DocumentSettings* settings;
-};
-
-Cirkuit::Document::Document(QObject* parent): KTextEditor::Document(parent)
-{
-}
-
-Document::~Document()
-{
-    delete d;
-}
-
-QString Document::directory() const
-{
-    return url().directory();
-}
-
-int Document::initialLineNumber() const
-{
-    return d->settings->initialLineNumber;
-}
-
-QString Document::initialText() const
-{
-    return d->settings->initialText;
-}
-
-void Document::initialize()
-{
-    d = new DocumentPrivate;
-}
-
-void Document::applySettings(DocumentSettings* settings)
-{
-    d->settings = settings;
-}
-
+// TODO remove file

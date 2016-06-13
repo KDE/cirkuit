@@ -20,11 +20,12 @@
 
 #include <QListView>
 
-#include "cirkuit_debug.h"
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/uploaddialog.h>
 
-#include "lib/documenttemplate.h"
+#include "../lib/documenttemplate.h"
+#include "cirkuitapp_debug.h"
+
 #include <KTemporaryFile>
 #include <KStandardDirs>
 #include <KIO/NetAccess>

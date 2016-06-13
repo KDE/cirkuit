@@ -26,7 +26,7 @@
 #include "cirkuitsettings.h"
 #include "renderthread.h"
 
-#include "cirkuit_debug.h"
+#include "cirkuitapp_debug.h"
 #include <KLocalizedString>
 
 using namespace Cirkuit;
@@ -96,7 +96,7 @@ void GeneratorThread::setScaleFactor(double scaleFactor)
     m_scaleFactor = scaleFactor;
 }
 
-void GeneratorThread::generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, Cirkuit::Document* doc, bool saveToFile, double scaleFactor)
+void GeneratorThread::generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend, KTextEditor::Document* doc, bool saveToFile, double scaleFactor)
 {
     m_input = in;
     m_output = out;

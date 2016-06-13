@@ -20,7 +20,7 @@
  */
 
 #include "backendchoosedialog.h"
-#include "lib/backend.h"
+#include "../lib/backend.h"
 #include <KIcon>
 #include <KIconLoader>
 #include <KUrl>

@@ -26,6 +26,7 @@
 #include "kdebug.h"
 
 #include "cirkuit_macros.h"
+#include "cirkuitnullbackend_debug.h"
 
 NullBackend::NullBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {

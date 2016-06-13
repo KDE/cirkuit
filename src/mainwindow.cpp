@@ -21,6 +21,7 @@
 #include "mainwindow.h"
 #include "cirkuitsettings.h"
 #include "circuitmacrosmanager.h"
+#include "cirkuitapp_debug.h"
 #include "generatorthread.h"
 
 #include "ui_cirkuit_general_settings.h"
@@ -62,6 +63,8 @@
 #include <KProcess>
 #include <kmimetypetrader.h>
 #include <KConfigSkeletonItem>
+#include <KMimeType>
+#include <KIcon>
 
 #ifdef ENABLE_KMESSAGEWIDGET
   #include "widgets/widgetfloater.h"
@@ -77,20 +80,10 @@
 #include <KTextEditor/Document>
 #include <KTextEditor/View>
 #include <KTextEditor/Editor>
-#include <KTextEditor/EditorChooser>
 
 MainWindow::MainWindow(QWidget *)
 {
-    KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
-
-    if (!editor) {
-        KMessageBox::error(this, i18n("A KDE text-editor component could not be found;\n"
-        "please check your KDE installation."));
-        kapp->exit(1);
-    }
-
-    m_doc = (Cirkuit::Document*) (editor->createDocument(0));
-    m_doc->initialize();
+    m_doc = KTextEditor::Editor::instance()->createDocument(0);
     m_view = qobject_cast<KTextEditor::View*>(m_doc->createView(this));
    
     m_previewWidget = new PreviewWidget(i18n("Preview"), this);
@@ -430,15 +423,16 @@ void MainWindow::newDocument(const QString& backendName)
         return;
     }
     
-    m_doc->applySettings(m_backend->documentSettings());
+    // TODO delete settings?
+    Cirkuit::DocumentSettings *settings = m_backend->documentSettings();
     if (!m_doc->closeUrl()) {
         return;
     }
     reset();
     
-    m_doc->setText(m_doc->initialText());
+    m_doc->setText(settings->initialText);
     KTextEditor::Cursor cursor = m_view->cursorPosition();
-    cursor.setLine(m_doc->initialLineNumber());
+    cursor.setLine(settings->initialLineNumber);
     m_view->setCursorPosition(cursor);
     m_doc->setModified(false);
 }

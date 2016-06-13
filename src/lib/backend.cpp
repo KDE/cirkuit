@@ -18,12 +18,13 @@
 */
 
 #include "backend.h"
+
+#include "cirkuitlib_debug.h"
 #include "document.h"
 
 #include <QStringList>
 
 #include <KUrl>
-#include "cirkuit_debug.h"
 #include <KServiceTypeTrader>
 #include <KService>
 #include <KConfigSkeleton>
@@ -197,7 +198,7 @@ QStringList Backend::identifyingWords() const
 }
 
 
-float Backend::identifyIndex(Cirkuit::Document* doc) const
+float Backend::identifyIndex(KTextEditor::Document* doc) const
 {
     if (identifyingWords().count() < 1) {
         return 0.0;
@@ -214,7 +215,7 @@ float Backend::identifyIndex(Cirkuit::Document* doc) const
     return (1.00*hits)/total;
 }
 
-Cirkuit::Backend* Cirkuit::Backend::autoChooseBackend(Document* doc)
+Cirkuit::Backend* Cirkuit::Backend::autoChooseBackend(KTextEditor::Document* doc)
 {
     Backend* bb = getBackend("null");
     float best = 0.0;

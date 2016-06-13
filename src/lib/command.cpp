@@ -19,12 +19,13 @@
 ***************************************************************************/
 
 #include "command.h"
+
+#include "cirkuitlib_debug.h"
 #include "logparser.h"
 
 #include <QFileInfo>
 #include <QDir>
 #include <QStringListIterator>
-#include "cirkuit_debug.h"
 #include <KProcess>
 #include <KStandardDirs>
 

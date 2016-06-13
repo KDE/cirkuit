@@ -28,8 +28,10 @@
 #include <KIO/Job>
 #include <KIO/NetAccess>
 #include <KProcess>
+#include <KUrl>
 
 #include <cirkuitsettings.h>
+#include "cirkuitapp_debug.h"
 
 CircuitMacrosManager::CircuitMacrosManager(): QObject()
 {

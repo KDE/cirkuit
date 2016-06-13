@@ -23,7 +23,7 @@
 #include "format.h"
 #include "document.h"
 #include "command.h"
-#include "cirkuit_debug.h"
+#include "cirkuitlib_debug.h"
 
 #include <QFileInfo>
 #include <QDir>
@@ -45,7 +45,7 @@ public:
     Backend* backend;
     KTemporaryFile* tempFile;
     QFileInfo* tempFileInfo;
-    Document* document;
+    KTextEditor::Document* document;
     int resolution;
 };
 
@@ -102,7 +102,7 @@ QString Cirkuit::Generator::formatPath(const Cirkuit::Format& format) const
     return url.path();
 }
 
-void Generator::setDocument(Document* doc)
+void Generator::setDocument(KTextEditor::Document* doc)
 {
     d->document = doc;
 }
@@ -112,7 +112,7 @@ void Generator::setResolution(int resolution)
     d->resolution = resolution;
 }
 
-Document* Generator::document() const
+KTextEditor::Document* Generator::document() const
 {
     return d->document;
 }
@@ -255,7 +255,7 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
     return false;
 }
 
-bool Cirkuit::Generator::generate(Document* doc, const Cirkuit::Format& format)
+bool Cirkuit::Generator::generate(KTextEditor::Document* doc, const Cirkuit::Format& format)
 {
     setDocument(doc);
     return convert(Format::Source, format);

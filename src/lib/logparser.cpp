@@ -19,7 +19,7 @@
 #include "logparser.h"
 #include "command.h"
 
-#include "cirkuit_debug.h"
+#include "cirkuitlib_debug.h"
 
 using namespace Cirkuit;
 

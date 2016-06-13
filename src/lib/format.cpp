@@ -18,6 +18,8 @@
 
 #include "format.h"
 
+#include <QMimeType>
+
 using namespace Cirkuit;
 
 class Cirkuit::FormatPrivate {
@@ -120,8 +122,16 @@ Format Format::fromExtension(const QString& extension)
     return Format(Unknown);
 }
 
-Format Format::fromMimeType(KMimeType::Ptr mime)
+Format Format::fromMimeType(const QMimeType &mime)
 {
-    return Format::fromExtension(mime->mainExtension());
+    const QStringList patterns = mime.globPatterns();
+    foreach(const QString pattern, patterns) {
+        const QString extension = pattern.mid(1); //remove the * from the glob
+        Format f = fromExtension(extension);
+        if (f == Unknown)
+            continue;
+        return f;
+    }
+    return Unknown;
 }
 

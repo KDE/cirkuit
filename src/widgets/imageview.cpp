@@ -18,7 +18,8 @@
 */
 
 #include "imageview.h"
-#include "renderthread.h"
+
+#include "../renderthread.h"
 
 #include <QLabel>
 #include <QScrollBar>
@@ -28,7 +29,6 @@
 #include <QKeyEvent>
 #include <QMenu>
 
-#include "cirkuit_debug.h"
 #include <KAction>
 #include <KToggleAction>
 #include <KActionCollection>

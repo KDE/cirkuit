@@ -7,6 +7,7 @@ ki18n_wrap_ui(TikzBackend_SRCS settings.ui)
 
 add_library(cirkuit_tikzbackend
  MODULE 
+ ${TikzBackend_SRCS}
  tikzbackend.cpp
  tikzdocumentsettings.cpp
  tikzgenerator.cpp)

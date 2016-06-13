@@ -30,8 +30,12 @@ class RenderThread;
 namespace Cirkuit
 {
 class Generator;
-class Document;
 class Backend;
+}
+
+namespace KTextEditor
+{
+    class Document;
 }
 
 class GeneratorThread : public QThread
@@ -49,7 +53,7 @@ protected:
     void run();
     
 public slots:
-    void generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend = 0, Cirkuit::Document* doc = 0, bool saveToFile = false, double scaleFactor=1.0);
+    void generate(const Cirkuit::Format& in, const Cirkuit::Format& out, Cirkuit::Backend* backend = 0, KTextEditor::Document* doc = 0, bool saveToFile = false, double scaleFactor=1.0);
     void setScaleFactor(double scaleFactor);
     
 signals:
@@ -65,7 +69,7 @@ signals:
     void backendChanged(QString);
     
 private:
-    Cirkuit::Document* m_doc;
+    KTextEditor::Document* m_doc;
     Cirkuit::Backend* m_backend;
     RenderThread* m_render;
     bool m_saveToFile;
