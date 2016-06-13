@@ -1,5 +1,5 @@
 include_directories( ${CMAKE_CURRENT_BINARY_DIR})
-
+                           
 add_subdirectory (templates)
 
 set( PstricksBackend_SRCS 
@@ -7,6 +7,13 @@ set( PstricksBackend_SRCS
  pstricksdocumentsettings.cpp
  pstricksgenerator.cpp
 )
+
+include(ECMQtDeclareLoggingCategory)
+
+ecm_qt_declare_logging_category(PstricksBackend_SRCS
+                                HEADER cirkuit_pstricksbackend_debug.h
+                                IDENTIFIER CIRKUIT_DEBUG
+                                CATEGORY_NAME org.kde.cirkuit_pstricksbackend)
 
 kconfig_add_kcfg_files(PstricksBackend_SRCS GENERATE_MOC settings.kcfgc)
 install(FILES pstricksbackend.kcfg DESTINATION ${KCFG_INSTALL_DIR})

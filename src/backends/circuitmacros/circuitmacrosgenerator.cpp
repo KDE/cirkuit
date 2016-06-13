@@ -27,7 +27,7 @@
 
 #include <QDir>
 
-#include "cirkuit_debug.h"
+#include "cirkuit_circuitmacrosbackend_debug.h"
 #include <KProcess>
 #include <KTemporaryFile>
 #include <KStandardDirs>
@@ -60,7 +60,7 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         tempFile()->close();    
         
         QStringList env = KProcess::systemEnvironment();
-        env << QString("M4PATH=%1:%2").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(QDir(document()->directory()).absolutePath());
+        env << QString("M4PATH=%1:%2").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(QDir(document()->url().path()).absolutePath());
                 
         QStringList m4args;
         if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_ps) {
@@ -110,7 +110,7 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
         
         QStringList environment = QProcess::systemEnvironment();
         // the following environment variable is needed to find boxdims.sty in the circuit maaros distribution
-        QString dirString = QString("TEXINPUTS=.:%1:%2:").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(QDir(document()->directory()).absolutePath());
+        QString dirString = QString("TEXINPUTS=.:%1:%2:").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(QDir(document()->url().path()).absolutePath());
         environment << dirString;
         
         QStringList latexArgs;

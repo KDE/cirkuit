@@ -5,9 +5,16 @@ add_subdirectory (templates)
 set( GnuplotBackend_SRCS 
  gnuplotbackend.cpp  
  gnuplotdocumentsettings.cpp
- gnuplotgenerator.cpp
+ gnuplotgenerator.cpp 
 )
 
+include(ECMQtDeclareLoggingCategory)
+
+ecm_qt_declare_logging_category(GnuplotBackend_SRCS
+                                HEADER cirkuit_gnuplotbackend_debug.h
+                                IDENTIFIER CIRKUIT_DEBUG
+                                CATEGORY_NAME org.kde.cirkuit_gnuplotbackend)
+                                
 kconfig_add_kcfg_files(GnuplotBackend_SRCS GENERATE_MOC settings.kcfgc)
 install(FILES gnuplotbackend.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 

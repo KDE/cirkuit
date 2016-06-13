@@ -1,5 +1,12 @@
 add_subdirectory (templates)
 
+include(ECMQtDeclareLoggingCategory)
+
+ecm_qt_declare_logging_category(TikzBackend_SRCS
+                                HEADER cirkuit_tikzbackend_debug.h
+                                IDENTIFIER CIRKUIT_DEBUG
+                                CATEGORY_NAME org.kde.cirkuit_tikzbackend)
+                                
 kconfig_add_kcfg_files(TikzBackend_SRCS GENERATE_MOC settings.kcfgc)
 install(FILES tikzbackend.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 

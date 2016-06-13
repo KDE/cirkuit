@@ -27,7 +27,7 @@
 #include "kdebug.h"
 
 #include "cirkuit_macros.h"
-#include "cirkuit_debug.h"
+#include "cirkuit_gnuplotbackend_debug.h"
 
 #include <KProcess>
 

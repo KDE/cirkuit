@@ -24,7 +24,7 @@
 #include "settings.h"
 #include "ui_settings.h"
 
-#include "cirkuit_debug.h"
+#include "cirkuit_pstricksbackend_debug.h"
 
 #include "cirkuit_macros.h"
 

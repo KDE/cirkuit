@@ -26,7 +26,7 @@
 
 #include <QDir>
 
-#include "cirkuit_debug.h"
+#include "cirkuit_tikzbackend_debug.h"
 #include <KProcess>
 #include <KTemporaryFile>
 #include <KStandardDirs>
@@ -68,7 +68,7 @@ bool TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& ou
         
         QStringList environment = QProcess::systemEnvironment();
         // the following environment variable is needed to find boxdims.sty in the circuit maaros distribution
-        QString dirString = QString("TEXINPUTS=.:%1:").arg(QDir(document()->directory()).absolutePath());
+        QString dirString = QString("TEXINPUTS=.:%1:").arg(QDir(document()->url().path()).absolutePath());
         environment << dirString;
         
         QStringList latexArgs;

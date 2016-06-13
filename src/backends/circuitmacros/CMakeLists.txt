@@ -9,6 +9,14 @@ set( CircuitMacrosBackend_SRCS dpiclogparser.cpp
  settingswidget.cpp
 )
 
+include(ECMQtDeclareLoggingCategory)
+
+ecm_qt_declare_logging_category(CircuitMacrosBackend_SRCS
+                                HEADER cirkuit_circuitmacrosbackend_debug.h
+                                IDENTIFIER CIRKUIT_DEBUG
+                                CATEGORY_NAME org.kde.cirkuit_circuitmacrosbackend_debug)
+
+
 kconfig_add_kcfg_files(CircuitMacrosBackend_SRCS GENERATE_MOC settings.kcfgc)
 install(FILES circuitmacrosbackend.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 

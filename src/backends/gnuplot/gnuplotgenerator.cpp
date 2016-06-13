@@ -25,7 +25,7 @@
 
 #include <QDir>
 
-#include "cirkuit_debug.h"
+#include "cirkuit_gnuplotbackend_debug.h"
 #include <KProcess>
 #include <KTemporaryFile>
 #include <KStandardDirs>
@@ -75,10 +75,10 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
             while ((pos = regex1.indexIn(line,pos)) != -1) {
                 QString capture = regex1.cap(1);
                 
-                if (QFile::exists(QDir(document()->directory()).absolutePath() + '/' + capture)) {
+                if (QFile::exists(QDir(document()->url().path()).absolutePath() + '/' + capture)) {
                     if (!line.startsWith(QLatin1String("set output"))) {
                         origFileNames << capture;
-                        line = line.replace(capture, QString("%1/%2").arg(QDir(document()->directory()).absolutePath()).arg(capture));
+                        line = line.replace(capture, QString("%1/%2").arg(QDir(document()->url().path()).absolutePath()).arg(capture));
                     }
                 }
                 
@@ -114,7 +114,7 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
         
         QStringList environment = QProcess::systemEnvironment();
         // the following environment variable is needed to find boxdims.sty in the circuit maaros distribution
-        QString dirString = QString("TEXINPUTS=.:%1:").arg(QDir(document()->directory()).absolutePath());
+        QString dirString = QString("TEXINPUTS=.:%1:").arg(QDir(document()->url().path()).absolutePath());
         environment << dirString;
         
         QStringList latexArgs;
