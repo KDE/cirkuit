@@ -95,3 +95,5 @@ KUrl GnuplotBackend::examplesUrl() const
 
 
 K_EXPORT_CIRKUIT_PLUGIN(gnuplotbackend, GnuplotBackend)
+
+#include "gnuplotbackend.moc"

@@ -90,3 +90,5 @@ Cirkuit::Generator* PstricksBackend::generator() const
 }
 
 K_EXPORT_CIRKUIT_PLUGIN(pstricksbackend, PstricksBackend)
+
+#include "pstricksbackend.moc"

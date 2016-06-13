@@ -61,3 +61,5 @@ Cirkuit::Generator* NullBackend::generator() const
 
 
 K_EXPORT_CIRKUIT_PLUGIN(nullbackend, NullBackend)
+
+#include "nullbackend.moc"

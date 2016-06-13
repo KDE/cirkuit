@@ -98,6 +98,6 @@ KConfigSkeletonItem* CircuitMacrosBackend::configTemplateUrl() const
     return Backend::configTemplateUrl();
 }
 
-
-
 K_EXPORT_CIRKUIT_PLUGIN(circuitmacrosbackend, CircuitMacrosBackend)
+
+#include "circuitmacrosbackend.moc"

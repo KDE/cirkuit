@@ -95,3 +95,5 @@ KUrl TikzBackend::helpUrl() const
 
 
 K_EXPORT_CIRKUIT_PLUGIN(tikzbackend, TikzBackend)
+
+#include "tikzbackend.moc"
