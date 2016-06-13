@@ -7,8 +7,8 @@ cmake_minimum_required(VERSION 3.0)
 # KF5 Port:
 # A lot of CMake code that used to be provided by kdelibs is now provided 
 # by the extra-cmake-modules package
-find_package(ECM 1.0 REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+find_package(ECM 5.18 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${PROJECT_SOURCE_DIR}/cmake_modules)
 
 find_package(Qt5 5.2 REQUIRED COMPONENTS Quick)
 find_package(KF5 REQUIRED COMPONENTS I18n ConfigWidgets DBusAddons DocTools KIO NewStuff TextEditor TextWidgets KDELibs4Support)
