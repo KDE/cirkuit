@@ -25,9 +25,9 @@
 #include <QStringList>
 
 #include <KUrl>
-#include <KServiceTypeTrader>
-#include <KService>
 #include <KConfigSkeleton>
+#include <KPluginFactory>
+#include <KPluginLoader>
 #include <KPluginMetaData>
 
 class Cirkuit::BackendPrivate {
@@ -137,16 +137,19 @@ QList<Backend*> Backend::availableBackends()
         return backendCache;
     }
 
-    KService::List services;
-    KServiceTypeTrader* trader = KServiceTypeTrader::self();
+    // filter only accecpts plugins which have "Cirkuit/Backend" as their
+    // service type in metadata
+    auto filter = [&](const KPluginMetaData &metaData) {
+        return metaData.serviceTypes().contains(QStringLiteral("Cirkuit/Backend"));
+    };
 
-    services = trader->query("Cirkuit/Backend");
-    
-    KService::List::const_iterator iter;
-    for (iter = services.begin(); iter < services.end(); ++iter) {
-        KService::Ptr service = *iter;
-        
-        KPluginLoader loader(service->library());
+    // find backend plugins in standard path (e.g. /usr/lib64/qt5/plugins) using filter from above
+    QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(QString(), filter);
+
+    for (const KPluginMetaData &plugin : plugins) {
+        qCDebug(CIRKUIT_DEBUG) << "trying to load backend:" << plugin.name();
+
+        KPluginLoader loader(plugin.fileName());
         KPluginFactory *factory = loader.factory();
         if (!factory) {
             qCWarning(CIRKUIT_DEBUG) << "error: " << loader.errorString();
@@ -159,11 +162,10 @@ QList<Backend*> Backend::availableBackends()
             continue;
         }        
    
-        KPluginMetaData info(loader);
-        backend->d->name = info.name();
-        backend->d->comment = info.description();
-        backend->d->icon = info.iconName();
-        backend->d->url = info.website();
+        backend->d->name = plugin.name();
+        backend->d->comment = plugin.description();
+        backend->d->icon = plugin.iconName();
+        backend->d->url = plugin.website();
         backendCache << backend;
     }
     return backendCache;
