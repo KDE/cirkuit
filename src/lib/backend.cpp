@@ -144,19 +144,18 @@ QList<Backend*> Backend::availableBackends()
     
     KService::List::const_iterator iter;
     for (iter = services.begin(); iter < services.end(); ++iter) {
-        QString error;
         KService::Ptr service = *iter;
         
         KPluginLoader loader(service->library());
         KPluginFactory *factory = loader.factory();
         if (!factory) {
-            qCWarning(CIRKUIT_DEBUG) << "error: " << error;
+            qCWarning(CIRKUIT_DEBUG) << "error: " << loader.errorString();
             continue;    
         }
         
         Backend* backend = factory->create<Backend>(0);
         if (!backend) {
-            qCWarning(CIRKUIT_DEBUG) << "error: " << error;
+            qCWarning(CIRKUIT_DEBUG) << "error: " << loader.errorString();
             continue;
         }        
    
