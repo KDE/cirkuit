@@ -28,7 +28,7 @@
 #include <KServiceTypeTrader>
 #include <KService>
 #include <KConfigSkeleton>
-#include <KPluginInfo>
+#include <KPluginMetaData>
 
 class Cirkuit::BackendPrivate {
 public:
@@ -147,7 +147,8 @@ QList<Backend*> Backend::availableBackends()
         QString error;
         KService::Ptr service = *iter;
         
-        KPluginFactory *factory = KPluginLoader(service->library()).factory();
+        KPluginLoader loader(service->library());
+        KPluginFactory *factory = loader.factory();
         if (!factory) {
             qCWarning(CIRKUIT_DEBUG) << "error: " << error;
             continue;    
@@ -159,10 +160,10 @@ QList<Backend*> Backend::availableBackends()
             continue;
         }        
    
-        KPluginInfo info(service);
+        KPluginMetaData info(loader);
         backend->d->name = info.name();
-        backend->d->comment = info.comment();
-        backend->d->icon = info.icon();
+        backend->d->comment = info.description();
+        backend->d->icon = info.iconName();
         backend->d->url = info.website();
         backendCache << backend;
     }
