@@ -18,6 +18,9 @@ add_library(cirkuit_tikzbackend
  tikzbackend.cpp
  tikzdocumentsettings.cpp
  tikzgenerator.cpp)
+kcoreaddons_desktop_to_json( cirkuit_tikzbackend tikzbackend.desktop
+                             SERVICE_TYPES cirkuit_backend.desktop
+)
 target_link_libraries( cirkuit_tikzbackend  KF5::KIOCore cirkuitlibs)
 
 install( FILES tikzbackend.desktop  DESTINATION ${SERVICES_INSTALL_DIR}/cirkuit)
