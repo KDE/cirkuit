@@ -26,5 +26,4 @@ kcoreaddons_desktop_to_json( cirkuit_pstricksbackend pstricksbackend.desktop
 )
 target_link_libraries( cirkuit_pstricksbackend  KF5::KIOCore cirkuitlibs)
 
-install( FILES pstricksbackend.desktop  DESTINATION ${SERVICES_INSTALL_DIR}/cirkuit)
 install(TARGETS cirkuit_pstricksbackend DESTINATION ${PLUGIN_INSTALL_DIR})

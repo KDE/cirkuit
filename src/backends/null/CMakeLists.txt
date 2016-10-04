@@ -18,5 +18,4 @@ kcoreaddons_desktop_to_json( cirkuit_nullbackend nullbackend.desktop
 )
 target_link_libraries( cirkuit_nullbackend  cirkuitlibs)
 
-install( FILES nullbackend.desktop  DESTINATION ${SERVICES_INSTALL_DIR}/cirkuit)
 install(TARGETS cirkuit_nullbackend DESTINATION ${PLUGIN_INSTALL_DIR})
