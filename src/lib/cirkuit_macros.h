@@ -31,7 +31,6 @@
 */
 #define K_EXPORT_CIRKUIT_PLUGIN(libname, classname) \
     K_PLUGIN_FACTORY(factory, registerPlugin<classname>();) \
-    K_EXPORT_PLUGIN(factory("cirkuit_" #libname)) \
     K_EXPORT_PLUGIN_VERSION(CIRKUIT_VERSION)
 
 #endif /* CIRKUIT_MACROS_H */
