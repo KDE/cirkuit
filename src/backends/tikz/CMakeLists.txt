@@ -23,5 +23,4 @@ kcoreaddons_desktop_to_json( cirkuit_tikzbackend tikzbackend.desktop
 )
 target_link_libraries( cirkuit_tikzbackend  KF5::KIOCore cirkuitlibs)
 
-install( FILES tikzbackend.desktop  DESTINATION ${SERVICES_INSTALL_DIR}/cirkuit)
 install(TARGETS cirkuit_tikzbackend DESTINATION ${PLUGIN_INSTALL_DIR})
