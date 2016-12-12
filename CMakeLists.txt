@@ -14,6 +14,8 @@ find_package(Qt5 5.2 REQUIRED COMPONENTS Quick)
 find_package(KF5 REQUIRED COMPONENTS I18n ConfigWidgets DBusAddons DocTools KIO NewStuff TextEditor TextWidgets KDELibs4Support)
 find_package(Poppler REQUIRED COMPONENTS Qt5)
 
+set(KDE_INSTALL_USE_QT_SYS_PATHS TRUE)
+
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)

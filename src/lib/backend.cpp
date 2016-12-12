@@ -25,10 +25,10 @@
 #include <QStringList>
 
 #include <KUrl>
-#include <KServiceTypeTrader>
-#include <KService>
 #include <KConfigSkeleton>
-#include <KPluginInfo>
+#include <KPluginFactory>
+#include <KPluginLoader>
+#include <KPluginMetaData>
 
 class Cirkuit::BackendPrivate {
 public:
@@ -137,33 +137,35 @@ QList<Backend*> Backend::availableBackends()
         return backendCache;
     }
 
-    KService::List services;
-    KServiceTypeTrader* trader = KServiceTypeTrader::self();
+    // filter only accecpts plugins which have "Cirkuit/Backend" as their
+    // service type in metadata
+    auto filter = [&](const KPluginMetaData &metaData) {
+        return metaData.serviceTypes().contains(QStringLiteral("Cirkuit/Backend"));
+    };
 
-    services = trader->query("Cirkuit/Backend");
-    
-    KService::List::const_iterator iter;
-    for (iter = services.begin(); iter < services.end(); ++iter) {
-        QString error;
-        KService::Ptr service = *iter;
-        
-        KPluginFactory *factory = KPluginLoader(service->library()).factory();
+    // find backend plugins in standard path (e.g. /usr/lib64/qt5/plugins) using filter from above
+    QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(QString(), filter);
+
+    for (const KPluginMetaData &plugin : plugins) {
+        qCDebug(CIRKUIT_DEBUG) << "trying to load backend:" << plugin.name();
+
+        KPluginLoader loader(plugin.fileName());
+        KPluginFactory *factory = loader.factory();
         if (!factory) {
-            qCWarning(CIRKUIT_DEBUG) << "error: " << error;
+            qCWarning(CIRKUIT_DEBUG) << "error: " << loader.errorString();
             continue;    
         }
         
         Backend* backend = factory->create<Backend>(0);
         if (!backend) {
-            qCWarning(CIRKUIT_DEBUG) << "error: " << error;
+            qCWarning(CIRKUIT_DEBUG) << "error: " << loader.errorString();
             continue;
         }        
    
-        KPluginInfo info(service);
-        backend->d->name = info.name();
-        backend->d->comment = info.comment();
-        backend->d->icon = info.icon();
-        backend->d->url = info.website();
+        backend->d->name = plugin.name();
+        backend->d->comment = plugin.description();
+        backend->d->icon = plugin.iconName();
+        backend->d->url = plugin.website();
         backendCache << backend;
     }
     return backendCache;

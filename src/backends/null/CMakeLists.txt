@@ -13,7 +13,9 @@ ecm_qt_declare_logging_category(NullBackend_SRCS
                                 CATEGORY_NAME org.kde.cirkuitnullbackend)
 
 add_library(cirkuit_nullbackend MODULE ${NullBackend_SRCS} )
+kcoreaddons_desktop_to_json( cirkuit_nullbackend nullbackend.desktop
+                             SERVICE_TYPES cirkuit_backend.desktop
+)
 target_link_libraries( cirkuit_nullbackend  cirkuitlibs)
 
-install( FILES nullbackend.desktop  DESTINATION ${SERVICES_INSTALL_DIR}/cirkuit)
 install(TARGETS cirkuit_nullbackend DESTINATION ${PLUGIN_INSTALL_DIR})
