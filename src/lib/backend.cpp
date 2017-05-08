@@ -143,7 +143,7 @@ QList<Backend*> Backend::availableBackends()
     services = trader->query("Cirkuit/Backend");
     
     KService::List::const_iterator iter;
-    for (iter = services.begin(); iter < services.end(); ++iter) {
+    for (iter = services.constBegin(); iter < services.constEnd(); ++iter) {
         QString error;
         KService::Ptr service = *iter;
         
