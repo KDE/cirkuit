@@ -34,7 +34,7 @@ add_executable(cirkuit
 target_link_libraries(cirkuit KF5::Archive KF5::KIOCore KF5::TextEditor KF5::NewStuff Poppler::Qt5 cirkuitlibs cirkuitwidgets)
 
 install(TARGETS cirkuit ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES cirkuitui.rc DESTINATION ${DATA_INSTALL_DIR}/cirkuit)
+install(FILES cirkuitui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/cirkuit)
 install(FILES cirkuit.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 install(FILES cirkuit_example.knsrc cirkuit_template.knsrc DESTINATION  ${CONFIG_INSTALL_DIR} )
 
