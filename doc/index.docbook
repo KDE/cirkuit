@@ -1,9 +1,7 @@
 <?xml version="1.0" ?>
-<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" 
-"dtd/kdex.dtd" [
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdedbx45.dtd" [
     <!ENTITY cirkuit "<application>Cirkuit</application>">
-    <!ENTITY kappname "&cirkuit;">
-    <!ENTITY package "playground">
     <!ENTITY % addindex "IGNORE">
     <!ENTITY % English "INCLUDE"> 
 ]>
@@ -191,21 +189,11 @@ Documentation Copyright &copy; 2011 Matteo Agostinelli
 &underGPL;           <!-- GPL License -->
 </chapter>
 
-<appendix id="installation">
-<title>Installation</title>
-
-<sect1 id="getting-kapp">
-<title>How to obtain &cirkuit;</title>
-
-&install.intro.documentation;
-
-</sect1>
-
-<sect1 id="requirements">
+<appendix id="requirements">
 <title>Requirements</title>
 
 <para>
-In order to successfully use &cirkuit;, you need &kde; 4 and a working LaTeX
+In order to successfully use &cirkuit;, you need &kde-frameworks; and a working LaTeX
 distribution. The individual backends might have additional requirements. Here
 is a (partial) list of the default backends' requirements:
 </para>
@@ -241,34 +229,6 @@ All required libraries as well as &cantor; itself can be found
 on <ulink url="ftp://ftp.kapp.org">The &cantor; home page</ulink>.
 </para>
 -->
-
-
-<!-- For a list of updates, you may refer to the application web site
-or the ChangeLog file, or ... -->
-<!--
-<para>
-You can find a list of changes at <ulink
-url="http://apps.kde.org/kapp">http://apps.kde.org/kapp</ulink>.
-</para>
--->
-</sect1>
-
-<sect1 id="compilation">
-<title>Compilation and Installation</title>
-
-&install.compile.documentation;
-
-</sect1>
-
-<sect1 id="configuration">
-<title>Configuration</title>
-
-<para>
-  Depending on your system, you may need to adjust the paths to the
-  different applications used by &cirkuit;.
-</para>
-
-</sect1>
 
 </appendix>
 
