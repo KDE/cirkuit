@@ -21,9 +21,6 @@ install(FILES pstricksbackend.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 ki18n_wrap_ui(PstricksBackend_SRCS settings.ui)
 
 add_library(cirkuit_pstricksbackend MODULE ${PstricksBackend_SRCS} )
-kcoreaddons_desktop_to_json( cirkuit_pstricksbackend pstricksbackend.desktop
-                             SERVICE_TYPES cirkuit_backend.desktop
-)
 target_link_libraries( cirkuit_pstricksbackend  KF5::KIOCore cirkuitlibs)
 
 install(TARGETS cirkuit_pstricksbackend DESTINATION ${PLUGIN_INSTALL_DIR})

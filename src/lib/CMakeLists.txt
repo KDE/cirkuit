@@ -24,4 +24,3 @@ set_target_properties( cirkuitlibs PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOV
 generate_export_header(cirkuitlibs BASE_NAME CIRKUIT)
 
 install( TARGETS cirkuitlibs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
-install( FILES cirkuit_backend.desktop DESTINATION ${KDE_INSTALL_KSERVICETYPES5DIR} )

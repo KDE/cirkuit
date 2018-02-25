@@ -21,9 +21,6 @@ install(FILES gnuplotbackend.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 ki18n_wrap_ui(GnuplotBackend_SRCS settings.ui)
 
 add_library(cirkuit_gnuplotbackend MODULE ${GnuplotBackend_SRCS} )
-kcoreaddons_desktop_to_json( cirkuit_gnuplotbackend gnuplotbackend.desktop
-                             SERVICE_TYPES cirkuit_backend.desktop
-)
 target_link_libraries( cirkuit_gnuplotbackend  KF5::KIOCore cirkuitlibs)
 
 install(TARGETS cirkuit_gnuplotbackend DESTINATION ${PLUGIN_INSTALL_DIR})
