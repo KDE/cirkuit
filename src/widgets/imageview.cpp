@@ -80,7 +80,7 @@ void ImageView::setupActions(KActionCollection* actionCollection)
     connect(this, SIGNAL(enableZoomOut(bool)), m_zoomOutAction, SLOT(setEnabled(bool)));
     
     m_zoomFitPageAction = new KToggleAction(i18n("Zoom to fit"), 0);
-    m_zoomFitPageAction->setShortcut(Qt::CTRL + Qt::Key_0);
+    actionCollection->setDefaultShortcut(m_zoomFitPageAction, Qt::CTRL + Qt::Key_1);
     m_zoomFitPageAction->setIcon(KIcon("zoom-fit-best"));
     actionCollection->addAction( "view_zoom_to_fit", m_zoomFitPageAction);
     connect(m_zoomFitPageAction, SIGNAL(triggered()), this, SLOT(updateZoomToFit()));
