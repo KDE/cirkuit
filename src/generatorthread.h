@@ -59,7 +59,7 @@ signals:
     
     void error(const QString& appname, const QString& msg);
     void output(const QString& appname, const QString& msg);
-    void fail();
+    void fail(const int);
     void success();
     
     void backendChanged(QString);

@@ -24,9 +24,9 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QStringListIterator>
-#include <KDebug>
+#include <QDebug>
 #include <KProcess>
-#include <KStandardDirs>
+#include <QStandardPaths>
 
 using namespace Cirkuit;
 
@@ -98,7 +98,8 @@ bool Command::execute(const QString& input, const QStringList& args)
     if (!args.isEmpty()) setArgs(args);
     
     if (!checkExistence()) {
-        kError() << "Program not found!!";
+        //kError(5001) << "error: " << error() << "Program not found!!";
+        qCritical() << "error (log 5001): " << error() << "Program not found!!";
         return false;
     }
     
@@ -129,7 +130,7 @@ bool Command::execute(const QString& input, const QStringList& args)
 
 bool Command::checkExistence() const
 {
-    return !KStandardDirs::findExe(d->name).isEmpty();
+    return !QStandardPaths::findExecutable(d->name).isEmpty();
 }
 
 QString Command::stdError() const
@@ -144,7 +145,7 @@ QString Command::stdOutput() const
 
 bool Command::checkExistence(const QString& name)
 {
-    return !KStandardDirs::findExe(name).isEmpty();
+    return !QStandardPaths::findExecutable(name).isEmpty();
 }
 
 bool Command::parseLog()

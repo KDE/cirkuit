@@ -1,0 +1,540 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Vít Pelčák <vit@pelcak.org>, 2010, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2011-11-18 05:01+0100\n"
+"PO-Revision-Date: 2011-10-19 10:26+0200\n"
+"Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: csX-Generator: Lokalize 1.1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 1.2\n"
+
+#: widgets/imageview.cpp:81
+#, fuzzy
+msgid "Zoom to fit"
+msgstr "Přizpůsobit velikost"
+
+#: widgets/templatechoosedialog.cpp:103 mainwindow.cpp:174
+#, fuzzy
+msgid "Template manager"
+msgstr "Správce předloh"
+
+#: widgets/templatechoosedialog.cpp:193
+#, fuzzy
+msgid "Template name"
+msgstr "Název předlohy"
+
+#: widgets/templatechoosedialog.cpp:193
+#, fuzzy
+msgid "Insert the template name"
+msgstr "Vložit název předlohy"
+
+#: widgets/templatechoosedialog.cpp:217
+#, fuzzy
+msgid "Do you really want to delete the selected template?"
+msgstr "Opravdu chcete smazat vybranou předlohu?"
+
+#: widgets/templatechoosedialog.cpp:218
+#, fuzzy
+msgid "Confirm deletion"
+msgstr "Potvrdit smazání"
+
+#: widgets/backendchoosedialog.cpp:26
+#, kde-format
+msgid ""
+"<h1>%1</h1><div>%2</div><br/><div>See <a href=\"%3\">%3</a> for more "
+"information</div>"
+msgstr ""
+"<h1>%1</h1><div>%2</div><br/><div>Podívejte se na <a href=\"%3\">%3</a> "
+"kvůli dalším informacím</div>"
+
+#: widgets/backendchoosedialog.cpp:33
+#, fuzzy
+#| msgid "Backends"
+msgid "Backend selection"
+msgstr "Výběr jádra"
+
+#: main.cpp:30
+#, fuzzy
+msgid "Cirkuit"
+msgstr "Cirkuit"
+
+#: main.cpp:30
+#, fuzzy
+msgid ""
+"An application to generate publication-ready figures. It is a KDE frontend "
+"for Circuit Macros by J. D. Aplevich, TikZ and Gnuplot. <p>Visit the <a "
+"href=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros>Circuit Macros</a> "
+"and <a href=http://www.texample.net/tikz>TikZ</a> websites for further "
+"information."
+msgstr ""
+"Program na vytváření obrázků připravených pro publikování. Jde o rozhraní "
+"KDE pro Circuit Macros od J. D. Apleviche, TikZ a Gnuplotu. <p>Navštivte "
+"stránky <a href=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros>Circuit "
+"Macros</a> a <a href=http://www.texample.net/tikz>TikZ</a> pro další "
+"informace."
+
+#: main.cpp:30
+#, fuzzy
+#| msgid "(c) 2010 Matteo Agostinelli"
+msgid "(c) 2011 Matteo Agostinelli"
+msgstr "(c) 2011 Matteo Agostinelli"
+
+#: main.cpp:31
+msgid "Matteo Agostinelli"
+msgstr "Matteo Agostinelli"
+
+#: main.cpp:31
+msgid "Maintainer"
+msgstr "Správce"
+
+#: main.cpp:36
+msgid "Document to open"
+msgstr "Dokument k otevření"
+
+#: generatorthread.cpp:55
+#, fuzzy
+msgid "No backend could be selected!"
+msgstr "Nepodařilo se vybrat žádné jádro"
+
+#: mainwindow.cpp:81
+msgid ""
+"A KDE text-editor component could not be found;\n"
+"please check your KDE installation."
+msgstr ""
+"Nepodařilo se nalézt součást textový editor KDE.\n"
+"Prověřte, prosím, svou instalaci KDE."
+
+#. i18n: file: cirkuit_general_settings.ui:65
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: mainwindow.cpp:90 rc.cpp:121
+msgid "Preview"
+msgstr "Náhled"
+
+#: mainwindow.cpp:96
+msgid "Log"
+msgstr "Záznam"
+
+#: mainwindow.cpp:158
+msgid "Export..."
+msgstr "Exportovat..."
+
+#: mainwindow.cpp:162
+#, fuzzy
+msgid "Build preview"
+msgstr "Sestavit náhled"
+
+#: mainwindow.cpp:168
+#, fuzzy
+msgid "Open preview"
+msgstr "Otevřít náhled"
+
+#: mainwindow.cpp:178
+#, fuzzy
+msgid "Show manual"
+msgstr "Ukázat příručku"
+
+#: mainwindow.cpp:182
+#, fuzzy
+msgid "Show examples"
+msgstr "Ukázat příklady"
+
+#: mainwindow.cpp:190
+#, fuzzy
+msgid "Download Examples"
+msgstr "Stáhnout příklady"
+
+#: mainwindow.cpp:195
+#, fuzzy
+msgid "Upload Example"
+msgstr "Nahrát příklad"
+
+#: mainwindow.cpp:200
+msgid "&Open Example"
+msgstr "&Otevřít příklad"
+
+#: mainwindow.cpp:238
+#, fuzzy
+msgid "Open file - Cirkuit"
+msgstr "Otevřít soubor - Cirkuit"
+
+#: mainwindow.cpp:281
+#, fuzzy
+msgid "Save file - Cirkuit"
+msgstr "Uložit soubor - Cirkuit"
+
+#: mainwindow.cpp:313
+#, fuzzy
+msgid "Export image - Cirkuit"
+msgstr "Vyvést obrázek - Cirkuit"
+
+#: mainwindow.cpp:402
+#, fuzzy, kde-format
+msgid "Backend %1 not found"
+msgstr "Jádro %1 nenalezeno"
+
+#: mainwindow.cpp:411
+#, fuzzy
+msgid "No valid backend selected."
+msgstr "Není vybráno žádné platné jádro."
+
+#: mainwindow.cpp:460
+msgid "General"
+msgstr "Obecné"
+
+#: mainwindow.cpp:519
+#, fuzzy
+msgid ""
+"Circuit Macros could not be found on your system. The application will not "
+"work if the macros are not installed. Do you want to proceed with the "
+"installation?"
+msgstr ""
+"Makra Circuit (Circuit Macros) se ve vašem systému najít nepodařilo. Program "
+"nebude pracovat, pokud makra nebudou nainstalována. Chcete pokračovat v "
+"instalaci?"
+
+#: mainwindow.cpp:519
+#, fuzzy
+msgid "Installation needed"
+msgstr "Instalace je nezbytná"
+
+#: mainwindow.cpp:524
+#, fuzzy
+msgid "Downloading Circuit Macros. Please wait..."
+msgstr "Stahují se Circuit Macros. Počkejte, prosím, ..."
+
+#: mainwindow.cpp:532
+#, fuzzy, kde-format
+msgid ""
+"A new version of Circuit Macros (version %1) is available. Do you want to "
+"upgrade?"
+msgstr ""
+"Je dostupná nová verze Circuit Macros (verze %1). Chcete provést povýšení "
+"verze?"
+
+#: mainwindow.cpp:532
+msgid "Upgrade"
+msgstr "Aktualizovat"
+
+#: mainwindow.cpp:550
+#, fuzzy
+msgid "Unable to generate a preview for the current input"
+msgstr "Pro současný vstup nelze vytvořit náhled"
+
+#: mainwindow.cpp:577
+#, fuzzy
+msgid ""
+"No working backend has been found. Cirkuit is unable to generate any figure."
+msgstr ""
+"Nebylo nalezeno žádné pracující jádro. Cirkuit není schopen vytvořit žádný "
+"obrázek."
+
+#: mainwindow.cpp:577
+#, fuzzy
+msgid "No backends found"
+msgstr "Nenalezena žádná jádra"
+
+#: mainwindow.cpp:610
+#, fuzzy, kde-format
+msgid "%1 manual"
+msgstr "%1 ruční"
+
+#: mainwindow.cpp:611
+#, fuzzy, kde-format
+msgid "%1 examples"
+msgstr "%1 příklady"
+
+#: mainwindow.cpp:630
+#, fuzzy
+msgid "Save the current document before uploading it"
+msgstr "Uložit nynější dokument před jeho nahráním"
+
+#: rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Vít Pelčák"
+
+#: rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "vit@pelcak.org"
+
+#. i18n: file: backends/circuitmacros/circuitmacrosbackend.kcfg:18
+#. i18n: ectx: label, entry (templateurl), group (CircuitMacrosBackend)
+#: rc.cpp:5
+#, fuzzy
+msgid "The location of the Circuit Macros template."
+msgstr "Umístění předlohy Circuit Macros."
+
+#. i18n: file: backends/circuitmacros/circuitmacrosbackend.kcfg:22
+#. i18n: ectx: label, entry (tikztemplateurl), group (CircuitMacrosBackend)
+#: rc.cpp:8
+#, fuzzy
+msgid "The location of the Circuit Macros template with TikZ backend."
+msgstr "Umístění předlohy Circuit Macros s jádrem TikZ."
+
+#. i18n: file: backends/circuitmacros/circuitmacrosbackend.kcfg:26
+#. i18n: ectx: label, entry (latexargs), group (CircuitMacrosBackend)
+#. i18n: file: backends/tikz/tikzbackend.kcfg:14
+#. i18n: ectx: label, entry (latexargs), group (TikzBackend)
+#. i18n: file: backends/pstricks/pstricksbackend.kcfg:14
+#. i18n: ectx: label, entry (latexargs), group (PstricksBackend)
+#. i18n: file: cirkuit.kcfg:38
+#. i18n: ectx: label, entry (LatexArgs), group (general)
+#: rc.cpp:11 rc.cpp:47 rc.cpp:54 rc.cpp:106
+#, fuzzy
+msgid "The default arguments called in the latex executable"
+msgstr "Výchozí argumenty volané v latexovém spustitelném souboru"
+
+#. i18n: file: backends/circuitmacros/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_template)
+#. i18n: file: backends/circuitmacros/settings.ui:27
+#. i18n: ectx: property (text), widget (QLabel, lbl_tikztemplate)
+#. i18n: file: backends/gnuplot/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_tikztemplate)
+#. i18n: file: backends/tikz/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_tikztemplate)
+#. i18n: file: backends/pstricks/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_pstrickstemplate)
+#: rc.cpp:16 rc.cpp:19 rc.cpp:38 rc.cpp:41 rc.cpp:58
+#, fuzzy
+msgid "Template path:"
+msgstr "Cesta k předloze:"
+
+#. i18n: file: backends/circuitmacros/settings.ui:37
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: rc.cpp:22
+#, fuzzy
+msgid "Pic interpreter"
+msgstr "Překladač fotek"
+
+#. i18n: file: backends/circuitmacros/settings.ui:45
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_PicInterpreter)
+#: rc.cpp:25
+#, fuzzy
+msgid "dpic + PSTricks"
+msgstr "dpic + PSTricks"
+
+#. i18n: file: backends/circuitmacros/settings.ui:50
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_PicInterpreter)
+#: rc.cpp:28
+#, fuzzy
+msgid "dpic + TikZ"
+msgstr "dpic + TikZ"
+
+#. i18n: file: backends/circuitmacros/settings.ui:55
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_PicInterpreter)
+#: rc.cpp:31
+#, fuzzy
+msgid "gpic"
+msgstr "gpic"
+
+#. i18n: file: backends/gnuplot/gnuplotbackend.kcfg:10
+#. i18n: ectx: label, entry (templateurl), group (GnuplotBackend)
+#: rc.cpp:34
+#, fuzzy
+msgid "The location of the Gnuplot template."
+msgstr "Umístění předlohy pro Gnuplot."
+
+#. i18n: file: backends/tikz/tikzbackend.kcfg:10
+#. i18n: ectx: label, entry (templateurl), group (TikzBackend)
+#: rc.cpp:44
+#, fuzzy
+msgid "The location of the TikZ template."
+msgstr "Umístění předlohy pro TikZ."
+
+#. i18n: file: backends/pstricks/pstricksbackend.kcfg:10
+#. i18n: ectx: label, entry (templateurl), group (PstricksBackend)
+#: rc.cpp:51
+#, fuzzy
+msgid "The location of the PSTricks template."
+msgstr "Umístění předlohy pro PSTricks."
+
+#. i18n: file: widgets/backendchooser.ui:29
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:61
+msgid "Choose the Backend to use:"
+msgstr "Vybrat podpůrnou vrstvu, která se bude používat:"
+
+#. i18n: file: widgets/backendchooser.ui:59
+#. i18n: ectx: property (text), widget (QCheckBox, makeDefault)
+#: rc.cpp:64
+msgid "Make this the default backend"
+msgstr "Nastavit toto jako vychozí podpůdnou vrstvu"
+
+#. i18n: file: widgets/templatechooser.ui:17
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:67
+msgid "Backend:"
+msgstr "Podpůrná vrstva:"
+
+#. i18n: file: widgets/templatechooser.ui:48
+#. i18n: ectx: property (text), widget (KPushButton, btnAdd)
+#: rc.cpp:70
+msgid "New"
+msgstr "Nový"
+
+#. i18n: file: widgets/templatechooser.ui:55
+#. i18n: ectx: property (text), widget (KPushButton, btnEdit)
+#: rc.cpp:73
+msgid "Edit"
+msgstr "Upravit"
+
+#. i18n: file: widgets/templatechooser.ui:62
+#. i18n: ectx: property (text), widget (KPushButton, btnRemove)
+#: rc.cpp:76
+msgid "Remove"
+msgstr "Odstranit"
+
+#. i18n: file: widgets/templatechooser.ui:69
+#. i18n: ectx: property (text), widget (KPushButton, btnDownload)
+#: rc.cpp:79
+msgid "Download"
+msgstr "Stáhnout"
+
+#. i18n: file: widgets/templatechooser.ui:76
+#. i18n: ectx: property (text), widget (KPushButton, btnUpload)
+#: rc.cpp:82
+msgid "Upload"
+msgstr "Odeslat"
+
+#. i18n: file: cirkuit.kcfg:10
+#. i18n: ectx: label, entry (DefaultBackend), group (general)
+#: rc.cpp:85
+#, fuzzy
+msgid "Default backend."
+msgstr "Výchozí jádro."
+
+#. i18n: file: cirkuit.kcfg:14
+#. i18n: ectx: label, entry (AutoSelectBackend), group (general)
+#. i18n: file: cirkuit_general_settings.ui:52
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoSelectBackend)
+#: rc.cpp:88 rc.cpp:118
+#, fuzzy
+msgid "Automatic backend selection"
+msgstr "Automatický výběr jádra"
+
+#. i18n: file: cirkuit.kcfg:18
+#. i18n: ectx: label, entry (RefreshInterval), group (general)
+#: rc.cpp:91
+#, fuzzy
+msgid "Preview generation refresh timeout."
+msgstr "Přestávka pro obnovu vytvoření náhledu."
+
+#. i18n: file: cirkuit.kcfg:22
+#. i18n: ectx: label, entry (AutoRefresh), group (general)
+#: rc.cpp:94
+#, fuzzy
+msgid "Enable automatic refresh."
+msgstr "Povolit automatickou obnovu."
+
+#. i18n: file: cirkuit.kcfg:26
+#. i18n: ectx: label, entry (RefreshOnSave), group (general)
+#: rc.cpp:97
+#, fuzzy
+msgid "Refresh when document is saved."
+msgstr "Obnovit při uložení dokumentu."
+
+#. i18n: file: cirkuit.kcfg:30
+#. i18n: ectx: label, entry (ZoomToFit), group (general)
+#: rc.cpp:100
+#, fuzzy
+msgid "Automatically zoom the preview to fit the preview widget"
+msgstr "Automaticky zvětšit náhled tak, aby se přizpůsobil oknu s náhledem"
+
+#. i18n: file: cirkuit.kcfg:34
+#. i18n: ectx: label, entry (ResolutionPpm), group (general)
+#: rc.cpp:103
+#, fuzzy
+msgid "PNG and JPEG resolution."
+msgstr "Rozlišení PNG a JPEG."
+
+#. i18n: file: cirkuit_general_settings.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, CirkuitGeneralForm)
+#: rc.cpp:109
+msgid "General settings"
+msgstr "Obecná nastavení"
+
+#. i18n: file: cirkuit_general_settings.ui:23
+#. i18n: ectx: property (title), widget (QGroupBox, groupBackend)
+#: rc.cpp:112
+msgid "Backends"
+msgstr "Podpůrné vrstvy"
+
+#. i18n: file: cirkuit_general_settings.ui:29
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:115
+#, fuzzy
+msgid "Default backend:"
+msgstr "Výchozí jádro:"
+
+#. i18n: file: cirkuit_general_settings.ui:71
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:124
+#, fuzzy
+msgid "Preview refresh interval (sec):"
+msgstr "Interval pro obnovu náhledu (s):"
+
+#. i18n: file: cirkuit_general_settings.ui:103
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoRefresh)
+#: rc.cpp:127
+#, fuzzy
+msgid "Automatic preview generation"
+msgstr "Automatické vytvoření náhledu"
+
+#. i18n: file: cirkuit_general_settings.ui:113
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RefreshOnSave)
+#: rc.cpp:130
+#, fuzzy
+msgid "Refresh the preview when saving the document"
+msgstr "Obnovit náhled při uložení dokumentu"
+
+#. i18n: file: cirkuit_general_settings.ui:129
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:133
+#, fuzzy
+msgid "PNG and JPEG resolution (DPI):"
+msgstr "Rozlišení PNG a JPEG (DPI):"
+
+#. i18n: file: cirkuitui.rc:5
+#. i18n: ectx: Menu (file)
+#: rc.cpp:136
+msgid "&File"
+msgstr "&Soubor"
+
+#. i18n: file: cirkuitui.rc:26
+#. i18n: ectx: Menu (build)
+#: rc.cpp:139
+msgid "&Preview"
+msgstr "Náhle&d"
+
+#. i18n: file: cirkuitui.rc:33
+#. i18n: ectx: Menu (view)
+#: rc.cpp:142
+msgid "&View"
+msgstr "Po&hled"
+
+#. i18n: file: cirkuitui.rc:46
+#. i18n: ectx: Menu (help)
+#: rc.cpp:145
+msgid "&Help"
+msgstr "Nápo&věda"
+
+#. i18n: file: cirkuitui.rc:54
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:148
+msgid "Main Toolbar"
+msgstr "Hlavní nástrojová lišta"
+
+
+
+
+#, fuzzy

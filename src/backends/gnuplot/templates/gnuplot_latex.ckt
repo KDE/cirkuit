@@ -1,18 +1,33 @@
 %%backend=gnuplot%%
 \documentclass{article}
 \usepackage[utf8x]{inputenc}
-\usepackage{tikz,amsmath,siunitx}
+\usepackage{amsmath,siunitx}
 \usepackage{gnuplot-lua-tikz}
 \usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
-\usepackage[graphics,tightpage,active]{preview}
-\PreviewEnvironment{tikzpicture}
-\PreviewEnvironment{equation}
-\PreviewEnvironment{equation*}
-\newlength{\imagewidth}
-\newlength{\imagescale}
+\usetikzlibrary{positioning,patterns,decorations.markings}
 \pagestyle{empty}
 
 \begin{document}
 \thispagestyle{empty}
+
+% ppl - palatino
+% pbk = bookman
+% phv = helvetiva
+% cmtt - computer modern
+% cmr  - computer modern roman - default
+% ptm  - times
+% cmss - computer modern san serif
+% lmtt - latin modern typewriter
+% jkpl - kp light
+% jkp  - kp
+% jkptt - teletype
+% jkpss  - san serif
+% see: http://www.tug.dk/FontCatalogue/
+
+{\fontfamily{ppl}\selectfont
+\newbox
+\graph
 \input %%SOURCE%%
+\noindent
+} % end fontfamily
 \end{document}

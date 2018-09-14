@@ -21,7 +21,7 @@
 #ifndef TIKZBACKEND_H
 #define TIKZBACKEND_H
 
-#include "backend.h"
+#include "backend_interface.h"
 
 #include <QList>
 #include <QVariant>
@@ -35,6 +35,8 @@ namespace Cirkuit
 class TikzBackend : public Cirkuit::Backend
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "tikzbackend" FILE "tikzbackend.json")
+  Q_INTERFACES(Cirkuit::Backend)
 public:
     explicit TikzBackend( QObject* parent = 0, const QList<QVariant> args = QList<QVariant>());
     ~TikzBackend();
@@ -46,8 +48,8 @@ public:
     virtual KConfigSkeleton* config() const;
     virtual QWidget* settingsWidget(QWidget* parent) const;
     
-    virtual KUrl helpUrl() const;
-    virtual KUrl examplesUrl() const;
+    virtual QString helpUrl() const;
+    virtual QString examplesUrl() const;
     
     QString id() const;
     

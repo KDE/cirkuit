@@ -29,7 +29,7 @@ class NullGenerator : public Cirkuit::Generator
 public:
     explicit NullGenerator(Cirkuit::Backend* backend = 0, QObject* parent = 0);
     virtual ~NullGenerator();
-    virtual bool convert(const Cirkuit::Format& in, const Cirkuit::Format& out);
+    virtual int convert(const Cirkuit::Format& in, const Cirkuit::Format& out);
 };
 
 #endif // NULLGENERATOR_H

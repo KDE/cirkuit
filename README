@@ -1,40 +1,81 @@
 Description
 -----------
-Cirkuit is a KDE4 interface for LaTeX graphic tools (such as TikZ, Gnuplot, Circuit Macros) to produce publication-ready pictures.
 
-Cirkuit can also be used as a GUI for Circuit macros by Dwight Aplevich, which is a set of macros for drawing high-quality line diagrams to include in TeX, LaTeX, or similar documents. Cirkuit builds a live preview of the source code and can export the resulting images in various formats. Cirkuit supports also live preview of TikZ and Gnuplot sources.
+Cirkuit is a GUI interface for LaTeX graphic tools (such as TikZ, Gnuplot,
+Circuit Macros) to produce publication-ready pictures.
+
+Cirkuit can also be used as a GUI for Circuit macros by Dwight Aplevich, which
+is a set of macros for drawing high-quality line diagrams to include in TeX,
+LaTeX, or similar documents. Cirkuit builds a live preview of the source code
+and can export the resulting images in various formats. Cirkuit supports also
+live preview of TikZ and Gnuplot sources.
+
+MA
+
+
+Notes for version 0.5.0
+-----------------------
+
+Version 0.5.0 of Cirkuit is a port of version 0.4.3 to Qt5 and KF5. It will
+run on recent Linux distributions (tested on Mint 19). Error reporting has
+been improved and some examples included in the distribution.
+
+Cirkuits supports 'backends' for m4 circuit macros, pstricks, tikz and
+gnuplot. It is probably most useful for the circuit macros. For Pstricks
+and Tikz there are alternatives that may be more satisfactory: QTikz and
+the the on-line www.overleaf.com. The Gnuplot backend does not work
+currently with Greek characters.
+
+m4 is now executed with the library path set with -I option, so statements
+such as include(HOMELIB_`'darrow.m4) can generally be removed from
+m4 scripts.
+
+If upgrading from Cirkuit 0.4.3 copy your templates to
+~/.local/share/cirkuit/templates/
+
+AG
+
 
 Source code
 -----------
-Cirkuit source code is now hosted on git.kde.org. The project homepage is http://projects.kde.org/cirkuit.
 
-Requirements
-------------
-To run this application you need to have the following applications installed:
+Cirkuit source code is now hosted on git.kde.org. The project homepage is
+http://projects.kde.org/cirkuit.
 
-* latex
-* m4
-* gs
-* dvips
-* epstopdf
-* ps2eps
 
-On Debian-based systems (e.g. Ubuntu/Kubuntu) type the following command to install the required apps:
+Build instructions
+------------------
 
-sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-pstricks texlive-base-bin texlive-extra-utils preview-latex-style m4 ghostscript pdf2svg
+Open a terminal and type:
 
-To build Cirkuit you need CMake and the KDE4 and Qt4 dev packages. To install them on Debian-based systems, type
+sudo apt-get install g++ cmake extra-cmake-modules qtbase5-dev libkf5windowsystem5 libkf5texteditor-dev libkf5archive-dev libkf5newstuff-dev libkf5crash-dev libpoppler-qt5-dev
 
-sudo apt-get install cmake kdelibs5-dev libqt4-dev libpoppler-qt4
 
-Packages are also available for Arch Linux (in AUR).
-
-To build the application from source, follow the usual KDE4/CMake procedure:
-
+Then:
 tar xzvf cirkuit-x.y.z.tar.gz
 cd cirkuit-x.y.z
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`
-make
+cmake .. && make
 sudo make install
+
+To make it run you will a number of KF5 and Qt5 components.
+You also need TexLive and a number of its packages. If LaTeX
+reports that style files (*.sty) are missing use web searches
+to identify the packages needed.
+
+Most of the required packages can be loaded with:
+
+sudo apt-get install epstool dpic ghostscript m4 pdf2svg imagemagick
+
+sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-pstricks texlive-base-bin texlive-extra-utils preview-latex-style texlive-font-utils texlive-latex-extra 
+
+You might also need texlive-fonts-extra texlive-fonts-recommended and lmodern
+
+To look at the help files (Help menu) a pdf reader such as Okular must be installed.
+
+See: https://wwwu.uni-klu.ac.at/magostin/cirkuit.html
+
+
+
+

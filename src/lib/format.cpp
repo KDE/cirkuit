@@ -115,13 +115,11 @@ Format Format::fromExtension(const QString& extension)
         return Format(Gif);
     } else if (extension.contains("tex")) {
         return Format(Tex);
+    } else if (extension.contains("html")) {
+        return Format(Html);
     }
     
     return Format(Unknown);
 }
 
-Format Format::fromMimeType(KMimeType::Ptr mime)
-{
-    return Format::fromExtension(mime->mainExtension());
-}
 

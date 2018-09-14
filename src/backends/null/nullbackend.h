@@ -22,7 +22,7 @@
 #ifndef _NULLBACKEND_H
 #define _NULLBACKEND_H
 
-#include "backend.h"
+#include "backend_interface.h"
 
 #include <QList>
 #include <QVariant>
@@ -36,6 +36,8 @@ namespace Cirkuit
 class NullBackend : public Cirkuit::Backend
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "nullbackend" FILE "nullbackend.json")
+  Q_INTERFACES(Cirkuit::Backend)
   public:
     explicit NullBackend( QObject* parent = 0, const QList<QVariant> args = QList<QVariant>());
     ~NullBackend();

@@ -21,7 +21,7 @@
 #ifndef GNUPLOTBACKEND_H
 #define GNUPLOTBACKEND_H
 
-#include "backend.h"
+#include "backend_interface.h"
 
 #include <QList>
 #include <QVariant>
@@ -35,6 +35,9 @@ namespace Cirkuit
 class GnuplotBackend : public Cirkuit::Backend
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "gnuplotbackend" FILE "gnuplotbackend.json")
+  Q_INTERFACES(Cirkuit::Backend)
+
 public:
     explicit GnuplotBackend( QObject* parent = 0, const QList<QVariant> args = QList<QVariant>());
     ~GnuplotBackend();
@@ -45,8 +48,8 @@ public:
     Cirkuit::Generator* generator() const;
     virtual KConfigSkeleton* config() const;
     virtual QWidget* settingsWidget(QWidget* parent) const;
-    virtual KUrl helpUrl() const;
-    virtual KUrl examplesUrl() const;
+    virtual QString helpUrl() const;
+    virtual QString examplesUrl() const;
     
     QString id() const;
     

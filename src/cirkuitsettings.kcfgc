@@ -1,4 +1,4 @@
-File=cirkuit.kcfg 
+File=cirkuit.kcfg
 ClassName=CirkuitSettings 
 Singleton=true
 Mutators=true

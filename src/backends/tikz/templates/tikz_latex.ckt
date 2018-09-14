@@ -1,16 +1,18 @@
 %%backend=tikz%%
-\documentclass{article}
-\usepackage[utf8x]{inputenc}
-\usepackage{tikz,amsmath}
-\usepackage[siunitx]{circuitikz}
+%\documentclass{article}
+\documentclass[tikz, border=10pt, 12pt]{standalone}
 
-\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage[europeanresistors,americaninductors,siunitx]{circuitikz}
+\usetikzlibrary{arrows,decorations,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
 \usepackage[graphics,tightpage,active]{preview}
+\usepackage{smartdiagram}
+
 \PreviewEnvironment{tikzpicture}
 \PreviewEnvironment{equation}
 \PreviewEnvironment{equation*}
-\newlength{\imagewidth}
-\newlength{\imagescale}
 \pagestyle{empty}
 
 \begin{document}

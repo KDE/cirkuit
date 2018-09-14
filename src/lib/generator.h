@@ -23,11 +23,11 @@
 
 #include "cirkuit_export.h"
 #include "format.h"
-
+#include <KLocalizedString>
 #include <QImage>
 
 class QFileInfo;
-class KTemporaryFile;
+class QTemporaryFile;
 
 namespace Cirkuit
 {
@@ -64,9 +64,12 @@ public:
     /**
      * This function returns the temporary working directory where all the 
      * conversions will take place.
-     * @return the url of the working directory
+     * The directory is created if it does not exist.
+     * @return the absolute path of working directory as String.
      */
-    static KUrl workingDir();
+    bool createWorkingDir() const; // create working dir. Return true if successful.
+
+    QString getWorkingDir() const;
     
     /**
      * Check if a format is present in the working directory
@@ -102,14 +105,14 @@ public slots:
      * @param output the output format
      * @return true if the operation is successful
      */
-    virtual bool convert(const Format& input, const Format& output);
+    virtual int convert(const Format& input, const Format& output);
     /**
      * Similar to convert, but the starting point is the source code defined in the document
      * @param doc the document holding the source code
      * @param output the output format
      * @return true if the operation is successful
      */
-    virtual bool generate(Document* doc, const Format& output = Format::Pdf);
+    virtual int generate(Document* doc, const Format& output = Format::Pdf);
     
     /**
      * Sets the current document
@@ -143,11 +146,10 @@ signals:
     /**
      * Signal emitted if the generation failed
      */
-    void fail();
+    void fail(const int);
     /**
      * Signal emitted when an error occurs
-     * @param appname the application that caused the error
-     * @param msg the error message
+     * e.g. shows error i18n("Unable to generate a preview for the current input")
      */
     void error(const QString& appname, const QString& msg);
     /**
@@ -167,7 +169,7 @@ protected:
     /**
      * A temporary file
      */
-    KTemporaryFile* tempFile() const;
+    QTemporaryFile* tempFile() const;
     /**
      * Information about the temporary file
      */
@@ -178,6 +180,7 @@ protected:
     Cirkuit::Backend* backend() const;
   
     GeneratorPrivate* d;
+
 };
 
 }

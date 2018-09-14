@@ -23,23 +23,23 @@
 #include <QFile>
 #include <QRegExp>
 
-#include <KDebug>
-#include <KGlobal>
-#include <KStandardDirs>
+#include <QDebug>
+#include <QStandardPaths>
 #include <QDir>
+
 
 using namespace Cirkuit;
 
 class Cirkuit::DocumentTemplatePrivate
 {
 public:
-    KUrl path;
+    QString fnpath;
     QString backend;
 };
 
-DocumentTemplate::DocumentTemplate(const KUrl& path, QObject* parent): QObject(parent), d(new DocumentTemplatePrivate)
+DocumentTemplate::DocumentTemplate(const QString& fnpath, QObject* parent): QObject(parent), d(new DocumentTemplatePrivate)
 {
-    d->path = path;
+    d->fnpath = fnpath;
     readBackend();
 }
 
@@ -48,16 +48,16 @@ DocumentTemplate::~DocumentTemplate()
     delete d;
 }
 
-KUrl DocumentTemplate::path() const
+QString DocumentTemplate::getDocFnPath() const
 {
-    return d->path;
+    return QString( d->fnpath);
 }
 
 void DocumentTemplate::readBackend() const
 {
     d->backend.clear();
     
-    QFile file(d->path.path());
+    QFile file(d->fnpath);
     file.open(QIODevice::ReadOnly);
     QTextStream stream(&file);
     
@@ -76,14 +76,14 @@ QString DocumentTemplate::backend() const
     return d->backend;
 }
 
-QString DocumentTemplate::name() const
+QString DocumentTemplate::getDocFn() const
 {
-    return d->path.fileName();
+    return QFileInfo(d->fnpath).fileName();
 }
 
 QString DocumentTemplate::insert(const QString& code, const QString& keyword)
 {
-    QFile file(d->path.path());
+    QFile file(d->fnpath);
     file.open(QIODevice::ReadOnly);
     QTextStream stream(&file);
     QString output = stream.readAll().replace(keyword, code, Qt::CaseInsensitive);
@@ -93,7 +93,7 @@ QString DocumentTemplate::insert(const QString& code, const QString& keyword)
 
 bool DocumentTemplate::operator==(const Cirkuit::DocumentTemplate& rhs) const
 {
-    return this->path().fileName() == rhs.path().fileName();
+    return QFileInfo(d->fnpath).fileName() == rhs.getDocFn();
 }
 
 static QList<DocumentTemplate*> templateCache = QList<DocumentTemplate*>();
@@ -144,16 +144,21 @@ QList< DocumentTemplate* > TemplateManager::backendFilter(const QList<DocumentTe
 
 void TemplateManager::scanTemplates()
 {
+    qDebug() << "SCANNING TEMPLATES";
     templateCache.clear();
     QDir templates;
     DocumentTemplate* t;
-    QStringList dirs = KGlobal::dirs()->findDirs("appdata", "templates");
-    
+    QStringList dirs;
+
+    // Preferred location for templates is ~/.local/share/cirkuit/templates, but also look in /usr/local/share/cirkuit/templates
+    dirs << QStandardPaths::locateAll(QStandardPaths::AppDataLocation, "templates", QStandardPaths::LocateDirectory)
+         << QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "templates", QStandardPaths::LocateDirectory);
+
     for(QStringList::iterator i = dirs.begin(); i != dirs.end(); ++i) {
         templates = QDir(*i);
         
         for (uint j = 0; j < templates.count(); ++j) {
-            KUrl fileUrl(templates.path() + '/' + templates[j]);
+            QString fileUrl(templates.path() + '/' + templates[j]);
             t = new DocumentTemplate(fileUrl);
             
             if (t->backend().isEmpty() || checkDuplicate(t)) {

@@ -24,13 +24,14 @@
 #include "settings.h"
 #include "logparser.h"
 #include "dpiclogparser.h"
+#include "failcodes.h"
 
 #include <QDir>
 
-#include <KDebug>
-#include <KProcess>
-#include <KTemporaryFile>
-#include <KStandardDirs>
+#include <QDebug>
+#include <QProcess>
+#include <QTemporaryFile>
+#include <QStandardPaths>
 
 
 using namespace Cirkuit;
@@ -45,38 +46,41 @@ CircuitMacrosGenerator::~CircuitMacrosGenerator()
 
 }
 
-bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
+int CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
-    kDebug() << "Inside the CircuitMacros generator...";
     
-      // Check if the conversion can be handled by the super-class
-    bool done = Cirkuit::Generator::convert(in, out);
-    if (done) return true;
-    
+    // Check if the conversion can be handled by the super-class
+    int fail = Cirkuit::Generator::convert(in, out);
+    if (fail==NoFail) return NoFail;
+    if (fail != Fail_unimplemented_conversion) return fail;
+
+    qDebug() << "Inside the CircuitMacros generator...";
+
     if (in == Format::Source) {
         tempFile()->open();
         QTextStream tmpStream(tempFile());
         tmpStream << document()->text();
         tempFile()->close();    
         
-        QStringList env = KProcess::systemEnvironment();
-        env << QString("M4PATH=%1:%2").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(QDir(document()->directory()).absolutePath());
-                
         QStringList m4args;
+        // Specify library directory (the circuit macros) with -I
+        // Assume we have a recent m4 installed
+        m4args << QString("-I") << QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                          "cirkuit/circuit_macros",QStandardPaths::LocateDirectory);
+
         if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_ps) {
-            m4args << KStandardDirs::locate("data", "cirkuit/circuit_macros/pstricks.m4");
+            m4args << QString("pstricks.m4");
         } else if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_pgf) {
-            m4args << KStandardDirs::locate("data", "cirkuit/circuit_macros/pgf.m4");
+            m4args << QString("pgf.m4");
         } else if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::gpic) {
-            m4args << KStandardDirs::locate("data", "cirkuit/circuit_macros/gpic.m4");
+            m4args << QString("gpic.m4");
         }
-        m4args << KStandardDirs::locate("data", "cirkuit/circuit_macros/libcct.m4")
-               << tempFileInfo()->fileName();
+        m4args << QString("libcct.m4") << tempFileInfo()->fileName();
 
         Command* m4command = new Command("m4", "", m4args);
-        m4command->setEnvironment(env);
-        m4command->setWorkingDirectory(workingDir().path());
-        if (!execute(m4command)) return false;
+     //   m4command->setEnvironment(env);
+        m4command->setWorkingDirectory(getWorkingDir()); // the working directory is searched first by m4
+        if (!execute(m4command)) return Fail_m4;
         
         QString m4out = m4command->stdOutput();
         
@@ -86,15 +90,18 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
             picArgs << "-p";        
             picCommand = new Command("dpic", m4out, picArgs);
             picCommand->setLogParser(new DpicLogParser);
+            if (!execute(picCommand)) return Fail_dpic;
         } else if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_pgf) {
             picArgs << "-g";       
             picCommand = new Command("dpic", m4out, picArgs);
             picCommand->setLogParser(new DpicLogParser);
+            if (!execute(picCommand)) return Fail_dpic;
         } else {
             picArgs << "-t";       
             picCommand = new Command("pic", m4out, picArgs);
+            if (!execute(picCommand)) return Fail_pic;
         }
-        if (!execute(picCommand)) return false;
+
             
         QString picout = picCommand->stdOutput();
         
@@ -105,12 +112,14 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
             QTextStream stream(&fileout);
             stream << picout;
             fileout.close();
-            return true;
+            return NoFail;
         }
         
         QStringList environment = QProcess::systemEnvironment();
-        // the following environment variable is needed to find boxdims.sty in the circuit maaros distribution
-        QString dirString = QString("TEXINPUTS=.:%1:%2:").arg(KStandardDirs::locate("data", "cirkuit/circuit_macros/")).arg(QDir(document()->directory()).absolutePath());
+        // LaTeX searches (in order) circuit_macros dir, dir that contains editor document, local dir
+        // The search of circuit_macros is needed to find boxdims.sty
+        QString dirString = QString("TEXINPUTS=%1:%2:.:").arg(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                               "cirkuit/circuit_macros/",QStandardPaths::LocateDirectory)).arg(QDir(document()->directory()).absolutePath());
         environment << dirString;
         
         QStringList latexArgs;
@@ -125,27 +134,42 @@ bool CircuitMacrosGenerator::convert(const Cirkuit::Format& in, const Cirkuit::F
             DocumentTemplate latexTemplate(CircuitMacrosSettings::tikztemplateurl().path());
             latexDoc = latexTemplate.insert(picout);
             latexCmd = new Command("pdflatex", latexDoc, latexArgs);
+            latexCmd->setWorkingDirectory(getWorkingDir());
+            latexCmd->setEnvironment(environment);
+            latexCmd->setLogParser(new LatexLogParser);
+            if (!execute(latexCmd)) return Fail_LateXExec;
         } else {
             DocumentTemplate latexTemplate(CircuitMacrosSettings::templateurl().path());
             latexDoc = latexTemplate.insert(picout);
             latexCmd = new Command("latex", latexDoc, latexArgs);
+            latexCmd->setWorkingDirectory(getWorkingDir());
+            latexCmd->setEnvironment(environment);
+            latexCmd->setLogParser(new LatexLogParser);
+            if (!execute(latexCmd)) Fail_PdfLateXExec;
         }              
-        latexCmd->setWorkingDirectory(workingDir().path());
-        latexCmd->setEnvironment(environment);
-        latexCmd->setLogParser(new LatexLogParser);
-        if (!execute(latexCmd)) return false;
+
     
-        // Now that a DVI has been generated, convert it to the
+        // Now that a PDF or DVI has been generated, convert it to the
         // desired output format
         
-        if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_pgf) {        
+        if (CircuitMacrosSettings::picInterpreter() == CircuitMacrosSettings::EnumPicInterpreter::dpic_pgf)
+        {
+            if (!QFileInfo(formatPath(Format::Pdf)).exists()) // check we have the pdf file in temp directory.
+            {
+               return Fail_PdfLateXNoOutput;
+            }
             return Generator::convert(Format::Pdf, out);
-        } else {
+        } else
+        {
+            if (!QFileInfo(formatPath(Format::Dvi)).exists()) // check we have the dvi file in temp directory.
+            {
+               return Fail_LateXNoOutput;
+            }
             return Generator::convert(Format::Dvi, out);
         }
+        return NoFail;
         
-        return true;
     }
     
-    return false;
+    return NoFail; // nothing to be done
 }

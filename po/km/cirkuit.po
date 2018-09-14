@@ -1,0 +1,484 @@
+# translation of cirkuit.po to Khmer
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: cirkuit\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2011-11-18 05:01+0100\n"
+"PO-Revision-Date: 2011-06-28 07:39+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Language: km-KH\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: widgets/imageview.cpp:81
+msgid "Zoom to fit"
+msgstr "ពង្រីក​ឲ្យ​សម"
+
+#: widgets/templatechoosedialog.cpp:103 mainwindow.cpp:174
+msgid "Template manager"
+msgstr "កម្មវិធី​គ្រប់គ្រង​ពុម្ព"
+
+#: widgets/templatechoosedialog.cpp:193
+msgid "Template name"
+msgstr "ឈ្មោះពុម្ព​"
+
+#: widgets/templatechoosedialog.cpp:193
+msgid "Insert the template name"
+msgstr "បញ្ចូល​ឈ្មោះ​ពុម្ព"
+
+#: widgets/templatechoosedialog.cpp:217
+msgid "Do you really want to delete the selected template?"
+msgstr "តើ​អ្នក​ពិតជា​ចង់​លុប​ពុម្ព​ដែល​បាន​ជ្រើស​នេះ​មែន​ទេ ?"
+
+#: widgets/templatechoosedialog.cpp:218
+msgid "Confirm deletion"
+msgstr "អះអាង​ការ​លុប"
+
+#: widgets/backendchoosedialog.cpp:26
+#, kde-format
+msgid ""
+"<h1>%1</h1><div>%2</div><br/><div>See <a href=\"%3\">%3</a> for more "
+"information</div>"
+msgstr ""
+"<h1>%1</h1><div>%2</div><br/><div>មើល <a href=\"%3\">%3</a> សម្រាប់​ព័ត៌មាន​បន្ថែម</"
+"div>"
+
+#: widgets/backendchoosedialog.cpp:33
+msgid "Backend selection"
+msgstr "ការ​ជ្រើស​កម្មវិធី​ខាងក្រោយ"
+
+#: main.cpp:30
+msgid "Cirkuit"
+msgstr "Cirkuit"
+
+#: main.cpp:30
+msgid ""
+"An application to generate publication-ready figures. It is a KDE frontend "
+"for Circuit Macros by J. D. Aplevich, TikZ and Gnuplot. <p>Visit the <a "
+"href=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros>Circuit Macros</a> "
+"and <a href=http://www.texample.net/tikz>TikZ</a> websites for further "
+"information."
+msgstr ""
+"កម្មវិធី​សម្រាប់​បង្កើត​រូបភាព​ពន្យល់​ការ​បោះពុម្ព​រួចហើយ ។ វា​គឺជា​កម្មវិធី​ខាងមុខ​របស់​ KDE សម្រាប់ "
+"Circuit Macros by J. D. Aplevich, TikZ and Gnuplot. <p>ចូល​មើល​តំបន់​បណ្ដាញ <a "
+"href=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros>Circuit Macros</a> "
+"និង <a href=http://www.texample.net/tikz>TikZ</a> សម្រាប់​ព័ត៌មាន​លម្អិត ។"
+
+#: main.cpp:30
+#, fuzzy
+#| msgid "(c) 2010 Matteo Agostinelli"
+msgid "(c) 2011 Matteo Agostinelli"
+msgstr "(c) 2010 Matteo Agostinelli"
+
+#: main.cpp:31
+msgid "Matteo Agostinelli"
+msgstr "Matteo Agostinelli"
+
+#: main.cpp:31
+msgid "Maintainer"
+msgstr "អ្នក​ថែទាំ"
+
+#: main.cpp:36
+msgid "Document to open"
+msgstr "ឯកសារ​ដែល​ត្រូវ​បើក"
+
+#: generatorthread.cpp:55
+msgid "No backend could be selected!"
+msgstr "គ្មាន​កម្មវិធី​ខាងក្រោយ​ត្រូវ​បាន​ជ្រើស​ទេ !"
+
+#: mainwindow.cpp:81
+msgid ""
+"A KDE text-editor component could not be found;\n"
+"please check your KDE installation."
+msgstr ""
+"មិន​អាច​រក​ឃើញ​សមាសភាគ​កម្មវិធី​និពន្ធ​អត្ថបទ​របស់ KDE \n"
+"សូម​ពិនិត្យ​ការ​ដំឡើង​ KDE របស់​អ្នក ។"
+
+#. i18n: file: cirkuit_general_settings.ui:65
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: mainwindow.cpp:90 rc.cpp:121
+msgid "Preview"
+msgstr "មើល​ជាមុន"
+
+#: mainwindow.cpp:96
+msgid "Log"
+msgstr "ចុះ​កំណត់ហេតុ"
+
+#: mainwindow.cpp:158
+msgid "Export..."
+msgstr "នាំចេញ..."
+
+#: mainwindow.cpp:162
+msgid "Build preview"
+msgstr "ស្ថាបនា​ការ​មើល​ជាមុន"
+
+#: mainwindow.cpp:168
+msgid "Open preview"
+msgstr "បើក​ការ​មើល​ជាមុន"
+
+#: mainwindow.cpp:178
+msgid "Show manual"
+msgstr "បង្ហាញ​សៀវភៅ​ដៃ"
+
+#: mainwindow.cpp:182
+msgid "Show examples"
+msgstr "បង្ហាញ​ឧទាហរណ៍"
+
+#: mainwindow.cpp:190
+msgid "Download Examples"
+msgstr "ទាញ​យក​ឧទាហរណ៍"
+
+#: mainwindow.cpp:195
+msgid "Upload Example"
+msgstr "ផ្ទុក​ឧទាហរណ៍​ឡើង"
+
+#: mainwindow.cpp:200
+msgid "&Open Example"
+msgstr "បើក​ឧទាហរណ៍"
+
+#: mainwindow.cpp:238
+msgid "Open file - Cirkuit"
+msgstr "បើក​ឯកសារ Cirkuit"
+
+#: mainwindow.cpp:281
+msgid "Save file - Cirkuit"
+msgstr "រក្សាទុក​ឯកសារ Cirkuit"
+
+#: mainwindow.cpp:313
+msgid "Export image - Cirkuit"
+msgstr "នាំចេញ​រូបភាព Cirkuit"
+
+#: mainwindow.cpp:402
+#, kde-format
+msgid "Backend %1 not found"
+msgstr "រក​មិន​ឃើញ​កម្មវិធី​ខាងក្រោយ %1"
+
+#: mainwindow.cpp:411
+msgid "No valid backend selected."
+msgstr "មិន​បាន​ជ្រើស​កម្មវិធី​ខាងក្រោយ​ដែល​ត្រឹមត្រូវ​ទេ ។"
+
+#: mainwindow.cpp:460
+msgid "General"
+msgstr "ទូទៅ"
+
+#: mainwindow.cpp:519
+msgid ""
+"Circuit Macros could not be found on your system. The application will not "
+"work if the macros are not installed. Do you want to proceed with the "
+"installation?"
+msgstr ""
+"មិន​អាច​រក​ឃើញ ​Circuit​ ម៉ាក្រូ​​នៅ​លើ​ប្រព័ន្ធ​របស់​អ្នក ។ កម្មវិធី​នឹង​មិន​ដំណើរការ​ទេ ប្រសិនបើ​មិន​បាន​ដំឡើង​"
+"ម៉ាក្រូ​ ។ តើ​អ្នក​ចង់​បន្ត​ការ​ដំឡើង​ដែរ ឬ​ទេ ?"
+
+#: mainwindow.cpp:519
+msgid "Installation needed"
+msgstr "តម្រូវ​ឲ្យ​មាន​ការ​ដំឡើង"
+
+#: mainwindow.cpp:524
+#, fuzzy
+#| msgid "Download Circuit Macros. Please wait..."
+msgid "Downloading Circuit Macros. Please wait..."
+msgstr "កំពុង​ទាញ​យក​ Circuit ​ម៉ាក្រូ ។ សូម​រង់ចាំ..."
+
+#: mainwindow.cpp:532
+#, kde-format
+msgid ""
+"A new version of Circuit Macros (version %1) is available. Do you want to "
+"upgrade?"
+msgstr "មាន​កំណែ​ថ្មី​របស់​ Circuit ​ម៉ាក្រូ (កំណែ %1) ។ តើ​អ្នក​ចង់​ធ្វើ​ឲ្យ​ប្រសើរ​ដែរ ឬ​ទេ ?"
+
+#: mainwindow.cpp:532
+msgid "Upgrade"
+msgstr "ធ្វើ​ឲ្យ​ប្រសើរ"
+
+#: mainwindow.cpp:550
+msgid "Unable to generate a preview for the current input"
+msgstr "មិន​អាច​បង្កើត​ការ​មើល​ជាមុន​សម្រាប់​ការ​បញ្ចូល​បច្ចុប្បន្ន"
+
+#: mainwindow.cpp:577
+msgid ""
+"No working backend has been found. Cirkuit is unable to generate any figure."
+msgstr ""
+"រក​មិន​ឃើញ​កម្មវិធី​​ខាងក្រោយ​ដែល​កំពុង​ធ្វើការ​ទេ ។ Cirkuit មិន​អាច​បង្កើត​រូបភាព​ពន្យល់​ណាមួយ​ឡើយ ។"
+
+#: mainwindow.cpp:577
+msgid "No backends found"
+msgstr "រក​មិន​ឃើញ​កម្មវិធី​ខាងក្រោយ"
+
+#: mainwindow.cpp:610
+#, kde-format
+msgid "%1 manual"
+msgstr "សៀវភៅ​ដៃ %1"
+
+#: mainwindow.cpp:611
+#, kde-format
+msgid "%1 examples"
+msgstr "ឧទាហរណ៍ %1"
+
+#: mainwindow.cpp:630
+msgid "Save the current document before uploading it"
+msgstr "រក្សាទុក​ឯកសារ​បច្ចុប្បន្ន​មុន​ពេល​ផ្ទុក​វា​ឡើង"
+
+#: rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ខឹម សុខែម, ម៉ន ម៉េត, សេង សុត្ថា, ចាន់ សម្បត្តិរតនៈ, សុខ សុភា"
+
+#: rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"khoemsokhem@khmeros.info,​​mornmet@khmeros.info,sutha@khmeros.info,"
+"ratanak@khmeros.info,sophea@khmeros.info"
+
+#. i18n: file: backends/circuitmacros/circuitmacrosbackend.kcfg:18
+#. i18n: ectx: label, entry (templateurl), group (CircuitMacrosBackend)
+#: rc.cpp:5
+msgid "The location of the Circuit Macros template."
+msgstr "ទីតាំង​របស់​ពុម្ព Circuit ម៉ាក្រូ ។"
+
+#. i18n: file: backends/circuitmacros/circuitmacrosbackend.kcfg:22
+#. i18n: ectx: label, entry (tikztemplateurl), group (CircuitMacrosBackend)
+#: rc.cpp:8
+msgid "The location of the Circuit Macros template with TikZ backend."
+msgstr "ទីតាំង​របស់​ពុម្ព Circuit ម៉ាក្រូ​ដែល​មាន​កម្មវិធី​ខាងក្រោយ TikZ ។"
+
+#. i18n: file: backends/circuitmacros/circuitmacrosbackend.kcfg:26
+#. i18n: ectx: label, entry (latexargs), group (CircuitMacrosBackend)
+#. i18n: file: backends/tikz/tikzbackend.kcfg:14
+#. i18n: ectx: label, entry (latexargs), group (TikzBackend)
+#. i18n: file: backends/pstricks/pstricksbackend.kcfg:14
+#. i18n: ectx: label, entry (latexargs), group (PstricksBackend)
+#. i18n: file: cirkuit.kcfg:38
+#. i18n: ectx: label, entry (LatexArgs), group (general)
+#: rc.cpp:11 rc.cpp:47 rc.cpp:54 rc.cpp:106
+msgid "The default arguments called in the latex executable"
+msgstr "អាគុយម៉ង់​លំនាំដើម​ដែល​បាន​ហៅ​នៅ​ក្នុង​ឯកសារ​ប្រតិបត្តិ latex"
+
+#. i18n: file: backends/circuitmacros/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_template)
+#. i18n: file: backends/circuitmacros/settings.ui:27
+#. i18n: ectx: property (text), widget (QLabel, lbl_tikztemplate)
+#. i18n: file: backends/gnuplot/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_tikztemplate)
+#. i18n: file: backends/tikz/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_tikztemplate)
+#. i18n: file: backends/pstricks/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_pstrickstemplate)
+#: rc.cpp:16 rc.cpp:19 rc.cpp:38 rc.cpp:41 rc.cpp:58
+msgid "Template path:"
+msgstr "ផ្លូវ​ពុម្ព ៖"
+
+#. i18n: file: backends/circuitmacros/settings.ui:37
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: rc.cpp:22
+msgid "Pic interpreter"
+msgstr "កម្មវិធី​បកប្រែ​រូបភាព"
+
+#. i18n: file: backends/circuitmacros/settings.ui:45
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_PicInterpreter)
+#: rc.cpp:25
+msgid "dpic + PSTricks"
+msgstr "dpic + PSTricks"
+
+#. i18n: file: backends/circuitmacros/settings.ui:50
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_PicInterpreter)
+#: rc.cpp:28
+msgid "dpic + TikZ"
+msgstr "dpic + TikZ"
+
+#. i18n: file: backends/circuitmacros/settings.ui:55
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_PicInterpreter)
+#: rc.cpp:31
+msgid "gpic"
+msgstr "gpic"
+
+#. i18n: file: backends/gnuplot/gnuplotbackend.kcfg:10
+#. i18n: ectx: label, entry (templateurl), group (GnuplotBackend)
+#: rc.cpp:34
+msgid "The location of the Gnuplot template."
+msgstr "ទីតាំង​របស់​ពុម្ព Gnuplot ។"
+
+#. i18n: file: backends/tikz/tikzbackend.kcfg:10
+#. i18n: ectx: label, entry (templateurl), group (TikzBackend)
+#: rc.cpp:44
+msgid "The location of the TikZ template."
+msgstr "ទីតាំង​របស់​ពុម្ព TikZ ។"
+
+#. i18n: file: backends/pstricks/pstricksbackend.kcfg:10
+#. i18n: ectx: label, entry (templateurl), group (PstricksBackend)
+#: rc.cpp:51
+msgid "The location of the PSTricks template."
+msgstr "ទីតាំង​របស់​ពុម្ព PSTricks ។"
+
+#. i18n: file: widgets/backendchooser.ui:29
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:61
+msgid "Choose the Backend to use:"
+msgstr "ជ្រើស​កម្មវិធី​ខាងក្រោយ​ដែល​ត្រូវ​ប្រើ ៖"
+
+#. i18n: file: widgets/backendchooser.ui:59
+#. i18n: ectx: property (text), widget (QCheckBox, makeDefault)
+#: rc.cpp:64
+msgid "Make this the default backend"
+msgstr "ដាក់​វា​ជា​កម្មវិធី​ខាងក្រោយ​លំនាំដើម"
+
+#. i18n: file: widgets/templatechooser.ui:17
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:67
+msgid "Backend:"
+msgstr "កម្មវិធី​ខាងក្រោយ ៖"
+
+#. i18n: file: widgets/templatechooser.ui:48
+#. i18n: ectx: property (text), widget (KPushButton, btnAdd)
+#: rc.cpp:70
+msgid "New"
+msgstr "ថ្មី"
+
+#. i18n: file: widgets/templatechooser.ui:55
+#. i18n: ectx: property (text), widget (KPushButton, btnEdit)
+#: rc.cpp:73
+msgid "Edit"
+msgstr "កែសម្រួល"
+
+#. i18n: file: widgets/templatechooser.ui:62
+#. i18n: ectx: property (text), widget (KPushButton, btnRemove)
+#: rc.cpp:76
+msgid "Remove"
+msgstr "យកចេញ"
+
+#. i18n: file: widgets/templatechooser.ui:69
+#. i18n: ectx: property (text), widget (KPushButton, btnDownload)
+#: rc.cpp:79
+msgid "Download"
+msgstr "ទាញ​យក"
+
+#. i18n: file: widgets/templatechooser.ui:76
+#. i18n: ectx: property (text), widget (KPushButton, btnUpload)
+#: rc.cpp:82
+msgid "Upload"
+msgstr "ផ្ទុក​ឡើង"
+
+#. i18n: file: cirkuit.kcfg:10
+#. i18n: ectx: label, entry (DefaultBackend), group (general)
+#: rc.cpp:85
+msgid "Default backend."
+msgstr "កម្មវិធី​ខាងក្រោយ​លំនាំដើម ។"
+
+#. i18n: file: cirkuit.kcfg:14
+#. i18n: ectx: label, entry (AutoSelectBackend), group (general)
+#. i18n: file: cirkuit_general_settings.ui:52
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoSelectBackend)
+#: rc.cpp:88 rc.cpp:118
+msgid "Automatic backend selection"
+msgstr "ការ​ជ្រើស​កម្មវិធី​ខាងក្រោយ​ដោយ​ស្វ័យប្រវត្តិ"
+
+#. i18n: file: cirkuit.kcfg:18
+#. i18n: ectx: label, entry (RefreshInterval), group (general)
+#: rc.cpp:91
+msgid "Preview generation refresh timeout."
+msgstr "អស់​ពេល​ធ្វើ​ឲ្យ​ស្រស់​​ការ​បង្កើត​មើល​ជា​មុន"
+
+#. i18n: file: cirkuit.kcfg:22
+#. i18n: ectx: label, entry (AutoRefresh), group (general)
+#: rc.cpp:94
+msgid "Enable automatic refresh."
+msgstr "បើក​ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យប្រវត្តិ ។"
+
+#. i18n: file: cirkuit.kcfg:26
+#. i18n: ectx: label, entry (RefreshOnSave), group (general)
+#: rc.cpp:97
+msgid "Refresh when document is saved."
+msgstr "ធ្វើ​ឲ្យ​ស្រស់​ពេល​ឯកសារ​ត្រូវ​បាន​រក្សាទុក ។"
+
+#. i18n: file: cirkuit.kcfg:30
+#. i18n: ectx: label, entry (ZoomToFit), group (general)
+#: rc.cpp:100
+msgid "Automatically zoom the preview to fit the preview widget"
+msgstr "ពង្រីក​ការ​មើល​ជាមុន​ដោយ​ស្វ័យប្រវត្តិ​ឲ្យ​សម​ទៅ​នឹង​ការ​មើល​ជាមុន​ធាតុ​ក្រាហ្វិក"
+
+#. i18n: file: cirkuit.kcfg:34
+#. i18n: ectx: label, entry (ResolutionPpm), group (general)
+#: rc.cpp:103
+msgid "PNG and JPEG resolution."
+msgstr "គុណភាព​បង្ហាញ PNG និង JPEG ។"
+
+#. i18n: file: cirkuit_general_settings.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, CirkuitGeneralForm)
+#: rc.cpp:109
+msgid "General settings"
+msgstr "ការ​កំណត់​ទូទៅ"
+
+#. i18n: file: cirkuit_general_settings.ui:23
+#. i18n: ectx: property (title), widget (QGroupBox, groupBackend)
+#: rc.cpp:112
+msgid "Backends"
+msgstr "កម្មវិធី​ខាងក្រោយ"
+
+#. i18n: file: cirkuit_general_settings.ui:29
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:115
+msgid "Default backend:"
+msgstr "កម្មវិធី​ខាងក្រោយ​លំនាំដើម ៖"
+
+#. i18n: file: cirkuit_general_settings.ui:71
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:124
+msgid "Preview refresh interval (sec):"
+msgstr "ចន្លោះ​ពេល​ការ​ធ្វើ​ឲ្យ​ស្រស់​មើល​ជាមុន (វិ.) ៖"
+
+#. i18n: file: cirkuit_general_settings.ui:103
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoRefresh)
+#: rc.cpp:127
+msgid "Automatic preview generation"
+msgstr "ការ​បង្កើត​មើល​ជាមុន​ដោយ​ស្វ័យប្រវត្តិ"
+
+#. i18n: file: cirkuit_general_settings.ui:113
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RefreshOnSave)
+#: rc.cpp:130
+msgid "Refresh the preview when saving the document"
+msgstr "ធ្វើ​ឲ្យ​ស្រស់​ការ​មើល​ជាមុន​ពេល​កំពុង​រក្សាទុក​ឯកសារ"
+
+#. i18n: file: cirkuit_general_settings.ui:129
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:133
+msgid "PNG and JPEG resolution (DPI):"
+msgstr "គុណភាព​បង្ហាញ PNG និង JPEG (DPI) ៖"
+
+#. i18n: file: cirkuitui.rc:5
+#. i18n: ectx: Menu (file)
+#: rc.cpp:136
+msgid "&File"
+msgstr "ឯកសារ"
+
+#. i18n: file: cirkuitui.rc:26
+#. i18n: ectx: Menu (build)
+#: rc.cpp:139
+msgid "&Preview"
+msgstr "មើល​ជាមុន"
+
+#. i18n: file: cirkuitui.rc:33
+#. i18n: ectx: Menu (view)
+#: rc.cpp:142
+msgid "&View"
+msgstr "មើល"
+
+#. i18n: file: cirkuitui.rc:46
+#. i18n: ectx: Menu (help)
+#: rc.cpp:145
+msgid "&Help"
+msgstr "ជំនួយ"
+
+#. i18n: file: cirkuitui.rc:54
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:148
+msgid "Main Toolbar"
+msgstr "របារ​ឧបករណ៍​មេ"

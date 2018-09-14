@@ -23,7 +23,9 @@
 
 #include <KParts/MainWindow>
 #include <QtGui/QKeyEvent>
-#include <KUrl>
+#include <QUrl>
+#include <KMessageWidget>
+#include <KLocalizedString>
 
 class ImageView;
 class LogViewWidget;
@@ -43,9 +45,7 @@ class PreviewWidget;
 class GeneratorThread;
 class QTimer;
 class KRecentFilesAction;
-#ifdef ENABLE_KMESSAGEWIDGET
 class KMessageWidget;
-#endif
 class CircuitMacrosManager;
 
 class MainWindow : public KParts::MainWindow
@@ -59,15 +59,15 @@ private slots:
     void clear();
     void openFile();
 	void newFile();
-    void saveAsFile(const KUrl& url);
+    void saveAsFile(const QString&);
     void saveAs();
     void save();
     void exportFile();
 
     void documentModified(KTextEditor::Document*);
     void buildPreview();
-    void showPreview(const QImage& image);
-    void saveFileToDisk(const QString& path);
+    void showPreview(const QImage&);
+    void saveFileToDisk(const QString&);
     void openPreview();
     void openPreviewFile();
     void openTemplateManager();
@@ -80,27 +80,27 @@ private slots:
     void configureKeyBindings();
     void configureToolbars();
     void builtNotification();
-    void failedNotification();
+    void failedNotification(const int);
 
     void showManual();
     void showExamples();
-    void downloadExamples();
-    void uploadExample();
-    void openExample();
+    // void downloadExamples();
+    // void uploadExample();
+    // void openExample();
 
     void checkCircuitMacros();
     void circuitMacrosConfigured();
     void askIfUpgrade(const QString&);
-    void reset();
-    void openHelpUrl(const KUrl& url);
+    void mainreset();
+    void openHelpUrl(const QString& fnpath);
     
     void initializeBackend();
     void setDefaultBackend(const QString& backend);
     
     void backendChanged(const QString& backendName);
-    #ifdef ENABLE_KMESSAGEWIDGET
-       void showMessage(KMessageWidget*);
-    #endif
+    void showMessage(KMessageWidget*);
+
+    void loadFileFromUrl2(const QUrl&, const QString&);
 
 private:
     void setupActions();
@@ -110,10 +110,10 @@ private:
     Cirkuit::Backend *m_backend;
     QTimer* m_updateTimer;
     QStringList mimeTypes;
-    KUrl m_currentFile;
-#ifdef ENABLE_KMESSAGEWIDGET
+    QString m_currentFile;
+    QString m_dirCurrentEditorFile;
+
     KMessageWidget* m_messageWidget;
-#endif
     KRecentFilesAction* recentFilesAction;
     
     CircuitMacrosManager* cmm;
@@ -128,10 +128,13 @@ private:
     bool m_firstRun;
 
 public slots:
-    void loadFile(const KUrl& url);
+    void loadFile(const QString&);
+    void loadFileFromUrl(const QUrl&);
+
 
 protected:
     void closeEvent(QCloseEvent *event);
+
 };
 
 #endif

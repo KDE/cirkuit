@@ -17,9 +17,8 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+#include "renderthread.h" // the Cirkuit version
 #include "imageview.h"
-#include "renderthread.h"
-
 #include <QLabel>
 #include <QScrollBar>
 #include <QGraphicsScene>
@@ -28,11 +27,11 @@
 #include <QKeyEvent>
 #include <QMenu>
 
-#include <KDebug>
-#include <KAction>
+#include <QDebug>
+#include <QAction>
 #include <KToggleAction>
 #include <KActionCollection>
-#include <KLocale>
+#include <KLocalizedString>
 
 ImageView::ImageView(QWidget* parent): QGraphicsView(parent), m_image(QImage()), m_pdfUrl(QString())
 {
@@ -72,15 +71,15 @@ void ImageView::setupActions(KActionCollection* actionCollection)
     m_zoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()), actionCollection);
     m_zoomOutAction = KStandardAction::zoomOut(this, SLOT(zoomOut()), actionCollection);
     m_zoomFitAction = KStandardAction::fitToPage(this, SLOT(zoomFit()), actionCollection);
-    m_zoomFitAction->setIcon(KIcon("zoom-fit-best"));
+    m_zoomFitAction->setIcon(QIcon("zoom-fit-best"));
     m_actualSizeAction = KStandardAction::actualSize(this, SLOT(normalSize()), actionCollection);
     
     connect(this, SIGNAL(enableZoomIn(bool)), m_zoomInAction, SLOT(setEnabled(bool)));
     connect(this, SIGNAL(enableZoomOut(bool)), m_zoomOutAction, SLOT(setEnabled(bool)));
     
     m_zoomFitPageAction = new KToggleAction(i18n("Zoom to fit"), 0);
-    m_zoomFitPageAction->setShortcut(Qt::CTRL + Qt::Key_0);
-    m_zoomFitPageAction->setIcon(KIcon("zoom-fit-best"));
+    actionCollection->setDefaultShortcut(m_zoomFitPageAction, Qt::CTRL + Qt::Key_0);
+    m_zoomFitPageAction->setIcon(QIcon("zoom-fit-best"));
     actionCollection->addAction( "view_zoom_to_fit", m_zoomFitPageAction);
     connect(m_zoomFitPageAction, SIGNAL(triggered()), this, SLOT(updateZoomToFit()));
     connect(this, SIGNAL(fitModeChanged(bool)), m_zoomFitPageAction, SLOT(setChecked(bool)));
@@ -95,27 +94,27 @@ void ImageView::setupActions(KActionCollection* actionCollection)
     addAction(m_zoomFitPageAction);
 }
 
-KAction* ImageView::zoomFitAction() const
+QAction* ImageView::zoomFitAction() const
 {
     return m_zoomFitAction;
 }
 
-KAction* ImageView::zoomFitPageAction() const
+QAction* ImageView::zoomFitPageAction() const
 {
     return m_zoomFitPageAction;
 }
 
-KAction* ImageView::zoomInAction() const
+QAction* ImageView::zoomInAction() const
 {
     return m_zoomInAction;
 }
 
-KAction* ImageView::zoomOutAction() const
+QAction* ImageView::zoomOutAction() const
 {
     return m_zoomOutAction;
 }
 
-KAction* ImageView::actualSizeAction() const
+QAction* ImageView::actualSizeAction() const
 {
     return m_actualSizeAction;
 }

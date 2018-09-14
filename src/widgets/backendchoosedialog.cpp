@@ -19,15 +19,16 @@
     Copyright (C) 2011 Matteo Agostinelli <agostinelli@gmail.com>
  */
 
+#include <KLocalizedString>
+#include <KIconLoader>
 #include "backendchoosedialog.h"
-
-#include "lib/backend.h"
+#include "lib/backend_interface.h"
 
 const char* BackendChooseDialog::descriptionTemplate = I18N_NOOP("<h1>%1</h1>" \
                                                                  "<div>%2</div><br/>" \
                                                                  "<div>See <a href=\"%3\">%3</a> for more information</div>");
 
-BackendChooseDialog::BackendChooseDialog(const QString& backendName, QWidget* parent) : KDialog(parent)
+BackendChooseDialog::BackendChooseDialog(const QString& backendName, QWidget* parent) : QDialog(parent)
 {
     setBackend(backendName);
     setWindowTitle(i18n("Backend selection"));
@@ -44,7 +45,7 @@ BackendChooseDialog::BackendChooseDialog(const QString& backendName, QWidget* pa
         }
         QListWidgetItem* item=new QListWidgetItem(m_ui.backendList);
         item->setText(backend->name());
-        item->setIcon(KIcon(backend->icon()));
+        item->setIcon(QIcon(backend->icon()));
         m_ui.backendList->addItem(item);
         if (m_ui.backendList->currentItem() == 0) {
             m_ui.backendList->setCurrentItem(item);
@@ -55,7 +56,10 @@ BackendChooseDialog::BackendChooseDialog(const QString& backendName, QWidget* pa
         }
     }
 
-    setMainWidget(w);
+ //   setMainWidget(w); // for KDialog
+
+    w->setLayout(m_ui.gridLayout);
+
     connect(this, SIGNAL(accepted()), this, SLOT(onAccept()));
 }
 

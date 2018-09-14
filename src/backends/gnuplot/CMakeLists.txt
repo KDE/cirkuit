@@ -1,6 +1,10 @@
-include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
-
 add_subdirectory (templates)
+
+#include_directories(${PROJECT_SOURCE_DIR}
+#                    ${PROJECT_BINARY_DIR}
+#)
+set (CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set( GnuplotBackend_SRCS 
  gnuplotbackend.cpp  
@@ -8,13 +12,13 @@ set( GnuplotBackend_SRCS
  gnuplotgenerator.cpp
 )
 
-kde4_add_kcfg_files(GnuplotBackend_SRCS GENERATE_MOC settings.kcfgc)
-install(FILES gnuplotbackend.kcfg DESTINATION ${KCFG_INSTALL_DIR})
+kconfig_add_kcfg_files(GnuplotBackend_SRCS GENERATE_MOC settings.kcfgc)
+#install(FILES gnuplotbackend.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 
-kde4_add_ui_files(GnuplotBackend_SRCS settings.ui)
+qt5_wrap_ui(GnuplotBackend_SRCS settings.ui)
 
-kde4_add_plugin( cirkuit_gnuplotbackend ${GnuplotBackend_SRCS} )
-target_link_libraries( cirkuit_gnuplotbackend ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} cirkuitlibs)
+add_library( cirkuit_gnuplotbackend SHARED ${GnuplotBackend_SRCS} )
+target_link_libraries( cirkuit_gnuplotbackend ${KF5_KFUI_LIBS} ${KF5_KIO_LIBS} cirkuitlibs)
 
 install( FILES gnuplotbackend.desktop  DESTINATION ${SERVICES_INSTALL_DIR}/cirkuit)
-install(TARGETS cirkuit_gnuplotbackend DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS cirkuit_gnuplotbackend DESTINATION ${BACKEND_INSTALL_DIR})

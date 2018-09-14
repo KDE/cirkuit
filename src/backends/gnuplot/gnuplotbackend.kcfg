@@ -4,11 +4,11 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="cirkuitrc"/>  
-  <include>kstandarddirs.h</include>
+  <include>QStandardPaths</include>
   <group name="GnuplotBackend">
     <entry name="templateurl" type="Url">
       <label>The location of the Gnuplot template.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/gnuplot_latex.ckt")</default>
+      <default code="true">QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "cirkuit/templates/gnuplot_latex.ckt"))</default>
     </entry>
   </group>
 </kcfg>

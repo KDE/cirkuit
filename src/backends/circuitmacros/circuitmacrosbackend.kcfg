@@ -4,7 +4,8 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="cirkuitrc"/>  
-  <include>kstandarddirs.h</include>
+  <include>QStandardPaths</include>
+   <include>KCoreConfigSkeleton</include>
   <group name="CircuitMacrosBackend">
     <entry name="PicInterpreter" type="Enum">
         <choices>
@@ -16,11 +17,11 @@
     </entry>    
     <entry name="templateurl" type="Url">
         <label>The location of the Circuit Macros template.</label>
-        <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_latex.ckt")</default>
+        <default code="true">QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "cirkuit/templates/cm_latex.ckt"))</default>
     </entry>
     <entry name="tikztemplateurl" type="Url">
         <label>The location of the Circuit Macros template with TikZ backend.</label>
-        <default code="true">KStandardDirs::locate("data", "cirkuit/templates/cm_tikz.ckt")</default>
+        <default code="true">QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation,  "cirkuit/templates/cm_tikz.ckt"))</default>
     </entry>
     <entry name="latexargs" type="StringList">
         <label>The default arguments called in the latex executable</label>

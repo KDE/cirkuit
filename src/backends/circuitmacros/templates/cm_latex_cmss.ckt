@@ -1,0 +1,31 @@
+%%backend=circuitmacros%%
+\documentclass{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{pstricks,pst-eps,graphicx,ifpdf,pst-grad,amsmath,wasysym}
+\pagestyle{empty}
+\thispagestyle{empty}
+
+\begin{document}
+% ppl - palatino
+% pbk = bookman
+% phv = helvetiva
+% cmtt - computer modern
+% cmr  - computer modern roman - default
+% ptm  - times
+% cmss - computer modern san serif
+% lmtt - latin modern typewriter
+% jkpl - kp light
+% jkp  - kp
+% jkptt - teletype
+% jkpss  - san serif
+% see: http://www.tug.dk/FontCatalogue/
+
+{\fontfamily{cmss}\selectfont
+\newbox\graph
+\begin{TeXtoEPS}
+%%SOURCE%%
+\box
+\graph
+\end{TeXtoEPS}
+} % end fontfamily
+\end{document}

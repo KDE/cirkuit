@@ -28,7 +28,7 @@ NullGenerator::~NullGenerator()
 
 }
 
-bool NullGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
+int NullGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
     return Cirkuit::Generator::convert(in, out);
 }

@@ -4,11 +4,11 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="cirkuitrc"/>  
-  <include>kstandarddirs.h</include>
+  <include>QStandardPaths</include>
   <group name="PstricksBackend">
     <entry name="templateurl" type="Url">
       <label>The location of the PSTricks template.</label>
-      <default code="true">KStandardDirs::locate("data", "cirkuit/templates/pst_latex.ckt")</default>
+      <default code="true">QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "cirkuit/templates/pst_latex.ckt"))</default>
     </entry>
     <entry name="latexargs" type="StringList">
         <label>The default arguments called in the latex executable</label>

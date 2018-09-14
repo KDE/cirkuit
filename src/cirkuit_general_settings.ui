@@ -34,7 +34,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="KComboBox" name="kcfg_DefaultBackend">
+       <widget class="QComboBox" name="kcfg_DefaultBackend">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -159,9 +159,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
+   <class>QComboBox</class>
    <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <header>QComboBox</header>
   </customwidget>
  </customwidgets>
  <resources/>

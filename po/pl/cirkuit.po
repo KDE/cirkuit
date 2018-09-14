@@ -1,0 +1,487 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2011-11-18 05:01+0100\n"
+"PO-Revision-Date: 2011-07-25 17:57+0200\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#: widgets/imageview.cpp:81
+msgid "Zoom to fit"
+msgstr "Powiększ tak, aby dopasować"
+
+#: widgets/templatechoosedialog.cpp:103 mainwindow.cpp:174
+msgid "Template manager"
+msgstr "Menadżer szablonów"
+
+#: widgets/templatechoosedialog.cpp:193
+msgid "Template name"
+msgstr "Nazwa szablonu"
+
+#: widgets/templatechoosedialog.cpp:193
+msgid "Insert the template name"
+msgstr "Wstaw nazwę szablonu"
+
+#: widgets/templatechoosedialog.cpp:217
+msgid "Do you really want to delete the selected template?"
+msgstr "Czy na pewno chcesz usunąć wybrany szablon?"
+
+#: widgets/templatechoosedialog.cpp:218
+msgid "Confirm deletion"
+msgstr "Potwierdź usunięcie"
+
+#: widgets/backendchoosedialog.cpp:26
+#, kde-format
+msgid ""
+"<h1>%1</h1><div>%2</div><br/><div>See <a href=\"%3\">%3</a> for more "
+"information</div>"
+msgstr ""
+"<h1>%1</h1><div>%2</div><br/><div>Zobacz <a href=\"%3\">%3</a> po więcej "
+"informacji</div>"
+
+#: widgets/backendchoosedialog.cpp:33
+msgid "Backend selection"
+msgstr "Wybór silnika"
+
+#: main.cpp:30
+msgid "Cirkuit"
+msgstr "Cirkuit"
+
+#: main.cpp:30
+msgid ""
+"An application to generate publication-ready figures. It is a KDE frontend "
+"for Circuit Macros by J. D. Aplevich, TikZ and Gnuplot. <p>Visit the <a "
+"href=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros>Circuit Macros</a> "
+"and <a href=http://www.texample.net/tikz>TikZ</a> websites for further "
+"information."
+msgstr ""
+"Program generujący rysunki gotowe do publikacji. Jest to nakładka dla KDE "
+"dla  Circuit Macros napisanych przez J. D. Aplevich, TikZ i Gnuplot. "
+"<p>Odwiedź strony<a href=http://www.ece.uwaterloo.ca/~aplevich/"
+"Circuit_macros>Circuit Macros</a> i <a href=http://www.texample.net/"
+"tikz>TikZ</a> po dalsze informacje."
+
+#: main.cpp:30
+#, fuzzy
+#| msgid "(c) 2010 Matteo Agostinelli"
+msgid "(c) 2011 Matteo Agostinelli"
+msgstr "(c) 2010 Matteo Agostinelli"
+
+#: main.cpp:31
+msgid "Matteo Agostinelli"
+msgstr "Matteo Agostinelli"
+
+#: main.cpp:31
+msgid "Maintainer"
+msgstr "Opiekun"
+
+#: main.cpp:36
+msgid "Document to open"
+msgstr "Dokument do otwarcia"
+
+#: generatorthread.cpp:55
+msgid "No backend could be selected!"
+msgstr "Nie można wybrać żadnego silnika!"
+
+#: mainwindow.cpp:81
+msgid ""
+"A KDE text-editor component could not be found;\n"
+"please check your KDE installation."
+msgstr ""
+"Nie znaleziono komponentu edytora tekstowego dla KDE;\n"
+"proszę sprawdzić swoją instalację KDE."
+
+#. i18n: file: cirkuit_general_settings.ui:65
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: mainwindow.cpp:90 rc.cpp:121
+msgid "Preview"
+msgstr "Podgląd"
+
+#: mainwindow.cpp:96
+msgid "Log"
+msgstr "Dziennik"
+
+#: mainwindow.cpp:158
+msgid "Export..."
+msgstr "Eksportuj..."
+
+#: mainwindow.cpp:162
+msgid "Build preview"
+msgstr "Zbuduj podgląd"
+
+#: mainwindow.cpp:168
+msgid "Open preview"
+msgstr "Otwórz podgląd"
+
+#: mainwindow.cpp:178
+msgid "Show manual"
+msgstr "Pokaż instrukcję"
+
+#: mainwindow.cpp:182
+msgid "Show examples"
+msgstr "Pokaż przykłady"
+
+#: mainwindow.cpp:190
+msgid "Download Examples"
+msgstr "Pobierz przykłady"
+
+#: mainwindow.cpp:195
+msgid "Upload Example"
+msgstr "Wyślij przykłady"
+
+#: mainwindow.cpp:200
+msgid "&Open Example"
+msgstr "&Otwórz przykład"
+
+#: mainwindow.cpp:238
+msgid "Open file - Cirkuit"
+msgstr "Otwórz plik - Cirkuit"
+
+#: mainwindow.cpp:281
+msgid "Save file - Cirkuit"
+msgstr "Zapisz plik - Cirkuit"
+
+#: mainwindow.cpp:313
+msgid "Export image - Cirkuit"
+msgstr "Eksportuj obraz - Cirkuit"
+
+#: mainwindow.cpp:402
+#, kde-format
+msgid "Backend %1 not found"
+msgstr "Nie znaleziono silnika %1"
+
+#: mainwindow.cpp:411
+msgid "No valid backend selected."
+msgstr "Nie wybrano poprawnego silnika."
+
+#: mainwindow.cpp:460
+msgid "General"
+msgstr "Ogólne"
+
+#: mainwindow.cpp:519
+msgid ""
+"Circuit Macros could not be found on your system. The application will not "
+"work if the macros are not installed. Do you want to proceed with the "
+"installation?"
+msgstr ""
+"Nie można znaleźć Circuit Macros na twoim systemie. Program nie zadziała, "
+"jeśli te makra nie zostaną zainstalowane. Czy chcesz kontynuować z "
+"instalacją?"
+
+#: mainwindow.cpp:519
+msgid "Installation needed"
+msgstr "Potrzebna instalacja"
+
+#: mainwindow.cpp:524
+#, fuzzy
+#| msgid "Download Circuit Macros. Please wait..."
+msgid "Downloading Circuit Macros. Please wait..."
+msgstr "Pobierz Circuit Macros. Proszę czekać..."
+
+#: mainwindow.cpp:532
+#, kde-format
+msgid ""
+"A new version of Circuit Macros (version %1) is available. Do you want to "
+"upgrade?"
+msgstr ""
+"Jest dostępna nowa wersja Circuit Macros (wersja %1). Czy chcesz uaktualnić?"
+
+#: mainwindow.cpp:532
+msgid "Upgrade"
+msgstr "Uaktualnij"
+
+#: mainwindow.cpp:550
+msgid "Unable to generate a preview for the current input"
+msgstr "Nie można wygenerować podglądu dla bieżącego wejścia"
+
+#: mainwindow.cpp:577
+msgid ""
+"No working backend has been found. Cirkuit is unable to generate any figure."
+msgstr ""
+"Nie znaleziono działającego silnika. Cirkuit nie może wygenerować "
+"jakiegokolwiek rysunku."
+
+#: mainwindow.cpp:577
+msgid "No backends found"
+msgstr "Nie znaleziono żadnego silnika"
+
+#: mainwindow.cpp:610
+#, kde-format
+msgid "%1 manual"
+msgstr "Instrukcja %1"
+
+#: mainwindow.cpp:611
+#, kde-format
+msgid "%1 examples"
+msgstr "Przykłady %1"
+
+#: mainwindow.cpp:630
+msgid "Save the current document before uploading it"
+msgstr "Zapisz bieżący dokument przed jego wysłaniem"
+
+#: rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Łukasz Wojniłowicz"
+
+#: rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "lukasz.wojnilowicz@gmail.com"
+
+#. i18n: file: backends/circuitmacros/circuitmacrosbackend.kcfg:18
+#. i18n: ectx: label, entry (templateurl), group (CircuitMacrosBackend)
+#: rc.cpp:5
+msgid "The location of the Circuit Macros template."
+msgstr "Położenie szablonu Circuit Macros."
+
+#. i18n: file: backends/circuitmacros/circuitmacrosbackend.kcfg:22
+#. i18n: ectx: label, entry (tikztemplateurl), group (CircuitMacrosBackend)
+#: rc.cpp:8
+msgid "The location of the Circuit Macros template with TikZ backend."
+msgstr "Położenie szablonu Circuit Macros z silnikiem TikZ."
+
+#. i18n: file: backends/circuitmacros/circuitmacrosbackend.kcfg:26
+#. i18n: ectx: label, entry (latexargs), group (CircuitMacrosBackend)
+#. i18n: file: backends/tikz/tikzbackend.kcfg:14
+#. i18n: ectx: label, entry (latexargs), group (TikzBackend)
+#. i18n: file: backends/pstricks/pstricksbackend.kcfg:14
+#. i18n: ectx: label, entry (latexargs), group (PstricksBackend)
+#. i18n: file: cirkuit.kcfg:38
+#. i18n: ectx: label, entry (LatexArgs), group (general)
+#: rc.cpp:11 rc.cpp:47 rc.cpp:54 rc.cpp:106
+msgid "The default arguments called in the latex executable"
+msgstr "Domyślne argumenty wywoływane w pliku wykonywalnym latex"
+
+#. i18n: file: backends/circuitmacros/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_template)
+#. i18n: file: backends/circuitmacros/settings.ui:27
+#. i18n: ectx: property (text), widget (QLabel, lbl_tikztemplate)
+#. i18n: file: backends/gnuplot/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_tikztemplate)
+#. i18n: file: backends/tikz/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_tikztemplate)
+#. i18n: file: backends/pstricks/settings.ui:17
+#. i18n: ectx: property (text), widget (QLabel, lbl_pstrickstemplate)
+#: rc.cpp:16 rc.cpp:19 rc.cpp:38 rc.cpp:41 rc.cpp:58
+msgid "Template path:"
+msgstr "Ścieżka szablonu:"
+
+#. i18n: file: backends/circuitmacros/settings.ui:37
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: rc.cpp:22
+msgid "Pic interpreter"
+msgstr "Program interpretujący pic"
+
+#. i18n: file: backends/circuitmacros/settings.ui:45
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_PicInterpreter)
+#: rc.cpp:25
+msgid "dpic + PSTricks"
+msgstr "dpic + PSTricks"
+
+#. i18n: file: backends/circuitmacros/settings.ui:50
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_PicInterpreter)
+#: rc.cpp:28
+msgid "dpic + TikZ"
+msgstr "dpic + TikZ"
+
+#. i18n: file: backends/circuitmacros/settings.ui:55
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_PicInterpreter)
+#: rc.cpp:31
+msgid "gpic"
+msgstr "gpic"
+
+#. i18n: file: backends/gnuplot/gnuplotbackend.kcfg:10
+#. i18n: ectx: label, entry (templateurl), group (GnuplotBackend)
+#: rc.cpp:34
+msgid "The location of the Gnuplot template."
+msgstr "Położenie szablonu Gnuplot."
+
+#. i18n: file: backends/tikz/tikzbackend.kcfg:10
+#. i18n: ectx: label, entry (templateurl), group (TikzBackend)
+#: rc.cpp:44
+msgid "The location of the TikZ template."
+msgstr "Położenie szablonu TikZ."
+
+#. i18n: file: backends/pstricks/pstricksbackend.kcfg:10
+#. i18n: ectx: label, entry (templateurl), group (PstricksBackend)
+#: rc.cpp:51
+msgid "The location of the PSTricks template."
+msgstr "Położenie szablonu PSTricks."
+
+#. i18n: file: widgets/backendchooser.ui:29
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:61
+msgid "Choose the Backend to use:"
+msgstr "Wybierz wykorzystywany silnik:"
+
+#. i18n: file: widgets/backendchooser.ui:59
+#. i18n: ectx: property (text), widget (QCheckBox, makeDefault)
+#: rc.cpp:64
+msgid "Make this the default backend"
+msgstr "Uczyń ten silnik domyślnym"
+
+#. i18n: file: widgets/templatechooser.ui:17
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:67
+msgid "Backend:"
+msgstr "Silnik:"
+
+#. i18n: file: widgets/templatechooser.ui:48
+#. i18n: ectx: property (text), widget (KPushButton, btnAdd)
+#: rc.cpp:70
+msgid "New"
+msgstr "Nowy"
+
+#. i18n: file: widgets/templatechooser.ui:55
+#. i18n: ectx: property (text), widget (KPushButton, btnEdit)
+#: rc.cpp:73
+msgid "Edit"
+msgstr "Edytuj"
+
+#. i18n: file: widgets/templatechooser.ui:62
+#. i18n: ectx: property (text), widget (KPushButton, btnRemove)
+#: rc.cpp:76
+msgid "Remove"
+msgstr "Usuń"
+
+#. i18n: file: widgets/templatechooser.ui:69
+#. i18n: ectx: property (text), widget (KPushButton, btnDownload)
+#: rc.cpp:79
+msgid "Download"
+msgstr "Pobierz"
+
+#. i18n: file: widgets/templatechooser.ui:76
+#. i18n: ectx: property (text), widget (KPushButton, btnUpload)
+#: rc.cpp:82
+msgid "Upload"
+msgstr "Wyślij"
+
+#. i18n: file: cirkuit.kcfg:10
+#. i18n: ectx: label, entry (DefaultBackend), group (general)
+#: rc.cpp:85
+msgid "Default backend."
+msgstr "Domyślny silnik."
+
+#. i18n: file: cirkuit.kcfg:14
+#. i18n: ectx: label, entry (AutoSelectBackend), group (general)
+#. i18n: file: cirkuit_general_settings.ui:52
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoSelectBackend)
+#: rc.cpp:88 rc.cpp:118
+msgid "Automatic backend selection"
+msgstr "Automatyczny wybór silnika"
+
+#. i18n: file: cirkuit.kcfg:18
+#. i18n: ectx: label, entry (RefreshInterval), group (general)
+#: rc.cpp:91
+msgid "Preview generation refresh timeout."
+msgstr "Czas oczekiwania na odświeżenie generowania podglądu."
+
+#. i18n: file: cirkuit.kcfg:22
+#. i18n: ectx: label, entry (AutoRefresh), group (general)
+#: rc.cpp:94
+msgid "Enable automatic refresh."
+msgstr "Włącz automatyczne odświeżanie."
+
+#. i18n: file: cirkuit.kcfg:26
+#. i18n: ectx: label, entry (RefreshOnSave), group (general)
+#: rc.cpp:97
+msgid "Refresh when document is saved."
+msgstr "Odśwież, gdy dokument zostanie zapisany."
+
+#. i18n: file: cirkuit.kcfg:30
+#. i18n: ectx: label, entry (ZoomToFit), group (general)
+#: rc.cpp:100
+msgid "Automatically zoom the preview to fit the preview widget"
+msgstr ""
+"Automatycznie powiększ podgląd, aby dopasować do elementu interfejsu podglądu"
+
+#. i18n: file: cirkuit.kcfg:34
+#. i18n: ectx: label, entry (ResolutionPpm), group (general)
+#: rc.cpp:103
+msgid "PNG and JPEG resolution."
+msgstr "Rozdzielczość PNG i JPEG."
+
+#. i18n: file: cirkuit_general_settings.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, CirkuitGeneralForm)
+#: rc.cpp:109
+msgid "General settings"
+msgstr "Ustawienia ogólne"
+
+#. i18n: file: cirkuit_general_settings.ui:23
+#. i18n: ectx: property (title), widget (QGroupBox, groupBackend)
+#: rc.cpp:112
+msgid "Backends"
+msgstr "Silniki"
+
+#. i18n: file: cirkuit_general_settings.ui:29
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:115
+msgid "Default backend:"
+msgstr "Domyślny silnik:"
+
+#. i18n: file: cirkuit_general_settings.ui:71
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:124
+msgid "Preview refresh interval (sec):"
+msgstr "Przedział odświeżania podglądu (sek):"
+
+#. i18n: file: cirkuit_general_settings.ui:103
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoRefresh)
+#: rc.cpp:127
+msgid "Automatic preview generation"
+msgstr "Automatyczna generacja podglądu"
+
+#. i18n: file: cirkuit_general_settings.ui:113
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RefreshOnSave)
+#: rc.cpp:130
+msgid "Refresh the preview when saving the document"
+msgstr "Odśwież podgląd przy zapisywaniu dokumentu"
+
+#. i18n: file: cirkuit_general_settings.ui:129
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:133
+msgid "PNG and JPEG resolution (DPI):"
+msgstr "Rozdzielczości PNG i JPEG (DPI):"
+
+#. i18n: file: cirkuitui.rc:5
+#. i18n: ectx: Menu (file)
+#: rc.cpp:136
+msgid "&File"
+msgstr "&Plik"
+
+#. i18n: file: cirkuitui.rc:26
+#. i18n: ectx: Menu (build)
+#: rc.cpp:139
+msgid "&Preview"
+msgstr "&Podgląd"
+
+#. i18n: file: cirkuitui.rc:33
+#. i18n: ectx: Menu (view)
+#: rc.cpp:142
+msgid "&View"
+msgstr "&Widok"
+
+#. i18n: file: cirkuitui.rc:46
+#. i18n: ectx: Menu (help)
+#: rc.cpp:145
+msgid "&Help"
+msgstr "&Pomoc"
+
+#. i18n: file: cirkuitui.rc:54
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:148
+msgid "Main Toolbar"
+msgstr "Główny pasek narzędzi"

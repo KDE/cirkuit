@@ -24,21 +24,19 @@
 #include "settings.h"
 #include "settingswidget.h"
 
-#include "kdebug.h"
-
-#include "cirkuit_macros.h"
+#include <QDebug>
 
 #include <KProcess>
 
 CircuitMacrosBackend::CircuitMacrosBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {
     Q_UNUSED(args)
-    kDebug()<<"Creating CircuitMacrosBackend";
+    qDebug()<<"Creating CircuitMacrosBackend";
 }
 
 CircuitMacrosBackend::~CircuitMacrosBackend()
 {
-    kDebug()<<"Destroying CircuitMacrosBackend";
+    qDebug()<<"Destroying CircuitMacrosBackend";
 }
 
 bool CircuitMacrosBackend::checkRequirements() const
@@ -78,14 +76,14 @@ QStringList CircuitMacrosBackend::identifyingWords() const
     return words;
 }
 
-KUrl CircuitMacrosBackend::examplesUrl() const
+QString CircuitMacrosBackend::examplesUrl() const
 {
-    return KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/examples/examples.ps");
+    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, "cirkuit/circuit_macros/examples/examples.ps",QStandardPaths::LocateFile);
 }
 
-KUrl CircuitMacrosBackend::helpUrl() const
+QString CircuitMacrosBackend::helpUrl() const
 {
-    return KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/doc/CMman.pdf");
+    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, "cirkuit/circuit_macros/doc/Circuit_macros.pdf",QStandardPaths::LocateFile);
 }
 
 KConfigSkeletonItem* CircuitMacrosBackend::configTemplateUrl() const
@@ -98,5 +96,3 @@ KConfigSkeletonItem* CircuitMacrosBackend::configTemplateUrl() const
 }
 
 
-
-K_EXPORT_CIRKUIT_PLUGIN(circuitmacrosbackend, CircuitMacrosBackend)

@@ -29,7 +29,7 @@ public:
     explicit PstricksGenerator(Cirkuit::Backend* backend = 0, QObject* parent = 0);
     virtual ~PstricksGenerator();
     
-    virtual bool convert(const Cirkuit::Format& in, const Cirkuit::Format& out);
+    virtual int convert(const Cirkuit::Format& in, const Cirkuit::Format& out);
 };
 
 #endif // PSTRICKSGENERATOR_H

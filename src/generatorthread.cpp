@@ -19,14 +19,14 @@
 ***************************************************************************/
 #include "generatorthread.h"
 
-#include "backend.h"
+#include "backend_interface.h"
 #include "generator.h"
 #include "document.h"
 #include "command.h"
 #include "cirkuitsettings.h"
 #include "renderthread.h"
-
-#include <KDebug>
+#include "failcodes.h"
+#include <QDebug>
 #include <KLocalizedString>
 
 using namespace Cirkuit;
@@ -52,12 +52,14 @@ void GeneratorThread::run()
     }
     
     if (!m_backend) {
-        kError() << i18n("No backend could be selected!");
+        qCritical() << i18n("No backend could be selected!");
         return;
     } else {
-        kDebug() << m_backend->id();
-        kDebug() << m_backend->name();
-        kDebug() << m_backend->description();
+        qDebug() << "GENERATOR THREAD STARTED";
+        qDebug() << "m_backend->id()" << m_backend->id();
+        qDebug() << "m_backend->name()" << m_backend->name();
+        qDebug() << "m_backend->description()" << m_backend->description();
+        qDebug() << "m_input" << m_input.extension() << "m_output" << m_output.extension();
     }
     
     Cirkuit::Generator* gen = m_backend->generator();
@@ -65,11 +67,15 @@ void GeneratorThread::run()
     connect(gen, SIGNAL(error(QString,QString)), this, SIGNAL(error(QString,QString)));
     connect(gen, SIGNAL(error(QString,QString)), this, SLOT(quit()));
     connect(gen, SIGNAL(output(QString,QString)), this, SIGNAL(output(QString,QString)));
-    connect(gen, SIGNAL(fail()), this, SIGNAL(fail()));
+    connect(gen, SIGNAL(fail(const int)), this, SIGNAL(fail(const int)));
     gen->setDocument(m_doc);
     gen->setResolution(CirkuitSettings::resolutionPpm());
-    if (!gen->convert(m_input, m_output)) {
-        emit fail();
+
+    int fcode = gen->convert(m_input, m_output);
+
+    if (fcode!=NoFail) {
+        qDebug() << "Conversion failed. Emit(" << fcode << ")";
+        emit fail(fcode);
         return;
     }
     

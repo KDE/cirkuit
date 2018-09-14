@@ -19,11 +19,12 @@
 #ifndef TEMPLATECHOOSEDIALOG_H
 #define TEMPLATECHOOSEDIALOG_H
 
-#include "ui_templatechooser.h"
-
+#include<QComboBox>
+#include<QPushButton>
 #include <QAbstractListModel>
-
-#include <KDialog>
+#include <QDialog>
+#include <QUrl>
+#include "ui_templatechooser.h"
 
 namespace Cirkuit {
 }
@@ -39,34 +40,34 @@ public:
     
     void applyBackendFilter(const QString& backendName = QString());
     void refresh();
+    virtual void DeleteRow(const QModelIndex& index, const int row);
     
 private:
     QString m_backendFilter;
 };
 
-class TemplateChooseDialog : public KDialog
+class TemplateChooseDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit TemplateChooseDialog(const QString& backendName = QString(), QWidget* parent = 0, Qt::WFlags flags = 0);
+    explicit TemplateChooseDialog(const QString& backendName = QString(), const QUrl& cur_selection = QUrl(), QWidget* parent = 0, Qt::WindowFlags flags = 0);
     
-    KUrl selectedFile() const;
+    QUrl selectedFile() const;
     
 protected:
     TemplateModel* m_model;
     Ui::TemplateChooseBase m_ui;
     
     QString m_backend;
-    KUrl m_selected;
+    QUrl m_selected = QUrl();
     
 protected slots:
     void changeCurrent(const QModelIndex& index);
-    void copyTempFile(const QString& fileName);
-    void update();
+    void update(const QString& dummy = QString());
     void readUrlSelected(const QModelIndex& index);
     
-    void downloadTemplate();
-    void uploadTemplate();
+   // void downloadTemplate();
+   // void uploadTemplate();
     void editTemplate();
     void addTemplate();
     void removeTemplate();

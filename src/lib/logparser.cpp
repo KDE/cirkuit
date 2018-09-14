@@ -19,7 +19,7 @@
 #include "logparser.h"
 #include "command.h"
 
-#include <KDebug>
+#include <QDebug>
 
 using namespace Cirkuit;
 
@@ -62,7 +62,7 @@ LatexLogParser::LatexLogParser(QObject* parent): LogParser(parent)
 
 bool LatexLogParser::parse(const QString& stdout, const QString& stderr)
 {
-    kDebug() << "Parsing LaTeX log";
+    qDebug() << "Parsing LaTeX log";
     QList<QRegExp> keywordPatterns;
     keywordPatterns << QRegExp("(\\S*):(\\d+): (.*$)")
         << QRegExp("Undefined control sequence")

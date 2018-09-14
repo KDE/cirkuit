@@ -24,21 +24,18 @@
 #include "settings.h"
 #include "ui_settings.h"
 
-#include "kdebug.h"
-
-#include "cirkuit_macros.h"
-
+#include <QDebug>
 #include <KProcess>
 
 TikzBackend::TikzBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {
     Q_UNUSED(args)
-    kDebug()<<"Creating TikzBackend";
+    qDebug()<<"Creating TikzBackend";
 }
 
 TikzBackend::~TikzBackend()
 {
-    kDebug()<<"Destroying TikzBackend";
+    qDebug()<<"Destroying TikzBackend";
 }
 
 bool TikzBackend::checkRequirements() const
@@ -77,20 +74,18 @@ QWidget* TikzBackend::settingsWidget(QWidget* parent) const
 QStringList TikzBackend::identifyingWords() const
 {
     QStringList words;
-    words << "\\path" << "tikzpicture" << "\\draw" << "node";
+    words << "\\path" << "tikzpicture" << "\\draw" << "node" << "smartdiagram";
     return words;
 }
 
-KUrl TikzBackend::examplesUrl() const
+QString TikzBackend::examplesUrl() const
 {
-    return KUrl("http://www.texample.net/tikz/");
+    return QString("http://www.texample.net/tikz/");
 }
 
-KUrl TikzBackend::helpUrl() const
+QString TikzBackend::helpUrl() const
 {
-    return KUrl("http://tug.org/svn/texlive/trunk/Master/texmf-dist/doc/generic/pgf/pgfmanual.pdf");
+    return QString("http://tug.org/svn/texlive/trunk/Master/texmf-dist/doc/generic/pgf/pgfmanual.pdf");
 }
 
 
-
-K_EXPORT_CIRKUIT_PLUGIN(tikzbackend, TikzBackend)

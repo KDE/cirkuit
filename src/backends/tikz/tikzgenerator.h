@@ -30,7 +30,7 @@ public:
     explicit TikzGenerator(Cirkuit::Backend* backend = 0, QObject* parent = 0);
     virtual ~TikzGenerator();
     
-    virtual bool convert(const Cirkuit::Format& in, const Cirkuit::Format& out);
+    virtual int convert(const Cirkuit::Format& in, const Cirkuit::Format& out);
 };
 
 #endif // TIKZGENERATOR_H

@@ -18,11 +18,11 @@
 
 #include "renderthread.h"
 
-#include <poppler-qt4.h>
+#include "poppler-qt5.h"
 
 #include <QFile>
 #include <QImage>
-#include <KDebug>
+//#include <QDebug>
 
 RenderThread::RenderThread(QObject* parent): QThread(parent)
 {

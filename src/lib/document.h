@@ -24,6 +24,8 @@
 #include "cirkuit_export.h"
 
 #include <KTextEditor/Document>
+#include <KTextEditor/Editor>
+#include <KParts/ReadWritePart>
 
 namespace Cirkuit
 {
@@ -53,7 +55,7 @@ public:
 };
 
 /**
- * The Document class represent a document of the text editor. 
+ * The Document class represents a document of the text editor. 
  * The creation of the class is managed by the Kate Part, therefore
  * the constructor should not be called directly. For the same reason
  * a separate DocumentSettings class has been added to personalize
@@ -63,6 +65,7 @@ public:
  * @author Matteo Agostinelli
  */
 class CIRKUIT_EXPORT Document : public KTextEditor::Document
+//class CIRKUIT_EXPORT Document : public KTextEditor::Editor
 {
     Q_OBJECT
 public:

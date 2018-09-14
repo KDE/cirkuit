@@ -1,3 +1,6 @@
+- 0.5.0
+Port to KF5 and Qt5
+
 - 0.4.2
 More informative messages
 Fixed wrong reassignment of Save and Save as actions

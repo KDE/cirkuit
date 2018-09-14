@@ -22,14 +22,15 @@
 
 #include <QFile>
 
-#include <KStandardDirs>
+#include <QStandardPaths>
 #include <KTar>
-#include <KLocale>
-#include <KIO/Job>
-#include <KIO/NetAccess>
-#include <KProcess>
-
+#include <KIO/FileCopyJob>
+//#include <KNS3/DownloadDialog>
+//#include <KNS3/UploadDialog>
+#include <QProcess>
+#include <QDebug>
 #include <cirkuitsettings.h>
+#include <QDir>
 
 CircuitMacrosManager::CircuitMacrosManager(): QObject()
 {
@@ -39,8 +40,9 @@ CircuitMacrosManager::CircuitMacrosManager(): QObject()
 bool CircuitMacrosManager::checkExistence() const
 {
     QStringList paths;
-    paths << KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/libcct.m4", true)
-          << KStandardDirs::locate("data", "cirkuit/circuit_macros/libcct.m4");
+
+    paths << QStandardPaths::locate(QStandardPaths::GenericDataLocation, "cirkuit/circuit_macros", QStandardPaths::LocateDirectory)
+          << QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "cirkuit/circuit_macros/libcct.m4", QStandardPaths::LocateFile);
     
     
     foreach(const QString& cm_path, paths) {
@@ -54,49 +56,62 @@ bool CircuitMacrosManager::checkExistence() const
 
 void CircuitMacrosManager::downloadLatest()
 {
-    KUrl origin = KUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/Circuit_macros.tar.gz");
-    KUrl dest = KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", true);
-
+    QUrl origin = QUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/Circuit_macros.tar.gz");
+    QString DestDir  = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/cirkuit";
+    QDir dir(DestDir);
+    if (!dir.exists()) {dir.mkpath(".");}
+    qDebug() << "Cirkuit macros will be saved in " << DestDir;
+    QUrl dest = QUrl::fromLocalFile(DestDir+"/Circuit_macros.tar.gz");
     KIO::Job* getJob = KIO::file_copy(origin, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
     connect( getJob, SIGNAL(result(KJob*)), this, SLOT(unpackCircuitMacros()) );
 }
 
 void CircuitMacrosManager::unpackCircuitMacros()
 {
-    KTar tarfile(KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", true));
-    tarfile.open(QIODevice::ReadOnly);
-    
-    const KArchiveDirectory* root = tarfile.directory();
-    
-    const KArchiveDirectory* mainDir = (KArchiveDirectory*) root->entry(root->entries().at(0));
-    mainDir->copyTo(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", true), true);
+    qDebug () << QStandardPaths::locate(QStandardPaths::GenericDataLocation, "cirkuit/Circuit_macros.tar.gz", QStandardPaths::LocateFile);
+    KTar tarfile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "cirkuit/Circuit_macros.tar.gz", QStandardPaths::LocateFile));
+    bool ok = tarfile.open(QIODevice::ReadOnly);
+    if (!ok) {qDebug() << "Error: Circuit_macros.tar.gz not present !!";}
 
+    QString DestDir  = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/cirkuit/circuit_macros";
+    QDir dir(DestDir);
+    if (!dir.exists()) {dir.mkpath(".");}
+    qDebug() << DestDir;
+    const KArchiveDirectory* root = tarfile.directory();
+    const KArchiveDirectory* mainDir = (KArchiveDirectory*) root->entry(root->entries().at(0));
+    mainDir->copyTo( DestDir, true);
     configureCircuitMacros();
 }
 
 void CircuitMacrosManager::configureCircuitMacros()
 {
-    QString homelibFilename = KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/homelib.txt", false);
-    QString defineString = QString("`define(`HOMELIB_',`%1')')").arg(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/", false));
+    qDebug() << "Configuring macros ...";
+    QString homelibLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/cirkuit/circuit_macros";
+    QDir dir(homelibLocation);
+    if (!dir.exists()) {dir.mkpath(".");}
 
-    QFile homelibFile(homelibFilename);
+    // code below from vs 0.4.3 for creating file homelib.txt in circuit_macros directory now seems to be unnecessary
+ /*
+    QFile homelibFile(homelibLocation+"/homelib.txt");
     if (!homelibFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
         return;
     }
+
+    QString defineString = QString("`define(`HOMELIB_',`%1')')").arg(homelibLocation);
     QTextStream out(&homelibFile);
     out << defineString << "\n";
-
     homelibFile.close();
 
     QStringList args;
     args << "homelib";
-    KProcess configProcess;
-    configProcess.setProgram("make", args);
-    configProcess.setWorkingDirectory(KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/"));
-    configProcess.startDetached();
 
-    QFile::remove(KStandardDirs::locateLocal("data", "cirkuit/Circuit_macros.tar.gz", false));
-    kDebug() << "Circuit macros configured";
+    QProcess configProcess;
+    configProcess.setWorkingDirectory(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "cirkuit/circuit_macros/",
+                                      QStandardPaths::LocateDirectory));
+    configProcess.startDetached("make", args);
+*/
+    QFile::remove(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("cirkuit/Circuit_macros.tar.gz"), QStandardPaths::LocateFile));
+    qDebug() << "Circuit macros configured";
     emit(configured());
 }
 
@@ -106,25 +121,25 @@ QString CircuitMacrosManager::installedVersion() const
         return "";
     }
     
-    QString filename = KStandardDirs::locateLocal("data", "cirkuit/circuit_macros/README", false);
+    QString filename = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("cirkuit/circuit_macros/README"), QStandardPaths::LocateFile);
     return findVersion(filename);
 }
 
 void CircuitMacrosManager::checkOnlineVersion()
 {
-    KUrl origin = KUrl("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/README");
-    KUrl dest = KStandardDirs::locateLocal("tmp", "cirkuit/README", true);
+    QString origin = QString("http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/README");
+    QString dest = QStandardPaths::locate(QStandardPaths::TempLocation, "cirkuit/README", QStandardPaths::LocateFile);
 
-    KIO::Job* getJob = KIO::file_copy(origin, dest, -1, KIO::Overwrite | KIO::HideProgressInfo);
+    KIO::Job* getJob = KIO::file_copy(QUrl(origin), QUrl(dest), -1, KIO::Overwrite | KIO::HideProgressInfo);
     connect( getJob, SIGNAL(result(KJob*)), this, SLOT(readVersion()) );
 }
 
 void CircuitMacrosManager::readVersion()
 {     
-    QString onlineVersion = findVersion(KStandardDirs::locateLocal("tmp", "cirkuit/README", false));
+    QString onlineVersion = findVersion(QStandardPaths::locate(QStandardPaths::TempLocation, QString("cirkuit/README"), QStandardPaths::LocateFile));
     QString installVersion = installedVersion();
-    kDebug() << "ONLINE version: " << onlineVersion;
-    kDebug() << "INSTALLED version: " << installVersion;
+    qDebug() << "ONLINE version: " << onlineVersion;
+    qDebug() << "INSTALLED version: " << installVersion;
 
     if (onlineVersion > installVersion) {
         emit newVersionAvailable(onlineVersion);

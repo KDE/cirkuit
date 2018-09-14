@@ -22,11 +22,12 @@
 #include "cirkuitsettings.h"
 #include "circuitmacrosmanager.h"
 #include "generatorthread.h"
+#include "failcodes.h"
 
 #include "ui_cirkuit_general_settings.h"
 
 #include "lib/document.h"
-#include "lib/backend.h"
+#include "lib/backend_interface.h"
 #include "lib/format.h"
 #include "lib/generator.h"
 #include "lib/documenttemplate.h"
@@ -37,56 +38,52 @@
 #include "widgets/backendchoosedialog.h"
 #include "widgets/templatechoosedialog.h"
 
-#include <KApplication>
-#include <KAction>
+#include <QApplication>
+#include <QDebug>
+#include <QAction>
 #include <KToggleAction>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
-#include <KStandardDirs>
+#include <QStandardPaths>
 #include <KRecentFilesAction>
-#include <KFileDialog>
+#include <QFileDialog>
 #include <KShortcutsDialog>
 #include <KMessageBox>
-#include <KIO/NetAccess>
-#include <KSaveFile>
-#include <KMenu>
+//#include <KIO>
+//#include <QSaveFile>
+#include <QMenu>
 #include <QTextStream>
 #include <QListWidget>
 #include <QFileInfo>
 #include <QFileSystemModel>
 #include <QTimer>
+#include <QMimeType>
+#include <QMimeDatabase>
 #include <KXMLGUIFactory>
 #include <KConfigDialog>
 #include <KRun>
 #include <KProcess>
-#include <kmimetypetrader.h>
-#include <KConfigSkeletonItem>
-
-#ifdef ENABLE_KMESSAGEWIDGET
-  #include "widgets/widgetfloater.h"
-  #include <KMessageWidget>
-#else
-  #include <KStatusBar>
-#endif
-
-
-#include <knewstuff3/downloaddialog.h>
-#include <knewstuff3/uploaddialog.h>
-
+#include <KConfigSkeleton>
+#include <KMessageWidget>
 #include <KTextEditor/Document>
-#include <KTextEditor/View>
 #include <KTextEditor/Editor>
-#include <KTextEditor/EditorChooser>
+#include <KTextEditor/View>
+//#include <KNS3/DownloadDialog>
+//#include <KNS3/UploadDialog>
+
+#include "widgets/widgetfloater.h"
+
+//#include <kmimetypetrader.h>
 
 MainWindow::MainWindow(QWidget *)
 {
-    KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
+    KTextEditor::Editor *editor = KTextEditor::Editor::instance();
 
     if (!editor) {
-        KMessageBox::error(this, i18n("A KDE text-editor component could not be found;\n"
-        "please check your KDE installation."));
-        kapp->exit(1);
+        KMessageBox::error(this, i18n("A KF5 text-editor component could not be found;\n"
+        "please check your KF5 installation."));
+        qApp->exit(1);
     }
 
     m_doc = (Cirkuit::Document*) (editor->createDocument(0));
@@ -97,19 +94,16 @@ MainWindow::MainWindow(QWidget *)
     m_previewWidget->setObjectName("preview-dock");
     m_imageView = m_previewWidget->view();
     addDockWidget(Qt::TopDockWidgetArea, m_previewWidget);
-#ifdef ENABLE_KMESSAGEWIDGET
+
     m_messageWidget = 0;
-#else
-    statusBar()->showMessage(i18n("Ready"), 3000);
-#endif
-    
+
     m_logViewWidget = new LogViewWidget(i18n("Log"), this);
     m_logViewWidget->setObjectName("log-dock");
     addDockWidget(Qt::BottomDockWidgetArea, m_logViewWidget);
     m_logViewWidget->hide();
 
-    mimeTypes << "application/x-cirkuit" << "text/x-tex" << "application/x-gnuplot";
-    m_currentFile = KUrl("");
+    m_currentFile = QString();
+    m_dirCurrentEditorFile = QDir::current().absolutePath();
     updateTitle();
 
     setCentralWidget(m_view);
@@ -120,7 +114,7 @@ MainWindow::MainWindow(QWidget *)
     createShellGUI(true);
 
     guiFactory()->addClient(m_view);
-    m_view->setContextMenu(qobject_cast<KMenu *> (factory()->container("ktexteditor_popup", this)));
+    m_view->setContextMenu(qobject_cast<QMenu *> (factory()->container("ktexteditor_popup", this)));
 
     m_generator = new GeneratorThread;
     
@@ -128,7 +122,7 @@ MainWindow::MainWindow(QWidget *)
     updateConfiguration();
     
     connect(m_generator, SIGNAL(success()), this, SLOT(builtNotification()));
-    connect(m_generator, SIGNAL(fail()), this, SLOT(failedNotification()));
+    connect(m_generator, SIGNAL(fail(const int)), this, SLOT(failedNotification(const int)));
     connect(m_doc, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(documentModified(KTextEditor::Document*)));
 
     connect(m_generator, SIGNAL(previewReady(QImage)), this, SLOT(showPreview(QImage)));
@@ -139,8 +133,10 @@ MainWindow::MainWindow(QWidget *)
     connect(m_generator, SIGNAL(backendChanged(QString)), this, SLOT(backendChanged(QString)));
     
     checkCircuitMacros();
+
+    qDebug() << "Initializing backends";
     initializeBackend();
-    newDocument(); 
+    newDocument();
 }
 
 void MainWindow::setupActions()
@@ -158,63 +154,64 @@ void MainWindow::setupActions()
     KStandardAction::open(this, SLOT(openFile()), actionCollection());
     KStandardAction::close(this, SLOT(newDocument()), actionCollection());
     KStandardAction::clear(this, SLOT(clear()), actionCollection());
-    KStandardAction::preferences(this, SLOT(configure()), actionCollection());    
+    KStandardAction::preferences(this, SLOT(configure()), actionCollection());
+
     KStandardAction::keyBindings(this, SLOT(configureKeyBindings()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
                                             
-    recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFile(KUrl)),
+    recentFilesAction = KStandardAction::openRecent(this, SLOT(loadFileFromUrl(QUrl)),
                                                                     actionCollection());
                                                                     
-    KAction* exportAction = new KAction(KIcon("document-export"), i18n("Export..."), 0);
+    QAction* exportAction = new QAction(QIcon("document-export"), i18n("Export image..."), 0);
     actionCollection()->addAction("export", exportAction);
     connect(exportAction, SIGNAL(triggered()), this, SLOT(exportFile()));
 
-    KAction* buildPreviewAction = new KAction(i18n("Build preview"), 0);
-    buildPreviewAction->setShortcut(Qt::ALT + Qt::Key_1);
-    buildPreviewAction->setIcon(KIcon("run-build"));
+    QAction* buildPreviewAction = new QAction(i18n("Build preview"), 0);
+    actionCollection()->setDefaultShortcut(buildPreviewAction, Qt::ALT + Qt::Key_1);
+    buildPreviewAction->setIcon(QIcon("run-build"));
     actionCollection()->addAction("build_preview", buildPreviewAction);
     connect(buildPreviewAction, SIGNAL(triggered()), this, SLOT(buildPreview()));
 
-    KAction* openPreviewAction = new KAction(i18n("Open preview"), 0);
-    openPreviewAction->setShortcut(Qt::ALT + Qt::Key_2);
-    openPreviewAction->setIcon(KIcon("document-preview"));
+    QAction* openPreviewAction = new QAction(i18n("Open preview"), 0);
+    actionCollection()->setDefaultShortcut(openPreviewAction, Qt::ALT + Qt::Key_2);
+    openPreviewAction->setIcon(QIcon("document-preview"));
     actionCollection()->addAction("open_preview", openPreviewAction);
     connect(openPreviewAction, SIGNAL(triggered()), this, SLOT(openPreview()));
     
-    KAction* templateManagerAction = new KAction(i18n("Template manager"), 0);
+    QAction* templateManagerAction = new QAction(i18n("Template manager"), 0);
     actionCollection()->addAction("template_manager", templateManagerAction);
     connect(templateManagerAction, SIGNAL(triggered()), this, SLOT(openTemplateManager()));
 
-    KAction* showManualAction = new KAction(KIcon("help-contents"), i18n("Show manual"),0);
+    QAction* showManualAction = new QAction(QIcon("help-contents"), i18n("Show manual"),0);
     actionCollection()->addAction( "showManual", showManualAction );
     connect(showManualAction, SIGNAL(triggered()), this, SLOT(showManual()));
 
-    KAction* showExamplesAction = new KAction(i18n("Show examples"),0);
+    QAction* showExamplesAction = new QAction(i18n("Show examples"),0);
     actionCollection()->addAction( "showExamples", showExamplesAction );
     connect(showExamplesAction, SIGNAL(triggered()), this, SLOT(showExamples()));
 
     QAction* showLivePreviewAction = m_previewWidget->toggleViewAction();
-    showLivePreviewAction->setIcon(KIcon("document-preview"));
+    showLivePreviewAction->setIcon(QIcon("document-preview"));
     actionCollection()->addAction( "show_live_preview", showLivePreviewAction );
 
-    KAction* downloadExamples = new KAction(i18n("Download Examples"), actionCollection());
-    downloadExamples->setIcon(KIcon("get-hot-new-stuff"));
+ /*   QAction* downloadExamples = new QAction(i18n("Download Examples"), actionCollection());
+    downloadExamples->setIcon(QIcon("get-hot-new-stuff"));
     actionCollection()->addAction("download_examples",  downloadExamples);
     connect(downloadExamples, SIGNAL(triggered()), this,  SLOT(downloadExamples()));
     
-    KAction* uploadExample = new KAction(i18n("Upload Example"), actionCollection());
-    uploadExample->setIcon(KIcon("get-hot-new-stuff"));
+    QAction* uploadExample = new QAction(i18n("Upload Example"), actionCollection());
+    uploadExample->setIcon(QIcon("get-hot-new-stuff"));
     actionCollection()->addAction("upload_example",  uploadExample);
     connect(uploadExample, SIGNAL(triggered()), this,  SLOT(uploadExample()));
     
-    KAction* openExample =new KAction(i18n("&Open Example"), actionCollection());
-    openExample->setIcon(KIcon("document-open"));
+    QAction* openExample =new QAction(i18n("&Open Example"), actionCollection());
+    openExample->setIcon(QIcon("document-open"));
     actionCollection()->addAction("file_open_example", openExample);
     connect(openExample, SIGNAL(triggered()), this, SLOT(openExample()));    
-    
+*/    
     QAction* showLogViewAction = m_logViewWidget->toggleViewAction();
     actionCollection()->addAction( "show_log_view", showLogViewAction );
-    showLogViewAction->setIcon(KIcon("documentation"));
+    showLogViewAction->setIcon(QIcon("documentation"));
 
     KConfig *config = CirkuitSettings::self()->config();
     recentFilesAction->loadEntries(config->group("recent_files"));
@@ -231,38 +228,45 @@ void MainWindow::clear()
 
 void MainWindow::newFile()
 {
-    QPointer<BackendChooseDialog> dlg = new BackendChooseDialog(CirkuitSettings::defaultBackend(), this);
+    BackendChooseDialog *dialog = new BackendChooseDialog(CirkuitSettings::defaultBackend(), this);
+  //  QPointer<BackendChooseDialog> dlg = new BackendChooseDialog(CirkuitSettings::defaultBackend(), this);
     
-    connect(dlg, SIGNAL(backendSelected(QString)), this, SLOT(newDocument(QString)));
-    connect(dlg, SIGNAL(defaultBackendSelected(QString)), this, SLOT(setDefaultBackend(QString)));
+    connect(dialog, SIGNAL(backendSelected(QString)), this, SLOT(newDocument(QString)));
+    connect(dialog, SIGNAL(defaultBackendSelected(QString)), this, SLOT(setDefaultBackend(QString)));
     
-    dlg->exec();
-    delete dlg;
+    dialog->exec();
+    delete dialog;
 }
 
 void MainWindow::openFile()
 {
-    QString filename;
-
-    QPointer<KFileDialog> openFileDialog = new KFileDialog(KUrl(), "", this);
-    openFileDialog->setWindowTitle(i18n("Open file - Cirkuit"));
-    openFileDialog->setOperationMode(KFileDialog::Opening);
-    openFileDialog->setMimeFilter(mimeTypes);
-    if (openFileDialog->exec() == QDialog::Accepted) {
-        filename = openFileDialog->selectedFile();
-    }
-
-    if (!filename.isEmpty()) {
+    QString openFileName = QFileDialog::getOpenFileName(this, i18n("Open file - Cirkuit"),  m_dirCurrentEditorFile,
+                                                        i18n("Cirkuit drawing (*.m4 *.ckt);;Tex (*.tex);;Gnuplot (*.gp);;All files (*.*)") );
+    if (!openFileName.isEmpty()) {
         m_imageView->clear();
-        recentFilesAction->addUrl(KUrl(filename));
-        loadFile(filename);
+        recentFilesAction->addUrl(QUrl(openFileName));
+        loadFile(openFileName);
     }
 }
 
-void MainWindow::loadFile(const KUrl& url)
+void MainWindow::loadFile(const QString& fnpath)
 {
-    m_currentFile = url;
-    m_view->document()->openUrl(url);
+    QUrl url = QUrl::fromLocalFile(fnpath);
+    loadFileFromUrl2(url, fnpath);
+}
+
+void MainWindow::loadFileFromUrl(const QUrl& url)
+{
+    loadFileFromUrl2(url, url.toLocalFile() );
+}
+
+void MainWindow::loadFileFromUrl2(const QUrl& url, const QString& fnpath)
+{
+    bool ok = m_view->document()->openUrl(url);
+    if (!ok) return;
+    m_currentFile = fnpath;
+    QFileInfo fi(m_currentFile);
+    m_dirCurrentEditorFile = fi.dir().absolutePath();
     m_imageView->clear();
     m_firstRun = true;
     m_backend = Cirkuit::Backend::autoChooseBackend(m_doc);
@@ -285,58 +289,43 @@ void MainWindow::save()
 
 void MainWindow::saveAs()
 {
-    QString filename;
+    QString saveFileName = QFileDialog::getSaveFileName(this, i18n("Save file - Cirkuit"),     m_dirCurrentEditorFile,
+                                                          i18n("Cirkuit drawing (*.m4, *.ckt);;Tex (*.tex);;Gnuplot (*.gp);;All files (*.*)") );
 
-    QPointer<KFileDialog> saveFileDialog = new KFileDialog(KUrl(), "", this);
-    saveFileDialog->setWindowTitle(i18n("Save file - Cirkuit"));
-    saveFileDialog->setOperationMode(KFileDialog::Saving);
-    saveFileDialog->setMimeFilter(mimeTypes, "application/x-cirkuit");
-    saveFileDialog->setConfirmOverwrite(true);
-    if (saveFileDialog->exec() == QDialog::Accepted) {
-        filename = saveFileDialog->selectedFile();
-    }
-
-    if (!filename.isEmpty()) {
-        saveAsFile(filename);
+    if (!saveFileName.isEmpty()) {
+        saveAsFile(saveFileName);
     }
 }
 
-void MainWindow::saveAsFile(const KUrl& url)
+void MainWindow::saveAsFile(const QString& fnpath)
 {
     if (CirkuitSettings::refreshOnSave()) {
         buildPreview();
     }
-    m_doc->saveAs(url);
+    QUrl url = QUrl::fromLocalFile(fnpath);
+    m_doc->saveAs(QUrl(url));
     recentFilesAction->addUrl(url);
-    m_currentFile = url;
+    m_currentFile = fnpath;
+    QFileInfo fi(m_currentFile);
+    m_dirCurrentEditorFile = fi.dir().absolutePath();
     updateTitle();
 }
 
 void MainWindow::exportFile()
 {
-    QString path;
 
     QStringList exportTypes;
-    exportTypes << "application/pdf" << "image/x-eps" << "image/png" << "image/jpeg" << "image/svg+xml" << "image/gif" << "text/x-tex";
 
-    QPointer<KFileDialog> saveFileDialog = new KFileDialog(KUrl(), "", this);
-    saveFileDialog->setWindowTitle(i18n("Export image - Cirkuit"));
-    saveFileDialog->setStartDir(m_currentFile.directory());
-    saveFileDialog->setOperationMode(KFileDialog::Saving);
-    saveFileDialog->setMimeFilter(exportTypes, "application/pdf");
-    saveFileDialog->setInlinePreviewShown(true);
-    saveFileDialog->setConfirmOverwrite(true);
-    if (saveFileDialog->exec() == QDialog::Accepted) {
-        path = saveFileDialog->selectedFile();
-    }
+    QString saveFileName = QFileDialog::getSaveFileName(this, i18n("Export image - Cirkuit"), m_dirCurrentEditorFile,
+                                      i18n("pdf (*.pdf);;png(*.png);;jpg(*.jpg);;eps(*.eps);;svg(*.svg);;gif(*.gif);;Document(*.tex)") );
 
-    if (!path.isEmpty()) {
-        QFileInfo fileinfo(path);
-        Cirkuit::Format format = Cirkuit::Format::fromMimeType(saveFileDialog->currentFilterMimeType());
+    if (!saveFileName.isEmpty()) {
+        QFileInfo fileinfo(saveFileName);
+        QString sfx = fileinfo.suffix().toLower(); // e.g. "pdf", "png" (dot-less)
+        Cirkuit::Format format = Cirkuit::Format::fromExtension(sfx);
+        m_tempSavePath = saveFileName;
         m_generator->generate(Cirkuit::Format::Source, format, m_backend, m_doc, true);
-        m_tempSavePath = path;
-        QFile oldFile(path);
-        oldFile.remove();
+        // saveFileToDisk() called after fileReady event emitted in generatorThread.
     }
 }
 
@@ -365,23 +354,16 @@ void MainWindow::buildPreview()
     if (m_updateTimer) {
         m_updateTimer->stop();
     }
-    
-    QString msg = i18n("Generating preview");
-#ifdef ENABLE_KMESSAGEWIDGET
     delete m_messageWidget;
+    QString msg = i18n("Generating preview");
+
     m_messageWidget = new KMessageWidget;
     m_messageWidget->setMessageType(KMessageWidget::Information);
     m_messageWidget->setText(msg);
     showMessage(m_messageWidget);
-#else
-    statusBar()->showMessage(msg);
-#endif
     m_logViewWidget->clear();
     m_logViewWidget->hide();
-    
     m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc, false, m_imageView->scaleFactor());
-    
-    kDebug() << "Preview generation in progress...";
 }
 
 void MainWindow::openPreview()
@@ -395,7 +377,7 @@ void MainWindow::openPreviewFile()
 {
     disconnect(m_generator, SIGNAL(finished()), this, SLOT(openPreviewFile()));
     
-    KUrl url = m_generator->previewUrl();
+    QUrl url = QUrl(m_generator->previewUrl());
     if (!url.isLocalFile()) {    
         return;
     }
@@ -405,11 +387,7 @@ void MainWindow::openPreviewFile()
 
 void MainWindow::builtNotification()
 {
-#ifdef ENABLE_KMESSAGEWIDGET
     m_messageWidget->animatedHide();
-#else
-    statusBar()->showMessage(i18n("Preview built"), 3000);;
-#endif
 }
 
 void MainWindow::newDocument(const QString& backendName)
@@ -434,7 +412,7 @@ void MainWindow::newDocument(const QString& backendName)
     if (!m_doc->closeUrl()) {
         return;
     }
-    reset();
+    mainreset();
     
     m_doc->setText(m_doc->initialText());
     KTextEditor::Cursor cursor = m_view->cursorPosition();
@@ -448,16 +426,17 @@ void MainWindow::updateTitle()
     m_windowTitle = "Cirkuit";
 
     if (!m_currentFile.isEmpty()) {
-        m_windowTitle += " - " + m_currentFile.fileName();
+        QFileInfo fi(m_currentFile);
+        m_windowTitle += " - " + fi.fileName();
     }
     
     m_windowTitle += "[*]";
     setWindowTitle(m_windowTitle);
 }
 
-void MainWindow::reset()
+void MainWindow::mainreset()
 {
-    m_currentFile = "";
+    m_currentFile = QString();
     m_doc->clear();
     m_imageView->clear();
     m_firstRun = true;
@@ -512,15 +491,20 @@ void MainWindow::showExamples()
     openHelpUrl(m_backend->examplesUrl());
 }
 
-void MainWindow::openHelpUrl(const KUrl& url)
+void MainWindow::openHelpUrl(const QString& fnpath)
 {
-    QString type;
-    if (url.isLocalFile()) {
-        type = KMimeType::findByUrl(url).constData()->name();
-    } else {
-        type = KIO::NetAccess::mimetype(url, this);
-    }
-    KRun::runUrl(url, type, this);
+
+        QMimeDatabase db;
+        QString fn = QFileInfo(fnpath).fileName();
+        QString mimtype;
+        QUrl url(fnpath);
+      if (url.isLocalFile()) {
+           mimtype = db.mimeTypeForFile(fn).name();
+      } else {
+          mimtype = db.mimeTypeForFile(fn).name();  // for now.  QNetworkAccessManager might be better for web locations
+//        mimtype = KIO::NetAccess::mimetype(url, this); // old
+      }
+    KRun::runUrl(url, mimtype, this, KRun::RunFlags());
 }
 
 void MainWindow::checkCircuitMacros()
@@ -529,20 +513,20 @@ void MainWindow::checkCircuitMacros()
     connect(cmm, SIGNAL(newVersionAvailable(QString)), this, SLOT(askIfUpgrade(QString)));
     connect(cmm, SIGNAL(configured()), this, SLOT(circuitMacrosConfigured()));
     if (cmm->checkExistence()) {
-        kDebug() << "Circuit macros found!";
-        kDebug() << QString("version %1").arg(cmm->installedVersion());
+        qDebug() << "Circuit macros found!";
+        qDebug() << QString("version %1").arg(cmm->installedVersion());
         cmm->checkOnlineVersion();
     } else {
-        kDebug() << "Circuit macros NOT found!!!!";
+        qDebug() << "Circuit macros NOT found!!!!";
         if (KMessageBox::questionYesNo(this, i18n("Circuit Macros could not be found on your system. The application will not work if the macros are not installed. Do you want to proceed with the installation?"), i18n("Installation needed")) == KMessageBox::Yes) {
             cmm->downloadLatest();
-#ifdef ENABLE_KMESSAGEWIDGET
+
             delete m_messageWidget;
             m_messageWidget = new KMessageWidget(m_imageView);
             m_messageWidget->setMessageType(KMessageWidget::Information);
             m_messageWidget->setText(i18n("Downloading Circuit Macros. Please wait..."));
             showMessage(m_messageWidget);
-#endif
+
         }
     }
 }
@@ -556,26 +540,29 @@ void MainWindow::askIfUpgrade(const QString& version)
 
 void MainWindow::circuitMacrosConfigured()
 {
-#ifdef ENABLE_KMESSAGEWIDGET
+
     if (m_messageWidget) {
         m_messageWidget->animatedHide();
     }
-#endif
 }
 
-void MainWindow::failedNotification()
+void MainWindow::failedNotification(const int fcode)
 {
+    QString msg = i18n(GetErrorString(fcode)) +
+                  i18n("\nUnable to generate a preview for the current input");
+
     m_imageView->setImage(QImage());
-    QString msg = i18n("Unable to generate a preview for the current input");
-#ifdef ENABLE_KMESSAGEWIDGET
     delete m_messageWidget;
     m_messageWidget = new KMessageWidget(m_imageView);
     m_messageWidget->setMessageType(KMessageWidget::Error);
     m_messageWidget->setText(msg);
     showMessage(m_messageWidget);
-#else
-    statusBar()->showMessage(msg, 5000);
-#endif
+
+    delete m_messageWidget;
+    m_messageWidget = new KMessageWidget(m_imageView);
+    m_messageWidget->setMessageType(KMessageWidget::Error);
+    m_messageWidget->setText(msg);
+    showMessage(m_messageWidget);
 }
 
 void MainWindow::showPreview(const QImage& image)
@@ -587,20 +574,22 @@ void MainWindow::showPreview(const QImage& image)
 
 void MainWindow::saveFileToDisk(const QString& path)
 {
-    kDebug() << "Copying "  << path << " to " << m_tempSavePath;
+    qDebug() << "Copying "  << path << " to " << m_tempSavePath;
+    // QFile::copy does not overwrite, so delete old copy before saving.
+    if (QFile::exists(m_tempSavePath)) QFile::remove(m_tempSavePath);
     QFile::copy(path, m_tempSavePath);
-    kDebug() << "File successfully exported";
+    qDebug() << "File successfully exported";
 }
 
 void MainWindow::initializeBackend()
 {
-    kDebug() << Cirkuit::Backend::listAvailableBackends();
+    qDebug() << Cirkuit::Backend::listAvailableBackends();
     m_backend = Cirkuit::Backend::getBackend(CirkuitSettings::defaultBackend());
     
     if (!m_backend) {
-        kDebug() << "The default backend has not been found";
+        qDebug() << "The default backend has not been found";
         if (Cirkuit::Backend::listAvailableBackends().count() < 1) {
-            kDebug() << "No backends available...";
+            qDebug() << "No backends available...";
             KMessageBox::error(this, i18n("No working backend has been found. Cirkuit is unable to generate any figure."), i18n("No backends found"));
             return;
         } else {
@@ -638,22 +627,24 @@ void MainWindow::backendChanged(const QString& backendName)
     actionCollection()->action("showExamples")->setText(i18n("%1 examples", backendName));
 }
 
+/*
 void MainWindow::downloadExamples()
 {
-    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog("cirkuit_example.knsrc");
+    KNS3::DownloadDialog* dialog = new KNS3::DownloadDialog("cirkuit_example.knsrc", this);
     dialog->exec();
     foreach (const KNS3::Entry& e,  dialog->changedEntries())
     {
-        kDebug() << "Changed Entry: " << e.name();
+        qDebug() << "Changed Entry: " << e.name();
     }
+    delete dialog;
 }
 
 void MainWindow::uploadExample()
 {
-    kDebug() << "Uploading to GHNS: " << m_currentFile;
+    qDebug() << "Uploading to GHNS: " << m_currentFile;
     
     if (!m_currentFile.isLocalFile()) {
-        kDebug() << "Trying to save the file first ...";
+        qDebug() << "Trying to save the file first ...";
         KMessageBox::error(this, i18n("Save the current document before uploading it"));
         return;
     }
@@ -666,43 +657,58 @@ void MainWindow::uploadExample()
 
 void MainWindow::openExample()
 {
-    QString dir = KStandardDirs::locateLocal("appdata",  "examples");
+    QString dir = QStandardPaths::locate(QStandardPaths::AppLocalDataLocation, "examples");
     if (dir.isEmpty()) return;
-    KStandardDirs::makeDir(dir);
+    QDir dirpath;
+    dirpath.mkpath(dir);
     
-    QPointer<KDialog> dlg=new KDialog(this);
+  //  QPointer<QDialog> dlg=new QDialog(this);
+    QDialog *dlg = new QDialog;
     
     QFileSystemModel* model = new QFileSystemModel;
     model->setRootPath(dir);
     
-    QListView *list = new QListView(dlg);
-    list->setModel(model);
-    list->setRootIndex(model->index(dir));
-    list->setSelectionMode(QAbstractItemView::SingleSelection);
-    dlg->setMainWidget(list);
+    QListView *view = new QListView(dlg);
+    view->setModel(model);
+    view->setRootIndex(model->index(dir));
+    view->setSelectionMode(QAbstractItemView::SingleSelection);
 
-    if (dlg->exec() == QDialog::Accepted && list->currentIndex().isValid()) {
-        loadFile(model->filePath(list->currentIndex()));
+//    dlg->setMainWidget(view);
+    dlg->listView->setModel(model);
+    if (dlg->exec() == QDialog::Accepted && view->currentIndex().isValid()) {
+        loadFile( QUrl(model->filePath(view->currentIndex())) );
     }
 
-    delete list;
+    delete view;
     delete dlg;
 }
+*/
 
 void MainWindow::openTemplateManager()
 {
     KConfigSkeletonItem* urlItem = m_backend->configTemplateUrl();
     if (!urlItem) return;
-    
-    TemplateChooseDialog dlg(m_backend->id());
+
+    TemplateChooseDialog dlg(m_backend->id(), urlItem->property().toUrl() );
     
     if (dlg.exec() == QDialog::Accepted && !dlg.selectedFile().isEmpty()) {
-        urlItem->setProperty(dlg.selectedFile());
+        QUrl sel_url = dlg.selectedFile();
+        urlItem->setProperty(sel_url);
         m_backend->config()->writeConfig();
+
+        delete m_messageWidget;
+        QString msg = i18n("Generating preview");
+
+        m_messageWidget = new KMessageWidget;
+        m_messageWidget->setMessageType(KMessageWidget::Information);
+        m_messageWidget->setText(msg);
+        showMessage(m_messageWidget);
+        m_logViewWidget->clear();
+        m_logViewWidget->hide();
+        m_generator->generate(Cirkuit::Format::Source, Cirkuit::Format::QtImage, m_backend, m_doc, false, m_imageView->scaleFactor());
     }
 }
 
-#ifdef ENABLE_KMESSAGEWIDGET
 void MainWindow::showMessage(KMessageWidget* messageWidget)
 {
     WidgetFloater* floater = new WidgetFloater(m_imageView);
@@ -710,5 +716,4 @@ void MainWindow::showMessage(KMessageWidget* messageWidget)
     floater->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     messageWidget->animatedShow();
 }
-#endif
 

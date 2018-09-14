@@ -27,8 +27,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Cambridge, MA 02110-1301, USA
 #include <QWidget>
 
 // KDE
-#include <kdebug.h>
-#include <kdialog.h>
+//#include <Qdebug.h>
+#include <QDialog>
 
 struct WidgetFloaterPrivate {
 	QWidget* mParent;
@@ -95,8 +95,9 @@ WidgetFloater::WidgetFloater(QWidget* parent)
 	d->mParent->installEventFilter(this);
 	d->mChild = 0;
 	d->mAlignment = Qt::AlignCenter;
-	d->mHorizontalMargin = KDialog::marginHint();
-	d->mVerticalMargin = KDialog::marginHint();
+	d->mHorizontalMargin = // QDialog::marginHint();  //**
+                            1;
+	d->mVerticalMargin = d->mHorizontalMargin;
 	d->mInsideUpdateChildGeometry = false;
 }
 

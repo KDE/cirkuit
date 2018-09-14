@@ -22,11 +22,12 @@
 #ifndef BACKENDCHOOSEDIALOG_H
 #define BACKENDCHOOSEDIALOG_H
 
-#include <KDialog>
+#include <QDialog>
+#include <QListWidget>
 
 #include "ui_backendchooser.h"
 
-class BackendChooseDialog : public KDialog
+class BackendChooseDialog : public QDialog
 {
 Q_OBJECT
 public:

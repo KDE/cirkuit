@@ -24,19 +24,17 @@
 #include "settings.h"
 #include "ui_settings.h"
 
-#include <KDebug>
-
-#include "cirkuit_macros.h"
+#include <QDebug>
 
 PstricksBackend::PstricksBackend(QObject* parent, const QList< QVariant > args): Backend(parent, args)
 {
     Q_UNUSED(args)
-    kDebug() << "Creating PstricksBackend";
+    qDebug() << "Creating PstricksBackend";
 }
 
 PstricksBackend::~PstricksBackend()
 {
-    kDebug() << "Destroying Pstricksbackend";
+    qDebug() << "Destroying Pstricksbackend";
 }
 
 QString PstricksBackend::id() const
@@ -56,14 +54,14 @@ QStringList PstricksBackend::identifyingWords() const
     return words;
 }
 
-KUrl PstricksBackend::helpUrl() const
+QString PstricksBackend::helpUrl() const
 {
-    return KUrl("http://mirror.ctan.org/graphics/pstricks/base/doc/pstricks-doc.pdf");
+    return QString("http://mirror.ctan.org/graphics/pstricks/base/doc/pstricks-doc.pdf");
 }
 
-KUrl PstricksBackend::examplesUrl() const
+QString PstricksBackend::examplesUrl() const
 {
-    return KUrl("http://tug.org/PSTricks/main.cgi?file=examples");
+    return QString("http://tug.org/PSTricks/main.cgi?file=examples");
 }
 
 Cirkuit::DocumentSettings* PstricksBackend::documentSettings() const
@@ -89,4 +87,3 @@ Cirkuit::Generator* PstricksBackend::generator() const
     return new PstricksGenerator();
 }
 
-K_EXPORT_CIRKUIT_PLUGIN(pstricksbackend, PstricksBackend)

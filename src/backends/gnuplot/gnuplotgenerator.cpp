@@ -22,13 +22,14 @@
 #include "documenttemplate.h"
 #include "command.h"
 #include "settings.h"
+#include "failcodes.h"
 
 #include <QDir>
 
-#include <KDebug>
-#include <KProcess>
-#include <KTemporaryFile>
-#include <KStandardDirs>
+#include <QDebug>
+#include <QProcess>
+#include <QTemporaryFile>
+//#include <QStandardPaths>
 
 using namespace Cirkuit;
 
@@ -42,15 +43,14 @@ GnuplotGenerator::~GnuplotGenerator()
 
 }
 
-bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
+int GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
-     // Check if the conversion can be handled by the super-class
-    bool done = Generator::convert(in, out);
-    if (done) {
-        return true;
-    }
+    // Check if the conversion can be handled by the super-class
+    int fail = Cirkuit::Generator::convert(in, out);
+    if (fail==NoFail) return NoFail;
+    if (fail != Fail_unimplemented_conversion) return fail;
     
-    kDebug() << "Inside the Gnuplot backend...";
+    qDebug() << "Inside the Gnuplot backend...";
     
     if (in == Format::Source) {
         QTextStream stream(tempFile());
@@ -103,30 +103,60 @@ bool GnuplotGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format&
         }
         tempFile()->close();
     
-        if (!execute(gnuplot)) return false;
+        if (!execute(gnuplot)) return Fail_gnuplot;
         
         if (out == Format::Tex) {
-            return true;
+            return NoFail;
         }
     
         DocumentTemplate gpTemplate(GnuplotSettings::templateurl().path());
         QString latexDoc = gpTemplate.insert(gnuplotOutputFile);
         
         QStringList environment = QProcess::systemEnvironment();
-        // the following environment variable is needed to find boxdims.sty in the circuit maaros distribution
-        QString dirString = QString("TEXINPUTS=.:%1:").arg(QDir(document()->directory()).absolutePath());
+        // LaTeX searches (in order) circuit_macros dir, dir that contains editor document, local dir
+        // The search of circuit_macros is needed to find boxdims.sty
+        QString dirString = QString("TEXINPUTS=%1:%2:.:").arg(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                               "cirkuit/circuit_macros/",QStandardPaths::LocateDirectory)).arg(QDir(document()->directory()).absolutePath());
+
         environment << dirString;
         
         QStringList latexArgs;
         latexArgs << QString("-jobname=%1").arg(tempFileInfo()->baseName());
         
-        Command* latexCmd = new Command("pdflatex", latexDoc, latexArgs);
-        latexCmd->setWorkingDirectory(workingDir().path());
+        Command* latexCmd = new Command("latex", latexDoc, latexArgs);
+        latexCmd->setWorkingDirectory(getWorkingDir());
         latexCmd->setEnvironment(environment);
-        if (!execute(latexCmd)) return false;
+
+        if (!execute(latexCmd)) return Fail_LateXExec;
+
+        if (!QFileInfo(formatPath(Format::Dvi)).exists()) // check we have the dvi file in temp directory.
+        {
+           return Fail_LateXNoOutput;
+        };
         
-        return convert(Format::Pdf, out);
+        return convert(Format::Dvi, out);
     }
     
+    return convert(Format::Dvi, out);
+}
+
+
+/*
+ *         Command* latexCmd = new Command("pdflatex", latexDoc, latexArgs);
+        latexCmd->setWorkingDirectory(getWorkingDir());
+        latexCmd->setEnvironment(environment);
+
+        if (!execute(latexCmd)) return Fail_PdfLateXExec;
+
+        if (!QFileInfo(formatPath(Format::Pdf)).exists()) // check we have the pdf file in temp directory.
+        {
+           return Fail_LateXNoOutput;
+        };
+
+        return convert(Format::Pdf, out);
+    }
+
     return convert(Format::Pdf, out);
 }
+
+*/

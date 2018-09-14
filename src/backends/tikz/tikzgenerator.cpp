@@ -23,13 +23,13 @@
 #include "command.h"
 #include "settings.h"
 #include "logparser.h"
+#include "failcodes.h"
 
 #include <QDir>
-
-#include <KDebug>
-#include <KProcess>
-#include <KTemporaryFile>
-#include <KStandardDirs>
+#include <QDebug>
+#include <QProcess>
+//#include <QTemporaryFile>
+//#include <QStandardPaths>
 
 using namespace Cirkuit;
 
@@ -43,15 +43,14 @@ TikzGenerator::~TikzGenerator()
 
 }
 
-bool TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
+int TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
     // Check if the conversion can be handled by the super-class
-    bool done = Generator::convert(in, out);
-    if (done) {
-        return true;
-    }
+    int fail = Cirkuit::Generator::convert(in, out);
+    if (fail==NoFail) return NoFail;
+    if (fail != Fail_unimplemented_conversion) return fail;
     
-    kDebug() << "Inside the TikZ backend...";
+    qDebug() << "Inside the TikZ backend...";
     
     if (in == Format::Source) {
         DocumentTemplate tikzTemplate(TikzSettings::templateurl().path());
@@ -63,12 +62,15 @@ bool TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& ou
             QTextStream stream(&fileout);
             stream << document()->text();
             fileout.close();
-            return true;
+            return NoFail;
         }
         
         QStringList environment = QProcess::systemEnvironment();
-        // the following environment variable is needed to find boxdims.sty in the circuit maaros distribution
-        QString dirString = QString("TEXINPUTS=.:%1:").arg(QDir(document()->directory()).absolutePath());
+        // LaTeX searches (in order) circuit_macros dir, dir that contains editor document, local dir
+        // The search of circuit_macros is needed to find boxdims.sty
+        QString dirString = QString("TEXINPUTS=%1:%2:.:").arg(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                               "cirkuit/circuit_macros/",QStandardPaths::LocateDirectory)).arg(QDir(document()->directory()).absolutePath());
+
         environment << dirString;
         
         QStringList latexArgs;
@@ -78,10 +80,12 @@ bool TikzGenerator::convert(const Cirkuit::Format& in, const Cirkuit::Format& ou
         latexArgs << QString("-jobname=%1").arg(tempFileInfo()->baseName());
         
         Command* latexCmd = new Command("pdflatex", latexDoc, latexArgs);
-        latexCmd->setWorkingDirectory(workingDir().path());
+        latexCmd->setWorkingDirectory(getWorkingDir());
         latexCmd->setEnvironment(environment);
         latexCmd->setLogParser(new LatexLogParser);
-        if (!execute(latexCmd)) return false;
+        if (!execute(latexCmd)) return Fail_PdfLateXExec;
+        // check we have the pdf file in temp directory.
+        if (!QFileInfo(formatPath(Format::Pdf)).exists()) return Fail_PdfLateXNoOutput;
         
         return convert(Format::Pdf, out);
     }

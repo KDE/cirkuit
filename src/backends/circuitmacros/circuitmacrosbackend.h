@@ -21,10 +21,11 @@
 #ifndef CIRCUITMACROSBACKEND_H
 #define CIRCUITMACROSBACKEND_H
 
-#include "backend.h"
+#include "backend_interface.h"
 
 #include <QList>
 #include <QVariant>
+#include <KCoreConfigSkeleton>
 
 namespace Cirkuit 
 {
@@ -35,6 +36,10 @@ namespace Cirkuit
 class CircuitMacrosBackend : public Cirkuit::Backend
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "circuitmacrosbackend" FILE "circuitmacrosbackend.json")
+  Q_INTERFACES(Cirkuit::Backend)
+
+
 public:
     explicit CircuitMacrosBackend( QObject* parent = 0, const QList<QVariant> args = QList<QVariant>());
     ~CircuitMacrosBackend();
@@ -47,8 +52,8 @@ public:
     virtual KConfigSkeletonItem* configTemplateUrl() const;
     virtual QWidget* settingsWidget(QWidget* parent) const;
     
-    virtual KUrl helpUrl() const;
-    virtual KUrl examplesUrl() const;
+    virtual QString helpUrl() const;
+    virtual QString examplesUrl() const;
     
     QString id() const;
     

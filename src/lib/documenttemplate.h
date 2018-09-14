@@ -25,7 +25,7 @@
 
 #include <QObject>
 
-#include <KUrl>
+#include <QFileInfo>
 
 namespace Cirkuit
 {
@@ -43,7 +43,7 @@ public:
      * Default constructor.
      * @param path is the path of the template file
      */
-    explicit DocumentTemplate(const KUrl& path, QObject* parent = 0);
+    explicit DocumentTemplate(const QString& path, QObject* parent = 0);
     ~DocumentTemplate(); 
     /**
      * Inserts the code into the template. The point of insertion
@@ -54,9 +54,9 @@ public:
      */
     QString insert(const QString& code, const QString& keyword = "%%source%%");
     
-    KUrl path() const;
+    QString getDocFnPath() const; // filename and path
     
-    QString name() const;
+    QString getDocFn() const;
     
     bool operator==(const DocumentTemplate& rhs) const;
     

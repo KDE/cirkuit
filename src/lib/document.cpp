@@ -19,7 +19,7 @@
 ***************************************************************************/
 
 #include "document.h"
-#include "backend.h"
+#include "backend_interface.h"
 
 using namespace Cirkuit;
 
@@ -33,7 +33,8 @@ public:
     DocumentSettings* settings;
 };
 
-Cirkuit::Document::Document(QObject* parent): KTextEditor::Document(parent)
+//Cirkuit::Document::Document(QObject* parent): KTextEditor::Document(parent) // as it was
+Cirkuit::Document::Document(QObject* parent): KTextEditor::Document((KTextEditor::DocumentPrivate*)(d), parent)  // Changed 2018
 {
 }
 
@@ -44,7 +45,7 @@ Document::~Document()
 
 QString Document::directory() const
 {
-    return url().directory();
+    return url().toString(QUrl::RemoveFilename | QUrl::StripTrailingSlash);
 }
 
 int Document::initialLineNumber() const

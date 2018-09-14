@@ -23,19 +23,17 @@
 #include "nullgenerator.h"
 #include "nulldocumentsettings.h"
 
-#include "kdebug.h"
-
-#include "cirkuit_macros.h"
+#include <QDebug>
 
 NullBackend::NullBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {
     Q_UNUSED(args)
-    kDebug()<<"Creating NullBackend";
+    qDebug()<<"Creating NullBackend";
 }
 
 NullBackend::~NullBackend()
 {
-    kDebug()<<"Destroying NullBackend";
+    qDebug()<<"Destroying NullBackend";
 }
 
 bool NullBackend::checkRequirements() const
@@ -58,5 +56,3 @@ Cirkuit::Generator* NullBackend::generator() const
     return new NullGenerator();
 }
 
-
-K_EXPORT_CIRKUIT_PLUGIN(nullbackend, NullBackend)

@@ -24,21 +24,18 @@
 #include "settings.h"
 #include "ui_settings.h"
 
-#include "kdebug.h"
-
-#include "cirkuit_macros.h"
-
+#include <QDebug>
 #include <KProcess>
 
 GnuplotBackend::GnuplotBackend( QObject* parent, const QList<QVariant> args ) : Cirkuit::Backend( parent )
 {
     Q_UNUSED(args)
-    kDebug()<<"Creating GnuplotBackend";
+    qDebug()<<"Creating GnuplotBackend";
 }
 
 GnuplotBackend::~GnuplotBackend()
 {
-    kDebug()<<"Destroying GnuplotBackend";
+    qDebug()<<"Destroying GnuplotBackend";
 }
 
 bool GnuplotBackend::checkRequirements() const
@@ -81,16 +78,14 @@ QStringList GnuplotBackend::identifyingWords() const
     return words;
 }
 
-KUrl GnuplotBackend::helpUrl() const
+QString GnuplotBackend::helpUrl() const
 {
-    return KUrl("http://www.gnuplot.info/documentation.html");
+    return QString("http://www.gnuplot.info/documentation.html");
 }
 
-KUrl GnuplotBackend::examplesUrl() const
+QString GnuplotBackend::examplesUrl() const
 {
-    return KUrl("http://gnuplot.sourceforge.net/demo/");
+    return QString("http://gnuplot.sourceforge.net/demo/");
 }
 
 
-
-K_EXPORT_CIRKUIT_PLUGIN(gnuplotbackend, GnuplotBackend)

@@ -14,22 +14,30 @@
    <item row="0" column="0">
     <widget class="QLabel" name="lbl_template">
      <property name="text">
-      <string>Template path:</string>
+      <string>Template file:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="KUrlRequester" name="kcfg_templateurl"/>
+    <widget class="KUrlRequester" name="kcfg_templateurl">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Template filename and full path&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="lbl_tikztemplate">
      <property name="text">
-      <string>Template path:</string>
+      <string>Template file:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="KUrlRequester" name="kcfg_tikztemplateurl"/>
+    <widget class="KUrlRequester" name="kcfg_tikztemplateurl">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Template filename and full path&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_4">

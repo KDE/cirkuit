@@ -19,17 +19,20 @@
 ***************************************************************************/
 
 #include "generator.h"
-#include "backend.h"
+#include "backend_interface.h"
 #include "format.h"
 #include "document.h"
 #include "command.h"
+#include "failcodes.h"
 
 #include <QFileInfo>
 #include <QDir>
 
-#include <KStandardDirs>
-#include <KTemporaryFile>
-#include <KIO/NetAccess>
+#include <QStandardPaths>
+#include <QTemporaryFile>
+//#include <KNS3>
+#include <kio/filecopyjob.h>
+//#include <KIO/NetAccess>
 
 using namespace Cirkuit;
 
@@ -42,15 +45,18 @@ public:
         resolution = 300;
     }
     Backend* backend;
-    KTemporaryFile* tempFile;
+    QTemporaryFile* tempFile;
     QFileInfo* tempFileInfo;
     Document* document;
     int resolution;
+
+    QString workingDir = QString();
 };
 
 Cirkuit::Generator::Generator(Cirkuit::Backend* backend, QObject* parent): QObject(parent), d(new GeneratorPrivate)
 {
     d->backend = backend;
+    createWorkingDir();
     createTempFiles();
 }
 
@@ -59,22 +65,32 @@ Cirkuit::Generator::~Generator()
     delete d;
 }
 
-KUrl Cirkuit::Generator::workingDir()
+bool Cirkuit::Generator::createWorkingDir() const
 {
-    return KUrl::fromPath(KStandardDirs::locateLocal("tmp", "cirkuit/build/", true));
+    // Create temporary directory for work files. Return true if successful.
+    d->workingDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QString("/cirkuit/build");
+    QDir dir(d->workingDir);
+    if  (dir.exists()) {return true;};
+    bool b = QDir().mkpath(d->workingDir);
+    return b;
 }
+
+inline QString
+Cirkuit::Generator::getWorkingDir() const
+{
+    return d->workingDir; // excludes trailing slash
+};
 
 void Cirkuit::Generator::createTempFiles(const QString& suffix)
 {
     delete d->tempFile;
     delete d->tempFileInfo;
     
-    d->tempFile = new KTemporaryFile;
-    d->tempFile->setPrefix(workingDir().path(KUrl::AddTrailingSlash));
-    d->tempFile->setSuffix(suffix);
+    d->tempFile = new QTemporaryFile;
+    d->tempFile->setFileTemplate(getWorkingDir() + "/XXXXXX" + suffix);
     d->tempFile->open();
-    
     d->tempFileInfo = new QFileInfo(d->tempFile->fileName());
+    qDebug() << "TEMPFILE" << d->tempFileInfo->absoluteFilePath();
 }
 
 bool Cirkuit::Generator::formatExists(const Cirkuit::Format& format) const
@@ -83,22 +99,20 @@ bool Cirkuit::Generator::formatExists(const Cirkuit::Format& format) const
         return false;
     }
     
-    KUrl formatUrl = workingDir();
-    formatUrl.addPath(d->tempFileInfo->baseName() + format.extension());
-    return KIO::NetAccess::exists(formatUrl, KIO::NetAccess::SourceSide, 0);
+    QUrl formatUrl = QUrl(getWorkingDir());
+    formatUrl.fromLocalFile(d->tempFileInfo->baseName() + format.extension());
+    return QFile::exists(formatUrl.path());
 }
 
 QString Cirkuit::Generator::formatPath(const Cirkuit::Format& format) const
 {
-    KUrl url = workingDir();
     QString filename;
     if (format.type() == Format::Png || format.type() == Format::Jpeg || format.type() == Format::Ppm) {
         filename = QString("%1-1%2").arg(d->tempFileInfo->baseName()).arg(format.extension());
     } else {
         filename = QString("%1%2").arg(d->tempFileInfo->baseName()).arg(format.extension());
     }
-    url.addPath(filename);
-    return url.path();
+    return getWorkingDir() + "/" + filename;
 }
 
 void Generator::setDocument(Document* doc)
@@ -123,36 +137,39 @@ int Generator::resolution() const
 
 bool Generator::execute(Cirkuit::Command* c)
 {
-    c->setWorkingDirectory(workingDir().path());
+    // c is subtyped from QProcess
+    c->setWorkingDirectory(getWorkingDir());
     connect(c, SIGNAL(newStandardError(QString,QString)), this, SIGNAL(error(QString,QString)));
-    kDebug() << "Executing " << c->name() << " with arguments " << c->args();
+    qDebug() << "Executing " << c->name() << " with arguments " << c->args();
     
     if (!c->execute()) {
-        kDebug() << c->name() << " failed";
-        emit fail();
+        qDebug() << c->name() << " failed";
         return false;
     }
     
-    kDebug() << c->name() << " executed correctly";
+    qDebug() << c->name() << " executed correctly";
     emit output(c->name(), c->stdOutput());
     return true;
 }
 
-bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
+int Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Format& out)
 {
-    kDebug() << "Inside the converter..." << "in: " << in.type() << " " << in.extension() << ", out: " << out.type() << " " << out.extension();
-    
+    qDebug() << "Inside the converter..." << "in: " << in.type() << " " << in.extension() << ", out: " << out.type() << " " << out.extension();
+
     // this class doesn't know how to convert from source
     if (in == Format::Source || out == Format::Source || out == Format::Dvi) {
-        kDebug() << "Cannot convert from or to source/DVI";
-        return false;
+        qDebug() << "Cannot convert from/to source or to DVI";
+        return Fail_unimplemented_conversion;
     }
     
     // Check that input and output formats are different
     if (in == out) {
-        return true;
+        return NoFail;
     }
     
+    // For cnoversion to another vector format, use an appropriate utility (must be installed), e.g.
+    // dvips, ps2pdf, epstopdf.
+    // For conversion to nonvector formats, the convert utility from the ImageMagick installation can be used.
     if (out == Format::QtImage) {
         return convert(in, Format::Pdf);
     }
@@ -160,17 +177,24 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
     if (in == Format::Dvi) {
         if (out == Format::Postscript) {
             QStringList args;
-            args << formatPath(in) << "-q" << QString("-o %1").arg(formatPath(Format::Postscript));
-            return execute(new Command("dvips", "", args, this));
+            args << formatPath(in) << "-q" << QString("-o") << formatPath(Format::Postscript);
+            if (!execute(new Command("dvips", "", args, this))) return Fail_dvips;
+            return NoFail;
         } else if (out == Format::Eps) {
             QStringList args;
-            args << "-E" << formatPath(in) << "-q" << "-o" << formatPath(Format::Eps);
-            return execute(new Command("dvips", "", args, this));
+            QString tmpfn = QString("%1/%2-tmp.eps").arg(d->tempFileInfo->path()).arg(d->tempFileInfo->baseName());
+            args << "-E" << formatPath(in) << "-q" << "-o" << tmpfn;
+            qDebug() << args;
+            if (!execute(new Command("dvips", "", args, this))) return Fail_dvips;
+            args.clear();
+            args << "--bbox"  << "--copy" << "--output" << formatPath(Format::Eps) << tmpfn;
+            if (!execute(new Command("epstool", "", args, this))) return Fail_epstool;
+            return NoFail;
+
         } else {
-            bool b = true;
-            if (!convert(in,Format::Eps)) b = false;
-            if (!convert(Format::Eps,out)) b = false;
-            return b;
+            int fail = convert(in,Format::Eps);
+            if (fail!=NoFail) return fail;
+            return convert(Format::Eps,out);
         }
     }
     
@@ -178,18 +202,19 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
         if (out == Format::Eps) {
             QStringList args;
             args << formatPath(in) << formatPath(Format::Eps);
-            return execute(new Command("ps2epsi", "", args, this));
+            if (!execute(new Command("ps2epsi", "", args, this))) return Fail_ps2epsi;
+            return NoFail;
         } else if (out == Format::Pdf) {
             QStringList args;
             args << formatPath(in) << formatPath(Format::Pdf);
-            return execute(new Command("ps2pdf", "", args, this));
+            if (!execute(new Command("ps2pdf", "", args, this))) return Fail_ps2pdf;
+            return NoFail;
         } else if (out == Format::Png) {
-            bool b = true;
-            if (!convert(in,Format::Eps)) b = false;
-            if (!convert(Format::Eps,Format::Png)) b = false;
-            return b;
+            int fail = convert(in,Format::Eps);
+            if (fail!=NoFail) return fail;
+            return convert(Format::Eps,Format::Png);
         } else {
-            return false;
+            return Fail_unimplemented_conversion;;
         }     
     }
     
@@ -197,64 +222,77 @@ bool Cirkuit::Generator::convert(const Cirkuit::Format& in, const Cirkuit::Forma
         if (out == Format::Postscript) {
             QStringList args;
             args << formatPath(in) << formatPath(Format::Postscript);
-            return execute(new Command("ps2ps", "", args, this));
+            if (!execute(new Command("ps2ps", "", args, this))) return Fail_ps2ps;
+            return NoFail;
         } else if (out == Format::Pdf) {
             QStringList args;
-            args << formatPath(in);// << QString("--outfile=%1").arg(formatPath(Pdf));
-            return execute(new Command("epstopdf", "", args, this));
+            args << formatPath(in);
+            if (!execute(new Command("epstopdf", "", args, this))) return Fail_epstopdf;
+            return NoFail;
         } else {
-            bool b = true;
-            if (!convert(in,Format::Pdf)) b = false;
-            if (!convert(Format::Pdf,out)) b = false;
-            return b;
-        }   
+            int fail = convert(in,Format::Pdf);
+            if (fail!=NoFail) return fail;
+            return convert(Format::Pdf,out);
+        }
     }
     
+    //Pdftoppm (poppler package) converts Portable Document Format (PDF) files to color image files in Portable Pixmap (PPM) format
+    //It has options for jpg and png
+    //ImageMagick would be an alternative (and is needed for gif).
+    // Also use pdf2svg and pdftops.
     if (in == Format::Pdf) {
         if (out == Format::Svg) {
             QStringList args;
             args << formatPath(in) << formatPath(Format::Svg);
-            return execute(new Command("pdf2svg", "", args, this));
+            if (!execute(new Command("pdf2svg", "", args, this))) return Fail_pdf2svg;
+            return NoFail;
         } else if (out == Format::Png) {
             QStringList args;
             args << "-png" << "-r" << QString::number(d->resolution) << formatPath(in) << d->tempFileInfo->baseName();
-            return execute(new Command("pdftoppm", "", args, this));
+            if (!execute(new Command("pdftoppm", "", args, this))) return Fail_poppler_pdftoppm;
+            return NoFail;
         } else if (out == Format::Jpeg) {
             QStringList args;
             args << "-jpeg" << "-r" << QString::number(d->resolution) << formatPath(in) << d->tempFileInfo->baseName();
-            return execute(new Command("pdftoppm", "", args, this));
+            if (!execute(new Command("pdftoppm", "", args, this))) return Fail_poppler_pdftoppm;
+            return NoFail;
         } else if (out == Format::Gif) {
-            bool b = true;
-            if (!convert(in,Format::Ppm)) b = false;
-            if (!convert(Format::Ppm,out)) b = false;
-            return b;
+            int fail = convert(in,Format::Ppm);
+            if (fail!=NoFail) return fail;
+            return convert(Format::Ppm,out);
         } else if (out == Format::Ppm) {
             QStringList args;
             args << "-r" << QString::number(d->resolution) << formatPath(in) << d->tempFileInfo->baseName();
-            return execute(new Command("pdftoppm", "", args, this));
+            if (!execute(new Command("pdftoppm", "", args, this))) return Fail_poppler_pdftoppm;
+            return NoFail;
         } else if (out == Format::Eps) {
             QStringList args;
             args << "-eps" << formatPath(in) << formatPath(out);
-            return execute(new Command("pdftops", "", args, this));
+            if (!execute(new Command("pdftops", "", args, this))) return Fail_pdftops;
+            return NoFail;
         } else if (out == Format::Postscript) {
             QStringList args;
             args << formatPath(in) << formatPath(out);
-            return execute(new Command("pdftops", "", args, this));
+            if (!execute(new Command("pdftops", "", args, this))) return Fail_pdftops;
+            return NoFail;
         }
+        //qDebug() << "Fail_unimplemented_conversion1 in generator.cpp";
+        return Fail_unimplemented_conversion;
     }
 
     if (in == Format::Ppm) {
         if (out == Format::Gif) {
             QStringList args;
             args << formatPath(Format::Ppm) << formatPath(Format::Gif);
-            return execute(new Command("convert", "", args, this));
+            if (!execute(new Command("convert", "", args, this))) return Fail_imagemagick_convert;
+            return NoFail;
         }
     }
-
-    return false;
+    //qDebug() << "Fail_unimplemented_conversion2 in generator.cpp";
+    return Fail_unimplemented_conversion;
 }
 
-bool Cirkuit::Generator::generate(Document* doc, const Cirkuit::Format& format)
+int Cirkuit::Generator::generate(Document* doc, const Cirkuit::Format& format)
 {
     setDocument(doc);
     return convert(Format::Source, format);
@@ -265,7 +303,7 @@ Cirkuit::Backend* Cirkuit::Generator::backend() const
     return d->backend;
 }
 
-KTemporaryFile* Cirkuit::Generator::tempFile() const
+QTemporaryFile* Cirkuit::Generator::tempFile() const
 {
     return d->tempFile;
 }

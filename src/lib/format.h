@@ -23,7 +23,7 @@
 #include "cirkuit_export.h"
 
 #include <QObject>
-#include <KMimeType>
+//#include <QMimeType>
 
 namespace Cirkuit {
 class FormatPrivate;
@@ -48,6 +48,7 @@ public:
         Ppm,
         Gif,
         Tex,
+        Html,
         Unknown
     };
    
@@ -79,7 +80,7 @@ public:
      * @param mime the mime type
      * @return the corresponding format
      */
-    static Format fromMimeType(KMimeType::Ptr mime);
+    //static Format fromMimeType(QMimeType mime);
 private:
     FormatPrivate* d;
 };

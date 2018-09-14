@@ -18,33 +18,55 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
 ***************************************************************************/
 
-#include <KApplication>
+#include <QApplication>
 #include <KAboutData>
-#include <KCmdLineArgs>
-
+#include <QCommandLineParser>
+#include <KLocalizedString>
 #include "cirkuitconfig.h"
 #include "mainwindow.h"
+#include <QDebug>
+#include <QCoreApplication>
 
 int main (int argc, char *argv[])
 {
-    KAboutData aboutData( "cirkuit", "cirkuit", ki18n("Cirkuit"), VERSION, ki18n("An application to generate publication-ready figures. It is a KDE frontend for Circuit Macros by J. D. Aplevich, TikZ and Gnuplot. <p>Visit the <a href=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros>Circuit Macros</a> and <a href=http://www.texample.net/tikz>TikZ</a> websites for further information."), KAboutData::License_GPL, ki18n("(c) 2011 Matteo Agostinelli"));
-    aboutData.addAuthor(ki18n("Matteo Agostinelli"), ki18n("Maintainer"), "matteo@agostinelli.me", "http://agostinelli.me");
-    aboutData.setHomepage("http://projects.kde.org/cirkuit");
-    KCmdLineArgs::init( argc, argv, &aboutData );
+    QApplication app(argc, argv);
+    QApplication::setApplicationName("Cirkuit");
+    QApplication::setApplicationVersion(VERSION);
+    KLocalizedString::setApplicationDomain("cirkuit");
 
-    KCmdLineOptions options;
-    options.add("+[file]", ki18n("Document to open"));
-    KCmdLineArgs::addCmdLineOptions( options );
+    // For internationalisation look at doc.qt.io.qt-5/internationalisation.html
+    QString a1 = i18n("An application to generate publication-ready figures. It is a KDE frontend for Circuit Macros by J. D. Aplevich, TikZ and Gnuplot.");
+    QString a2 = i18n("Visit the <a href=http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros>Circuit Macros</a> and <a href=http://www.texample.net/tikz>TikZ</a> websites for further information.");
 
-    KApplication app;
+    KAboutData aboutData ( I18N_NOOP("cirkuit"),
+                                i18n("Cirkuit"),
+                                QString(VERSION),
+                                QString(a1),
+                                KAboutLicense::GPL,
+                                QString(a2),
+                                i18n("(c) 2011 Matteo Agostinelli)"),
+                                QString("https://wwwu.uni-klu.ac.at/magostin/cirkuit.html") );
+
+   aboutData.addAuthor(QString("Matteo Agostinelli"),
+                       i18n("Main author"),
+                       QString(""),
+                       QString("https://wwwu.uni-klu.ac.at/magostin/cirkuit.html"),
+                       QString(""));
+
+    KAboutData::setApplicationData(aboutData);
+    QCommandLineParser parser;
+  //  parser.addOptions( "+[file]", ki18n("Document to open") );
+    parser.process(app);
+
+    const QStringList args = parser.positionalArguments();
+
+   // QApplication app;
+
     MainWindow* window = new MainWindow();
-
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-    if (args->count()) {
-        window->loadFile(args->url(0).url());
-    }
-
     window->show();
 
+    if (args.size()) {
+        window->loadFile( args.first() );    
+}
     return app.exec();
 }
